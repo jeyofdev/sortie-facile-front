@@ -4,8 +4,8 @@ import { ButtonComponent } from './components/button/button.component';
 import { PrimengModule } from './modules/primeng.module';
 
 @NgModule({
-  declarations: [ButtonComponent],
-  imports: [CommonModule, PrimengModule],
-  exports: [ButtonComponent, PrimengModule],
+	declarations: [ButtonComponent],
+	imports: [CommonModule, PrimengModule],
+	exports: [ButtonComponent, PrimengModule],
 })
 export class SharedModule {}
