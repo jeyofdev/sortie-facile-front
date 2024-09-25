@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ButtonComponent } from './components/button/button.component';
 import { PrimengModule } from './modules/primeng.module';
+import { ComponentModule } from './modules/components.module';
 
 @NgModule({
-	declarations: [ButtonComponent],
-	imports: [CommonModule, PrimengModule],
-	exports: [ButtonComponent, PrimengModule],
+	imports: [CommonModule, PrimengModule, ComponentModule],
+	exports: [PrimengModule, ComponentModule],
 })
 export class SharedModule {}
