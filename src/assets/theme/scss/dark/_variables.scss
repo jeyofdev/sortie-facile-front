@@ -5,15 +5,24 @@ $textColor: $shade000 !default;
 $textSecondaryColor: $shade400 !default;
 $borderRadius: 6px !default;
 $transitionDuration: 0.2s !default;
-$formElementTransition: background-color $transitionDuration,
-  color $transitionDuration, border-color $transitionDuration,
-  box-shadow $transitionDuration, outline-color $transitionDuration !default;
-$actionIconTransition: background-color $transitionDuration,
-  color $transitionDuration, border-color $transitionDuration,
-  box-shadow $transitionDuration, outline-color $transitionDuration !default;
-$listItemTransition: background-color $transitionDuration,
-  color $transitionDuration, border-color $transitionDuration,
-  box-shadow $transitionDuration, outline-color $transitionDuration !default;
+$formElementTransition:
+	background-color $transitionDuration,
+	color $transitionDuration,
+	border-color $transitionDuration,
+	box-shadow $transitionDuration,
+	outline-color $transitionDuration !default;
+$actionIconTransition:
+	background-color $transitionDuration,
+	color $transitionDuration,
+	border-color $transitionDuration,
+	box-shadow $transitionDuration,
+	outline-color $transitionDuration !default;
+$listItemTransition:
+	background-color $transitionDuration,
+	color $transitionDuration,
+	border-color $transitionDuration,
+	box-shadow $transitionDuration,
+	outline-color $transitionDuration !default;
 $primeIconFontSize: 1rem !default;
 $divider: 1px solid $shade700 !default;
 $inlineSpacing: 0.5rem !default;
@@ -46,7 +55,7 @@ $actionIconBorderRadius: 50% !default;
 //input field (e.g. inputtext, spinner, inputmask)
 $inputPadding: 0.5rem 0.75rem !default;
 $inputTextFontSize: 1rem !default;
-$inputBg: $shade950 !default;
+$inputBg: $shade000 !default;
 $inputTextColor: $textColor !default;
 $inputIconColor: $textSecondaryColor !default;
 $inputBorder: 1px solid $shade700 !default;
@@ -90,8 +99,9 @@ $inputListHeaderBorder: 0 none !default;
 $inputOverlayBg: $inputListBg !default;
 $inputOverlayHeaderBg: $inputListHeaderBg !default;
 $inputOverlayBorder: 1px solid $shade700 !default;
-$inputOverlayShadow: 0 4px 6px -1px rgb(0 0 0 / 0.1),
-  0 2px 4px -2px rgb(0 0 0 / 0.1) !default;
+$inputOverlayShadow:
+	0 4px 6px -1px rgb(0 0 0 / 0.1),
+	0 2px 4px -2px rgb(0 0 0 / 0.1) !default;
 
 //button
 $buttonPadding: 0.5rem 1rem !default;
@@ -106,8 +116,10 @@ $buttonHoverBorderColor: $primaryLightColor !default;
 $buttonActiveBg: $primaryLighterColor !default;
 $buttonTextActiveColor: $primaryTextColor !default;
 $buttonActiveBorderColor: $primaryLighterColor !default;
-$raisedButtonShadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2),
-  0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12) !default;
+$raisedButtonShadow:
+	0 3px 1px -2px rgba(0, 0, 0, 0.2),
+	0 2px 2px 0 rgba(0, 0, 0, 0.14),
+	0 1px 5px 0 rgba(0, 0, 0, 0.12) !default;
 $roundedButtonBorderRadius: 2rem !default;
 
 $textButtonHoverBgOpacity: 0.04 !default;
@@ -184,7 +196,7 @@ $dangerButtonActiveBorderColor: $dangerLighterColor !default;
 $dangerButtonFocusShadow: none;
 
 $contrastButtonBg: $shade000 !default;
-$contrastButtonTextColor: $shade950 !default;
+$contrastButtonTextColor: $shade000 !default;
 $contrastButtonBorder: 1px solid $contrastButtonBg !default;
 $contrastButtonHoverBg: $shade100 !default;
 $contrastButtonTextHoverColor: $contrastButtonTextColor !default;
@@ -231,20 +243,20 @@ $colorPickerBorder: 1px solid $shade700 !default;
 $colorPickerHandleColor: $shade000 !default;
 
 //togglebutton
-$toggleButtonBg: $shade950 !default;
-$toggleButtonBorder: 1px solid $shade950 !default;
+$toggleButtonBg: $shade000 !default;
+$toggleButtonBorder: 1px solid $shade000 !default;
 $toggleButtonTextColor: $textSecondaryColor !default;
 $toggleButtonIconColor: $textSecondaryColor !default;
-$toggleButtonHoverBg: $shade950 !default;
-$toggleButtonHoverBorderColor: $shade950 !default;
+$toggleButtonHoverBg: $shade000 !default;
+$toggleButtonHoverBorderColor: $shade000 !default;
 $toggleButtonTextHoverColor: $textColor !default;
 $toggleButtonIconHoverColor: $textColor !default;
-$toggleButtonActiveBg: $shade950 !default;
-$toggleButtonActiveBorderColor: $shade950 !default;
+$toggleButtonActiveBg: $shade000 !default;
+$toggleButtonActiveBorderColor: $shade000 !default;
 $toggleButtonTextActiveColor: $textColor !default;
 $toggleButtonIconActiveColor: $textColor !default;
-$toggleButtonActiveHoverBg: $shade950 !default;
-$toggleButtonActiveHoverBorderColor: $shade950 !default;
+$toggleButtonActiveHoverBg: $shade000 !default;
+$toggleButtonActiveHoverBorderColor: $shade000 !default;
 $toggleButtonTextActiveHoverColor: $textColor !default;
 $toggleButtonIconActiveHoverColor: $textColor !default;
 
@@ -421,7 +433,9 @@ $cardSubTitleFontWeight: 400 !default;
 $cardSubTitleColor: $textSecondaryColor !default;
 $cardContentPadding: 0 0 0 0 !default;
 $cardFooterPadding: 0 0 0 0 !default;
-$cardShadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1) !default;
+$cardShadow:
+	0 1px 3px 0 rgb(0 0 0 / 0.1),
+	0 1px 2px -1px rgb(0 0 0 / 0.1) !default;
 
 //editor
 $editorToolbarBg: $panelHeaderBg !default;
@@ -560,8 +574,9 @@ $toastDetailMargin: $inlineSpacing 0 0 0 !default;
 //overlays
 $overlayContentBorder: 1px solid $shade700 !default;
 $overlayContentBg: $shade900 !default;
-$overlayContainerShadow: 0 20px 25px -5px rgb(0 0 0 / 0.1),
-  0 8px 10px -6px rgb(0 0 0 / 0.1) !default;
+$overlayContainerShadow:
+	0 20px 25px -5px rgb(0 0 0 / 0.1),
+	0 8px 10px -6px rgb(0 0 0 / 0.1) !default;
 
 //dialog
 $dialogHeaderBg: $shade900 !default;
@@ -635,8 +650,9 @@ $submenuHeaderBorderRadius: 0 !default;
 $submenuHeaderFontWeight: 600 !default;
 $overlayMenuBg: $menuBg !default;
 $overlayMenuBorder: 1px solid $shade700 !default;
-$overlayMenuShadow: 0 4px 6px -1px rgb(0 0 0 / 0.1),
-  0 2px 4px -2px rgb(0 0 0 / 0.1) !default;
+$overlayMenuShadow:
+	0 4px 6px -1px rgb(0 0 0 / 0.1),
+	0 2px 4px -2px rgb(0 0 0 / 0.1) !default;
 $verticalMenuPadding: 0.25rem 0.25rem !default;
 $menuSeparatorMargin: 2px 0 !default;
 
@@ -803,55 +819,55 @@ $imagePreviewActionIconFontSize: 1.5rem !default;
 $imagePreviewActionIconBorderRadius: 50% !default;
 
 :root {
-  --font-family: $fontFamily;
-  --font-family-secondary: $fontFamilySecondary;
-  --font-feature-settings: "cv02", "cv03", "cv04", "cv11";
-  --text-color: #{$shade000};
-  --text-color-secondary: #{$shade400};
-  --primary-color: #{$primaryColor};
-  --primary-color-text: #{$primaryTextColor};
-  --surface-0: #18181b;
-  --surface-50: #27272a;
-  --surface-100: #3f3f46;
-  --surface-200: #52525b;
-  --surface-300: #71717a;
-  --surface-400: #a1a1aa;
-  --surface-500: #d4d4d8;
-  --surface-600: #e4e4e7;
-  --surface-700: #f4f4f5;
-  --surface-800: #fafafa;
-  --surface-900: #ffffff;
-  --gray-0: #ffffff;
-  --gray-50: #fafafa;
-  --gray-100: #f4f4f5;
-  --gray-200: #e4e4e7;
-  --gray-300: #d4d4d8;
-  --gray-400: #a1a1aa;
-  --gray-500: #71717a;
-  --gray-600: #52525b;
-  --gray-700: #3f3f46;
-  --gray-800: #27272a;
-  --gray-900: #18181b;
-  --content-padding: 1.125rem;
-  --inline-spacing: #{$inlineSpacing};
-  --border-radius: #{$borderRadius};
-  --surface-ground: #09090b;
-  --surface-section: #18181b;
-  --surface-card: #18181b;
-  --surface-overlay: #18181b;
-  --surface-border: #27272a;
-  --surface-hover: rgba(255, 255, 255, 0.03);
-  --focus-ring: #{$focusShadow};
-  --maskbg: #{$maskBg};
-  --highlight-bg: #{$highlightBg};
-  --highlight-text-color: #{$highlightTextColor};
-  --p-anchor-gutter: 2px;
-  color-scheme: dark;
+	--font-family: $fontFamily;
+	--font-family-secondary: $fontFamilySecondary;
+	--font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+	--text-color: #{$shade000};
+	--text-color-secondary: #{$shade400};
+	--primary-color: #{$primaryColor};
+	--primary-color-text: #{$primaryTextColor};
+	--surface-0: #{$surface000};
+	--surface-50: #27272a;
+	--surface-100: #3f3f46;
+	--surface-200: #52525b;
+	--surface-300: #71717a;
+	--surface-400: #a1a1aa;
+	--surface-500: #d4d4d8;
+	--surface-600: #e4e4e7;
+	--surface-700: #f4f4f5;
+	--surface-800: #{$surface800};
+	--surface-900: #ffffff;
+	--gray-0: #{$shade000};
+	--gray-50: #fafafa;
+	--gray-100: #{$shade100};
+	--gray-200: #e4e4e7;
+	--gray-300: #d4d4d8;
+	--gray-400: #a1a1aa;
+	--gray-500: #71717a;
+	--gray-600: #52525b;
+	--gray-700: #3f3f46;
+	--gray-800: #27272a;
+	--gray-900: #18181b;
+	--content-padding: 1.125rem;
+	--inline-spacing: #{$inlineSpacing};
+	--border-radius: #{$borderRadius};
+	--surface-ground: #09090b;
+	--surface-section: #18181b;
+	--surface-card: #18181b;
+	--surface-overlay: #18181b;
+	--surface-border: #27272a;
+	--surface-hover: rgba(255, 255, 255, 0.03);
+	--focus-ring: #{$focusShadow};
+	--maskbg: #{$maskBg};
+	--highlight-bg: #{$highlightBg};
+	--highlight-text-color: #{$highlightTextColor};
+	--p-anchor-gutter: 2px;
+	color-scheme: dark;
 }
 
 :root {
-  --p-focus-ring-color: var(--primary-color);
-  font-family: "Inter var", sans-serif;
-  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
-  font-variation-settings: normal;
+	--p-focus-ring-color: var(--primary-color);
+	font-family: 'Inter var', sans-serif;
+	font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+	font-variation-settings: normal;
 }

@@ -2,18 +2,21 @@ $white: #ffffff;
 $black: #000000;
 
 //reused color variables
-$shade000: #ffffff !default;
-$shade50: #fafafa !default;
-$shade100: #f4f4f5 !default;
-$shade200: #e4e4e7 !default;
-$shade300: #d4d4d8 !default;
-$shade400: #a1a1aa !default;
-$shade500: #71717a !default;
-$shade600: #52525b !default;
-$shade700: #3f3f46 !default;
-$shade800: #27272a !default;
-$shade900: #18181b !default;
-$shade950: #09090b !default;
+$shade000: #dfdada !default;
+$shade50: #f8fafc !default;
+$shade100: #ece2e2 !default;
+$shade200: #d9d9d9 !default;
+$shade300: #cbd5e1 !default;
+$shade400: #94a3b8 !default;
+$shade500: #f9f9f9 !default;
+$shade600: #475569 !default;
+$shade700: #d6cece !default;
+$shade800: #1e293b !default;
+$shade900: #0f172a !default;
+
+// surface
+$surface000: #dfdada !default;
+$surface800: #3d4750 !default;
 
 $disabledInputBg: $shade700 !default;
 $hoverBg: rgba(255, 255, 255, 0.03) !default;
@@ -106,8 +109,8 @@ $secondaryMessageTextColor: $shade300 !default;
 $secondaryMessageIconColor: $shade300 !default;
 $contrastMessageBg: $shade000 !default;
 $contrastMessageBorder: solid $shade100 !default;
-$contrastMessageTextColor: $shade950 !default;
-$contrastMessageIconColor: $shade950 !default;
+$contrastMessageTextColor: $shade000 !default;
+$contrastMessageIconColor: $shade000 !default;
 
 //rating
 $ratingCancelIconColor: #f87171 !default;

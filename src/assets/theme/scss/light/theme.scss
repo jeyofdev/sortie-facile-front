@@ -1,10 +1,10 @@
 $white: #ffffff;
-$black: #1e1f1d;
+$black: #000000;
 
 // grays
-$shade000: #ffffff !default;
+$shade000: #dfdada !default;
 $shade50: #f8fafc !default;
-$shade100: #f1f5f9 !default;
+$shade100: #ece2e2 !default;
 $shade200: #d9d9d9 !default;
 $shade300: #cbd5e1 !default;
 $shade400: #94a3b8 !default;
@@ -14,6 +14,10 @@ $shade700: #d6cece !default;
 $shade800: #1e293b !default;
 $shade900: #0f172a !default;
 $shade950: #020617 !default;
+
+// surface
+$surface000: #dfdada !default;
+$surface800: #3d4750 !default;
 
 $disabledInputBg: $shade200 !default;
 
