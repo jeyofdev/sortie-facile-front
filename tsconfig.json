@@ -21,10 +21,16 @@
 		"useDefineForClassFields": false,
 		"lib": ["ES2022", "dom"],
 		"paths": {
+			"@routes/*": ["app/routes/*"],
 			"@services/*": ["app/core/services/*"],
 			"@shared/*": ["app/shared/*"],
+			"@enums/*": ["app/shared/enums/*"],
 			"@components/*": ["app/shared/components/*"],
-			"@root/*": ["app/*"]
+			"@root/*": ["app/*"],
+			"@features/*": ["app/features/*"],
+			"@landing/*": ["app/features/landing/*"],
+			"@auth/*": ["app/features/auth/*"],
+			"@error/*": ["app/error/*"]
 		}
 	},
 	"angularCompilerOptions": {
