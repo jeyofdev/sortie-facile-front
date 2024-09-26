@@ -7,7 +7,7 @@
 		"build": "ng build",
 		"watch": "ng build --watch --configuration development",
 		"test": "ng test",
-		"format": "npx prettier --write src/**/*.ts",
+		"format": "npx prettier --write src/**/*.{ts,scss}",
 		"compile:theme": "./bin/compile-theme.sh"
 	},
 	"private": true,

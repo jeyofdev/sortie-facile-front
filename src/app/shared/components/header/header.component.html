@@ -1,1 +1,75 @@
+<header>
+	<div class="header-top">
+		<div class="header-container">
+			<span>Get premium plan.</span>
+			<div class="top-left">
+				<p-button label="Help ?" [text]="true" [plain]="true" />
+			</div>
+		</div>
+	</div>
+
+	<div class="header-middle">
+		<div class="header-container">
+			<div class="logo-container">
+				<img src="assets/images/logo.png" alt="Logo" />
+			</div>
+
+			<div class="search-container">
+				<p-iconField iconPosition="right">
+					<p-inputIcon styleClass="pi pi-search" />
+					<input type="text" pInputText placeholder="Search" />
+				</p-iconField>
+			</div>
+
+			<nav class="nav-container">
+				<p-menu #menu [model]="items" [popup]="true" styleClass="menu-account" />
+
+				<p-button (mouseenter)="menu.toggle($event)" styleClass="button-link-account">
+					<div class="icon-box">
+						<i class="pi pi-user"></i>
+					</div>
+
+					<div class="content-box">
+						<p class="nb-items">Account</p>
+						<p class="label">Login</p>
+					</div>
+				</p-button>
+
+				<p-button (onClick)="showDialog()" styleClass="button-links">
+					<div class="icon-box">
+						<i class="pi pi-star"></i>
+					</div>
+
+					<div class="content-box">
+						<p class="nb-items">10 items</p>
+						<p class="label">Favorites</p>
+					</div>
+				</p-button>
+
+				<p-button (onClick)="showDialog()" styleClass="button-links">
+					<div class="icon-box">
+						<i class="pi pi-thumbtack"></i>
+					</div>
+
+					<div class="content-box">
+						<p class="nb-items">4 items</p>
+						<p class="label">Booking</p>
+					</div>
+				</p-button>
+			</nav>
+		</div>
+	</div>
+</header>
+
 <button (click)="toggleDarkMode()">toggle dark mode</button>
+
+<p-dialog
+	header="Edit Profile"
+	[modal]="true"
+	[(visible)]="visible"
+	[position]="position"
+	[dismissableMask]="true"
+	[style]="{ width: '25rem' }"
+>
+	<h1>TODO</h1>
+</p-dialog>
