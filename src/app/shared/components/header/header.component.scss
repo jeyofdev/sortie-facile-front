@@ -111,36 +111,5 @@
 		display: flex;
 		justify-content: flex-end;
 		gap: 1.5rem;
-
-		.button-links,
-		.button-link-account {
-			display: flex;
-			gap: 0.6rem;
-			background-color: transparent;
-			border: none;
-			color: var(--gray-800);
-
-			.pi {
-				color: var(--primary-color);
-				font-size: 2rem;
-			}
-
-			.content-box {
-				display: flex;
-				flex-direction: column;
-				justify-content: flex-start;
-				align-items: flex-start;
-				gap: 0.1rem;
-
-				.nb-items {
-					font-size: 0.85rem;
-				}
-
-				.label {
-					font-size: 1rem;
-					font-weight: 700;
-				}
-			}
-		}
 	}
 }

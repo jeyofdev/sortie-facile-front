@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DarkModeService } from '@services/dark-mode.service';
+import { HeaderService } from '@services/header.service';
 import { Position } from '@shared/types/position.type';
 import { MenuItem } from 'primeng/api';
 
@@ -13,33 +14,25 @@ export class HeaderComponent implements OnInit {
 	position: Position = 'right';
 	items: MenuItem[] | undefined;
 
-	constructor(private darkModeService: DarkModeService) {}
+	constructor(
+		private darkModeService: DarkModeService,
+		private headerService: HeaderService,
+	) {}
 
 	ngOnInit() {
 		this.darkModeService.initDarkMode();
-		this.items = [
-			{
-				items: [
-					{
-						label: 'Signin',
-					},
-					{
-						label: 'Signup',
-					},
-				],
-			},
-		];
+		this.items = this.headerService.getMiddleHeaderNavItems();
 	}
 
 	toggleDarkMode() {
 		this.darkModeService.toggleDarkMode();
 	}
 
-	showDialog() {
-		this.visible = true;
-	}
-
 	onHide() {
 		this.visible = false;
+	}
+
+	showBookingsDialog() {
+		this.visible = true;
 	}
 }

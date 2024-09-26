@@ -22,40 +22,23 @@
 			</div>
 
 			<nav class="nav-container">
-				<p-menu #menu [model]="items" [popup]="true" styleClass="menu-account" />
+				<p-menu #menuAuth [model]="items" [popup]="true" styleClass="menu-account" />
 
-				<p-button (mouseenter)="menu.toggle($event)" styleClass="button-link-account">
-					<div class="icon-box">
-						<i class="pi pi-user"></i>
-					</div>
+				<app-button-header-icon
+					icon="user"
+					label="Login"
+					subtitle="Account"
+					(mouseenter)="menuAuth.toggle($event)"
+				></app-button-header-icon>
 
-					<div class="content-box">
-						<p class="nb-items">Account</p>
-						<p class="label">Login</p>
-					</div>
-				</p-button>
+				<app-button-header-icon icon="star" label="Favorites" subtitle="10 items"></app-button-header-icon>
 
-				<p-button (onClick)="showDialog()" styleClass="button-links">
-					<div class="icon-box">
-						<i class="pi pi-star"></i>
-					</div>
-
-					<div class="content-box">
-						<p class="nb-items">10 items</p>
-						<p class="label">Favorites</p>
-					</div>
-				</p-button>
-
-				<p-button (onClick)="showDialog()" styleClass="button-links">
-					<div class="icon-box">
-						<i class="pi pi-thumbtack"></i>
-					</div>
-
-					<div class="content-box">
-						<p class="nb-items">4 items</p>
-						<p class="label">Booking</p>
-					</div>
-				</p-button>
+				<app-button-header-icon
+					icon="thumbtack"
+					label="Booking"
+					subtitle="4 items"
+					(click)="showBookingsDialog()"
+				></app-button-header-icon>
 			</nav>
 		</div>
 	</div>
