@@ -6,6 +6,7 @@ import { InputSearchComponent } from '@shared/components/form/input/input-search
 import { LogoComponent } from '@shared/components/logo/logo.component';
 import { FooterComponent } from '@shared/components/footer/footer.component';
 import { ContainerComponent } from '@shared/components/container/container.component';
+import { LayoutComponent } from '@shared/components/layout/layout/layout.component';
 
 @NgModule({
 	declarations: [
@@ -15,8 +16,9 @@ import { ContainerComponent } from '@shared/components/container/container.compo
 		LogoComponent,
 		FooterComponent,
 		ContainerComponent,
+		LayoutComponent,
 	],
 	imports: [PrimengModule],
-	exports: [HeaderComponent, FooterComponent, ContainerComponent],
+	exports: [HeaderComponent, FooterComponent, ContainerComponent, LayoutComponent],
 })
 export class ComponentModule {}
