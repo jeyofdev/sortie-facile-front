@@ -1,7 +1,7 @@
-:host ::ng-deep .footer-bottom {
+:host ::ng-deep footer {
 	display: flex;
-	justify-content: center;
-	background-color: var(--surface-800);
+	flex-direction: column;
+	align-items: center;
 
 	.header-container {
 		display: flex;
@@ -12,8 +12,49 @@
 		padding: 0.9rem 0.5rem;
 	}
 
-	p {
-		font-size: 1rem;
-		color: var(--gray-0);
+	.footer-top,
+	.footer-bottom {
+		display: flex;
+		justify-content: center;
+		width: 100%;
+	}
+
+	.footer-top {
+		gap: 1rem;
+		border-top: 1px solid var(--gray-0);
+
+		.header-container {
+			padding-top: 3rem;
+		}
+
+		.left {
+			width: 25%;
+
+			.logo-container {
+				margin-bottom: 1.5rem;
+			}
+
+			p {
+				color: var(--gray-500);
+				font-size: 1.15rem;
+				line-height: 1.5;
+			}
+		}
+
+		.right {
+			display: flex;
+			justify-content: flex-end;
+			width: 70%;
+		}
+	}
+
+	.footer-bottom {
+		background-color: var(--surface-800);
+		margin-top: 2rem;
+
+		p {
+			font-size: 1rem;
+			color: var(--gray-0);
+		}
 	}
 }
