@@ -10,13 +10,14 @@ $shade300: #cbd5e1 !default;
 $shade400: #94a3b8 !default;
 $shade500: #f9f9f9 !default;
 $shade600: #475569 !default;
-$shade700: #d6cece !default;
-$shade800: #1e293b !default;
+$shade700: #64727f !default;
+$shade800: #3d4750 !default;
 $shade900: #0f172a !default;
 $shade950: #020617 !default;
 
 // surface
-$surface000: #dfdada !default;
+$surface000: $white !default;
+$surface100: #fdf9f9 !default;
 $surface800: #3d4750 !default;
 
 $disabledInputBg: $shade200 !default;
