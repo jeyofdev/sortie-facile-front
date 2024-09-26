@@ -89,11 +89,6 @@
 		padding: 0.5rem 0.5rem;
 	}
 
-	.logo-container > img {
-		width: 60px;
-		height: auto;
-	}
-
 	.search-container {
 		width: 33.33333333%;
 	}
@@ -102,5 +97,12 @@
 		display: flex;
 		justify-content: flex-end;
 		gap: 1.5rem;
+	}
+}
+
+:host ::ng-deep .booking-dialog {
+	.p-dialog-header {
+		color: var(--gray-800);
+		justify-content: center;
 	}
 }
