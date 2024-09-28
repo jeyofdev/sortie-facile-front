@@ -29,6 +29,8 @@ export class SigninPageComponent implements OnInit {
 			this.loginForm.controls[control].markAsTouched();
 		}
 
+		console.log(this.loginForm);
+
 		console.log(this.loginForm.value);
 	}
 
