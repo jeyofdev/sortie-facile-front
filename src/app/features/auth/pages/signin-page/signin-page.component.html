@@ -3,7 +3,17 @@
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 	<div class="form-control">
 		<label for="email">Email : </label>
-		<input type="text" pInputText id="email" name="email" formControlName="email" placeholder="xxx@gmail.com" />
+		<input
+			type="text"
+			pInputText
+			id="email"
+			name="email"
+			formControlName="email"
+			placeholder="xxx@gmail.com"
+			[ngClass]="{
+				'is-invalid': formIsSubmitted && loginForm.controls['email'].invalid,
+			}"
+		/>
 	</div>
 
 	<div class="form-control">
@@ -14,6 +24,9 @@
 			[feedback]="false"
 			[toggleMask]="true"
 			placeholder="*****"
+			[ngClass]="{
+				'is-invalid': formIsSubmitted && loginForm.controls['password'].invalid,
+			}"
 		/>
 	</div>
 

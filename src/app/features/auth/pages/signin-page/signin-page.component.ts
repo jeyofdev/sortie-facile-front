@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
 	selector: 'app-signin-page',
@@ -23,6 +23,12 @@ export class SigninPageComponent implements OnInit {
 	}
 
 	onSubmit(): void {
+		this.formIsSubmitted = true;
+
+		for (const control in this.loginForm.controls) {
+			this.loginForm.controls[control].markAsTouched();
+		}
+
 		console.log(this.loginForm.value);
 	}
 
@@ -34,7 +40,9 @@ export class SigninPageComponent implements OnInit {
 	}
 
 	private initFormControls(): void {
-		this.emailCtrl = this.formBuilder.control('');
-		this.passwordCtrl = this.formBuilder.control('');
+		this.regexEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+
+		this.emailCtrl = this.formBuilder.control('', [Validators.required, Validators.pattern(this.regexEmail)]);
+		this.passwordCtrl = this.formBuilder.control('', [Validators.required, Validators.minLength(8)]);
 	}
 }
