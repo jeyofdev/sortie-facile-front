@@ -6,8 +6,18 @@ import { InputIconModule } from 'primeng/inputicon';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
+import { BadgeModule } from 'primeng/badge';
 
 @NgModule({
-	exports: [ButtonModule, DialogModule, MenuModule, InputIconModule, IconFieldModule, InputTextModule, PasswordModule],
+	exports: [
+		ButtonModule,
+		DialogModule,
+		MenuModule,
+		InputIconModule,
+		IconFieldModule,
+		InputTextModule,
+		PasswordModule,
+		BadgeModule,
+	],
 })
 export class PrimengModule {}

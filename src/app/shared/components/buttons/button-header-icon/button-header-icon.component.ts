@@ -11,6 +11,7 @@ export class ButtonHeaderIconComponent implements OnInit {
 	@Input({ required: true }) icon!: string;
 	@Input({ required: true }) label!: string;
 	@Input({ required: true }) subtitle!: string;
+	@Input() badge!: number;
 
 	ngOnInit(): void {
 		this.iconClass += ' pi-' + this.icon;

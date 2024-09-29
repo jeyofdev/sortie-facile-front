@@ -1,29 +1,58 @@
 :host::ng-deep .button-header-icon {
 	display: flex;
-	gap: 0.6rem;
 	background-color: transparent;
 	border: none;
 	color: var(--gray-800);
+	padding: 0rem;
 
-	.pi {
-		color: var(--primary-color);
-		font-size: 2rem;
+	.icon-box {
+		position: relative;
+
+		.pi {
+			color: var(--primary-color);
+			font-size: 1.5rem;
+			margin-top: 0.6rem;
+			margin-right: 0.5rem;
+
+			.p-badge {
+				line-height: 0.8rem;
+				top: 0;
+				right: 0;
+			}
+		}
+
+		@media screen and (min-width: 768px) {
+			gap: 0.6rem;
+			padding: 0.5rem 0.8rem;
+
+			.pi {
+				font-size: 2rem;
+
+				.p-badge {
+					display: none;
+				}
+			}
+		}
 	}
 
 	.content-box {
-		display: flex;
-		flex-direction: column;
-		justify-content: flex-start;
-		align-items: flex-start;
-		gap: 0.1rem;
+		display: none;
 
-		.subtitle {
-			font-size: 0.85rem;
-		}
+		@media screen and (min-width: 768px) {
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-start;
+			align-items: flex-start;
+			gap: 0.1rem;
 
-		.label {
-			font-size: 1rem;
-			font-weight: 700;
+			.subtitle {
+				font-size: 0.85rem;
+			}
+
+			.label {
+				font-size: 1rem;
+				font-weight: 700;
+			}
 		}
 	}
 }

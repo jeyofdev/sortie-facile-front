@@ -1,6 +1,10 @@
 <p-button styleClass="button-header-icon">
 	<div class="icon-box">
-		<i [class]="iconClass"></i>
+		@if (badge) {
+			<i [class]="iconClass" pBadge [value]="badge" severity="warning"></i>
+		} @else {
+			<i [class]="iconClass"></i>
+		}
 	</div>
 
 	<div class="content-box">
