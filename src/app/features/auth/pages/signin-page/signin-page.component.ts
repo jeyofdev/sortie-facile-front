@@ -12,17 +12,18 @@ import { validationLoginMessages } from '@shared/validations/messages/login-mess
 export class SigninPageComponent implements OnInit {
 	formIsSubmitted: boolean = false;
 	validationMessages!: ValidationMessages[];
-	loginForm!: FormGroup;
+	regexEmail!: RegExp;
+
+	mainForm!: FormGroup;
 
 	emailCtrl!: FormControl;
 	passwordCtrl!: FormControl;
-
-	regexEmail!: RegExp;
 
 	constructor(private formBuilder: FormBuilder) {}
 
 	ngOnInit(): void {
 		this.validationMessages = validationLoginMessages;
+
 		this.initFormControls();
 		this.initLoginForm();
 	}
@@ -45,17 +46,11 @@ export class SigninPageComponent implements OnInit {
 	}
 
 	onSubmit(): void {
-		this.formIsSubmitted = true;
-
-		for (const control in this.loginForm.controls) {
-			this.loginForm.controls[control].markAsTouched();
-		}
-
-		console.log(this.loginForm.value);
+		console.log(this.mainForm.value);
 	}
 
 	private initLoginForm() {
-		this.loginForm = this.formBuilder.group({
+		this.mainForm = this.formBuilder.group({
 			email: this.emailCtrl,
 			password: this.passwordCtrl,
 		});

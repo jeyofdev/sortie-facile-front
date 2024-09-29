@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { AbstractControl, FormGroupDirective } from '@angular/forms';
+import { ValidationMessage } from '@shared/types/validation-message.type';
 
 @Component({
 	selector: 'app-error-field',
@@ -7,8 +8,8 @@ import { FormGroup } from '@angular/forms';
 	styleUrl: './error-field.component.scss',
 })
 export class ErrorFieldComponent {
-	@Input({ required: true }) formIsSubmitted!: boolean;
-	@Input({ required: true }) form!: FormGroup<any>;
+	@Input({ required: true }) form!: FormGroupDirective;
+	@Input({ required: true }) control!: AbstractControl<any, any> | null;
 	@Input({ required: true }) controlName!: string;
-	@Input({ required: true }) validationMessage!: any;
+	@Input({ required: true }) validationMessage!: ValidationMessage | null;
 }

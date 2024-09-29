@@ -9,6 +9,7 @@ import { ContainerComponent } from '@shared/components/container/container.compo
 import { LayoutComponent } from '@shared/components/layout/layout/layout.component';
 import { ErrorFieldComponent } from '@shared/components/form/error-field/error-field.component';
 import { CommonModule } from '@angular/common';
+import { TextFieldComponent } from '@shared/components/form/text-field/text-field.component';
 
 @NgModule({
 	declarations: [
@@ -20,8 +21,16 @@ import { CommonModule } from '@angular/common';
 		ContainerComponent,
 		LayoutComponent,
 		ErrorFieldComponent,
+		TextFieldComponent,
 	],
 	imports: [CommonModule, PrimengModule],
-	exports: [HeaderComponent, FooterComponent, ContainerComponent, LayoutComponent, ErrorFieldComponent],
+	exports: [
+		HeaderComponent,
+		FooterComponent,
+		ContainerComponent,
+		LayoutComponent,
+		ErrorFieldComponent,
+		TextFieldComponent,
+	],
 })
 export class ComponentModule {}

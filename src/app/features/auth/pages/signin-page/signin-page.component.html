@@ -17,34 +17,23 @@
 					<span>Log in to your account below</span>
 				</p>
 
-				<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-					<div class="form-control">
-						<label for="email">Email : </label>
-						<p-iconField iconPosition="left">
-							<p-inputIcon styleClass="pi pi-envelope" />
-							<input
-								type="text"
-								pInputText
-								id="email"
-								name="email"
-								formControlName="email"
-								placeholder="xxx@gmail.com"
-								[ngClass]="{
-									'is-invalid':
-										formIsSubmitted && loginForm.controls['email'].invalid && loginForm.controls['email'].touched,
-								}"
-							/>
-						</p-iconField>
+				<form #loginForm="ngForm" [formGroup]="mainForm" (ngSubmit)="onSubmit()">
+					<app-text-field
+						labelFor="email"
+						label="Email :"
+						type="text"
+						icon="envelope"
+						id="email"
+						name="email"
+						placeholder="xxx@gmail.com"
+						[form]="loginForm"
+						formControlName="email"
+						[parentForm]="mainForm"
+						controlName="email"
+						[validationMessage]="getValidationMessages('email')"
+					></app-text-field>
 
-						<app-error-field
-							[formIsSubmitted]="formIsSubmitted"
-							[form]="loginForm"
-							controlName="email"
-							[validationMessage]="getValidationMessages('email')"
-						></app-error-field>
-					</div>
-
-					<div class="form-control">
+					<!-- <div class="form-control">
 						<label for="password">Password : </label>
 						<p-iconField iconPosition="left">
 							<p-inputIcon styleClass="pi pi-lock pi-password" />
@@ -66,7 +55,7 @@
 							controlName="password"
 							[validationMessage]="getValidationMessages('password')"
 						></app-error-field>
-					</div>
+					</div> -->
 
 					<div class="forgot-password-box">
 						<a href="#" class="redirect-link">Forgot your password ?.</a>
