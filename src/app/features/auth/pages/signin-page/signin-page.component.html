@@ -36,17 +36,12 @@
 							/>
 						</p-iconField>
 
-						@if (formIsSubmitted && loginForm.controls['email'].invalid && loginForm.controls['email'].touched) {
-							<div class="invalid-feedback">
-								<span *ngIf="loginForm.controls['email']?.errors?.['required']"
-									>Email is required for registration.</span
-								>
-
-								<span *ngIf="loginForm.controls['email']?.errors?.['pattern']"
-									>Invalid email format. Please provide a correct email address.</span
-								>
-							</div>
-						}
+						<app-error-field
+							[formIsSubmitted]="formIsSubmitted"
+							[form]="loginForm"
+							controlName="email"
+							[validationMessage]="getValidationMessages('email')"
+						></app-error-field>
 					</div>
 
 					<div class="form-control">
@@ -65,17 +60,12 @@
 							/>
 						</p-iconField>
 
-						@if (formIsSubmitted && loginForm.controls['password'].invalid) {
-							<div class="invalid-feedback">
-								<span *ngIf="loginForm.controls['password']?.errors?.['required']"
-									>Password is required for registration.</span
-								>
-
-								<span *ngIf="loginForm.controls['password']?.errors?.['minlength']"
-									>Password must be at least 8 characters long.</span
-								>
-							</div>
-						}
+						<app-error-field
+							[formIsSubmitted]="formIsSubmitted"
+							[form]="loginForm"
+							controlName="password"
+							[validationMessage]="getValidationMessages('password')"
+						></app-error-field>
 					</div>
 
 					<div class="forgot-password-box">

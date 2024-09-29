@@ -7,6 +7,8 @@ import { LogoComponent } from '@shared/components/logo/logo.component';
 import { FooterComponent } from '@shared/components/footer/footer.component';
 import { ContainerComponent } from '@shared/components/container/container.component';
 import { LayoutComponent } from '@shared/components/layout/layout/layout.component';
+import { ErrorFieldComponent } from '@shared/components/form/error-field/error-field.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
 	declarations: [
@@ -17,8 +19,9 @@ import { LayoutComponent } from '@shared/components/layout/layout/layout.compone
 		FooterComponent,
 		ContainerComponent,
 		LayoutComponent,
+		ErrorFieldComponent,
 	],
-	imports: [PrimengModule],
-	exports: [HeaderComponent, FooterComponent, ContainerComponent, LayoutComponent],
+	imports: [CommonModule, PrimengModule],
+	exports: [HeaderComponent, FooterComponent, ContainerComponent, LayoutComponent, ErrorFieldComponent],
 })
 export class ComponentModule {}
