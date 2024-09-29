@@ -10,6 +10,7 @@ import { LayoutComponent } from '@shared/components/layout/layout/layout.compone
 import { ErrorFieldComponent } from '@shared/components/form/error-field/error-field.component';
 import { CommonModule } from '@angular/common';
 import { TextFieldComponent } from '@shared/components/form/text-field/text-field.component';
+import { PasswordFieldComponent } from '@shared/components/form/password-field/password-field.component';
 
 @NgModule({
 	declarations: [
@@ -22,6 +23,7 @@ import { TextFieldComponent } from '@shared/components/form/text-field/text-fiel
 		LayoutComponent,
 		ErrorFieldComponent,
 		TextFieldComponent,
+		PasswordFieldComponent,
 	],
 	imports: [CommonModule, PrimengModule],
 	exports: [
@@ -31,6 +33,7 @@ import { TextFieldComponent } from '@shared/components/form/text-field/text-fiel
 		LayoutComponent,
 		ErrorFieldComponent,
 		TextFieldComponent,
+		PasswordFieldComponent,
 	],
 })
 export class ComponentModule {}

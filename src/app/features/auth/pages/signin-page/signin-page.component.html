@@ -18,44 +18,40 @@
 				</p>
 
 				<form #loginForm="ngForm" [formGroup]="mainForm" (ngSubmit)="onSubmit()">
-					<app-text-field
-						labelFor="email"
-						label="Email :"
-						type="text"
-						icon="envelope"
-						id="email"
-						name="email"
-						placeholder="xxx@gmail.com"
-						[form]="loginForm"
-						formControlName="email"
-						[parentForm]="mainForm"
-						controlName="email"
-						[validationMessage]="getValidationMessages('email')"
-					></app-text-field>
-
-					<!-- <div class="form-control">
-						<label for="password">Password : </label>
-						<p-iconField iconPosition="left">
-							<p-inputIcon styleClass="pi pi-lock pi-password" />
-							<p-password
-								inputId="password"
-								formControlName="password"
-								[feedback]="false"
-								[toggleMask]="true"
-								placeholder="*****"
-								[ngClass]="{
-									'is-invalid': formIsSubmitted && loginForm.controls['password'].invalid,
-								}"
-							/>
-						</p-iconField>
-
-						<app-error-field
-							[formIsSubmitted]="formIsSubmitted"
+					<div class="form-control">
+						<app-text-field
+							labelFor="email"
+							label="Email :"
+							type="text"
+							icon="envelope"
+							id="email"
+							name="email"
+							placeholder="xxx@gmail.com"
 							[form]="loginForm"
+							formControlName="email"
+							[parentForm]="mainForm"
+							controlName="email"
+							[validationMessage]="getValidationMessages('email')"
+						></app-text-field>
+					</div>
+
+					<div class="form-control">
+						<app-password-field
+							labelFor="password"
+							label="Password :"
+							icon="password"
+							id="password"
+							name="password"
+							placeholder="*****"
+							[feedback]="false"
+							[toggleMask]="true"
+							[form]="loginForm"
+							formControlName="password"
+							[parentForm]="mainForm"
 							controlName="password"
 							[validationMessage]="getValidationMessages('password')"
-						></app-error-field>
-					</div> -->
+						></app-password-field>
+					</div>
 
 					<div class="forgot-password-box">
 						<a href="#" class="redirect-link">Forgot your password ?.</a>
