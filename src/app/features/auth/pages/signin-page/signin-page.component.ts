@@ -47,7 +47,6 @@ export class SigninPageComponent implements OnInit {
 
 	onSubmit(): void {
 		console.log(this.mainForm.value);
-		console.log(this.mainForm);
 	}
 
 	private initLoginForm() {
