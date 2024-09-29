@@ -23,4 +23,13 @@
 		border: 1px solid var(--gray-0);
 		width: 100%;
 	}
+
+	.p-input-icon-right > .p-icon-wrapper,
+	.p-input-icon-right > i {
+		color: var(--gray-800);
+	}
+
+	.p-icon-field-left .p-input-icon:first-of-type {
+		color: var(--gray-800);
+	}
 }

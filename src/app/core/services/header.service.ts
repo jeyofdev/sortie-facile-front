@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { AuthRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
 import { MenuItem } from 'primeng/api';
 
 @Injectable({
@@ -11,6 +12,7 @@ export class HeaderService {
 				items: [
 					{
 						label: 'Signin',
+						routerLink: PrimaryRouteEnum.AUTH + '/' + AuthRouteEnum.SIGNIN,
 					},
 					{
 						label: 'Signup',
