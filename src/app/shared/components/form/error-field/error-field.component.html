@@ -1,0 +1,9 @@
+@if (form.submitted && control?.invalid) {
+	<div class="invalid-feedback">
+		<span *ngIf="control?.hasError('required')">{{ validationMessage?.['required'] }}</span>
+
+		<span *ngIf="control?.hasError('pattern')">{{ validationMessage?.['pattern'] }}</span>
+
+		<span *ngIf="control?.hasError('minlength')">{{ validationMessage?.['minlength'] }}</span>
+	</div>
+}

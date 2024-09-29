@@ -2,11 +2,15 @@ import { NgModule } from '@angular/core';
 import { HeaderComponent } from '@shared/components/header/header.component';
 import { PrimengModule } from '@shared/modules/primeng.module';
 import { ButtonHeaderIconComponent } from '@shared/components/buttons/button-header-icon/button-header-icon.component';
-import { InputSearchComponent } from '@shared/components/form/input/input-search/input-search.component';
+import { InputSearchComponent } from '@shared/components/form/input-search/input-search.component';
 import { LogoComponent } from '@shared/components/logo/logo.component';
 import { FooterComponent } from '@shared/components/footer/footer.component';
 import { ContainerComponent } from '@shared/components/container/container.component';
 import { LayoutComponent } from '@shared/components/layout/layout/layout.component';
+import { ErrorFieldComponent } from '@shared/components/form/error-field/error-field.component';
+import { CommonModule } from '@angular/common';
+import { TextFieldComponent } from '@shared/components/form/text-field/text-field.component';
+import { PasswordFieldComponent } from '@shared/components/form/password-field/password-field.component';
 
 @NgModule({
 	declarations: [
@@ -17,8 +21,19 @@ import { LayoutComponent } from '@shared/components/layout/layout/layout.compone
 		FooterComponent,
 		ContainerComponent,
 		LayoutComponent,
+		ErrorFieldComponent,
+		TextFieldComponent,
+		PasswordFieldComponent,
 	],
-	imports: [PrimengModule],
-	exports: [HeaderComponent, FooterComponent, ContainerComponent, LayoutComponent],
+	imports: [CommonModule, PrimengModule],
+	exports: [
+		HeaderComponent,
+		FooterComponent,
+		ContainerComponent,
+		LayoutComponent,
+		ErrorFieldComponent,
+		TextFieldComponent,
+		PasswordFieldComponent,
+	],
 })
 export class ComponentModule {}

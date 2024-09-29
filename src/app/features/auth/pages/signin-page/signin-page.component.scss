@@ -137,61 +137,6 @@
 					&:nth-child(2) {
 						margin-bottom: 0;
 					}
-
-					label {
-						display: block;
-						margin-bottom: 0.25rem;
-						font-size: 1.025rem;
-						opacity: 0.75;
-					}
-
-					.pi-password {
-						position: absolute;
-						top: 37.2px;
-						z-index: 1;
-					}
-
-					p-password {
-						display: block;
-						.p-inputwrapper {
-							display: block;
-						}
-
-						&.ng-invalid.is-invalid > .p-password > .p-inputtext {
-							border: 1.5px solid var(--red-400);
-							color: var(--red-500);
-							box-shadow: 0px 0px 3px 0px var(--red-400);
-						}
-					}
-
-					.p-inputtext {
-						width: 100%;
-						padding: 0.85rem 1rem 0.85rem 2.5rem;
-						border: 1.5px solid var(--gray-0);
-						border-radius: 8px;
-						color: var(--gray-800);
-
-						&:focus {
-							border: none;
-							outline: none;
-							box-shadow: 0px 0px 4px 0px var(--primary-color);
-						}
-
-						&.is-invalid {
-							border: 1.5px solid var(--red-400);
-							box-shadow: 0px 0px 3px 0px var(--red-400);
-							color: var(--red-500);
-						}
-					}
-				}
-
-				.invalid-feedback {
-					margin-top: 0.35rem;
-
-					span {
-						color: var(--red-500);
-						font-size: 0.9rem;
-					}
 				}
 
 				.forgot-password-box {

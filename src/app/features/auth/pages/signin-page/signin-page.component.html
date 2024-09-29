@@ -17,65 +17,40 @@
 					<span>Log in to your account below</span>
 				</p>
 
-				<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+				<form #loginForm="ngForm" [formGroup]="mainForm" (ngSubmit)="onSubmit()">
 					<div class="form-control">
-						<label for="email">Email : </label>
-						<p-iconField iconPosition="left">
-							<p-inputIcon styleClass="pi pi-envelope" />
-							<input
-								type="text"
-								pInputText
-								id="email"
-								name="email"
-								formControlName="email"
-								placeholder="xxx@gmail.com"
-								[ngClass]="{
-									'is-invalid':
-										formIsSubmitted && loginForm.controls['email'].invalid && loginForm.controls['email'].touched,
-								}"
-							/>
-						</p-iconField>
-
-						@if (formIsSubmitted && loginForm.controls['email'].invalid && loginForm.controls['email'].touched) {
-							<div class="invalid-feedback">
-								<span *ngIf="loginForm.controls['email']?.errors?.['required']"
-									>Email is required for registration.</span
-								>
-
-								<span *ngIf="loginForm.controls['email']?.errors?.['pattern']"
-									>Invalid email format. Please provide a correct email address.</span
-								>
-							</div>
-						}
+						<app-text-field
+							labelFor="email"
+							label="Email :"
+							type="text"
+							icon="envelope"
+							id="email"
+							name="email"
+							placeholder="xxx@gmail.com"
+							[form]="loginForm"
+							formControlName="email"
+							[parentForm]="mainForm"
+							controlName="email"
+							[validationMessage]="getValidationMessages('email')"
+						></app-text-field>
 					</div>
 
 					<div class="form-control">
-						<label for="password">Password : </label>
-						<p-iconField iconPosition="left">
-							<p-inputIcon styleClass="pi pi-lock pi-password" />
-							<p-password
-								inputId="password"
-								formControlName="password"
-								[feedback]="false"
-								[toggleMask]="true"
-								placeholder="*****"
-								[ngClass]="{
-									'is-invalid': formIsSubmitted && loginForm.controls['password'].invalid,
-								}"
-							/>
-						</p-iconField>
-
-						@if (formIsSubmitted && loginForm.controls['password'].invalid) {
-							<div class="invalid-feedback">
-								<span *ngIf="loginForm.controls['password']?.errors?.['required']"
-									>Password is required for registration.</span
-								>
-
-								<span *ngIf="loginForm.controls['password']?.errors?.['minlength']"
-									>Password must be at least 8 characters long.</span
-								>
-							</div>
-						}
+						<app-password-field
+							labelFor="password"
+							label="Password :"
+							icon="lock"
+							id="password"
+							name="password"
+							placeholder="*****"
+							[feedback]="false"
+							[toggleMask]="true"
+							[form]="loginForm"
+							formControlName="password"
+							[parentForm]="mainForm"
+							controlName="password"
+							[validationMessage]="getValidationMessages('password')"
+						></app-password-field>
 					</div>
 
 					<div class="forgot-password-box">

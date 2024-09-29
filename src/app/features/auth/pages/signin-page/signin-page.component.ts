@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ValidationMessages } from '@shared/models/validation-messages.model';
+import { ValidationMessage } from '@shared/types/validation-message.type';
+import { validationLoginMessages } from '@shared/validations/messages/login-message.error';
 
 @Component({
 	selector: 'app-signin-page',
@@ -8,34 +11,46 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class SigninPageComponent implements OnInit {
 	formIsSubmitted: boolean = false;
-	loginForm!: FormGroup;
+	validationMessages!: ValidationMessages[];
+	regexEmail!: RegExp;
+
+	mainForm!: FormGroup;
 
 	emailCtrl!: FormControl;
 	passwordCtrl!: FormControl;
 
-	regexEmail!: RegExp;
-
 	constructor(private formBuilder: FormBuilder) {}
 
 	ngOnInit(): void {
+		this.validationMessages = validationLoginMessages;
+
 		this.initFormControls();
 		this.initLoginForm();
 	}
 
-	onSubmit(): void {
-		this.formIsSubmitted = true;
+	getValidationMessages(name: string): ValidationMessage | null {
+		try {
+			const validationMessage: ValidationMessages = this.validationMessages.find(
+				vm => vm.getName() === name,
+			) as ValidationMessages;
 
-		for (const control in this.loginForm.controls) {
-			this.loginForm.controls[control].markAsTouched();
+			if (!validationMessage) {
+				throw new Error(`Validation messages not found for name: ${name}`);
+			}
+
+			return validationMessage.getMessages();
+		} catch (err) {
+			console.error(err);
+			return null;
 		}
+	}
 
-		console.log(this.loginForm);
-
-		console.log(this.loginForm.value);
+	onSubmit(): void {
+		console.log(this.mainForm.value);
 	}
 
 	private initLoginForm() {
-		this.loginForm = this.formBuilder.group({
+		this.mainForm = this.formBuilder.group({
 			email: this.emailCtrl,
 			password: this.passwordCtrl,
 		});

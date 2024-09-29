@@ -1,0 +1,25 @@
+<label [for]="labelFor">{{ label }}</label>
+
+<p-iconField iconPosition="left">
+	<p-inputIcon [styleClass]="iconClass" />
+	<input
+		pInputText
+		[type]="type"
+		[id]="id"
+		[name]="name"
+		[placeholder]="placeholder"
+		[value]="value"
+		[disabled]="disabled"
+		(input)="onInputChange($event)"
+		(focus)="markAsTouched()"
+		[ngClass]="{
+			'is-invalid ng-dirty': control?.invalid && form.submitted,
+		}"
+/></p-iconField>
+
+<app-error-field
+	[form]="form"
+	[control]="control"
+	[controlName]="controlName"
+	[validationMessage]="validationMessage"
+></app-error-field>
