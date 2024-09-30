@@ -1,18 +1,18 @@
-<app-auth-layout imgSrc="assets/images/signin.jpg" imgAlt="signin" pageTitle="Welcome back" pageIcon="user">
+<app-auth-layout imgSrc="assets/images/signup.jpg" imgAlt="signup" pageTitle="Create new account" pageIcon="user">
 	<ng-container subtitle>
-		<span>Glad to see you again.</span>
-		<span>Log in to your account below.</span>
+		<span>Sign up now and be part of a growing community.</span>
+		<span>It's quick, easy, and free !</span>
 	</ng-container>
 
 	<ng-container primary>
-		<app-alert-error
+		<!-- <app-alert-error
 			*ngIf="formError"
 			[content]="formError"
 			severity="error"
 			icon="exclamation-circle"
-		></app-alert-error>
+		></app-alert-error> -->
 
-		<form #signinForm="ngForm" [formGroup]="mainForm" (ngSubmit)="onSubmit()">
+		<form #signupForm="ngForm" [formGroup]="mainForm" (ngSubmit)="onSubmit()">
 			<div class="form-control">
 				<app-text-field
 					labelFor="email"
@@ -22,7 +22,7 @@
 					id="email"
 					name="email"
 					placeholder="xxx@gmail.com"
-					[form]="signinForm"
+					[form]="signupForm"
 					formControlName="email"
 					[parentForm]="mainForm"
 					controlName="email"
@@ -40,7 +40,7 @@
 					placeholder="*****"
 					[feedback]="false"
 					[toggleMask]="true"
-					[form]="signinForm"
+					[form]="signupForm"
 					formControlName="password"
 					[parentForm]="mainForm"
 					controlName="password"
@@ -48,16 +48,12 @@
 				></app-password-field>
 			</div>
 
-			<div class="forgot-password-box">
-				<a href="#" class="redirect-link">Forgot your password ?.</a>
-			</div>
-
 			<p-button type="submit" label="Login" icon="pi pi-arrow-up-right" iconPos="right" styleClass="btn-cta" />
 		</form>
 
 		<p class="redirect-text">
-			Dont't have an account ?
-			<a [routerLink]="redirectLink" class="redirect-link">Sign up</a> for free.
+			Already have an account ?
+			<a [routerLink]="redirectLink" class="redirect-link">Sign in</a>.
 		</p>
 	</ng-container>
 </app-auth-layout>

@@ -5,9 +5,10 @@ import { AuthRoutingModule } from '@auth/auth-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '@shared/shared.module';
 import { AuthLayoutComponent } from './component/layout/auth-layout/auth-layout.component';
+import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 
 @NgModule({
-	declarations: [SigninPageComponent, AuthLayoutComponent],
+	declarations: [SigninPageComponent, AuthLayoutComponent, SignupPageComponent],
 	imports: [CommonModule, AuthRoutingModule, FormsModule, ReactiveFormsModule, SharedModule],
 })
 export class AuthModule {}

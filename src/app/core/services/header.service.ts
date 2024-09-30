@@ -16,6 +16,7 @@ export class HeaderService {
 					},
 					{
 						label: 'Signup',
+						routerLink: PrimaryRouteEnum.AUTH + '/' + AuthRouteEnum.SIGNUP,
 					},
 				],
 			},

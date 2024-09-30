@@ -1,0 +1,64 @@
+:host::ng-deep app-alert-error {
+	margin-bottom: 2.5rem;
+	width: 100%;
+}
+
+:host::ng-deep form {
+	width: 100%;
+
+	.form-control {
+		margin-bottom: 1.5rem;
+
+		&:nth-child(2) {
+			margin-bottom: 0;
+		}
+	}
+
+	.btn-cta {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-top: 1.5rem;
+		width: 100%;
+		padding: 0.6rem 1.5rem;
+		border: none;
+		border-radius: 10px;
+		background: var(--primary-500);
+		color: var(--surface-0);
+		font-weight: 600;
+		text-transform: uppercase;
+		transition: background-color 0.3s ease-in-out;
+
+		&:hover {
+			background: var(--primary-700);
+		}
+
+		.p-button-label {
+			flex: inherit;
+			font-weight: normal;
+			font-size: 0.9rem;
+			line-height: 1;
+			margin-top: 0.1rem;
+		}
+
+		.p-button-icon {
+			font-size: 0.9rem;
+		}
+	}
+}
+
+.redirect-text {
+	font-size: 0.95rem;
+	color: var(--gray-800);
+	margin-top: 2.5rem;
+
+	.redirect-link {
+		font-size: 0.95rem;
+		color: var(--primary-color);
+		text-decoration: none;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+}

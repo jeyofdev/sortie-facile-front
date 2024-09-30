@@ -1,6 +1,6 @@
 import { ValidationMessages } from '@shared/models/validation-messages.model';
 
-export const validationLoginMessages: ValidationMessages[] = [
+export const validationSigninMessages: ValidationMessages[] = [
 	new ValidationMessages('email', {
 		required: 'Email is required for registration.',
 		pattern: 'Invalid email format. Please provide a correct email address.',

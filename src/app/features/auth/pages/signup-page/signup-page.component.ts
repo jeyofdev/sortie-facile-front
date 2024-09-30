@@ -1,23 +1,16 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '@services/auth.service';
-import { LocalStorageService } from '@services/local-storage.service';
 import { AuthRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
-import { ResponseAuthSigninBase } from '@shared/models/auth/response-auth-signin-base.model';
-import { ResponseAuthSigninError } from '@shared/models/auth/response-auth-signin-error.model';
 import { ValidationMessages } from '@shared/models/validation-messages.model';
 import { ValidationMessage } from '@shared/types/validation-message.type';
-import { validationSigninMessages } from '@shared/validations/messages/signin-message.error';
-import { Subscription, tap } from 'rxjs';
+import { validationSignupMessages } from '@shared/validations/messages/signup-message.error';
 
 @Component({
-	selector: 'app-signin-page',
-	templateUrl: './signin-page.component.html',
-	styleUrl: './signin-page.component.scss',
+	selector: 'app-signup-page',
+	templateUrl: './signup-page.component.html',
+	styleUrl: './signup-page.component.scss',
 })
-export class SigninPageComponent implements OnInit, OnDestroy {
-	private _signinSubscription: Subscription = new Subscription();
-
+export class SignupPageComponent implements OnInit {
 	validationMessages!: ValidationMessages[];
 	regexEmail!: RegExp;
 
@@ -29,18 +22,14 @@ export class SigninPageComponent implements OnInit, OnDestroy {
 
 	redirectLink!: string;
 
-	constructor(
-		private _formBuilder: FormBuilder,
-		private _authService: AuthService,
-		private _localStorageService: LocalStorageService,
-	) {}
+	constructor(private _formBuilder: FormBuilder) {}
 
 	ngOnInit(): void {
-		this.redirectLink = '/' + PrimaryRouteEnum.AUTH + '/' + AuthRouteEnum.SIGNUP;
-		this.validationMessages = validationSigninMessages;
+		this.redirectLink = '/' + PrimaryRouteEnum.AUTH + '/' + AuthRouteEnum.SIGNIN;
+		this.validationMessages = validationSignupMessages;
 
 		this.initFormControls();
-		this.initSigninForm();
+		this.initSignupForm();
 	}
 
 	getValidationMessages(name: string): ValidationMessage | null {
@@ -62,25 +51,13 @@ export class SigninPageComponent implements OnInit, OnDestroy {
 
 	onSubmit(): void {
 		if (this.mainForm.valid) {
-			this.formError = '';
-			this._localStorageService.clearAuthToken();
-
-			this._signinSubscription = this._authService
-				.signInWithEmailAndPassword$(this.mainForm.value)
-				.pipe(
-					tap((res: ResponseAuthSigninBase) => {
-						if (res instanceof ResponseAuthSigninError) {
-							this.formError = res.message;
-						}
-					}),
-				)
-				.subscribe();
+			console.log(this.mainForm.value);
 		} else {
 			this.formError = 'The form contains errors. Please check your informations.';
 		}
 	}
 
-	private initSigninForm() {
+	private initSignupForm() {
 		this.mainForm = this._formBuilder.group({
 			email: this.emailCtrl,
 			password: this.passwordCtrl,
@@ -92,9 +69,5 @@ export class SigninPageComponent implements OnInit, OnDestroy {
 
 		this.emailCtrl = this._formBuilder.control('', [Validators.required, Validators.pattern(this.regexEmail)]);
 		this.passwordCtrl = this._formBuilder.control('', [Validators.required, Validators.minLength(8)]);
-	}
-
-	ngOnDestroy(): void {
-		this._signinSubscription.unsubscribe();
 	}
 }
