@@ -15,6 +15,7 @@ export class SigninPageComponent implements OnInit {
 	regexEmail!: RegExp;
 
 	mainForm!: FormGroup;
+	formError!: string;
 
 	emailCtrl!: FormControl;
 	passwordCtrl!: FormControl;
@@ -46,7 +47,11 @@ export class SigninPageComponent implements OnInit {
 	}
 
 	onSubmit(): void {
-		console.log(this.mainForm.value);
+		if (this.mainForm.valid) {
+			this.formError = '';
+		} else {
+			this.formError = 'The form contains errors. Please check your login informations.';
+		}
 	}
 
 	private initLoginForm() {
