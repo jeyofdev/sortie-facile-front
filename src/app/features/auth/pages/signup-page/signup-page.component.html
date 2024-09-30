@@ -1,0 +1,79 @@
+<app-auth-layout imgSrc="assets/images/signup.jpg" imgAlt="signup" pageTitle="Create new account" pageIcon="user">
+	<ng-container subtitle>
+		<span>Sign up now and be part of a growing community.</span>
+		<span>It's quick, easy, and free !</span>
+	</ng-container>
+
+	<ng-container primary>
+		<app-alert-error
+			*ngIf="formError"
+			[content]="formError"
+			severity="error"
+			icon="exclamation-circle"
+		></app-alert-error>
+
+		<form #signupForm="ngForm" [formGroup]="mainForm" (ngSubmit)="onSubmit()">
+			<div class="form-control">
+				<app-text-field
+					labelFor="email"
+					label="Email :"
+					type="text"
+					icon="envelope"
+					id="email"
+					name="email"
+					placeholder="xxx@gmail.com"
+					[form]="signupForm"
+					formControlName="email"
+					[parentForm]="mainForm"
+					controlName="email"
+					[validationMessage]="getValidationMessages('email')"
+				></app-text-field>
+			</div>
+
+			<ng-container [formGroupName]="'passwordForm'">
+				<div class="form-control">
+					<app-password-field
+						labelFor="password"
+						label="Password :"
+						icon="lock"
+						id="password"
+						name="password"
+						placeholder="*****"
+						[feedback]="false"
+						[toggleMask]="true"
+						[form]="signupForm"
+						formControlName="password"
+						[parentForm]="passwordForm"
+						controlName="password"
+						[validationMessage]="getValidationMessages('password')"
+					></app-password-field>
+				</div>
+
+				<div class="form-control">
+					<app-password-field
+						labelFor="confirmPassword"
+						label="Confirm password :"
+						icon="lock"
+						id="confirmPassword"
+						name="confirmPassword"
+						placeholder="*****"
+						[feedback]="false"
+						[toggleMask]="true"
+						[form]="signupForm"
+						formControlName="confirmPassword"
+						[parentForm]="passwordForm"
+						controlName="confirmPassword"
+						[validationMessage]="getValidationMessages('confirmPassword')"
+					></app-password-field>
+				</div>
+			</ng-container>
+
+			<p-button type="submit" label="Login" icon="pi pi-arrow-up-right" iconPos="right" styleClass="btn-cta" />
+		</form>
+
+		<p class="redirect-text">
+			Already have an account ?
+			<a [routerLink]="redirectLink" class="redirect-link">Sign in</a>.
+		</p>
+	</ng-container>
+</app-auth-layout>

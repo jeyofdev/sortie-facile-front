@@ -6,4 +6,5 @@ export enum PrimaryRouteEnum {
 
 export enum AuthRouteEnum {
 	SIGNIN = 'signin',
+	SIGNUP = 'signup',
 }

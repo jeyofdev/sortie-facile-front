@@ -1,77 +1,63 @@
-<app-container>
-	<div class="login-container">
-		<div class="login-image-box">
-			<img src="assets/images/signin.jpg" alt="" />
-		</div>
+<app-auth-layout imgSrc="assets/images/signin.jpg" imgAlt="signin" pageTitle="Welcome back" pageIcon="user">
+	<ng-container subtitle>
+		<span>Glad to see you again.</span>
+		<span>Log in to your account below.</span>
+	</ng-container>
 
-		<div class="login-content-box">
-			<div class="login-content">
-				<div class="icon-box">
-					<i class="pi pi-user"></i>
-				</div>
+	<ng-container primary>
+		<app-alert-error
+			*ngIf="formError"
+			[content]="formError"
+			severity="error"
+			icon="exclamation-circle"
+		></app-alert-error>
 
-				<h1 class="page-title">Welcome back</h1>
-
-				<p class="page-subtitle">
-					<span>Glad to see you again.</span>
-					<span>Log in to your account below</span>
-				</p>
-
-				<app-alert-error
-					*ngIf="formError"
-					[content]="formError"
-					severity="error"
-					icon="exclamation-circle"
-				></app-alert-error>
-
-				<form #loginForm="ngForm" [formGroup]="mainForm" (ngSubmit)="onSubmit()">
-					<div class="form-control">
-						<app-text-field
-							labelFor="email"
-							label="Email :"
-							type="text"
-							icon="envelope"
-							id="email"
-							name="email"
-							placeholder="xxx@gmail.com"
-							[form]="loginForm"
-							formControlName="email"
-							[parentForm]="mainForm"
-							controlName="email"
-							[validationMessage]="getValidationMessages('email')"
-						></app-text-field>
-					</div>
-
-					<div class="form-control">
-						<app-password-field
-							labelFor="password"
-							label="Password :"
-							icon="lock"
-							id="password"
-							name="password"
-							placeholder="*****"
-							[feedback]="false"
-							[toggleMask]="true"
-							[form]="loginForm"
-							formControlName="password"
-							[parentForm]="mainForm"
-							controlName="password"
-							[validationMessage]="getValidationMessages('password')"
-						></app-password-field>
-					</div>
-
-					<div class="forgot-password-box">
-						<a href="#" class="redirect-link">Forgot your password ?.</a>
-					</div>
-
-					<p-button type="submit" label="Login" icon="pi pi-arrow-up-right" iconPos="right" styleClass="btn-cta" />
-				</form>
-
-				<p class="redirect-text">
-					Already have an account ?
-					<a href="#" class="redirect-link">Sign up.</a>
-				</p>
+		<form #signinForm="ngForm" [formGroup]="mainForm" (ngSubmit)="onSubmit()">
+			<div class="form-control">
+				<app-text-field
+					labelFor="email"
+					label="Email :"
+					type="text"
+					icon="envelope"
+					id="email"
+					name="email"
+					placeholder="xxx@gmail.com"
+					[form]="signinForm"
+					formControlName="email"
+					[parentForm]="mainForm"
+					controlName="email"
+					[validationMessage]="getValidationMessages('email')"
+				></app-text-field>
 			</div>
-		</div>
-	</div>
-</app-container>
+
+			<div class="form-control">
+				<app-password-field
+					labelFor="password"
+					label="Password :"
+					icon="lock"
+					id="password"
+					name="password"
+					placeholder="*****"
+					[feedback]="false"
+					[toggleMask]="true"
+					[form]="signinForm"
+					formControlName="password"
+					[parentForm]="mainForm"
+					controlName="password"
+					[validationMessage]="getValidationMessages('password')"
+				></app-password-field>
+			</div>
+
+			<div class="forgot-password-box">
+				<a href="#" class="redirect-link">Forgot your password ?.</a>
+			</div>
+
+			<p-button type="submit" label="Login" icon="pi pi-arrow-up-right" iconPos="right" styleClass="btn-cta" />
+		</form>
+
+		<p class="redirect-text">
+			Dont't have an account ?
+			<a [routerLink]="redirectLink" class="redirect-link">Sign up</a> for free.
+		</p>
+	</ng-container>
+</app-auth-layout>

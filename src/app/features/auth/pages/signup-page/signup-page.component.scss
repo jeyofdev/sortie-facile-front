@@ -8,27 +8,6 @@
 
 	.form-control {
 		margin-bottom: 1.5rem;
-
-		&:nth-child(2) {
-			margin-bottom: 0;
-		}
-	}
-
-	.forgot-password-box {
-		display: flex;
-		justify-content: flex-end;
-		margin-top: 0.5rem;
-		margin-bottom: 1.5rem;
-
-		a {
-			font-size: 0.9rem;
-			color: var(--primary-color);
-			text-decoration: none;
-
-			&:hover {
-				text-decoration: underline;
-			}
-		}
 	}
 
 	.btn-cta {

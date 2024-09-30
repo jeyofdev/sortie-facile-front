@@ -2,12 +2,13 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '@services/auth.service';
 import { LocalStorageService } from '@services/local-storage.service';
+import { AuthRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
 import { ResponseAuthSigninBase } from '@shared/models/auth/response-auth-signin-base.model';
 import { ResponseAuthSigninError } from '@shared/models/auth/response-auth-signin-error.model';
 import { ValidationMessages } from '@shared/models/validation-messages.model';
 import { ValidationMessage } from '@shared/types/validation-message.type';
-import { validationLoginMessages } from '@shared/validations/messages/login-message.error';
-import { map, Subscription, tap } from 'rxjs';
+import { validationSigninMessages } from '@shared/validations/messages/signin-message.error';
+import { Subscription, tap } from 'rxjs';
 
 @Component({
 	selector: 'app-signin-page',
@@ -17,7 +18,6 @@ import { map, Subscription, tap } from 'rxjs';
 export class SigninPageComponent implements OnInit, OnDestroy {
 	private _signinSubscription: Subscription = new Subscription();
 
-	formIsSubmitted: boolean = false;
 	validationMessages!: ValidationMessages[];
 	regexEmail!: RegExp;
 
@@ -27,6 +27,8 @@ export class SigninPageComponent implements OnInit, OnDestroy {
 	emailCtrl!: FormControl;
 	passwordCtrl!: FormControl;
 
+	redirectLink!: string;
+
 	constructor(
 		private _formBuilder: FormBuilder,
 		private _authService: AuthService,
@@ -34,10 +36,11 @@ export class SigninPageComponent implements OnInit, OnDestroy {
 	) {}
 
 	ngOnInit(): void {
-		this.validationMessages = validationLoginMessages;
+		this.redirectLink = '/' + PrimaryRouteEnum.AUTH + '/' + AuthRouteEnum.SIGNUP;
+		this.validationMessages = validationSigninMessages;
 
 		this.initFormControls();
-		this.initLoginForm();
+		this.initSigninForm();
 	}
 
 	getValidationMessages(name: string): ValidationMessage | null {
@@ -73,11 +76,11 @@ export class SigninPageComponent implements OnInit, OnDestroy {
 				)
 				.subscribe();
 		} else {
-			this.formError = 'The form contains errors. Please check your login informations.';
+			this.formError = 'The form contains errors. Please check your informations.';
 		}
 	}
 
-	private initLoginForm() {
+	private initSigninForm() {
 		this.mainForm = this._formBuilder.group({
 			email: this.emailCtrl,
 			password: this.passwordCtrl,
