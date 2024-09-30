@@ -11,6 +11,7 @@ import { ErrorFieldComponent } from '@shared/components/form/error-field/error-f
 import { CommonModule } from '@angular/common';
 import { TextFieldComponent } from '@shared/components/form/text-field/text-field.component';
 import { PasswordFieldComponent } from '@shared/components/form/password-field/password-field.component';
+import { AlertErrorComponent } from '@shared/components/form/alert-error/alert-error.component';
 
 @NgModule({
 	declarations: [
@@ -24,6 +25,7 @@ import { PasswordFieldComponent } from '@shared/components/form/password-field/p
 		ErrorFieldComponent,
 		TextFieldComponent,
 		PasswordFieldComponent,
+		AlertErrorComponent,
 	],
 	imports: [CommonModule, PrimengModule],
 	exports: [
@@ -34,6 +36,7 @@ import { PasswordFieldComponent } from '@shared/components/form/password-field/p
 		ErrorFieldComponent,
 		TextFieldComponent,
 		PasswordFieldComponent,
+		AlertErrorComponent,
 	],
 })
 export class ComponentModule {}

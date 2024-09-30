@@ -17,6 +17,13 @@
 					<span>Log in to your account below</span>
 				</p>
 
+				<app-alert-error
+					*ngIf="formError"
+					[content]="formError"
+					severity="error"
+					icon="exclamation-circle"
+				></app-alert-error>
+
 				<form #loginForm="ngForm" [formGroup]="mainForm" (ngSubmit)="onSubmit()">
 					<div class="form-control">
 						<app-text-field

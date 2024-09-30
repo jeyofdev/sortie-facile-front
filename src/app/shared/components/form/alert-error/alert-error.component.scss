@@ -1,0 +1,18 @@
+:host::ng-deep .p-message {
+	margin: 0;
+
+	.p-message-wrapper {
+		display: flex;
+		gap: 1.5rem;
+
+		.pi {
+			font-size: 1.25rem;
+		}
+
+		p {
+			font-size: 0.975rem;
+			line-height: 1.2;
+			margin: 0;
+		}
+	}
+}
