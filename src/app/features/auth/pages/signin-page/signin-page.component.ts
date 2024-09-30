@@ -7,7 +7,7 @@ import { ResponseAuthSigninError } from '@shared/models/auth/response-auth-signi
 import { ValidationMessages } from '@shared/models/validation-messages.model';
 import { ValidationMessage } from '@shared/types/validation-message.type';
 import { validationLoginMessages } from '@shared/validations/messages/login-message.error';
-import { map, Subscription, tap } from 'rxjs';
+import { Subscription, tap } from 'rxjs';
 
 @Component({
 	selector: 'app-signin-page',

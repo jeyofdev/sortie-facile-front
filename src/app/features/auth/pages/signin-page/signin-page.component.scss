@@ -1,214 +1,81 @@
-:host::ng-deep app-container {
+:host::ng-deep app-alert-error {
+	margin-bottom: 2.5rem;
 	width: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+}
 
-	.container {
-		justify-content: center;
+:host::ng-deep form {
+	width: 100%;
+
+	.form-control {
+		margin-bottom: 1.5rem;
+
+		&:nth-child(2) {
+			margin-bottom: 0;
+		}
 	}
 
-	.login-container {
+	.forgot-password-box {
+		display: flex;
+		justify-content: flex-end;
+		margin-top: 0.5rem;
+		margin-bottom: 1.5rem;
+
+		a {
+			font-size: 0.9rem;
+			color: var(--primary-color);
+			text-decoration: none;
+
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+	}
+
+	.btn-cta {
 		display: flex;
 		justify-content: center;
-		gap: 2rem;
+		align-items: center;
+		margin-top: 1.5rem;
 		width: 100%;
-		max-width: 1100px;
+		padding: 0.6rem 1.5rem;
+		border: none;
+		border-radius: 10px;
+		background: var(--primary-500);
+		color: var(--surface-0);
+		font-weight: 600;
+		text-transform: uppercase;
+		transition: background-color 0.3s ease-in-out;
 
-		@media screen and (min-width: 992px) {
-			gap: 2rem;
+		&:hover {
+			background: var(--primary-700);
 		}
 
-		@media screen and (min-width: 1280px) {
-			max-width: 1200px;
+		.p-button-label {
+			flex: inherit;
+			font-weight: normal;
+			font-size: 0.9rem;
+			line-height: 1;
+			margin-top: 0.1rem;
 		}
 
-		@media screen and (min-width: 1920px) {
-			gap: 3rem;
+		.p-button-icon {
+			font-size: 0.9rem;
 		}
+	}
+}
 
-		.login-image-box {
-			display: none;
+.redirect-text {
+	font-size: 0.95rem;
+	color: var(--gray-800);
+	margin-top: 2.5rem;
 
-			@media screen and (min-width: 768px) {
-				display: flex;
-				flex: 1;
-				overflow: hidden;
-				border-radius: 30px;
-			}
+	.redirect-link {
+		font-size: 0.95rem;
+		color: var(--primary-color);
+		text-decoration: none;
 
-			@media screen and (min-width: 992px) {
-				max-width: 500px;
-			}
-
-			@media screen and (min-width: 1380px) {
-				max-width: 600px;
-			}
-
-			@media screen and (min-width: 1920px) {
-				max-width: 700px;
-			}
-
-			> img {
-				width: 100%;
-				height: auto;
-				transform: scale(2);
-				border-radius: 30px;
-				object-fit: cover;
-
-				@media screen and (min-width: 768px) {
-					transform: scale(1);
-				}
-
-				@media screen and (min-width: 920px) {
-					transform: scale(1.15);
-				}
-			}
-		}
-
-		.login-content-box {
-			flex: 1;
-			display: flex;
-			justify-content: center;
-			background: var(--surface-0);
-
-			.login-content {
-				display: flex;
-				justify-content: center;
-				flex-direction: column;
-				align-items: center;
-				width: 100%;
-				max-width: 500px;
-				padding: 1rem 0;
-
-				@media screen and (min-width: 768px) {
-					padding: 2.5rem 0;
-				}
-
-				@media screen and (min-width: 1280px) {
-					padding: 4rem 0;
-				}
-			}
-
-			.icon-box {
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				width: 75px;
-				height: 75px;
-				background: transparent;
-				border-radius: 100%;
-				border: 2px solid var(--gray-800);
-				margin-bottom: 1.5rem;
-
-				i {
-					font-size: 2rem;
-					color: var(--gray-800);
-				}
-			}
-
-			.page-title {
-				font-size: 2rem;
-				color: var(--gray-800);
-				margin-bottom: 1rem;
-				font-weight: initial;
-				text-align: center;
-			}
-
-			.page-subtitle {
-				font-size: 1rem;
-				color: var(--gray-800);
-				margin-bottom: 3rem;
-				font-weight: initial;
-				text-align: center;
-				line-height: 1.2;
-
-				span {
-					display: block;
-				}
-			}
-
-			app-alert-error {
-				margin-bottom: 2.5rem;
-				width: 100%;
-			}
-
-			form {
-				width: 100%;
-
-				.form-control {
-					margin-bottom: 1.5rem;
-
-					&:nth-child(2) {
-						margin-bottom: 0;
-					}
-				}
-
-				.forgot-password-box {
-					display: flex;
-					justify-content: flex-end;
-					margin-top: 0.5rem;
-					margin-bottom: 1.5rem;
-
-					a {
-						font-size: 0.9rem;
-						color: var(--primary-color);
-						text-decoration: none;
-
-						&:hover {
-							text-decoration: underline;
-						}
-					}
-				}
-			}
-
-			.btn-cta {
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				margin-top: 1.5rem;
-				width: 100%;
-				padding: 0.6rem 1.5rem;
-				border: none;
-				border-radius: 10px;
-				background: var(--primary-500);
-				color: var(--surface-0);
-				font-weight: 600;
-				text-transform: uppercase;
-				transition: background-color 0.3s ease-in-out;
-
-				&:hover {
-					background: var(--primary-700);
-				}
-
-				.p-button-label {
-					flex: inherit;
-					font-weight: normal;
-					font-size: 0.9rem;
-					line-height: 1;
-					margin-top: 0.1rem;
-				}
-
-				.p-button-icon {
-					font-size: 0.9rem;
-				}
-			}
-		}
-
-		.redirect-text {
-			font-size: 0.95rem;
-			color: var(--gray-800);
-			margin-top: 2.5rem;
-
-			.redirect-link {
-				font-size: 0.95rem;
-				color: var(--primary-color);
-				text-decoration: none;
-
-				&:hover {
-					text-decoration: underline;
-				}
-			}
+		&:hover {
+			text-decoration: underline;
 		}
 	}
 }

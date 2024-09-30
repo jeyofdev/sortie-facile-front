@@ -4,9 +4,10 @@ import { SigninPageComponent } from '@auth/pages/signin-page/signin-page.compone
 import { AuthRoutingModule } from '@auth/auth-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '@shared/shared.module';
+import { AuthLayoutComponent } from './component/layout/auth-layout/auth-layout.component';
 
 @NgModule({
-	declarations: [SigninPageComponent],
+	declarations: [SigninPageComponent, AuthLayoutComponent],
 	imports: [CommonModule, AuthRoutingModule, FormsModule, ReactiveFormsModule, SharedModule],
 })
 export class AuthModule {}
