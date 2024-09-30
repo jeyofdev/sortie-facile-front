@@ -1,19 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '@services/auth.service';
+import { LocalStorageService } from '@services/local-storage.service';
 import { ResponseAuthSigninBase } from '@shared/models/auth/response-auth-signin-base.model';
 import { ResponseAuthSigninError } from '@shared/models/auth/response-auth-signin-error.model';
 import { ValidationMessages } from '@shared/models/validation-messages.model';
 import { ValidationMessage } from '@shared/types/validation-message.type';
 import { validationLoginMessages } from '@shared/validations/messages/login-message.error';
-import { map, Subscription } from 'rxjs';
+import { map, Subscription, tap } from 'rxjs';
 
 @Component({
 	selector: 'app-signin-page',
 	templateUrl: './signin-page.component.html',
 	styleUrl: './signin-page.component.scss',
 })
-export class SigninPageComponent implements OnInit {
+export class SigninPageComponent implements OnInit, OnDestroy {
 	private _signinSubscription: Subscription = new Subscription();
 
 	formIsSubmitted: boolean = false;
@@ -29,6 +30,7 @@ export class SigninPageComponent implements OnInit {
 	constructor(
 		private _formBuilder: FormBuilder,
 		private _authService: AuthService,
+		private _localStorageService: LocalStorageService,
 	) {}
 
 	ngOnInit(): void {
@@ -58,15 +60,14 @@ export class SigninPageComponent implements OnInit {
 	onSubmit(): void {
 		if (this.mainForm.valid) {
 			this.formError = '';
+			this._localStorageService.clearAuthToken();
 
 			this._signinSubscription = this._authService
 				.signInWithEmailAndPassword$(this.mainForm.value)
 				.pipe(
-					map((res: ResponseAuthSigninBase) => {
+					tap((res: ResponseAuthSigninBase) => {
 						if (res instanceof ResponseAuthSigninError) {
 							this.formError = res.message;
-						} else {
-							console.log('Response : ', res);
 						}
 					}),
 				)
@@ -88,5 +89,9 @@ export class SigninPageComponent implements OnInit {
 
 		this.emailCtrl = this._formBuilder.control('', [Validators.required, Validators.pattern(this.regexEmail)]);
 		this.passwordCtrl = this._formBuilder.control('', [Validators.required, Validators.minLength(8)]);
+	}
+
+	ngOnDestroy(): void {
+		this._signinSubscription.unsubscribe();
 	}
 }
