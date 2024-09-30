@@ -9,4 +9,8 @@ export const validationSignupMessages: ValidationMessages[] = [
 		required: 'Password is required for registration.',
 		minlength: 'Password must be at least 8 characters long.',
 	}),
+	new ValidationMessages('confirmPassword', {
+		required: 'Confirm password is required for registration.',
+		minlength: 'Confirm password must be at least 8 characters long.',
+	}),
 ];

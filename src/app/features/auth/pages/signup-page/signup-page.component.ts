@@ -4,6 +4,7 @@ import { AuthRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
 import { ValidationMessages } from '@shared/models/validation-messages.model';
 import { ValidationMessage } from '@shared/types/validation-message.type';
 import { validationSignupMessages } from '@shared/validations/messages/signup-message.error';
+import { passwordEqualValidator } from '@validators/password-equal.validator';
 
 @Component({
 	selector: 'app-signup-page',
@@ -15,10 +16,13 @@ export class SignupPageComponent implements OnInit {
 	regexEmail!: RegExp;
 
 	mainForm!: FormGroup;
+	passwordForm!: FormGroup;
+
 	formError!: string;
 
 	emailCtrl!: FormControl;
 	passwordCtrl!: FormControl;
+	confirmPasswordCtrl!: FormControl;
 
 	redirectLink!: string;
 
@@ -50,17 +54,25 @@ export class SignupPageComponent implements OnInit {
 	}
 
 	onSubmit(): void {
+		this.formError = '';
+		console.log(this.mainForm.get('passwordForm')?.hasError('matchPassword')); // Vérifiez les erreurs sur le groupe
+
 		if (this.mainForm.valid) {
 			console.log(this.mainForm.value);
 		} else {
-			this.formError = 'The form contains errors. Please check your informations.';
+			if (this.mainForm.get('passwordForm')?.hasError('matchPassword')) {
+				this.formError =
+					'Les champs de mot de passe ne correspondent pas. Veuillez vous assurer que le mot de passe et sa confirmation sont identiques.';
+			} else {
+				this.formError = 'Le formulaire contient des erreurs. Veuillez vérifier vos informations.';
+			}
 		}
 	}
 
 	private initSignupForm() {
 		this.mainForm = this._formBuilder.group({
 			email: this.emailCtrl,
-			password: this.passwordCtrl,
+			passwordForm: this.passwordForm,
 		});
 	}
 
@@ -69,5 +81,16 @@ export class SignupPageComponent implements OnInit {
 
 		this.emailCtrl = this._formBuilder.control('', [Validators.required, Validators.pattern(this.regexEmail)]);
 		this.passwordCtrl = this._formBuilder.control('', [Validators.required, Validators.minLength(8)]);
+		this.confirmPasswordCtrl = this._formBuilder.control('', [Validators.required, Validators.minLength(8)]);
+
+		this.passwordForm = this._formBuilder.group(
+			{
+				password: this.passwordCtrl,
+				confirmPassword: this.confirmPasswordCtrl,
+			},
+			{
+				validators: [passwordEqualValidator],
+			},
+		);
 	}
 }

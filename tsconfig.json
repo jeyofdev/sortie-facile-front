@@ -30,7 +30,8 @@
 			"@features/*": ["app/features/*"],
 			"@landing/*": ["app/features/landing/*"],
 			"@auth/*": ["app/features/auth/*"],
-			"@error/*": ["app/error/*"]
+			"@error/*": ["app/error/*"],
+			"@validators/*": ["app/shared/validations/validators/*"]
 		}
 	},
 	"angularCompilerOptions": {
