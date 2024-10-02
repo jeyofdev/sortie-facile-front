@@ -1,0 +1,55 @@
+<app-auth-profile-layout imgSrc="assets/images/signup.jpg" imgAlt="Address" pageTitle="Address" pageIcon="map-marker">
+	<ng-container subtitle>
+		<span
+			>To complete your registration, please provide your full address to ensure the proper handling of your
+			information.</span
+		>
+	</ng-container>
+
+	<ng-container primary>
+		<app-alert-error
+			*ngIf="formError"
+			[content]="formError"
+			severity="error"
+			icon="exclamation-circle"
+		></app-alert-error>
+
+		<form #authProfileAddressForm="ngForm" [formGroup]="mainForm" (ngSubmit)="onSubmit()">
+			<ng-container formGroupName="streetForm">
+				<div class="form-control">
+					<app-text-field
+						labelFor="streetNumber"
+						label="Street number :"
+						type="text"
+						id="streetNumber"
+						name="streetNumber"
+						placeholder="10"
+						[form]="authProfileAddressForm"
+						formControlName="streetNumber"
+						[parentForm]="streetForm"
+						controlName="streetNumber"
+						[validationMessage]="getValidationMessages('streetNumber')"
+					></app-text-field>
+				</div>
+
+				<div class="form-control">
+					<app-text-field
+						labelFor="street"
+						label="Street :"
+						type="text"
+						id="street"
+						name="street"
+						placeholder="Rue de la république"
+						[form]="authProfileAddressForm"
+						formControlName="street"
+						[parentForm]="streetForm"
+						controlName="street"
+						[validationMessage]="getValidationMessages('street')"
+					></app-text-field>
+				</div>
+			</ng-container>
+
+			<p-button type="submit" label="Next" icon="pi pi-arrow-up-right" iconPos="right" styleClass="btn-cta" />
+		</form>
+	</ng-container>
+</app-auth-profile-layout>

@@ -1,0 +1,47 @@
+:host::ng-deep app-alert-error {
+	margin-bottom: 2.5rem;
+	width: 100%;
+}
+
+:host::ng-deep form {
+	width: 100%;
+
+	.form-control {
+		margin-bottom: 1.5rem;
+	}
+
+	.btn-block {
+		display: flex;
+		justify-content: flex-end;
+	}
+
+	.btn-cta {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: 0.6rem 1.5rem;
+		border: none;
+		border-radius: 10px;
+		background: var(--primary-500);
+		color: var(--surface-0);
+		font-weight: 600;
+		text-transform: uppercase;
+		transition: background-color 0.3s ease-in-out;
+
+		&:hover {
+			background: var(--primary-700);
+		}
+
+		.p-button-label {
+			flex: inherit;
+			font-weight: normal;
+			font-size: 0.9rem;
+			line-height: 1;
+			margin-top: 0.1rem;
+		}
+
+		.p-button-icon {
+			font-size: 0.9rem;
+		}
+	}
+}

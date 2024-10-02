@@ -13,4 +13,10 @@ export const validationAuthProfileMessages: ValidationMessages[] = [
 		required: 'The date of birth is required for registration.',
 		pattern: 'Invalid date format. Please provide a correct date.',
 	}),
+	new ValidationMessages('streetNumber', {
+		required: 'The street number is required for registration.',
+	}),
+	new ValidationMessages('street', {
+		required: 'The street is required for registration.',
+	}),
 ];
