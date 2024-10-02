@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
+import { Router } from '@angular/router';
+import { AuthProfileEnum, AuthRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
 import { ValidationMessages } from '@shared/models/validation-messages.model';
 import { ValidationMessage } from '@shared/types/validation-message.type';
 import { validationSignupMessages } from '@shared/validations/messages/signup-message.error';
@@ -26,7 +27,10 @@ export class SignupPageComponent implements OnInit {
 
 	redirectLink!: string;
 
-	constructor(private _formBuilder: FormBuilder) {}
+	constructor(
+		private _formBuilder: FormBuilder,
+		private _router: Router,
+	) {}
 
 	ngOnInit(): void {
 		this.redirectLink = '/' + PrimaryRouteEnum.AUTH + '/' + AuthRouteEnum.SIGNIN;
@@ -55,17 +59,24 @@ export class SignupPageComponent implements OnInit {
 
 	onSubmit(): void {
 		this.formError = '';
-		console.log(this.mainForm.get('passwordForm')?.hasError('matchPassword')); // Vérifiez les erreurs sur le groupe
-
 		if (this.mainForm.valid) {
 			console.log(this.mainForm.value);
 		} else {
-			if (this.mainForm.get('passwordForm')?.hasError('matchPassword')) {
-				this.formError =
-					'Les champs de mot de passe ne correspondent pas. Veuillez vous assurer que le mot de passe et sa confirmation sont identiques.';
-			} else {
-				this.formError = 'Le formulaire contient des erreurs. Veuillez vérifier vos informations.';
-			}
+			this._router.navigateByUrl(
+				PrimaryRouteEnum.AUTH +
+					'/' +
+					AuthRouteEnum.SIGNUP +
+					'/' +
+					PrimaryRouteEnum.PROFILE +
+					'/' +
+					AuthProfileEnum.PERSONAL,
+			);
+			// if (this.mainForm.get('passwordForm')?.hasError('matchPassword')) {
+			// 	this.formError =
+			// 		'Les champs de mot de passe ne correspondent pas. Veuillez vous assurer que le mot de passe et sa confirmation sont identiques.';
+			// } else {
+			// 	this.formError = 'Le formulaire contient des erreurs. Veuillez vérifier vos informations.';
+			// }
 		}
 	}
 

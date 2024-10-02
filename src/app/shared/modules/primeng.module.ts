@@ -8,6 +8,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { BadgeModule } from 'primeng/badge';
 import { MessagesModule } from 'primeng/messages';
+import { InputMaskModule } from 'primeng/inputmask';
 
 @NgModule({
 	exports: [
@@ -20,6 +21,7 @@ import { MessagesModule } from 'primeng/messages';
 		PasswordModule,
 		BadgeModule,
 		MessagesModule,
+		InputMaskModule,
 	],
 })
 export class PrimengModule {}

@@ -1,0 +1,23 @@
+<app-container>
+	<div class="auth-container">
+		<div class="auth-image-box">
+			<img [src]="imgSrc" [alt]="imgAlt" />
+		</div>
+
+		<div class="auth-content-box">
+			<div class="auth-content">
+				<div class="icon-box">
+					<i [class]="iconClass"></i>
+				</div>
+
+				<h1 class="page-title">{{ pageTitle }}</h1>
+
+				<p class="page-subtitle">
+					<ng-content select="[subtitle]"></ng-content>
+				</p>
+
+				<ng-content select="[primary]"></ng-content>
+			</div>
+		</div>
+	</div>
+</app-container>

@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 import { TextFieldComponent } from '@shared/components/form/text-field/text-field.component';
 import { PasswordFieldComponent } from '@shared/components/form/password-field/password-field.component';
 import { AlertErrorComponent } from '@shared/components/form/alert-error/alert-error.component';
+import { MaskFieldComponent } from '@shared/components/form/mask-field/mask-field.component';
 
 @NgModule({
 	declarations: [
@@ -26,6 +27,7 @@ import { AlertErrorComponent } from '@shared/components/form/alert-error/alert-e
 		TextFieldComponent,
 		PasswordFieldComponent,
 		AlertErrorComponent,
+		MaskFieldComponent,
 	],
 	imports: [CommonModule, PrimengModule],
 	exports: [
@@ -37,6 +39,7 @@ import { AlertErrorComponent } from '@shared/components/form/alert-error/alert-e
 		TextFieldComponent,
 		PasswordFieldComponent,
 		AlertErrorComponent,
+		MaskFieldComponent,
 	],
 })
 export class ComponentModule {}
