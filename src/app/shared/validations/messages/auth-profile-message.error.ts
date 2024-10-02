@@ -23,6 +23,9 @@ export const validationAuthProfileMessages: ValidationMessages[] = [
 		required: 'The region is required for registration.',
 	}),
 	new ValidationMessages('department', {
-		required: 'The region is required for registration.',
+		required: 'The department is required for registration.',
+	}),
+	new ValidationMessages('city', {
+		required: 'The city is required for registration.',
 	}),
 ];

@@ -82,6 +82,23 @@
 				></app-select-field>
 			</div>
 
+			<div class="form-control">
+				<app-autocomplete-field
+					labelFor="city"
+					label="City :"
+					type="text"
+					id="city"
+					name="city"
+					[showClear]="true"
+					[items]="cityItems"
+					[form]="authProfileAddressForm"
+					formControlName="city"
+					[parentForm]="mainForm"
+					controlName="city"
+					[validationMessage]="getValidationMessages('city')"
+				></app-autocomplete-field>
+			</div>
+
 			<div class="btn-block">
 				<p-button
 					type="button"
@@ -92,6 +109,7 @@
 					styleClass="btn-cta"
 					(click)="backToPreviousStep()"
 				/>
+
 				<p-button type="submit" label="Continue" icon="pi pi-arrow-up-right" iconPos="right" styleClass="btn-cta" />
 			</div>
 		</form>

@@ -1,7 +1,6 @@
 import { Component, forwardRef, Input } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FormInputControlValueAccessor } from '@shared/abstract/form-input-control-value-accessor.abstract';
-import { Region } from '@shared/models/address/region.interface';
 import { DropdownChangeEvent } from 'primeng/dropdown';
 
 @Component({
@@ -17,7 +16,8 @@ import { DropdownChangeEvent } from 'primeng/dropdown';
 	],
 })
 export class SelectFieldComponent extends FormInputControlValueAccessor {
-	@Input() items!: unknown[];
+	@Input({ required: true }) items!: unknown[];
+
 	selectedCity: unknown | undefined;
 
 	onInputChange(event: DropdownChangeEvent): void {

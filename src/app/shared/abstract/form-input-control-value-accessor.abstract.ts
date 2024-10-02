@@ -1,6 +1,7 @@
 import { Directive, Input, OnInit } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, FormGroup, FormGroupDirective } from '@angular/forms';
 import { ValidationMessage } from '@shared/types/validation-message.type';
+import { AutoCompleteDropdownClickEvent } from 'primeng/autocomplete';
 import { DropdownChangeEvent } from 'primeng/dropdown';
 import { InputNumberInputEvent } from 'primeng/inputnumber';
 
@@ -30,7 +31,9 @@ export abstract class FormInputControlValueAccessor implements OnInit, ControlVa
 		this.disabled = false;
 	}
 
-	abstract onInputChange(event: Event | InputNumberInputEvent | DropdownChangeEvent): void;
+	abstract onInputChange(
+		event: Event | InputNumberInputEvent | DropdownChangeEvent | AutoCompleteDropdownClickEvent,
+	): void;
 
 	writeValue(value: string): void {
 		this.value = value;

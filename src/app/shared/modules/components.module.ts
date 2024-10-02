@@ -15,6 +15,7 @@ import { AlertErrorComponent } from '@shared/components/form/alert-error/alert-e
 import { MaskFieldComponent } from '@shared/components/form/mask-field/mask-field.component';
 import { NumberFieldComponent } from '@shared/components/form/number-field/number-field.component';
 import { SelectFieldComponent } from '@shared/components/form/select-field/select-field.component';
+import { AutocompleteFieldComponent } from '@shared/components/form/autocomplete-field/autocomplete-field.component';
 
 @NgModule({
 	declarations: [
@@ -32,6 +33,7 @@ import { SelectFieldComponent } from '@shared/components/form/select-field/selec
 		MaskFieldComponent,
 		NumberFieldComponent,
 		SelectFieldComponent,
+		AutocompleteFieldComponent,
 	],
 	imports: [CommonModule, PrimengModule],
 	exports: [
@@ -46,6 +48,7 @@ import { SelectFieldComponent } from '@shared/components/form/select-field/selec
 		MaskFieldComponent,
 		NumberFieldComponent,
 		SelectFieldComponent,
+		AutocompleteFieldComponent,
 	],
 })
 export class ComponentModule {}
