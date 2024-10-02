@@ -1,0 +1,47 @@
+<label [for]="labelFor">{{ label }}</label>
+
+@if (icon) {
+	<p-iconField iconPosition="left">
+		<p-inputIcon [styleClass]="iconClass" />
+
+		<p-inputMask
+			[inputId]="id"
+			[name]="name"
+			[mask]="mask"
+			[placeholder]="placeholder"
+			[autoClear]="false"
+			[disabled]="disabled"
+			(onInput)="onInputChange($event)"
+			(onFocus)="markAsTouched()"
+			[ngClass]="{
+				'has-icon': icon,
+				'is-invalid ng-dirty': control?.invalid && form.submitted,
+			}"
+		></p-inputMask>
+	</p-iconField>
+} @else {
+	<p-iconField iconPosition="left">
+		<p-inputIcon [styleClass]="iconClass" />
+
+		<p-inputMask
+			[inputId]="id"
+			[name]="name"
+			[mask]="mask"
+			[placeholder]="placeholder"
+			[autoClear]="false"
+			[disabled]="disabled"
+			(onInput)="onInputChange($event)"
+			(onFocus)="markAsTouched()"
+			[ngClass]="{
+				'is-invalid ng-dirty': control?.invalid && form.submitted,
+			}"
+		></p-inputMask>
+	</p-iconField>
+}
+
+<app-error-field
+	[form]="form"
+	[control]="control"
+	[controlName]="controlName"
+	[validationMessage]="validationMessage"
+></app-error-field>
