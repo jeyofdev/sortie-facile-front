@@ -6,7 +6,7 @@ import { ValidationMessage } from '@shared/types/validation-message.type';
 export abstract class FormInputControlValueAccessor implements OnInit, ControlValueAccessor {
 	@Input({ required: true }) labelFor!: string;
 	@Input({ required: true }) label!: string;
-	@Input({ required: true }) icon!: string;
+	@Input() icon!: string;
 	@Input({ required: true }) id!: string;
 	@Input({ required: true }) name!: string;
 	@Input() placeholder!: string;

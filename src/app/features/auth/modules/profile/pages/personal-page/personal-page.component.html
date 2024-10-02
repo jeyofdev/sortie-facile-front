@@ -1,1 +1,58 @@
-<p>personal-page works!</p>
+<app-auth-profile-layout
+	imgSrc="assets/images/signup.jpg"
+	imgAlt="Personal informations"
+	pageTitle="Personal information"
+	pageIcon="user"
+>
+	<ng-container subtitle>
+		<span>Help us get to know you better !</span>
+		<span>Fill out this form so we can personalize your experience.</span>
+	</ng-container>
+
+	<ng-container primary>
+		<app-alert-error
+			*ngIf="formError"
+			[content]="formError"
+			severity="error"
+			icon="exclamation-circle"
+		></app-alert-error>
+
+		<form #AuthProfilePersonalForm="ngForm" [formGroup]="mainForm" (ngSubmit)="onSubmit()">
+			<ng-container formGroupName="nameForm">
+				<div class="form-control">
+					<app-text-field
+						labelFor="firstname"
+						label="Firstname :"
+						type="text"
+						id="firstname"
+						name="firstname"
+						placeholder="John"
+						[form]="AuthProfilePersonalForm"
+						formControlName="firstname"
+						[parentForm]="nameForm"
+						controlName="firstname"
+						[validationMessage]="getValidationMessages('firstname')"
+					></app-text-field>
+				</div>
+
+				<div class="form-control">
+					<app-text-field
+						labelFor="lastname"
+						label="Lastname :"
+						type="text"
+						id="lastname"
+						name="lastname"
+						placeholder="Doe"
+						[form]="AuthProfilePersonalForm"
+						formControlName="lastname"
+						[parentForm]="nameForm"
+						controlName="lastname"
+						[validationMessage]="getValidationMessages('lastname')"
+					></app-text-field>
+				</div>
+			</ng-container>
+
+			<p-button type="submit" label="Next" icon="pi pi-arrow-up-right" iconPos="right" styleClass="btn-cta" />
+		</form>
+	</ng-container>
+</app-auth-profile-layout>

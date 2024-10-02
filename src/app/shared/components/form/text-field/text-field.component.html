@@ -1,7 +1,24 @@
 <label [for]="labelFor">{{ label }}</label>
 
-<p-iconField iconPosition="left">
-	<p-inputIcon [styleClass]="iconClass" />
+@if (icon) {
+	<p-iconField iconPosition="left">
+		<p-inputIcon [styleClass]="iconClass" />
+		<input
+			pInputText
+			[type]="type"
+			[id]="id"
+			[name]="name"
+			[placeholder]="placeholder"
+			[value]="value"
+			[disabled]="disabled"
+			(input)="onInputChange($event)"
+			(focus)="markAsTouched()"
+			[ngClass]="{
+				'has-icon': icon,
+				'is-invalid ng-dirty': control?.invalid && form.submitted,
+			}"
+	/></p-iconField>
+} @else {
 	<input
 		pInputText
 		[type]="type"
@@ -15,7 +32,8 @@
 		[ngClass]="{
 			'is-invalid ng-dirty': control?.invalid && form.submitted,
 		}"
-/></p-iconField>
+	/>
+}
 
 <app-error-field
 	[form]="form"
