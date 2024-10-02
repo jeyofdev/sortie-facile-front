@@ -3,6 +3,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { AuthStepService } from '@services/auth-step.service';
 import { AuthProfileEnum, AuthRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
+import { Department } from '@shared/models/address/department.interface';
+import { Region } from '@shared/models/address/region.interface';
 import { ValidationMessages } from '@shared/models/validation-messages.model';
 import { ValidationMessage } from '@shared/types/validation-message.type';
 import { validationAuthProfileMessages } from '@shared/validations/messages/auth-profile-message.error';
@@ -20,9 +22,27 @@ export class AddressPageComponent implements OnInit {
 
 	streetNumberCtrl!: FormControl;
 	streetCtrl!: FormControl;
+	regionCtrl!: FormControl;
+	departmentCtrl!: FormControl;
 
 	formError!: string;
 	step1Data!: string;
+
+	regionItems: Region[] = [
+		{ id: '1', name: 'auvergne-rhône-alpes' },
+		{ id: '2', name: 'bourgogne-franche-comté' },
+		{ id: '3', name: 'bretagne' },
+		{ id: '4', name: 'nouvelle-aquitaine' },
+		{ id: '5', name: 'occitanie' },
+	];
+
+	departmentItems: Department[] = [
+		{ id: '1', name: 'gironde' },
+		{ id: '2', name: 'alpes-de-haute-provence' },
+		{ id: '3', name: 'landes' },
+		{ id: '4', name: 'loire' },
+		{ id: '5', name: 'corrèze' },
+	];
 
 	constructor(
 		private _formBuilder: FormBuilder,
@@ -90,12 +110,16 @@ export class AddressPageComponent implements OnInit {
 	private initSignupForm() {
 		this.mainForm = this._formBuilder.group({
 			streetForm: this.streetForm,
+			region: this.regionCtrl,
+			department: this.departmentCtrl,
 		});
 	}
 
 	private initFormControls(): void {
 		this.streetNumberCtrl = this._formBuilder.control('', [Validators.required]);
 		this.streetCtrl = this._formBuilder.control('', [Validators.required]);
+		this.regionCtrl = this._formBuilder.control('', [Validators.required]);
+		this.departmentCtrl = this._formBuilder.control('', [Validators.required]);
 
 		this.streetForm = this._formBuilder.group({
 			streetNumber: this.streetNumberCtrl,

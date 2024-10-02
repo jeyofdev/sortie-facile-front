@@ -50,6 +50,38 @@
 				</div>
 			</ng-container>
 
+			<div class="form-control">
+				<app-select-field
+					labelFor="region"
+					label="Region :"
+					type="text"
+					id="region"
+					name="region"
+					[items]="regionItems"
+					[form]="authProfileAddressForm"
+					formControlName="region"
+					[parentForm]="mainForm"
+					controlName="region"
+					[validationMessage]="getValidationMessages('region')"
+				></app-select-field>
+			</div>
+
+			<div class="form-control">
+				<app-select-field
+					labelFor="department"
+					label="Department :"
+					type="text"
+					id="department"
+					name="department"
+					[items]="departmentItems"
+					[form]="authProfileAddressForm"
+					formControlName="department"
+					[parentForm]="mainForm"
+					controlName="department"
+					[validationMessage]="getValidationMessages('department')"
+				></app-select-field>
+			</div>
+
 			<div class="btn-block">
 				<p-button
 					type="button"
