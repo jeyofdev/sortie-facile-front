@@ -10,6 +10,8 @@ import { BadgeModule } from 'primeng/badge';
 import { MessagesModule } from 'primeng/messages';
 import { InputMaskModule } from 'primeng/inputmask';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { DropdownModule } from 'primeng/dropdown';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 
 @NgModule({
 	exports: [
@@ -24,6 +26,8 @@ import { InputNumberModule } from 'primeng/inputnumber';
 		MessagesModule,
 		InputMaskModule,
 		InputNumberModule,
+		DropdownModule,
+		AutoCompleteModule,
 	],
 })
 export class PrimengModule {}

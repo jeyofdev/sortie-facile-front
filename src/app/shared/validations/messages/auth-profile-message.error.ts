@@ -19,4 +19,13 @@ export const validationAuthProfileMessages: ValidationMessages[] = [
 	new ValidationMessages('street', {
 		required: 'The street is required for registration.',
 	}),
+	new ValidationMessages('region', {
+		required: 'The region is required for registration.',
+	}),
+	new ValidationMessages('department', {
+		required: 'The department is required for registration.',
+	}),
+	new ValidationMessages('city', {
+		required: 'The city is required for registration.',
+	}),
 ];
