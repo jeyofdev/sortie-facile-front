@@ -5,20 +5,18 @@ import { ValidationMessage } from '@shared/types/validation-message.type';
 import { validationAuthProfileMessages } from '@shared/validations/messages/auth-profile-message.error';
 
 @Component({
-	selector: 'app-personal-page',
-	templateUrl: './personal-page.component.html',
-	styleUrl: './personal-page.component.scss',
+	selector: 'app-address-page',
+	templateUrl: './address-page.component.html',
+	styleUrl: './address-page.component.scss',
 })
-export class PersonalPageComponent implements OnInit {
+export class AddressPageComponent implements OnInit {
 	validationMessages!: ValidationMessages[];
-	regexDate!: RegExp;
 
 	mainForm!: FormGroup;
-	nameForm!: FormGroup;
+	streetForm!: FormGroup;
 
-	firstnameCtrl!: FormControl;
-	lastnameCtrl!: FormControl;
-	dateOfBirthCtrl!: FormControl;
+	streetNumberCtrl!: FormControl;
+	streetCtrl!: FormControl;
 
 	formError!: string;
 
@@ -55,21 +53,17 @@ export class PersonalPageComponent implements OnInit {
 
 	private initSignupForm() {
 		this.mainForm = this._formBuilder.group({
-			nameForm: this.nameForm,
-			dateOfBirth: this.dateOfBirthCtrl,
+			streetForm: this.streetForm,
 		});
 	}
 
 	private initFormControls(): void {
-		this.regexDate = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
+		this.streetNumberCtrl = this._formBuilder.control('', [Validators.required]);
+		this.streetCtrl = this._formBuilder.control('', [Validators.required]);
 
-		this.firstnameCtrl = this._formBuilder.control('', [Validators.required, Validators.minLength(8)]);
-		this.lastnameCtrl = this._formBuilder.control('', [Validators.required, Validators.minLength(8)]);
-		this.dateOfBirthCtrl = this._formBuilder.control('', [Validators.required, Validators.pattern(this.regexDate)]);
-
-		this.nameForm = this._formBuilder.group({
-			firstname: this.firstnameCtrl,
-			lastname: this.lastnameCtrl,
+		this.streetForm = this._formBuilder.group({
+			streetNumber: this.streetNumberCtrl,
+			street: this.streetCtrl,
 		});
 	}
 }

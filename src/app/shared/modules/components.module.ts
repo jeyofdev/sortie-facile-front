@@ -13,6 +13,7 @@ import { TextFieldComponent } from '@shared/components/form/text-field/text-fiel
 import { PasswordFieldComponent } from '@shared/components/form/password-field/password-field.component';
 import { AlertErrorComponent } from '@shared/components/form/alert-error/alert-error.component';
 import { MaskFieldComponent } from '@shared/components/form/mask-field/mask-field.component';
+import { NumberFieldComponent } from '@shared/components/form/number-field/number-field.component';
 
 @NgModule({
 	declarations: [
@@ -28,6 +29,7 @@ import { MaskFieldComponent } from '@shared/components/form/mask-field/mask-fiel
 		PasswordFieldComponent,
 		AlertErrorComponent,
 		MaskFieldComponent,
+		NumberFieldComponent,
 	],
 	imports: [CommonModule, PrimengModule],
 	exports: [
@@ -40,6 +42,7 @@ import { MaskFieldComponent } from '@shared/components/form/mask-field/mask-fiel
 		PasswordFieldComponent,
 		AlertErrorComponent,
 		MaskFieldComponent,
+		NumberFieldComponent,
 	],
 })
 export class ComponentModule {}
