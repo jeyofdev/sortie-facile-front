@@ -3,13 +3,14 @@
 @if (icon) {
 	<p-iconField iconPosition="left">
 		<p-inputIcon [styleClass]="iconClass" />
-
-		<p-inputMask
+		<p-inputNumber
+			[mode]="mode"
+			[useGrouping]="useGrouping"
+			[min]="1"
+			[max]="100000"
 			[inputId]="id"
 			[name]="name"
-			[mask]="mask"
 			[placeholder]="placeholder"
-			[autoClear]="false"
 			[disabled]="disabled"
 			(onInput)="onInputChange($event)"
 			(onFocus)="markAsTouched()"
@@ -17,15 +18,16 @@
 				'has-icon': icon,
 				'is-invalid ng-dirty': control?.invalid && form.submitted,
 			}"
-		></p-inputMask>
-	</p-iconField>
+	/></p-iconField>
 } @else {
-	<p-inputMask
+	<p-inputNumber
+		[mode]="mode"
+		[useGrouping]="useGrouping"
+		[min]="1"
+		[max]="100000"
 		[inputId]="id"
 		[name]="name"
-		[mask]="mask"
 		[placeholder]="placeholder"
-		[autoClear]="false"
 		[disabled]="disabled"
 		(onInput)="onInputChange($event)"
 		(onFocus)="markAsTouched()"

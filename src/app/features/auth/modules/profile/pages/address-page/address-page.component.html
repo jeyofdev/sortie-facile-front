@@ -17,10 +17,11 @@
 		<form #authProfileAddressForm="ngForm" [formGroup]="mainForm" (ngSubmit)="onSubmit()">
 			<ng-container formGroupName="streetForm">
 				<div class="form-control">
-					<app-text-field
+					<app-number-field
 						labelFor="streetNumber"
 						label="Street number :"
-						type="text"
+						[useGrouping]="false"
+						mode="decimal"
 						id="streetNumber"
 						name="streetNumber"
 						placeholder="10"
@@ -29,7 +30,7 @@
 						[parentForm]="streetForm"
 						controlName="streetNumber"
 						[validationMessage]="getValidationMessages('streetNumber')"
-					></app-text-field>
+					></app-number-field>
 				</div>
 
 				<div class="form-control">

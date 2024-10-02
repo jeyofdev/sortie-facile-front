@@ -1,0 +1,44 @@
+label {
+	display: block;
+	margin-bottom: 0.25rem;
+	font-size: 1.025rem;
+	opacity: 0.75;
+}
+
+:host::ng-deep p-inputnumber {
+	width: 100%;
+
+	.p-inputnumber {
+		width: 100%;
+		padding: 0;
+		border: none;
+
+		.p-inputtext {
+			padding: 0.85rem 1rem;
+			color: var(--gray-800);
+			border-radius: 8px;
+
+			&:focus {
+				border: none;
+				outline: none;
+				box-shadow: 0px 0px 4px 0px var(--primary-color);
+			}
+
+			&:hover {
+				border-color: var(--gray-0);
+			}
+		}
+	}
+
+	&.has-icon {
+		.p-inputnumber {
+			padding: 0.85rem 1rem 0.85rem 2.5rem;
+		}
+	}
+
+	&.is-invalid .p-inputnumber .p-inputtext {
+		border: 1.5px solid var(--red-400);
+		box-shadow: 0px 0px 3px 0px var(--red-400);
+		color: var(--red-500);
+	}
+}
