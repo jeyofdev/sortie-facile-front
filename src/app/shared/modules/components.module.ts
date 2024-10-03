@@ -16,6 +16,7 @@ import { MaskFieldComponent } from '@shared/components/form/mask-field/mask-fiel
 import { NumberFieldComponent } from '@shared/components/form/number-field/number-field.component';
 import { SelectFieldComponent } from '@shared/components/form/select-field/select-field.component';
 import { AutocompleteFieldComponent } from '@shared/components/form/autocomplete-field/autocomplete-field.component';
+import { TextareaFieldComponent } from '@shared/components/form/textarea-field/textarea-field.component';
 
 @NgModule({
 	declarations: [
@@ -34,6 +35,7 @@ import { AutocompleteFieldComponent } from '@shared/components/form/autocomplete
 		NumberFieldComponent,
 		SelectFieldComponent,
 		AutocompleteFieldComponent,
+		TextareaFieldComponent,
 	],
 	imports: [CommonModule, PrimengModule],
 	exports: [
@@ -49,6 +51,7 @@ import { AutocompleteFieldComponent } from '@shared/components/form/autocomplete
 		NumberFieldComponent,
 		SelectFieldComponent,
 		AutocompleteFieldComponent,
+		TextareaFieldComponent,
 	],
 })
 export class ComponentModule {}

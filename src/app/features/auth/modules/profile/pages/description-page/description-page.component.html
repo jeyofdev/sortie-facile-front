@@ -21,20 +21,20 @@
 
 		<form #authProfileDescriptionForm="ngForm" [formGroup]="mainForm" (ngSubmit)="onSubmit()">
 			<div class="form-control">
-				<app-text-field
+				<app-textarea-field
 					labelFor="description"
 					label="Description :"
-					type="text"
 					id="description"
 					name="description"
-					icon="description"
+					[cols]="30"
+					[rows]="10"
 					placeholder="Enter a description"
 					[form]="authProfileDescriptionForm"
 					formControlName="description"
 					[parentForm]="mainForm"
 					controlName="description"
 					[validationMessage]="getValidationMessages('description')"
-				></app-text-field>
+				></app-textarea-field>
 			</div>
 
 			<div class="btn-block">
