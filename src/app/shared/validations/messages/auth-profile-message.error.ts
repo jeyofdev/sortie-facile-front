@@ -40,4 +40,8 @@ export const validationAuthProfileMessages: ValidationMessages[] = [
 	new ValidationMessages('facebook', {
 		minlength: 'The facebook username must be at least 3 characters long.',
 	}),
+	new ValidationMessages('description', {
+		required: 'The description is required for registration.',
+		minlength: 'The facebook username must be at least 20 characters long.',
+	}),
 ];

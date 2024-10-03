@@ -8,9 +8,10 @@ import { SharedModule } from '@shared/shared.module';
 import { ComponentsModule } from '../components.module';
 import { AddressPageComponent } from './pages/address-page/address-page.component';
 import { ContactPageComponent } from './pages/contact-page/contact-page.component';
+import { DescriptionPageComponent } from './pages/description-page/description-page.component';
 
 @NgModule({
-	declarations: [PersonalPageComponent, AddressPageComponent, ContactPageComponent],
+	declarations: [PersonalPageComponent, AddressPageComponent, ContactPageComponent, DescriptionPageComponent],
 	imports: [CommonModule, FormsModule, ReactiveFormsModule, ProfileRoutingModule, SharedModule, ComponentsModule],
 })
 export class ProfileModule {}

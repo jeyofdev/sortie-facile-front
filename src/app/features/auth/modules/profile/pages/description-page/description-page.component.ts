@@ -8,20 +8,15 @@ import { ValidationMessage } from '@shared/types/validation-message.type';
 import { validationAuthProfileMessages } from '@shared/validations/messages/auth-profile-message.error';
 
 @Component({
-	selector: 'app-contact-page',
-	templateUrl: './contact-page.component.html',
-	styleUrl: './contact-page.component.scss',
+	selector: 'app-description-page',
+	templateUrl: './description-page.component.html',
+	styleUrl: './description-page.component.scss',
 })
-export class ContactPageComponent implements OnInit {
+export class DescriptionPageComponent implements OnInit {
 	validationMessages!: ValidationMessages[];
 
 	mainForm!: FormGroup;
-	socialForm!: FormGroup;
-
-	phoneCtrl!: FormControl;
-	twitterCtrl!: FormControl;
-	instagramCtrl!: FormControl;
-	facebookCtrl!: FormControl;
+	descriptionCtrl!: FormControl;
 
 	formError!: string;
 
@@ -83,27 +78,17 @@ export class ContactPageComponent implements OnInit {
 				'/' +
 				PrimaryRouteEnum.PROFILE +
 				'/' +
-				AuthProfileEnum.ADDRESS,
+				AuthProfileEnum.CONTACT,
 		);
 	}
 
 	private initSignupForm() {
 		this.mainForm = this._formBuilder.group({
-			phone: this.phoneCtrl,
-			socialForm: this.socialForm,
+			description: this.descriptionCtrl,
 		});
 	}
 
 	private initFormControls(): void {
-		this.phoneCtrl = this._formBuilder.control('', [Validators.required]);
-		this.twitterCtrl = this._formBuilder.control('', [Validators.minLength(3)]);
-		this.instagramCtrl = this._formBuilder.control('', [Validators.minLength(3)]);
-		this.facebookCtrl = this._formBuilder.control('', [Validators.minLength(3)]);
-
-		this.socialForm = this._formBuilder.group({
-			twitter: this.twitterCtrl,
-			instagram: this.instagramCtrl,
-			facebook: this.facebookCtrl,
-		});
+		this.descriptionCtrl = this._formBuilder.control('', [Validators.required, Validators.minLength(20)]);
 	}
 }
