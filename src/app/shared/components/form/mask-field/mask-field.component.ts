@@ -31,7 +31,7 @@ export class MaskFieldComponent extends FormInputControlValueAccessor implements
 		}
 	}
 
-	onInputChange(event: Event): void {
+	override onInputChange(event: Event): void {
 		this.value = (event.target as HTMLInputElement).value;
 
 		if (this.disabled) {

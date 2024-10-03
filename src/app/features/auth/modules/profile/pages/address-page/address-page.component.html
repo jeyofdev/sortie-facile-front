@@ -54,50 +54,58 @@
 				<app-select-field
 					labelFor="region"
 					label="Region :"
-					type="text"
 					id="region"
 					name="region"
-					[items]="regionItems"
+					placeholder="select region"
+					[items]="(regionItems$ | async) || []"
 					[form]="authProfileAddressForm"
 					formControlName="region"
 					[parentForm]="mainForm"
 					controlName="region"
 					[validationMessage]="getValidationMessages('region')"
+					(selectedValueChange)="onRegionSelected($event)"
 				></app-select-field>
 			</div>
 
-			<div class="form-control">
-				<app-select-field
-					labelFor="department"
-					label="Department :"
-					type="text"
-					id="department"
-					name="department"
-					[items]="departmentItems"
-					[form]="authProfileAddressForm"
-					formControlName="department"
-					[parentForm]="mainForm"
-					controlName="department"
-					[validationMessage]="getValidationMessages('department')"
-				></app-select-field>
-			</div>
+			@if (selectedRegion$) {
+				<div class="form-control">
+					<app-select-field
+						labelFor="department"
+						label="Department :"
+						type="text"
+						id="department"
+						name="department"
+						placeholder="Select department"
+						[items]="(departmentItems$ | async) || []"
+						[form]="authProfileAddressForm"
+						formControlName="department"
+						[parentForm]="mainForm"
+						controlName="department"
+						[validationMessage]="getValidationMessages('department')"
+						(selectedValueChange)="onDepartmentSelected($event)"
+					></app-select-field>
+				</div>
+			}
 
-			<div class="form-control">
-				<app-autocomplete-field
-					labelFor="city"
-					label="City :"
-					type="text"
-					id="city"
-					name="city"
-					[showClear]="true"
-					[items]="cityItems"
-					[form]="authProfileAddressForm"
-					formControlName="city"
-					[parentForm]="mainForm"
-					controlName="city"
-					[validationMessage]="getValidationMessages('city')"
-				></app-autocomplete-field>
-			</div>
+			@if (selectedDepartment$) {
+				<div class="form-control">
+					<app-autocomplete-field
+						labelFor="city"
+						label="City :"
+						type="text"
+						id="city"
+						name="city"
+						[showClear]="true"
+						placeholder="Select city"
+						[items]="(cityItems$ | async) || []"
+						[form]="authProfileAddressForm"
+						formControlName="city"
+						[parentForm]="mainForm"
+						controlName="city"
+						[validationMessage]="getValidationMessages('city')"
+					></app-autocomplete-field>
+				</div>
+			}
 
 			<div class="btn-block">
 				<p-button

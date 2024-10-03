@@ -17,7 +17,7 @@ import { FormInputControlValueAccessor } from '@shared/abstract/form-input-contr
 export class TextFieldComponent extends FormInputControlValueAccessor {
 	@Input({ required: true }) type!: 'text' | 'email';
 
-	onInputChange(event: Event): void {
+	override onInputChange(event: Event): void {
 		if (this.disabled) {
 			return;
 		}

@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AddressService } from '@services/address.service';
 import { AuthStepService } from '@services/auth-step.service';
 import { AuthProfileEnum, AuthRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
 import { City } from '@shared/models/address/city.interface';
 import { Department } from '@shared/models/address/department.interface';
-import { Region } from '@shared/models/address/region.interface';
+import { Region } from '@shared/models/address/region.model';
 import { ValidationMessages } from '@shared/models/validation-messages.model';
 import { ValidationMessage } from '@shared/types/validation-message.type';
 import { validationAuthProfileMessages } from '@shared/validations/messages/auth-profile-message.error';
+import { Observable, of } from 'rxjs';
 
 @Component({
 	selector: 'app-address-page',
@@ -30,37 +32,23 @@ export class AddressPageComponent implements OnInit {
 	formError!: string;
 	step1Data!: string;
 
-	regionItems: Region[] = [
-		{ id: '1', name: 'auvergne-rhône-alpes' },
-		{ id: '2', name: 'bourgogne-franche-comté' },
-		{ id: '3', name: 'bretagne' },
-		{ id: '4', name: 'nouvelle-aquitaine' },
-		{ id: '5', name: 'occitanie' },
-	];
+	regionItems$: Observable<Region[]> = of([]);
+	departmentItems$: Observable<Department[]> = of([]);
+	cityItems$: Observable<City[]> = of([]);
 
-	departmentItems: Department[] = [
-		{ id: '1', name: 'gironde' },
-		{ id: '2', name: 'alpes-de-haute-provence' },
-		{ id: '3', name: 'landes' },
-		{ id: '4', name: 'loire' },
-		{ id: '5', name: 'corrèze' },
-	];
-
-	cityItems: City[] = [
-		{ id: '1', name: 'Bordeaux' },
-		{ id: '2', name: 'Mérignac' },
-		{ id: '3', name: 'Pessac' },
-		{ id: '4', name: 'Talence' },
-		{ id: '5', name: 'Bègles' },
-	];
+	selectedRegion$!: Observable<Region | null>;
+	selectedDepartment$!: Observable<Department | null>;
 
 	constructor(
 		private _formBuilder: FormBuilder,
 		private _router: Router,
 		private _authStepService: AuthStepService,
+		private _addressService: AddressService,
 	) {}
 
 	ngOnInit(): void {
+		this.regionItems$ = this._addressService.getAllRegions();
+
 		this.validationMessages = validationAuthProfileMessages;
 		this.step1Data = this._authStepService.getStepData('step1');
 
@@ -137,5 +125,22 @@ export class AddressPageComponent implements OnInit {
 			streetNumber: this.streetNumberCtrl,
 			street: this.streetCtrl,
 		});
+	}
+
+	onRegionSelected(region: Region): void {
+		this.departmentCtrl.reset();
+		this.cityCtrl.reset();
+
+		this.selectedRegion$ = of(region);
+
+		this.departmentItems$ = this._addressService.getDepartmentsByRegion(region.id);
+		this.cityItems$ = of([]);
+	}
+
+	onDepartmentSelected(department: Department): void {
+		this.cityCtrl.reset();
+		this.selectedDepartment$ = of(department);
+
+		this.cityItems$ = this._addressService.getCitiesByDepartment(department.id);
 	}
 }
