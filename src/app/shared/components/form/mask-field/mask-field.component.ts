@@ -27,7 +27,7 @@ export class MaskFieldComponent extends FormInputControlValueAccessor implements
 			this.placeholder = '01/10/2000';
 		} else if (this.type === 'phone') {
 			this.mask = '99-99-99-99-99';
-			this.placeholder = '99-99-99-99-99';
+			this.placeholder = '01-99-99-99-99';
 		}
 	}
 

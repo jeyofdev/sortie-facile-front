@@ -1,0 +1,24 @@
+<label [for]="labelFor">{{ label }}</label>
+
+<textarea
+	pInputTextarea
+	[id]="id"
+	[name]="name"
+	[rows]="rows"
+	[cols]="cols"
+	[placeholder]="placeholder"
+	[value]="value"
+	[disabled]="disabled"
+	(input)="onInputChange($event)"
+	(focus)="markAsTouched()"
+	[ngClass]="{
+		'is-invalid ng-dirty': control?.invalid && form.submitted,
+	}"
+></textarea>
+
+<app-error-field
+	[form]="form"
+	[control]="control"
+	[controlName]="controlName"
+	[validationMessage]="validationMessage"
+></app-error-field>

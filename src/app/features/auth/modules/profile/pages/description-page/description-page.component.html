@@ -1,0 +1,55 @@
+<app-auth-profile-layout
+	imgSrc="assets/images/signup.jpg"
+	imgAlt="description"
+	pageTitle="Description"
+	pageIcon="pen-to-square"
+>
+	<ng-container subtitle>
+		<span
+			>Help us get to know you better by providing a description that highlights your interests, skills, or
+			requirements.</span
+		>
+	</ng-container>
+
+	<ng-container primary>
+		<app-alert-error
+			*ngIf="formError"
+			[content]="formError"
+			severity="error"
+			icon="exclamation-circle"
+		></app-alert-error>
+
+		<form #authProfileDescriptionForm="ngForm" [formGroup]="mainForm" (ngSubmit)="onSubmit()">
+			<div class="form-control">
+				<app-textarea-field
+					labelFor="description"
+					label="Description :"
+					id="description"
+					name="description"
+					[cols]="30"
+					[rows]="10"
+					placeholder="Enter a description"
+					[form]="authProfileDescriptionForm"
+					formControlName="description"
+					[parentForm]="mainForm"
+					controlName="description"
+					[validationMessage]="getValidationMessages('description')"
+				></app-textarea-field>
+			</div>
+
+			<div class="btn-block">
+				<p-button
+					type="button"
+					label="Previous"
+					severity="secondary"
+					icon="pi pi-arrow-up-left"
+					iconPos="left"
+					styleClass="btn-cta"
+					(click)="backToPreviousStep()"
+				/>
+
+				<p-button type="submit" label="Continue" icon="pi pi-arrow-up-right" iconPos="right" styleClass="btn-cta" />
+			</div>
+		</form>
+	</ng-container>
+</app-auth-profile-layout>
