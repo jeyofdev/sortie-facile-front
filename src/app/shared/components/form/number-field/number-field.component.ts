@@ -19,7 +19,7 @@ export class NumberFieldComponent extends FormInputControlValueAccessor {
 	@Input() mode: 'decimal' | 'currency' = 'decimal';
 	@Input() useGrouping: boolean = false;
 
-	onInputChange(event: InputNumberInputEvent): void {
+	override onInputChange(event: InputNumberInputEvent): void {
 		if (this.disabled) {
 			return;
 		}

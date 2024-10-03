@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FormInputControlValueAccessor } from '@shared/abstract/form-input-control-value-accessor.abstract';
 import { DropdownChangeEvent } from 'primeng/dropdown';
@@ -16,15 +16,17 @@ import { DropdownChangeEvent } from 'primeng/dropdown';
 	],
 })
 export class SelectFieldComponent extends FormInputControlValueAccessor {
-	@Input({ required: true }) items!: unknown[];
+	@Input({ required: true }) items!: any[];
+	@Output() selectedValueChange = new EventEmitter<any>();
 
-	selectedCity: unknown | undefined;
+	selectedCity: any | undefined;
 
-	onInputChange(event: DropdownChangeEvent): void {
+	override onInputChange(event: DropdownChangeEvent): void {
 		if (this.disabled) {
 			return;
 		}
 
 		this.onChanged(event.value.name);
+		this.selectedValueChange.emit(event.value);
 	}
 }

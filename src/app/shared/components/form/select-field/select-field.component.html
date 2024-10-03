@@ -7,7 +7,7 @@
 			formControlName="selectedCity"
 			[options]="items"
 			optionLabel="name"
-			placeholder="Select a City"
+			[placeholder]="placeholder"
 			(onChange)="onInputChange($event)"
 			(onFocus)="markAsTouched()"
 			[ngClass]="{
@@ -21,7 +21,7 @@
 		formControlName="selectedCity"
 		[options]="items"
 		optionLabel="name"
-		placeholder="Select a City"
+		[placeholder]="placeholder"
 		(onChange)="onInputChange($event)"
 		(onFocus)="markAsTouched()"
 		[ngClass]="{
