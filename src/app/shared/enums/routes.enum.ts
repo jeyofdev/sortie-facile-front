@@ -13,4 +13,5 @@ export enum AuthRouteEnum {
 export enum AuthProfileEnum {
 	PERSONAL = 'personal',
 	ADDRESS = 'address',
+	CONTACT = 'contact',
 }

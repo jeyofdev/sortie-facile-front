@@ -28,4 +28,16 @@ export const validationAuthProfileMessages: ValidationMessages[] = [
 	new ValidationMessages('city', {
 		required: 'The city is required for registration.',
 	}),
+	new ValidationMessages('phone', {
+		required: 'The phone is required for registration.',
+	}),
+	new ValidationMessages('twitter', {
+		minlength: 'The twitter username must be at least 3 characters long.',
+	}),
+	new ValidationMessages('instagram', {
+		minlength: 'The instagram username must be at least 3 characters long.',
+	}),
+	new ValidationMessages('facebook', {
+		minlength: 'The facebook username must be at least 3 characters long.',
+	}),
 ];

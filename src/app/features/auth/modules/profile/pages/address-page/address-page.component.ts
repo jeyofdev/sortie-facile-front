@@ -88,7 +88,7 @@ export class AddressPageComponent implements OnInit {
 					'/' +
 					PrimaryRouteEnum.PROFILE +
 					'/' +
-					AuthProfileEnum.ADDRESS,
+					AuthProfileEnum.CONTACT,
 			);
 		}
 	}
