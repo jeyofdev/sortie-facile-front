@@ -37,19 +37,7 @@
 				></app-textarea-field>
 			</div>
 
-			<div class="btn-block">
-				<p-button
-					type="button"
-					label="Previous"
-					severity="secondary"
-					icon="pi pi-arrow-up-left"
-					iconPos="left"
-					styleClass="btn-cta"
-					(click)="backToPreviousStep()"
-				/>
-
-				<p-button type="submit" label="Continue" icon="pi pi-arrow-up-right" iconPos="right" styleClass="btn-cta" />
-			</div>
+			<app-form-button-box [showPreviousBtn]="true" (previousClick)="backToPreviousStep()"></app-form-button-box>
 		</form>
 	</ng-container>
 </app-auth-profile-layout>
