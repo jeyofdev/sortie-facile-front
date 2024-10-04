@@ -3,12 +3,11 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { AddressService } from '@services/address.service';
 import { AuthStepService } from '@services/auth-step.service';
-import { AuthProfileEnum, AuthRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
+import { AuthProfilePage } from '@shared/abstract/auth-profile-page.abstract';
+import { AuthProfileEnum } from '@shared/enums/routes.enum';
 import { City } from '@shared/models/address/city.interface';
 import { Department } from '@shared/models/address/department.interface';
 import { Region } from '@shared/models/address/region.model';
-import { ValidationMessages } from '@shared/models/validation-messages.model';
-import { ValidationMessage } from '@shared/types/validation-message.type';
 import { validationAuthProfileMessages } from '@shared/validations/messages/auth-profile-message.error';
 import { Observable, of } from 'rxjs';
 
@@ -17,10 +16,7 @@ import { Observable, of } from 'rxjs';
 	templateUrl: './address-page.component.html',
 	styleUrl: './address-page.component.scss',
 })
-export class AddressPageComponent implements OnInit {
-	validationMessages!: ValidationMessages[];
-
-	mainForm!: FormGroup;
+export class AddressPageComponent extends AuthProfilePage implements OnInit {
 	streetForm!: FormGroup;
 
 	streetNumberCtrl!: FormControl;
@@ -29,7 +25,6 @@ export class AddressPageComponent implements OnInit {
 	departmentCtrl!: FormControl;
 	cityCtrl!: FormControl;
 
-	formError!: string;
 	step1Data!: string;
 
 	regionItems$: Observable<Region[]> = of([]);
@@ -41,90 +36,28 @@ export class AddressPageComponent implements OnInit {
 
 	constructor(
 		private _formBuilder: FormBuilder,
-		private _router: Router,
-		private _authStepService: AuthStepService,
+		_router: Router,
+		_authStepService: AuthStepService,
 		private _addressService: AddressService,
-	) {}
+	) {
+		super(_router, _authStepService);
+	}
 
-	ngOnInit(): void {
+	override ngOnInit(): void {
 		this.regionItems$ = this._addressService.getAllRegions();
 
 		this.validationMessages = validationAuthProfileMessages;
 		this.step1Data = this._authStepService.getStepData('step1');
 
-		this.initFormControls();
-		this.initSignupForm();
+		super.ngOnInit();
 	}
 
-	getValidationMessages(name: string): ValidationMessage | null {
-		try {
-			const validationMessage: ValidationMessages = this.validationMessages.find(
-				vm => vm.getName() === name,
-			) as ValidationMessages;
-
-			if (!validationMessage) {
-				throw new Error(`Validation messages not found for name: ${name}`);
-			}
-
-			return validationMessage.getMessages();
-		} catch (err) {
-			console.error(err);
-			return null;
-		}
+	override onSubmit(): void {
+		super.onSubmit('step2', AuthProfileEnum.CONTACT);
 	}
 
-	onSubmit(): void {
-		console.log('Form Value:', this.mainForm.value);
-		console.log('Form Value:', this.mainForm);
-
-		if (this.mainForm.valid) {
-			this._authStepService.setStepData('step2', this.mainForm.value);
-			console.log(this._authStepService.getAllData());
-
-			this._router.navigateByUrl(
-				PrimaryRouteEnum.AUTH +
-					'/' +
-					AuthRouteEnum.SIGNUP +
-					'/' +
-					PrimaryRouteEnum.PROFILE +
-					'/' +
-					AuthProfileEnum.CONTACT,
-			);
-		}
-	}
-
-	backToPreviousStep(): void {
-		this._router.navigateByUrl(
-			PrimaryRouteEnum.AUTH +
-				'/' +
-				AuthRouteEnum.SIGNUP +
-				'/' +
-				PrimaryRouteEnum.PROFILE +
-				'/' +
-				AuthProfileEnum.PERSONAL,
-		);
-	}
-
-	private initSignupForm() {
-		this.mainForm = this._formBuilder.group({
-			streetForm: this.streetForm,
-			region: this.regionCtrl,
-			department: this.departmentCtrl,
-			city: this.cityCtrl,
-		});
-	}
-
-	private initFormControls(): void {
-		this.streetNumberCtrl = this._formBuilder.control('', [Validators.required]);
-		this.streetCtrl = this._formBuilder.control('', [Validators.required]);
-		this.regionCtrl = this._formBuilder.control('', [Validators.required]);
-		this.departmentCtrl = this._formBuilder.control('', [Validators.required]);
-		this.cityCtrl = this._formBuilder.control('', [Validators.required]);
-
-		this.streetForm = this._formBuilder.group({
-			streetNumber: this.streetNumberCtrl,
-			street: this.streetCtrl,
-		});
+	override backToPreviousStep(): void {
+		super.backToPreviousStep(AuthProfileEnum.PERSONAL);
 	}
 
 	onRegionSelected(region: Region): void {
@@ -142,5 +75,27 @@ export class AddressPageComponent implements OnInit {
 		this.selectedDepartment$ = of(department);
 
 		this.cityItems$ = this._addressService.getCitiesByDepartment(department.id);
+	}
+
+	protected override initSignupForm() {
+		this.mainForm = this._formBuilder.group({
+			streetForm: this.streetForm,
+			region: this.regionCtrl,
+			department: this.departmentCtrl,
+			city: this.cityCtrl,
+		});
+	}
+
+	protected override initFormControls(): void {
+		this.streetNumberCtrl = this._formBuilder.control('', [Validators.required]);
+		this.streetCtrl = this._formBuilder.control('', [Validators.required]);
+		this.regionCtrl = this._formBuilder.control('', [Validators.required]);
+		this.departmentCtrl = this._formBuilder.control('', [Validators.required]);
+		this.cityCtrl = this._formBuilder.control('', [Validators.required]);
+
+		this.streetForm = this._formBuilder.group({
+			streetNumber: this.streetNumberCtrl,
+			street: this.streetCtrl,
+		});
 	}
 }

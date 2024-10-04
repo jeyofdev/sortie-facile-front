@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthStepService } from '@services/auth-step.service';
-import { AuthProfileEnum, AuthRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
-import { ValidationMessages } from '@shared/models/validation-messages.model';
-import { ValidationMessage } from '@shared/types/validation-message.type';
+import { AuthProfilePage } from '@shared/abstract/auth-profile-page.abstract';
+import { AuthProfileEnum } from '@shared/enums/routes.enum';
 import { validationAuthProfileMessages } from '@shared/validations/messages/auth-profile-message.error';
 
 @Component({
@@ -12,83 +11,37 @@ import { validationAuthProfileMessages } from '@shared/validations/messages/auth
 	templateUrl: './description-page.component.html',
 	styleUrl: './description-page.component.scss',
 })
-export class DescriptionPageComponent implements OnInit {
-	validationMessages!: ValidationMessages[];
-
-	mainForm!: FormGroup;
+export class DescriptionPageComponent extends AuthProfilePage implements OnInit {
 	descriptionCtrl!: FormControl;
-
-	formError!: string;
 
 	constructor(
 		private _formBuilder: FormBuilder,
-		private _router: Router,
-		private _authStepService: AuthStepService,
-	) {}
+		_router: Router,
+		_authStepService: AuthStepService,
+	) {
+		super(_router, _authStepService);
+	}
 
-	ngOnInit(): void {
+	override ngOnInit(): void {
 		this.validationMessages = validationAuthProfileMessages;
-
-		this.initFormControls();
-		this.initSignupForm();
+		super.ngOnInit();
 	}
 
-	getValidationMessages(name: string): ValidationMessage | null {
-		try {
-			const validationMessage: ValidationMessages = this.validationMessages.find(
-				vm => vm.getName() === name,
-			) as ValidationMessages;
-
-			if (!validationMessage) {
-				throw new Error(`Validation messages not found for name: ${name}`);
-			}
-
-			return validationMessage.getMessages();
-		} catch (err) {
-			console.error(err);
-			return null;
-		}
+	override onSubmit(): void {
+		super.onSubmit('step3', AuthProfileEnum.DESCRIPTION);
 	}
 
-	onSubmit(): void {
-		console.log('Form Value:', this.mainForm.value);
-		console.log('Form Value:', this.mainForm);
-
-		if (this.mainForm.valid) {
-			this._authStepService.setStepData('step3', this.mainForm.value);
-			console.log(this._authStepService.getAllData());
-
-			this._router.navigateByUrl(
-				PrimaryRouteEnum.AUTH +
-					'/' +
-					AuthRouteEnum.SIGNUP +
-					'/' +
-					PrimaryRouteEnum.PROFILE +
-					'/' +
-					AuthProfileEnum.DESCRIPTION,
-			);
-		}
+	override backToPreviousStep(): void {
+		super.backToPreviousStep(AuthProfileEnum.CONTACT);
 	}
 
-	backToPreviousStep(): void {
-		this._router.navigateByUrl(
-			PrimaryRouteEnum.AUTH +
-				'/' +
-				AuthRouteEnum.SIGNUP +
-				'/' +
-				PrimaryRouteEnum.PROFILE +
-				'/' +
-				AuthProfileEnum.CONTACT,
-		);
-	}
-
-	private initSignupForm() {
+	protected override initSignupForm() {
 		this.mainForm = this._formBuilder.group({
 			description: this.descriptionCtrl,
 		});
 	}
 
-	private initFormControls(): void {
+	protected override initFormControls(): void {
 		this.descriptionCtrl = this._formBuilder.control('', [Validators.required, Validators.minLength(20)]);
 	}
 }

@@ -1,0 +1,20 @@
+<div
+	class="btn-block"
+	[ngClass]="{
+		'has-previous-btn': showPreviousBtn,
+	}"
+>
+	@if (showPreviousBtn) {
+		<p-button
+			type="button"
+			label="Previous"
+			severity="secondary"
+			icon="pi pi-arrow-up-left"
+			iconPos="left"
+			styleClass="btn-cta"
+			(click)="onClick()"
+		/>
+	}
+
+	<p-button type="submit" label="Continue" icon="pi pi-arrow-up-right" iconPos="right" styleClass="btn-cta" />
+</div>
