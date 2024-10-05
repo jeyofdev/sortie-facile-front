@@ -35,7 +35,7 @@ export class DescriptionPageComponent extends AuthProfilePage implements OnInit 
 		super.backToPreviousStep(AuthProfileEnum.CONTACT);
 	}
 
-	protected override initSignupForm() {
+	protected override initMainForm() {
 		this.mainForm = this._formBuilder.group({
 			description: this.descriptionCtrl,
 		});

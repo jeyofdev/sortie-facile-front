@@ -40,7 +40,7 @@ export class ContactPageComponent extends AuthProfilePage implements OnInit {
 		super.backToPreviousStep(AuthProfileEnum.ADDRESS);
 	}
 
-	protected override initSignupForm() {
+	protected override initMainForm() {
 		this.mainForm = this._formBuilder.group({
 			phone: this.phoneCtrl,
 			socialForm: this.socialForm,

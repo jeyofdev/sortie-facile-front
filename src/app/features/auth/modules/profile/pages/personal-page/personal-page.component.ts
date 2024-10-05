@@ -37,7 +37,7 @@ export class PersonalPageComponent extends AuthProfilePage implements OnInit {
 		super.onSubmit('step1', AuthProfileEnum.ADDRESS);
 	}
 
-	protected override initSignupForm() {
+	protected override initMainForm() {
 		this.mainForm = this._formBuilder.group({
 			nameForm: this.nameForm,
 			dateOfBirth: this.dateOfBirthCtrl,

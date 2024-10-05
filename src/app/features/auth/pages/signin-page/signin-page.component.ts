@@ -1,12 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '@services/auth.service';
 import { LocalStorageService } from '@services/local-storage.service';
+import { AuthPageAbstract } from '@shared/abstract/auth-page.abstract';
 import { AuthRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
 import { ResponseAuthSigninBase } from '@shared/models/auth/response-auth-signin-base.model';
 import { ResponseAuthSigninError } from '@shared/models/auth/response-auth-signin-error.model';
-import { ValidationMessages } from '@shared/models/validation-messages.model';
-import { ValidationMessage } from '@shared/types/validation-message.type';
 import { validationSigninMessages } from '@shared/validations/messages/signin-message.error';
 import { Subscription, tap } from 'rxjs';
 
@@ -15,52 +14,30 @@ import { Subscription, tap } from 'rxjs';
 	templateUrl: './signin-page.component.html',
 	styleUrl: './signin-page.component.scss',
 })
-export class SigninPageComponent implements OnInit, OnDestroy {
+export class SigninPageComponent extends AuthPageAbstract implements OnInit, OnDestroy {
 	private _signinSubscription: Subscription = new Subscription();
 
-	validationMessages!: ValidationMessages[];
 	regexEmail!: RegExp;
-
-	mainForm!: FormGroup;
-	formError!: string;
 
 	emailCtrl!: FormControl;
 	passwordCtrl!: FormControl;
-
-	redirectLink!: string;
 
 	constructor(
 		private _formBuilder: FormBuilder,
 		private _authService: AuthService,
 		private _localStorageService: LocalStorageService,
-	) {}
+	) {
+		super();
+	}
 
-	ngOnInit(): void {
+	override ngOnInit(): void {
 		this.redirectLink = '/' + PrimaryRouteEnum.AUTH + '/' + AuthRouteEnum.SIGNUP;
 		this.validationMessages = validationSigninMessages;
 
-		this.initFormControls();
-		this.initSigninForm();
+		super.ngOnInit();
 	}
 
-	getValidationMessages(name: string): ValidationMessage | null {
-		try {
-			const validationMessage: ValidationMessages = this.validationMessages.find(
-				vm => vm.getName() === name,
-			) as ValidationMessages;
-
-			if (!validationMessage) {
-				throw new Error(`Validation messages not found for name: ${name}`);
-			}
-
-			return validationMessage.getMessages();
-		} catch (err) {
-			console.error(err);
-			return null;
-		}
-	}
-
-	onSubmit(): void {
+	override onSubmit(): void {
 		if (this.mainForm.valid) {
 			this.formError = '';
 			this._localStorageService.clearAuthToken();
@@ -80,14 +57,14 @@ export class SigninPageComponent implements OnInit, OnDestroy {
 		}
 	}
 
-	private initSigninForm() {
+	protected override initMainForm() {
 		this.mainForm = this._formBuilder.group({
 			email: this.emailCtrl,
 			password: this.passwordCtrl,
 		});
 	}
 
-	private initFormControls(): void {
+	protected override initFormControls(): void {
 		this.regexEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
 
 		this.emailCtrl = this._formBuilder.control('', [Validators.required, Validators.pattern(this.regexEmail)]);
