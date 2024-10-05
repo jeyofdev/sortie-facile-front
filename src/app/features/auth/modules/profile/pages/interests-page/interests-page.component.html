@@ -1,0 +1,18 @@
+<app-auth-profile-layout imgSrc="assets/images/signup.jpg" imgAlt="Interests" pageTitle="Interests" pageIcon="hashtag">
+	<ng-container subtitle>
+		<span>Select your areas of interest to receive customized updates and suggestions based on what you like.</span>
+	</ng-container>
+
+	<ng-container primary>
+		<div class="content-box">
+			<p-button
+				type="submit"
+				label="Continue"
+				icon="pi pi-arrow-up-right"
+				iconPos="right"
+				styleClass="btn-cta"
+				(onClick)="onSubmit()"
+			/>
+		</div>
+	</ng-container>
+</app-auth-profile-layout>

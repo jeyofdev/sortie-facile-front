@@ -28,7 +28,7 @@ export class DescriptionPageComponent extends AuthProfilePage implements OnInit 
 	}
 
 	override onSubmit(): void {
-		super.onSubmit('step3', AuthProfileEnum.DESCRIPTION);
+		super.onSubmit('step3', AuthProfileEnum.INTERESTS);
 	}
 
 	override backToPreviousStep(): void {

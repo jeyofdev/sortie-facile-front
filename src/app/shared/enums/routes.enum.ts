@@ -15,4 +15,5 @@ export enum AuthProfileEnum {
 	ADDRESS = 'address',
 	CONTACT = 'contact',
 	DESCRIPTION = 'description',
+	INTERESTS = 'interests',
 }

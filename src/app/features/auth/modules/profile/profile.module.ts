@@ -10,6 +10,7 @@ import { AddressPageComponent } from './pages/address-page/address-page.componen
 import { ContactPageComponent } from './pages/contact-page/contact-page.component';
 import { DescriptionPageComponent } from './pages/description-page/description-page.component';
 import { FormButtonBoxComponent } from './component/form-button-box/form-button-box.component';
+import { InterestsPageComponent } from './pages/interests-page/interests-page.component';
 
 @NgModule({
 	declarations: [
@@ -18,6 +19,7 @@ import { FormButtonBoxComponent } from './component/form-button-box/form-button-
 		ContactPageComponent,
 		DescriptionPageComponent,
 		FormButtonBoxComponent,
+		InterestsPageComponent,
 	],
 	imports: [CommonModule, FormsModule, ReactiveFormsModule, ProfileRoutingModule, SharedModule, ComponentsModule],
 })
