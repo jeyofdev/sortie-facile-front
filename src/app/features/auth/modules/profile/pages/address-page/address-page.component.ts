@@ -77,7 +77,7 @@ export class AddressPageComponent extends AuthProfilePage implements OnInit {
 		this.cityItems$ = this._addressService.getCitiesByDepartment(department.id);
 	}
 
-	protected override initSignupForm() {
+	protected override initMainForm() {
 		this.mainForm = this._formBuilder.group({
 			streetForm: this.streetForm,
 			region: this.regionCtrl,

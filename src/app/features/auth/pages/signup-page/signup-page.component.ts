@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthPageAbstract } from '@shared/abstract/auth-page.abstract';
 import { AuthProfileEnum, AuthRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
-import { ValidationMessages } from '@shared/models/validation-messages.model';
-import { ValidationMessage } from '@shared/types/validation-message.type';
 import { validationSignupMessages } from '@shared/validations/messages/signup-message.error';
 import { passwordEqualValidator } from '@validators/password-equal.validator';
 
@@ -12,49 +11,27 @@ import { passwordEqualValidator } from '@validators/password-equal.validator';
 	templateUrl: './signup-page.component.html',
 	styleUrl: './signup-page.component.scss',
 })
-export class SignupPageComponent implements OnInit {
-	validationMessages!: ValidationMessages[];
+export class SignupPageComponent extends AuthPageAbstract implements OnInit {
 	regexEmail!: RegExp;
 
-	mainForm!: FormGroup;
 	passwordForm!: FormGroup;
-
-	formError!: string;
 
 	emailCtrl!: FormControl;
 	passwordCtrl!: FormControl;
 	confirmPasswordCtrl!: FormControl;
 
-	redirectLink!: string;
-
 	constructor(
 		private _formBuilder: FormBuilder,
 		private _router: Router,
-	) {}
+	) {
+		super();
+	}
 
-	ngOnInit(): void {
+	override ngOnInit(): void {
 		this.redirectLink = '/' + PrimaryRouteEnum.AUTH + '/' + AuthRouteEnum.SIGNIN;
 		this.validationMessages = validationSignupMessages;
 
-		this.initFormControls();
-		this.initSignupForm();
-	}
-
-	getValidationMessages(name: string): ValidationMessage | null {
-		try {
-			const validationMessage: ValidationMessages = this.validationMessages.find(
-				vm => vm.getName() === name,
-			) as ValidationMessages;
-
-			if (!validationMessage) {
-				throw new Error(`Validation messages not found for name: ${name}`);
-			}
-
-			return validationMessage.getMessages();
-		} catch (err) {
-			console.error(err);
-			return null;
-		}
+		super.ngOnInit();
 	}
 
 	onSubmit(): void {
@@ -80,14 +57,14 @@ export class SignupPageComponent implements OnInit {
 		}
 	}
 
-	private initSignupForm() {
+	protected override initMainForm() {
 		this.mainForm = this._formBuilder.group({
 			email: this.emailCtrl,
 			passwordForm: this.passwordForm,
 		});
 	}
 
-	private initFormControls(): void {
+	protected override initFormControls(): void {
 		this.regexEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
 
 		this.emailCtrl = this._formBuilder.control('', [Validators.required, Validators.pattern(this.regexEmail)]);
