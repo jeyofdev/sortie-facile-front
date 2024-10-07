@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthStepService } from '@services/auth-step.service';
 import { InterestService } from '@services/interests.service';
 import { AuthProfileEnum, AuthRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
+import { StepAuthProfileInterests } from '@shared/models/auth/steps/step-auth-profile-interests.model';
 import { Interest } from '@shared/models/interests.interface';
 import { Observable } from 'rxjs';
 
@@ -30,7 +31,7 @@ export class InterestsPageComponent implements OnInit {
 	}
 
 	onSubmit(): void {
-		this._authStepService.setStepData('step4', this.selectedInterestIds);
+		this._authStepService.setStepData('step5', new StepAuthProfileInterests(this.selectedInterestIds));
 		console.log(this._authStepService.getAllData());
 
 		this.navigateByUrl(AuthProfileEnum.INTERESTS);

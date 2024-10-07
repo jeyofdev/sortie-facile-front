@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthStepService } from '@services/auth-step.service';
 import { AuthProfilePage } from '@shared/abstract/auth-profile-page.abstract';
 import { AuthProfileEnum } from '@shared/enums/routes.enum';
+import { StepAuthProfileDescription } from '@shared/models/auth/steps/step-auth-profile-description.model';
 import { validationAuthProfileMessages } from '@shared/validations/messages/auth-profile-message.error';
 
 @Component({
@@ -28,7 +29,7 @@ export class DescriptionPageComponent extends AuthProfilePage implements OnInit 
 	}
 
 	override onSubmit(): void {
-		super.onSubmit('step3', AuthProfileEnum.INTERESTS);
+		super.onSubmit('step4', new StepAuthProfileDescription(this.mainForm.value.description), AuthProfileEnum.INTERESTS);
 	}
 
 	override backToPreviousStep(): void {
