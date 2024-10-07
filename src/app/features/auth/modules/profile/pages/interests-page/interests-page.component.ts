@@ -7,6 +7,8 @@ import { AuthProfileEnum, AuthRouteEnum, PrimaryRouteEnum } from '@shared/enums/
 import { AuthUserRegister } from '@shared/models/auth/auth-user-register.model';
 import { StepAuthProfileInterests } from '@shared/models/auth/steps/step-auth-profile-interests.model';
 import { Interest } from '@shared/models/interests.interface';
+import { NewProfileData } from '@shared/models/profile/new-profile-data.model';
+import { ProfileDatas } from '@shared/models/profile/profile-datas.model';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -37,7 +39,29 @@ export class InterestsPageComponent implements OnInit {
 		this._authStepService.setStepData('step6', new StepAuthProfileInterests(this.selectedInterestIds));
 		console.log(this._authStepService.getAllData());
 
-		this._authService.signUpWithEmailAndPassword$(this._authStepService.getStepData('step1'));
+		this._authService.signUpWithEmailAndPassword$(
+			this._authStepService.getStepData('step1'),
+			new ProfileDatas(
+				1,
+				1,
+				1,
+				new NewProfileData(
+					this._authStepService.getStepData('step2').firstName,
+					this._authStepService.getStepData('step2').lastName,
+					new Date(this._authStepService.getStepData('step2').dateOfBirth),
+					this._authStepService.getStepData('step3').streetNumber,
+					this._authStepService.getStepData('step3').street,
+					22123,
+					this._authStepService.getStepData('step4').phone.split('-').join(''),
+					this._authStepService.getStepData('step4').twitter,
+					this._authStepService.getStepData('step4').instagram,
+					this._authStepService.getStepData('step4').facebook,
+					this._authStepService.getStepData('step5').description,
+					null,
+					this._authStepService.getStepData('step6').interestsIds,
+				),
+			),
+		);
 
 		this.navigateByUrl(AuthProfileEnum.INTERESTS);
 	}
