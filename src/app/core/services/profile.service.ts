@@ -15,7 +15,7 @@ export class ProfileService {
 	add(userId: string, profileData: ProfileDatas): Observable<ResponseAddProfile> {
 		return this._httpClient
 			.post<ResponseAddProfile>(
-				`${this._BASE_URL}/add/region/1/department/1/city/1/user/${userId}`,
+				`${this._BASE_URL}/add/region/${profileData.regionId}/department/${profileData.departmentId}/city/${profileData.cityId}/user/${userId}`,
 				profileData.newProfileData,
 			)
 			.pipe(tap(res => console.log(res)));

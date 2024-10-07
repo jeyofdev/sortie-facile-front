@@ -14,7 +14,7 @@ export class AuthStepService {
 	private stepData: AuthStepData = new AuthStepData(
 		new StepAuthRegister('', ''),
 		new StepAuthProfilePersonnalInfo('', '', ''),
-		new StepAuthProfileAddress(0, '', '', '', ''),
+		new StepAuthProfileAddress(0, '', 0, 0, 0),
 		new StepAuthProfileContact('', '', '', ''),
 		new StepAuthProfileDescription(''),
 		new StepAuthProfileInterests([]),

@@ -42,9 +42,9 @@ export class InterestsPageComponent implements OnInit {
 		this._authService.signUpWithEmailAndPassword$(
 			this._authStepService.getStepData('step1'),
 			new ProfileDatas(
-				1,
-				1,
-				1,
+				this._authStepService.getStepData('step3').regionId,
+				this._authStepService.getStepData('step3').departmentId,
+				this._authStepService.getStepData('step3').cityId,
 				new NewProfileData(
 					this._authStepService.getStepData('step2').firstName,
 					this._authStepService.getStepData('step2').lastName,
