@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthStepService } from '@services/auth-step.service';
+import { InterestService } from '@services/interests.service';
 import { AuthProfileEnum, AuthRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
+import { Interest } from '@shared/models/interests.interface';
+import { Observable } from 'rxjs';
 
 @Component({
 	selector: 'app-interests-page',
@@ -9,14 +12,28 @@ import { AuthProfileEnum, AuthRouteEnum, PrimaryRouteEnum } from '@shared/enums/
 	styleUrl: './interests-page.component.scss',
 })
 export class InterestsPageComponent implements OnInit {
-	descriptionCtrl!: FormControl;
+	interestList$!: Observable<Interest[]>;
+	selectedInterestIds: number[] = [];
 
-	constructor(private _router: Router) {}
+	constructor(
+		private _router: Router,
+		private _interestService: InterestService,
+		private _authStepService: AuthStepService,
+	) {}
 
-	ngOnInit(): void {}
+	ngOnInit(): void {
+		this.interestList$ = this._interestService.getAllInterests();
+	}
+
+	onInterestClick(interestId: number): void {
+		this.checkIfInterestIsPresentInSelectedInterestIds(interestId);
+	}
 
 	onSubmit(): void {
-		console.log('ok');
+		this._authStepService.setStepData('step4', this.selectedInterestIds);
+		console.log(this._authStepService.getAllData());
+
+		this.navigateByUrl(AuthProfileEnum.INTERESTS);
 	}
 
 	backToPreviousStep(): void {
@@ -27,5 +44,13 @@ export class InterestsPageComponent implements OnInit {
 		this._router.navigateByUrl(
 			PrimaryRouteEnum.AUTH + '/' + AuthRouteEnum.SIGNUP + '/' + PrimaryRouteEnum.PROFILE + '/' + navitateEndpoint,
 		);
+	}
+
+	private checkIfInterestIsPresentInSelectedInterestIds(interestId: number) {
+		if (!this.selectedInterestIds.includes(interestId)) {
+			this.selectedInterestIds.push(interestId);
+		} else {
+			this.selectedInterestIds = this.selectedInterestIds.filter(id => id !== interestId);
+		}
 	}
 }

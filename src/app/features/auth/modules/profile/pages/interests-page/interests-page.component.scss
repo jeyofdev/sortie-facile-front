@@ -3,6 +3,40 @@
 	width: 100%;
 }
 
+.btn-block {
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 3rem;
+}
+
 :host::ng-deep .content-box {
 	width: 100%;
+
+	.interest-list-box {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 1rem;
+		margin-bottom: 2rem;
+
+		app-button-img {
+			display: flex;
+			width: 100%;
+
+			@media screen and (min-width: 450px) {
+				width: calc(50% - 1rem);
+			}
+
+			@media screen and (min-width: 768px) and (max-width: 960px) {
+				width: 100%;
+			}
+		}
+	}
+
+	app-form-button-box .btn-block {
+		padding: 0 0.5rem;
+	}
 }
