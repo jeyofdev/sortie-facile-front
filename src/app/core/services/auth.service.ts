@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, of } from 'rxjs';
+import { catchError, map, Observable, of, tap } from 'rxjs';
 import { AuthUserCredential } from '@shared/models/auth/auth-user-credential.model';
 import { HttpClient } from '@angular/common/http';
 import { ResponseAuthSigninBase } from '@shared/models/auth/response-auth-signin-base.model';
 import { ResponseAuthSigninError } from '@shared/models/auth/response-auth-signin-error.model';
 import { AuthTokenService } from './auth-token.service';
 import { AuthTokenResponse } from '@shared/models/auth/auth-token-response.model';
+import { AuthUserRegister } from '@shared/models/auth/auth-user-register.model';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class AuthService {
 	private readonly _BASE_URL = 'http://localhost:8080/api/v1/auth';
+	private readonly _BASE_URL_PROFILE = 'http://localhost:8080/api/v1/profile';
 
 	constructor(
 		private _httpClient: HttpClient,
@@ -31,5 +33,12 @@ export class AuthService {
 				return of(new ResponseAuthSigninError(true, errorMessage));
 			}),
 		);
+	}
+
+	signUpWithEmailAndPassword$(userRegisterDatas: AuthUserRegister): void {
+		this._httpClient
+			.post(`${this._BASE_URL}/register`, userRegisterDatas)
+			.pipe(tap(res => console.log(res)))
+			.subscribe();
 	}
 }

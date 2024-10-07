@@ -36,7 +36,7 @@ export class PersonalPageComponent extends AuthProfilePage implements OnInit {
 
 	override onSubmit(): void {
 		super.onSubmit(
-			'step1',
+			'step2',
 			new StepAuthProfilePersonnalInfo(
 				this.mainForm.value.nameForm.firstname,
 				this.mainForm.value.nameForm.firstname,

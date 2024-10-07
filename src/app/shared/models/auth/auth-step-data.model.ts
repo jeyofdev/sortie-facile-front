@@ -3,13 +3,15 @@ import { StepAuthProfileContact } from './steps/step-auth-profile-contact.model'
 import { StepAuthProfileDescription } from './steps/step-auth-profile-description.model';
 import { StepAuthProfileInterests } from './steps/step-auth-profile-interests.model';
 import { StepAuthProfilePersonnalInfo } from './steps/step-auth-profile-personal-infos.model';
+import { StepAuthRegister } from './steps/step-auth-register.model';
 
 export class AuthStepData {
 	constructor(
-		public step1: StepAuthProfilePersonnalInfo,
-		public step2: StepAuthProfileAddress,
-		public step3: StepAuthProfileContact,
-		public step4: StepAuthProfileDescription,
-		public step5: StepAuthProfileInterests,
+		public step1: StepAuthRegister,
+		public step2: StepAuthProfilePersonnalInfo,
+		public step3: StepAuthProfileAddress,
+		public step4: StepAuthProfileContact,
+		public step5: StepAuthProfileDescription,
+		public step6: StepAuthProfileInterests,
 	) {}
 }

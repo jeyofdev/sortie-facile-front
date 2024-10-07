@@ -35,7 +35,7 @@ export class ContactPageComponent extends AuthProfilePage implements OnInit {
 
 	override onSubmit(): void {
 		super.onSubmit(
-			'step3',
+			'step4',
 			new StepAuthProfileContact(
 				this.mainForm.value.phone,
 				this.mainForm.value.socialForm.twitter,

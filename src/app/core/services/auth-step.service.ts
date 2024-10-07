@@ -5,12 +5,14 @@ import { StepAuthProfileContact } from '@shared/models/auth/steps/step-auth-prof
 import { StepAuthProfileDescription } from '@shared/models/auth/steps/step-auth-profile-description.model';
 import { StepAuthProfileInterests } from '@shared/models/auth/steps/step-auth-profile-interests.model';
 import { StepAuthProfilePersonnalInfo } from '@shared/models/auth/steps/step-auth-profile-personal-infos.model';
+import { StepAuthRegister } from '@shared/models/auth/steps/step-auth-register.model';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class AuthStepService {
 	private stepData: AuthStepData = new AuthStepData(
+		new StepAuthRegister('', ''),
 		new StepAuthProfilePersonnalInfo('', '', ''),
 		new StepAuthProfileAddress(0, '', '', '', ''),
 		new StepAuthProfileContact('', '', '', ''),

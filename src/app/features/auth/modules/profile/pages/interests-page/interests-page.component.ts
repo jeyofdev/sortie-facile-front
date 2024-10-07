@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthStepService } from '@services/auth-step.service';
+import { AuthService } from '@services/auth.service';
 import { InterestService } from '@services/interests.service';
 import { AuthProfileEnum, AuthRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
+import { AuthUserRegister } from '@shared/models/auth/auth-user-register.model';
 import { StepAuthProfileInterests } from '@shared/models/auth/steps/step-auth-profile-interests.model';
 import { Interest } from '@shared/models/interests.interface';
 import { Observable } from 'rxjs';
@@ -20,6 +22,7 @@ export class InterestsPageComponent implements OnInit {
 		private _router: Router,
 		private _interestService: InterestService,
 		private _authStepService: AuthStepService,
+		private _authService: AuthService,
 	) {}
 
 	ngOnInit(): void {
@@ -31,8 +34,10 @@ export class InterestsPageComponent implements OnInit {
 	}
 
 	onSubmit(): void {
-		this._authStepService.setStepData('step5', new StepAuthProfileInterests(this.selectedInterestIds));
+		this._authStepService.setStepData('step6', new StepAuthProfileInterests(this.selectedInterestIds));
 		console.log(this._authStepService.getAllData());
+
+		this._authService.signUpWithEmailAndPassword$(this._authStepService.getStepData('step1'));
 
 		this.navigateByUrl(AuthProfileEnum.INTERESTS);
 	}

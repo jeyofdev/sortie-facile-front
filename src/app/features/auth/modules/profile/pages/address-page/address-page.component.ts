@@ -55,7 +55,7 @@ export class AddressPageComponent extends AuthProfilePage implements OnInit {
 
 	override onSubmit(): void {
 		super.onSubmit(
-			'step2',
+			'step3',
 			new StepAuthProfileAddress(
 				this.mainForm.value.streetForm.streetNumber,
 				this.mainForm.value.streetForm.street,

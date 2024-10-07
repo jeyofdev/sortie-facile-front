@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthStepService } from '@services/auth-step.service';
 import { AuthPageAbstract } from '@shared/abstract/auth-page.abstract';
 import { AuthProfileEnum, AuthRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
+import { StepAuthRegister } from '@shared/models/auth/steps/step-auth-register.model';
 import { validationSignupMessages } from '@shared/validations/messages/signup-message.error';
 import { passwordEqualValidator } from '@validators/password-equal.validator';
 
@@ -23,6 +25,7 @@ export class SignupPageComponent extends AuthPageAbstract implements OnInit {
 	constructor(
 		private _formBuilder: FormBuilder,
 		private _router: Router,
+		private _authStepService: AuthStepService,
 	) {
 		super();
 	}
@@ -37,8 +40,11 @@ export class SignupPageComponent extends AuthPageAbstract implements OnInit {
 	onSubmit(): void {
 		this.formError = '';
 		if (this.mainForm.valid) {
-			console.log(this.mainForm.value);
-		} else {
+			this._authStepService.setStepData(
+				'step1',
+				new StepAuthRegister(this.mainForm.value.email, this.mainForm.value.passwordForm.password),
+			);
+
 			this._router.navigateByUrl(
 				PrimaryRouteEnum.AUTH +
 					'/' +
@@ -48,12 +54,13 @@ export class SignupPageComponent extends AuthPageAbstract implements OnInit {
 					'/' +
 					AuthProfileEnum.PERSONAL,
 			);
-			// if (this.mainForm.get('passwordForm')?.hasError('matchPassword')) {
-			// 	this.formError =
-			// 		'Les champs de mot de passe ne correspondent pas. Veuillez vous assurer que le mot de passe et sa confirmation sont identiques.';
-			// } else {
-			// 	this.formError = 'Le formulaire contient des erreurs. Veuillez vérifier vos informations.';
-			// }
+		} else {
+			if (this.mainForm.get('passwordForm')?.hasError('matchPassword')) {
+				this.formError =
+					'Les champs de mot de passe ne correspondent pas. Veuillez vous assurer que le mot de passe et sa confirmation sont identiques.';
+			} else {
+				this.formError = 'Le formulaire contient des erreurs. Veuillez vérifier vos informations.';
+			}
 		}
 	}
 
