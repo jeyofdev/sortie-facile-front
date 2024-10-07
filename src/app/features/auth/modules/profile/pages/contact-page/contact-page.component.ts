@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthStepService } from '@services/auth-step.service';
 import { AuthProfilePage } from '@shared/abstract/auth-profile-page.abstract';
 import { AuthProfileEnum } from '@shared/enums/routes.enum';
+import { StepAuthProfileContact } from '@shared/models/auth/steps/step-auth-profile-contact.model';
 import { validationAuthProfileMessages } from '@shared/validations/messages/auth-profile-message.error';
 
 @Component({
@@ -33,7 +34,16 @@ export class ContactPageComponent extends AuthProfilePage implements OnInit {
 	}
 
 	override onSubmit(): void {
-		super.onSubmit('step3', AuthProfileEnum.DESCRIPTION);
+		super.onSubmit(
+			'step4',
+			new StepAuthProfileContact(
+				this.mainForm.value.phone,
+				this.mainForm.value.socialForm.twitter,
+				this.mainForm.value.socialForm.instagram,
+				this.mainForm.value.socialForm.facebook,
+			),
+			AuthProfileEnum.DESCRIPTION,
+		);
 	}
 
 	override backToPreviousStep(): void {

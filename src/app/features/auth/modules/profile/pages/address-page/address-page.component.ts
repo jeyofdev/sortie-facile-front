@@ -8,6 +8,7 @@ import { AuthProfileEnum } from '@shared/enums/routes.enum';
 import { City } from '@shared/models/address/city.interface';
 import { Department } from '@shared/models/address/department.interface';
 import { Region } from '@shared/models/address/region.model';
+import { StepAuthProfileAddress } from '@shared/models/auth/steps/step-auth-profile-address.model';
 import { validationAuthProfileMessages } from '@shared/validations/messages/auth-profile-message.error';
 import { Observable, of } from 'rxjs';
 
@@ -47,13 +48,23 @@ export class AddressPageComponent extends AuthProfilePage implements OnInit {
 		this.regionItems$ = this._addressService.getAllRegions();
 
 		this.validationMessages = validationAuthProfileMessages;
-		this.step1Data = this._authStepService.getStepData('step1');
+		// this.step1Data = this._authStepService.getStepData('step1');
 
 		super.ngOnInit();
 	}
 
 	override onSubmit(): void {
-		super.onSubmit('step2', AuthProfileEnum.CONTACT);
+		super.onSubmit(
+			'step3',
+			new StepAuthProfileAddress(
+				this.mainForm.value.streetForm.streetNumber,
+				this.mainForm.value.streetForm.street,
+				this.mainForm.value.region,
+				this.mainForm.value.department,
+				this.mainForm.value.city,
+			),
+			AuthProfileEnum.CONTACT,
+		);
 	}
 
 	override backToPreviousStep(): void {

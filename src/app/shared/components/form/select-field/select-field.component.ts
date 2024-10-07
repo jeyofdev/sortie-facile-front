@@ -26,7 +26,7 @@ export class SelectFieldComponent extends FormInputControlValueAccessor {
 			return;
 		}
 
-		this.onChanged(event.value.name);
+		this.onChanged(event.value.id);
 		this.selectedValueChange.emit(event.value);
 	}
 }

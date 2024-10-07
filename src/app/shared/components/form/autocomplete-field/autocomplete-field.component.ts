@@ -27,7 +27,7 @@ export class AutocompleteFieldComponent extends FormInputControlValueAccessor {
 			return;
 		}
 
-		this.onChanged(event.value.name);
+		this.onChanged(event.value.id);
 	}
 
 	filterItems(event: AutoCompleteCompleteEvent) {

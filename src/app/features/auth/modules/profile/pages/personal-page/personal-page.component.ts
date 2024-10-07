@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthStepService } from '@services/auth-step.service';
 import { AuthProfilePage } from '@shared/abstract/auth-profile-page.abstract';
 import { AuthProfileEnum } from '@shared/enums/routes.enum';
+import { StepAuthProfilePersonnalInfo } from '@shared/models/auth/steps/step-auth-profile-personal-infos.model';
 import { validationAuthProfileMessages } from '@shared/validations/messages/auth-profile-message.error';
 
 @Component({
@@ -34,7 +35,15 @@ export class PersonalPageComponent extends AuthProfilePage implements OnInit {
 	}
 
 	override onSubmit(): void {
-		super.onSubmit('step1', AuthProfileEnum.ADDRESS);
+		super.onSubmit(
+			'step2',
+			new StepAuthProfilePersonnalInfo(
+				this.mainForm.value.nameForm.firstname,
+				this.mainForm.value.nameForm.firstname,
+				this.mainForm.value.dateOfBirth,
+			),
+			AuthProfileEnum.ADDRESS,
+		);
 	}
 
 	protected override initMainForm() {
