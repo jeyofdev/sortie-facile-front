@@ -1,0 +1,28 @@
+<app-auth-profile-layout imgSrc="assets/images/signup.jpg" imgAlt="Interests" pageTitle="Interests" pageIcon="hashtag">
+	<ng-container subtitle>
+		<span>Select your areas of interest to receive customized updates and suggestions based on what you like.</span>
+	</ng-container>
+
+	<ng-container primary>
+		<div class="content-box">
+			<div class="interest-list-box">
+				@for (interest of interestList$ | async; track interest.id) {
+					<app-button-img
+						[label]="interest.title"
+						[backgroundUrl]="interest.imgUrl"
+						(onClickBtnImg)="onInterestClick(interest.id)"
+					></app-button-img>
+				}
+			</div>
+
+			<app-form-button-box
+				[showPreviousBtn]="true"
+				(previousClick)="backToPreviousStep()"
+				(nextClick)="onSubmit()"
+				[hasNextClickEvent]="true"
+			>
+				></app-form-button-box
+			>
+		</div>
+	</ng-container>
+</app-auth-profile-layout>

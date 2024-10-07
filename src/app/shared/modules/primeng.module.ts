@@ -13,6 +13,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { DropdownModule } from 'primeng/dropdown';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { CheckboxModule } from 'primeng/checkbox';
 
 @NgModule({
 	exports: [
@@ -30,6 +31,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 		DropdownModule,
 		AutoCompleteModule,
 		InputTextareaModule,
+		CheckboxModule,
 	],
 })
 export class PrimengModule {}
