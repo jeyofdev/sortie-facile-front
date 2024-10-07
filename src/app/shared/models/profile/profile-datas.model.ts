@@ -1,6 +1,6 @@
-import { NewProfileData } from './new-profile-data.model';
+import { NewProfileData } from '@shared/models/profile/new-profile-data.model';
 
-export class ProfileDatas {
+export class NewUserProfileDatas {
 	constructor(
 		public regionId: number,
 		public departmentId: number,

@@ -8,7 +8,7 @@ import { AuthUserRegister } from '@shared/models/auth/auth-user-register.model';
 import { StepAuthProfileInterests } from '@shared/models/auth/steps/step-auth-profile-interests.model';
 import { Interest } from '@shared/models/interests.interface';
 import { NewProfileData } from '@shared/models/profile/new-profile-data.model';
-import { ProfileDatas } from '@shared/models/profile/profile-datas.model';
+import { NewUserProfileDatas } from '@shared/models/profile/profile-datas.model';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -41,7 +41,7 @@ export class InterestsPageComponent implements OnInit {
 
 		this._authService.signUpWithEmailAndPassword$(
 			this._authStepService.getStepData('step1'),
-			new ProfileDatas(
+			new NewUserProfileDatas(
 				this._authStepService.getStepData('step3').regionId,
 				this._authStepService.getStepData('step3').departmentId,
 				this._authStepService.getStepData('step3').cityId,

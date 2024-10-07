@@ -1,4 +1,4 @@
-import { ResponseAuthSigninBase } from './response-auth-signin-base.model';
+import { ResponseAuthSigninBase } from '@shared/models/auth/response-auth-signin-base.model';
 
 export class ResponseAuthSigninError extends ResponseAuthSigninBase {
 	constructor(

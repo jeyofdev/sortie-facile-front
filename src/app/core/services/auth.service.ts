@@ -8,14 +8,15 @@ import { AuthTokenService } from './auth-token.service';
 import { AuthTokenResponse } from '@shared/models/auth/auth-token-response.model';
 import { AuthUserRegister } from '@shared/models/auth/auth-user-register.model';
 import { ProfileService } from './profile.service';
-import { ProfileDatas } from '@shared/models/profile/profile-datas.model';
+import { NewUserProfileDatas } from '@shared/models/profile/profile-datas.model';
 import { ResponseAuthSignup } from '@shared/models/auth/response-auth-signup.model';
+import { RouteAPI } from '@shared/enums/route-api.enum';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class AuthService {
-	private readonly _BASE_URL = 'http://localhost:8080/api/v1/auth';
+	private readonly _BASE_URL = RouteAPI.AUTH;
 
 	constructor(
 		private _httpClient: HttpClient,
@@ -38,14 +39,11 @@ export class AuthService {
 		);
 	}
 
-	signUpWithEmailAndPassword$(userRegisterDatas: AuthUserRegister, profileData: ProfileDatas): void {
-		this._httpClient
-			.post<ResponseAuthSignup>(`${this._BASE_URL}/register`, userRegisterDatas)
-			.pipe(
-				switchMap((registerUserResponse: ResponseAuthSignup) => {
-					return this._profileService.add(registerUserResponse.userId, profileData);
-				}),
-			)
-			.subscribe();
+	signUpWithEmailAndPassword$(userRegisterDatas: AuthUserRegister, newUserprofileDatas: NewUserProfileDatas): void {
+		this._httpClient.post<ResponseAuthSignup>(`${this._BASE_URL}/register`, userRegisterDatas).pipe(
+			switchMap((registerUserResponse: ResponseAuthSignup) => {
+				return this._profileService.add(registerUserResponse.userId, newUserprofileDatas);
+			}),
+		);
 	}
 }

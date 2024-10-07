@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { RouteAPI } from '@shared/enums/route-api.enum';
 import { Interest } from '@shared/models/interests.interface';
 import { Observable } from 'rxjs';
 
@@ -7,7 +8,7 @@ import { Observable } from 'rxjs';
 	providedIn: 'root',
 })
 export class InterestService {
-	private readonly _BASE_URL = 'http://localhost:8080/api/v1/category';
+	private readonly _BASE_URL = RouteAPI.CATEGORY;
 
 	constructor(private _httpClient: HttpClient) {}
 
