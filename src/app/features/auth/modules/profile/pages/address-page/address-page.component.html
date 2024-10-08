@@ -105,6 +105,7 @@
 						[parentForm]="mainForm"
 						controlName="city"
 						[validationMessage]="getValidationMessages('city')"
+						(selectedValueChange)="onCitySelected($event)"
 					></app-autocomplete-field>
 				</div>
 			}

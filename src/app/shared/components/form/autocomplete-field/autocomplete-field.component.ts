@@ -1,4 +1,4 @@
-import { Component, EventEmitter, forwardRef, Input } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FormInputControlValueAccessor } from '@shared/abstract/form-input-control-value-accessor.abstract';
 import { AutoCompleteCompleteEvent, AutoCompleteSelectEvent } from 'primeng/autocomplete';
@@ -19,6 +19,8 @@ export class AutocompleteFieldComponent extends FormInputControlValueAccessor {
 	@Input({ required: true }) items!: unknown[];
 	@Input() showClear: Boolean = false;
 
+	@Output() selectedValueChange = new EventEmitter<any>();
+
 	filteredItems!: unknown[];
 	selectedCity: unknown | undefined;
 
@@ -28,6 +30,7 @@ export class AutocompleteFieldComponent extends FormInputControlValueAccessor {
 		}
 
 		this.onChanged(event.value.id);
+		this.selectedValueChange.emit(event.value);
 	}
 
 	filterItems(event: AutoCompleteCompleteEvent) {

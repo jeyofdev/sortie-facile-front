@@ -4,6 +4,7 @@ export class StepAuthProfileAddress {
 		public street: string,
 		public regionId: number,
 		public departmentId: number,
+		public zipCode: number,
 		public cityId: number,
 	) {}
 }

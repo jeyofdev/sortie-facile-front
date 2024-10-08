@@ -46,7 +46,7 @@ export class InterestsPageComponent extends AuthPageGlobalAbstract<never> implem
 		console.log(this._authStepService.getAllData());
 		this.error = '';
 
-		if (this._authStepService.getStepData('step6').interestsIds.length > 0) {
+		if (this.selectedInterestIds.length > 0) {
 			this._authService.signUpWithEmailAndPassword$(
 				this._authStepService.getStepData('step1'),
 				new NewUserProfileDatas(
@@ -59,7 +59,7 @@ export class InterestsPageComponent extends AuthPageGlobalAbstract<never> implem
 						new Date(this._authStepService.getStepData('step2').dateOfBirth),
 						this._authStepService.getStepData('step3').streetNumber,
 						this._authStepService.getStepData('step3').street,
-						22123,
+						this._authStepService.getStepData('step3').zipCode,
 						this._authStepService.getStepData('step4').phone.split('-').join(''),
 						this._authStepService.getStepData('step4').twitter,
 						this._authStepService.getStepData('step4').instagram,
