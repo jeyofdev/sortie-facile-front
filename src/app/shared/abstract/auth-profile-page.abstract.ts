@@ -4,9 +4,13 @@ import { AuthStepService } from '@services/auth-step.service';
 import { AuthProfileEnum, AuthRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
 import { AuthPageGlobalAbstract } from './auth-page-global.abstract';
 import { AuthStepData } from '@shared/models/auth/auth-step-data.model';
+import { AbstractControl } from '@angular/forms';
 
 @Directive()
-export abstract class AuthProfilePage extends AuthPageGlobalAbstract implements OnInit {
+export abstract class AuthProfilePage<T extends { [key: string]: AbstractControl<any, any> }>
+	extends AuthPageGlobalAbstract<T>
+	implements OnInit
+{
 	constructor(
 		protected _router: Router,
 		protected _authStepService: AuthStepService,

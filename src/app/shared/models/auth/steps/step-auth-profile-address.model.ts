@@ -1,6 +1,6 @@
 export class StepAuthProfileAddress {
 	constructor(
-		public streetNumber: number,
+		public streetNumber: string,
 		public street: string,
 		public regionId: number,
 		public departmentId: number,

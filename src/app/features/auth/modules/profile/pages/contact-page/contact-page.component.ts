@@ -5,6 +5,8 @@ import { AuthStepService } from '@services/auth-step.service';
 import { AuthProfilePage } from '@shared/abstract/auth-profile-page.abstract';
 import { AuthProfileEnum } from '@shared/enums/routes.enum';
 import { StepAuthProfileContact } from '@shared/models/auth/steps/step-auth-profile-contact.model';
+import { FormContact } from '@shared/types/form/form-contact.type';
+import { FormSocial } from '@shared/types/form/form-social.type';
 import { validationAuthProfileMessages } from '@shared/validations/messages/auth-profile-message.error';
 
 @Component({
@@ -12,13 +14,13 @@ import { validationAuthProfileMessages } from '@shared/validations/messages/auth
 	templateUrl: './contact-page.component.html',
 	styleUrl: './contact-page.component.scss',
 })
-export class ContactPageComponent extends AuthProfilePage implements OnInit {
-	socialForm!: FormGroup;
+export class ContactPageComponent extends AuthProfilePage<FormContact> implements OnInit {
+	socialForm!: FormGroup<FormSocial>;
 
-	phoneCtrl!: FormControl;
-	twitterCtrl!: FormControl;
-	instagramCtrl!: FormControl;
-	facebookCtrl!: FormControl;
+	phoneCtrl!: FormControl<string>;
+	twitterCtrl!: FormControl<string>;
+	instagramCtrl!: FormControl<string>;
+	facebookCtrl!: FormControl<string>;
 
 	constructor(
 		private _formBuilder: FormBuilder,
@@ -37,10 +39,10 @@ export class ContactPageComponent extends AuthProfilePage implements OnInit {
 		super.onSubmit(
 			'step4',
 			new StepAuthProfileContact(
-				this.mainForm.value.phone,
-				this.mainForm.value.socialForm.twitter,
-				this.mainForm.value.socialForm.instagram,
-				this.mainForm.value.socialForm.facebook,
+				this.mainForm.value.phone as string,
+				this.mainForm.value?.socialForm?.twitter as string,
+				this.mainForm.value?.socialForm?.instagram as string,
+				this.mainForm.value?.socialForm?.facebook as string,
 			),
 			AuthProfileEnum.DESCRIPTION,
 		);
@@ -58,10 +60,22 @@ export class ContactPageComponent extends AuthProfilePage implements OnInit {
 	}
 
 	protected override initFormControls(): void {
-		this.phoneCtrl = this._formBuilder.control('', [Validators.required]);
-		this.twitterCtrl = this._formBuilder.control('', [Validators.minLength(3)]);
-		this.instagramCtrl = this._formBuilder.control('', [Validators.minLength(3)]);
-		this.facebookCtrl = this._formBuilder.control('', [Validators.minLength(3)]);
+		this.phoneCtrl = this._formBuilder.control('', {
+			validators: [Validators.required],
+			nonNullable: true,
+		});
+		this.twitterCtrl = this._formBuilder.control('', {
+			validators: [Validators.minLength(3)],
+			nonNullable: true,
+		});
+		this.instagramCtrl = this._formBuilder.control('', {
+			validators: [Validators.minLength(3)],
+			nonNullable: true,
+		});
+		this.facebookCtrl = this._formBuilder.control('', {
+			validators: [Validators.minLength(3)],
+			nonNullable: true,
+		});
 
 		this.socialForm = this._formBuilder.group({
 			twitter: this.twitterCtrl,

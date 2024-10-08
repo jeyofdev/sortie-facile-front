@@ -9,6 +9,8 @@ import { City } from '@shared/models/address/city.model';
 import { Department } from '@shared/models/address/department.model';
 import { Region } from '@shared/models/address/region.model';
 import { StepAuthProfileAddress } from '@shared/models/auth/steps/step-auth-profile-address.model';
+import { FormAddress } from '@shared/types/form/form-address.type';
+import { FormStreet } from '@shared/types/form/form-street.type';
 import { validationAuthProfileMessages } from '@shared/validations/messages/auth-profile-message.error';
 import { Observable, of } from 'rxjs';
 
@@ -17,14 +19,14 @@ import { Observable, of } from 'rxjs';
 	templateUrl: './address-page.component.html',
 	styleUrl: './address-page.component.scss',
 })
-export class AddressPageComponent extends AuthProfilePage implements OnInit {
-	streetForm!: FormGroup;
+export class AddressPageComponent extends AuthProfilePage<FormAddress> implements OnInit {
+	streetForm!: FormGroup<FormStreet>;
 
-	streetNumberCtrl!: FormControl;
-	streetCtrl!: FormControl;
-	regionCtrl!: FormControl;
-	departmentCtrl!: FormControl;
-	cityCtrl!: FormControl;
+	streetNumberCtrl!: FormControl<string>;
+	streetCtrl!: FormControl<string>;
+	regionCtrl!: FormControl<number>;
+	departmentCtrl!: FormControl<number>;
+	cityCtrl!: FormControl<number>;
 
 	step1Data!: string;
 
@@ -46,9 +48,7 @@ export class AddressPageComponent extends AuthProfilePage implements OnInit {
 
 	override ngOnInit(): void {
 		this.regionItems$ = this._addressService.getAllRegions();
-
 		this.validationMessages = validationAuthProfileMessages;
-		// this.step1Data = this._authStepService.getStepData('step1');
 
 		super.ngOnInit();
 	}
@@ -57,11 +57,11 @@ export class AddressPageComponent extends AuthProfilePage implements OnInit {
 		super.onSubmit(
 			'step3',
 			new StepAuthProfileAddress(
-				this.mainForm.value.streetForm.streetNumber,
-				this.mainForm.value.streetForm.street,
-				this.mainForm.value.region,
-				this.mainForm.value.department,
-				this.mainForm.value.city,
+				this.mainForm.value.streetForm?.streetNumber as string,
+				this.mainForm.value.streetForm?.street as string,
+				this.mainForm.value.region as number,
+				this.mainForm.value.department as number,
+				this.mainForm.value.city as number,
 			),
 			AuthProfileEnum.CONTACT,
 		);
@@ -98,11 +98,26 @@ export class AddressPageComponent extends AuthProfilePage implements OnInit {
 	}
 
 	protected override initFormControls(): void {
-		this.streetNumberCtrl = this._formBuilder.control('', [Validators.required]);
-		this.streetCtrl = this._formBuilder.control('', [Validators.required]);
-		this.regionCtrl = this._formBuilder.control('', [Validators.required]);
-		this.departmentCtrl = this._formBuilder.control('', [Validators.required]);
-		this.cityCtrl = this._formBuilder.control('', [Validators.required]);
+		this.streetNumberCtrl = this._formBuilder.control('', {
+			validators: [Validators.required],
+			nonNullable: true,
+		});
+		this.streetCtrl = this._formBuilder.control('', {
+			validators: [Validators.required],
+			nonNullable: true,
+		});
+		this.regionCtrl = this._formBuilder.control(0, {
+			validators: [Validators.required],
+			nonNullable: true,
+		});
+		this.departmentCtrl = this._formBuilder.control(0, {
+			validators: [Validators.required],
+			nonNullable: true,
+		});
+		this.cityCtrl = this._formBuilder.control(0, {
+			validators: [Validators.required],
+			nonNullable: true,
+		});
 
 		this.streetForm = this._formBuilder.group({
 			streetNumber: this.streetNumberCtrl,
