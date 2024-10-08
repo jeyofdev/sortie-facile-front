@@ -5,5 +5,7 @@
 		<span *ngIf="control?.hasError('pattern')">{{ validationMessage?.['pattern'] }}</span>
 
 		<span *ngIf="control?.hasError('minlength')">{{ validationMessage?.['minlength'] }}</span>
+
+		<span *ngIf="control?.hasError('maxlength')">{{ validationMessage?.['maxlength'] }}</span>
 	</div>
 }

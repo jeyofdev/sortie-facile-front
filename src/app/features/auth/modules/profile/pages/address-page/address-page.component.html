@@ -25,6 +25,8 @@
 						id="streetNumber"
 						name="streetNumber"
 						placeholder="10"
+						[min]="1"
+						[max]="9999999"
 						[form]="authProfileAddressForm"
 						formControlName="streetNumber"
 						[parentForm]="streetForm"

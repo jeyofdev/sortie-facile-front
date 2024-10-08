@@ -60,20 +60,22 @@ export class ContactPageComponent extends AuthProfilePage<FormContact> implement
 	}
 
 	protected override initFormControls(): void {
+		const regexPhone = /^(0[1-9][0-9]{8})$/;
+
 		this.phoneCtrl = this._formBuilder.control('', {
-			validators: [Validators.required],
+			validators: [Validators.required, Validators.pattern(regexPhone)],
 			nonNullable: true,
 		});
 		this.twitterCtrl = this._formBuilder.control('', {
-			validators: [Validators.minLength(3)],
+			validators: [Validators.minLength(3), Validators.minLength(3), Validators.maxLength(30)],
 			nonNullable: true,
 		});
 		this.instagramCtrl = this._formBuilder.control('', {
-			validators: [Validators.minLength(3)],
+			validators: [Validators.minLength(3), Validators.minLength(3), Validators.maxLength(30)],
 			nonNullable: true,
 		});
 		this.facebookCtrl = this._formBuilder.control('', {
-			validators: [Validators.minLength(3)],
+			validators: [Validators.minLength(3), Validators.minLength(3), Validators.maxLength(30)],
 			nonNullable: true,
 		});
 

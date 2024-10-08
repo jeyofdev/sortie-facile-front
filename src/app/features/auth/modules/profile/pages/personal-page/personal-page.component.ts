@@ -56,14 +56,14 @@ export class PersonalPageComponent extends AuthProfilePage<FormPersonalInfo> imp
 	}
 
 	protected override initFormControls(): void {
-		this.regexDate = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
+		this.regexDate = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(19|20)\d{2}$/;
 
 		this.firstnameCtrl = this._formBuilder.control('', {
-			validators: [Validators.required, Validators.minLength(8)],
+			validators: [Validators.required, Validators.minLength(2), Validators.maxLength(30)],
 			nonNullable: true,
 		});
 		this.lastnameCtrl = this._formBuilder.control('', {
-			validators: [Validators.required, Validators.minLength(8)],
+			validators: [Validators.required, Validators.minLength(2), Validators.maxLength(30)],
 			nonNullable: true,
 		});
 		this.dateOfBirthCtrl = this._formBuilder.control('', {

@@ -98,12 +98,14 @@ export class AddressPageComponent extends AuthProfilePage<FormAddress> implement
 	}
 
 	protected override initFormControls(): void {
+		const regexStreetNumber = /^\d{1,4}$/;
+
 		this.streetNumberCtrl = this._formBuilder.control('', {
-			validators: [Validators.required],
+			validators: [Validators.required, Validators.pattern(regexStreetNumber)],
 			nonNullable: true,
 		});
 		this.streetCtrl = this._formBuilder.control('', {
-			validators: [Validators.required],
+			validators: [Validators.required, Validators.maxLength(80)],
 			nonNullable: true,
 		});
 		this.regionCtrl = this._formBuilder.control(0, {
