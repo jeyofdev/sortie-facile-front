@@ -1,11 +1,11 @@
-import { FormGroup } from '@angular/forms';
+import { AbstractControl, FormGroup } from '@angular/forms';
 import { ValidationMessages } from '@shared/models/validation-messages.model';
 import { ValidationMessage } from '@shared/types/validation-message.type';
 
-export class AuthPageGlobalAbstract {
+export class AuthPageGlobalAbstract<T extends { [key: string]: AbstractControl<any, any> }> {
 	validationMessages!: ValidationMessages[];
 
-	mainForm!: FormGroup;
+	mainForm!: FormGroup<T>;
 
 	formError!: string;
 

@@ -1,6 +1,10 @@
-export class AuthUserCredential {
+import { AuthUserDataBase } from '@shared/models/auth/auth-user-data-base.model';
+
+export class AuthUserCredential extends AuthUserDataBase {
 	constructor(
-		public email: string,
-		public password: string,
-	) {}
+		public override email: string,
+		public override password: string,
+	) {
+		super(email, password);
+	}
 }

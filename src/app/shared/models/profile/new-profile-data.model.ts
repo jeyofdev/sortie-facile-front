@@ -3,7 +3,7 @@ export class NewProfileData {
 		public firstname: string,
 		public lastname: string,
 		public dateOfBirth: Date,
-		public streetNumber: number,
+		public streetNumber: string,
 		public street: string,
 		public zipCode: number,
 		public phone: string,

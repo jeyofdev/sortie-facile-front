@@ -5,6 +5,7 @@ import { AuthStepService } from '@services/auth-step.service';
 import { AuthProfilePage } from '@shared/abstract/auth-profile-page.abstract';
 import { AuthProfileEnum } from '@shared/enums/routes.enum';
 import { StepAuthProfileDescription } from '@shared/models/auth/steps/step-auth-profile-description.model';
+import { FormDescription } from '@shared/types/form/form-description.type';
 import { validationAuthProfileMessages } from '@shared/validations/messages/auth-profile-message.error';
 
 @Component({
@@ -12,8 +13,8 @@ import { validationAuthProfileMessages } from '@shared/validations/messages/auth
 	templateUrl: './description-page.component.html',
 	styleUrl: './description-page.component.scss',
 })
-export class DescriptionPageComponent extends AuthProfilePage implements OnInit {
-	descriptionCtrl!: FormControl;
+export class DescriptionPageComponent extends AuthProfilePage<FormDescription> implements OnInit {
+	descriptionCtrl!: FormControl<string>;
 
 	constructor(
 		private _formBuilder: FormBuilder,
@@ -29,7 +30,11 @@ export class DescriptionPageComponent extends AuthProfilePage implements OnInit 
 	}
 
 	override onSubmit(): void {
-		super.onSubmit('step5', new StepAuthProfileDescription(this.mainForm.value.description), AuthProfileEnum.INTERESTS);
+		super.onSubmit(
+			'step5',
+			new StepAuthProfileDescription(this.mainForm.value.description as string),
+			AuthProfileEnum.INTERESTS,
+		);
 	}
 
 	override backToPreviousStep(): void {
@@ -43,6 +48,9 @@ export class DescriptionPageComponent extends AuthProfilePage implements OnInit 
 	}
 
 	protected override initFormControls(): void {
-		this.descriptionCtrl = this._formBuilder.control('', [Validators.required, Validators.minLength(20)]);
+		this.descriptionCtrl = this._formBuilder.control('', {
+			validators: [Validators.required, Validators.minLength(20)],
+			nonNullable: true,
+		});
 	}
 }

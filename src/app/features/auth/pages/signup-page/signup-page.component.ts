@@ -5,6 +5,8 @@ import { AuthStepService } from '@services/auth-step.service';
 import { AuthPageAbstract } from '@shared/abstract/auth-page.abstract';
 import { AuthProfileEnum, AuthRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
 import { StepAuthRegister } from '@shared/models/auth/steps/step-auth-register.model';
+import { FormPassword } from '@shared/types/form/form-password.type';
+import { FormSignup } from '@shared/types/form/form-signup.type';
 import { validationSignupMessages } from '@shared/validations/messages/signup-message.error';
 import { passwordEqualValidator } from '@validators/password-equal.validator';
 
@@ -13,14 +15,14 @@ import { passwordEqualValidator } from '@validators/password-equal.validator';
 	templateUrl: './signup-page.component.html',
 	styleUrl: './signup-page.component.scss',
 })
-export class SignupPageComponent extends AuthPageAbstract implements OnInit {
+export class SignupPageComponent extends AuthPageAbstract<FormSignup> implements OnInit {
 	regexEmail!: RegExp;
 
-	passwordForm!: FormGroup;
+	passwordForm!: FormGroup<FormPassword>;
 
-	emailCtrl!: FormControl;
-	passwordCtrl!: FormControl;
-	confirmPasswordCtrl!: FormControl;
+	emailCtrl!: FormControl<string>;
+	passwordCtrl!: FormControl<string>;
+	confirmPasswordCtrl!: FormControl<string>;
 
 	constructor(
 		private _formBuilder: FormBuilder,
@@ -42,7 +44,10 @@ export class SignupPageComponent extends AuthPageAbstract implements OnInit {
 		if (this.mainForm.valid) {
 			this._authStepService.setStepData(
 				'step1',
-				new StepAuthRegister(this.mainForm.value.email, this.mainForm.value.passwordForm.password),
+				new StepAuthRegister(
+					this.mainForm.value.email as string,
+					this.mainForm.value?.passwordForm?.password as string,
+				),
 			);
 
 			this._router.navigateByUrl(
@@ -74,9 +79,18 @@ export class SignupPageComponent extends AuthPageAbstract implements OnInit {
 	protected override initFormControls(): void {
 		this.regexEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
 
-		this.emailCtrl = this._formBuilder.control('', [Validators.required, Validators.pattern(this.regexEmail)]);
-		this.passwordCtrl = this._formBuilder.control('', [Validators.required, Validators.minLength(8)]);
-		this.confirmPasswordCtrl = this._formBuilder.control('', [Validators.required, Validators.minLength(8)]);
+		this.emailCtrl = this._formBuilder.control('', {
+			validators: [Validators.required, Validators.pattern(this.regexEmail)],
+			nonNullable: true,
+		});
+		this.passwordCtrl = this._formBuilder.control('', {
+			validators: [Validators.required, Validators.minLength(8)],
+			nonNullable: true,
+		});
+		this.confirmPasswordCtrl = this._formBuilder.control('', {
+			validators: [Validators.required, Validators.minLength(8)],
+			nonNullable: true,
+		});
 
 		this.passwordForm = this._formBuilder.group(
 			{
