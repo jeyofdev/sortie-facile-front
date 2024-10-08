@@ -4,6 +4,8 @@
 	</ng-container>
 
 	<ng-container primary>
+		<app-alert-error *ngIf="error" [content]="error" severity="error" icon="exclamation-circle"></app-alert-error>
+
 		<div class="content-box">
 			<div class="interest-list-box">
 				@for (interest of interestList$ | async; track interest.id) {

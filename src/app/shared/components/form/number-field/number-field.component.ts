@@ -18,6 +18,8 @@ import { InputNumberInputEvent } from 'primeng/inputnumber';
 export class NumberFieldComponent extends FormInputControlValueAccessor {
 	@Input() mode: 'decimal' | 'currency' = 'decimal';
 	@Input() useGrouping: boolean = false;
+	@Input({ required: true }) min!: number;
+	@Input({ required: true }) max!: number;
 
 	override onInputChange(event: InputNumberInputEvent): void {
 		if (this.disabled) {
