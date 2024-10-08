@@ -27,6 +27,7 @@ export class AddressPageComponent extends AuthProfilePage<FormAddress> implement
 	regionCtrl!: FormControl<number>;
 	departmentCtrl!: FormControl<number>;
 	cityCtrl!: FormControl<number>;
+	zipCode!: number;
 
 	step1Data!: string;
 
@@ -36,6 +37,7 @@ export class AddressPageComponent extends AuthProfilePage<FormAddress> implement
 
 	selectedRegion$!: Observable<Region | null>;
 	selectedDepartment$!: Observable<Department | null>;
+	selectedCity$!: Observable<City | null>;
 
 	constructor(
 		private _formBuilder: FormBuilder,
@@ -61,6 +63,7 @@ export class AddressPageComponent extends AuthProfilePage<FormAddress> implement
 				this.mainForm.value.streetForm?.street as string,
 				this.mainForm.value.region as number,
 				this.mainForm.value.department as number,
+				this.zipCode,
 				this.mainForm.value.city as number,
 			),
 			AuthProfileEnum.CONTACT,
@@ -86,6 +89,10 @@ export class AddressPageComponent extends AuthProfilePage<FormAddress> implement
 		this.selectedDepartment$ = of(department);
 
 		this.cityItems$ = this._addressService.getCitiesByDepartment(department.id);
+	}
+
+	onCitySelected(city: City): void {
+		this.zipCode = Number(city.zipCode);
 	}
 
 	protected override initMainForm() {

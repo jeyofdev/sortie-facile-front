@@ -60,7 +60,7 @@ export class ContactPageComponent extends AuthProfilePage<FormContact> implement
 	}
 
 	protected override initFormControls(): void {
-		const regexPhone = /^(0[1-9][0-9]{8})$/;
+		const regexPhone = /^(0[1-9])(-\d{2}){4}$/;
 
 		this.phoneCtrl = this._formBuilder.control('', {
 			validators: [Validators.required, Validators.pattern(regexPhone)],

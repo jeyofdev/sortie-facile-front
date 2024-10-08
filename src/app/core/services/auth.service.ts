@@ -40,10 +40,14 @@ export class AuthService {
 	}
 
 	signUpWithEmailAndPassword$(userRegisterDatas: AuthUserRegister, newUserprofileDatas: NewUserProfileDatas): void {
-		this._httpClient.post<ResponseAuthSignup>(`${this._BASE_URL}/register`, userRegisterDatas).pipe(
-			switchMap((registerUserResponse: ResponseAuthSignup) => {
-				return this._profileService.add(registerUserResponse.userId, newUserprofileDatas);
-			}),
-		);
+		this._httpClient
+			.post<ResponseAuthSignup>(`${this._BASE_URL}/register`, userRegisterDatas)
+			.pipe(
+				tap(() => console.log('tap')),
+				switchMap((registerUserResponse: ResponseAuthSignup) => {
+					return this._profileService.add(registerUserResponse.userId, newUserprofileDatas);
+				}),
+			)
+			.subscribe();
 	}
 }
