@@ -3,6 +3,7 @@ import { AuthProfileEnum, AuthRouteEnum, PrimaryRouteEnum } from '@enums/routes.
 import { SigninPageComponent } from '@auth/pages/signin-page/signin-page.component';
 import { SignupPageComponent } from '@root/features/auth/pages/signup-page/signup-page.component';
 import { ForgotPasswordComponent } from '@root/features/auth/pages/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from '@root/features/auth/pages/reset-password/reset-password.component';
 
 export const routes: Routes = [
 	{
@@ -16,6 +17,10 @@ export const routes: Routes = [
 	{
 		path: AuthRouteEnum.FORGOT_PASSWORD,
 		component: ForgotPasswordComponent,
+	},
+	{
+		path: AuthRouteEnum.RESET_PASSWORD,
+		component: ResetPasswordComponent,
 	},
 	{
 		path: AuthRouteEnum.SIGNUP + '/' + PrimaryRouteEnum.PROFILE,

@@ -9,6 +9,7 @@ export enum AuthRouteEnum {
 	SIGNIN = 'signin',
 	SIGNUP = 'signup',
 	FORGOT_PASSWORD = 'forgot-password',
+	RESET_PASSWORD = 'reset-password',
 }
 
 export enum AuthProfileEnum {
