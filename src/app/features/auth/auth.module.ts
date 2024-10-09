@@ -6,9 +6,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '@shared/shared.module';
 import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 import { ComponentsModule } from '@features/auth/modules/components.module';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 
 @NgModule({
-	declarations: [SigninPageComponent, SignupPageComponent],
+	declarations: [SigninPageComponent, SignupPageComponent, ForgotPasswordComponent],
 	imports: [CommonModule, AuthRoutingModule, FormsModule, ReactiveFormsModule, SharedModule, ComponentsModule],
 })
 export class AuthModule {}
