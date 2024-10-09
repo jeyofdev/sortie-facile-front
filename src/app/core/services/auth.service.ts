@@ -65,4 +65,22 @@ export class AuthService {
 				}),
 			);
 	}
+
+	resetPassword(resetToken: string, newPassword: string): Observable<ResponseAuthBase> {
+		const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+
+		const body = new URLSearchParams();
+		body.set('newPassword', newPassword);
+
+		return this._httpClient
+			.post<ResponseAuthBase>(`${this._BASE_URL}/update-password?resetToken=${resetToken}`, body.toString(), {
+				headers,
+			})
+			.pipe(
+				catchError(err => {
+					const errorMessage = err.error?.message || 'An error occurred while connecting. Please try again.';
+					return of(new ResponseAuthError(true, errorMessage));
+				}),
+			);
+	}
 }

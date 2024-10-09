@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '@services/auth.service';
 import { AuthPageAbstract } from '@shared/abstract/auth-page.abstract';
 import { AuthRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
+import { ResponseAuthBase } from '@shared/models/auth/response-auth-signin-base.model';
+import { ResponseAuthError } from '@shared/models/auth/response-auth-signin-error.model';
 import { FormPassword } from '@shared/types/form/form-password.type';
 import { validationForgotPasswordMessages } from '@shared/validations/messages/forgot-password-message.error';
 import { passwordEqualValidator } from '@shared/validations/validators/password-equal.validator';
+import { tap } from 'rxjs';
 
 @Component({
 	selector: 'app-reset-password',
@@ -16,9 +20,13 @@ export class ResetPasswordComponent extends AuthPageAbstract<FormPassword> imple
 	passwordCtrl!: FormControl<string>;
 	confirmPasswordCtrl!: FormControl<string>;
 
+	formSuccess!: string;
+	resetToken: string | null = null;
+
 	constructor(
 		private _formBuilder: FormBuilder,
-		private _router: Router,
+		private _route: ActivatedRoute,
+		private _authService: AuthService,
 	) {
 		super();
 	}
@@ -27,22 +35,40 @@ export class ResetPasswordComponent extends AuthPageAbstract<FormPassword> imple
 		this.redirectLink = '/' + PrimaryRouteEnum.AUTH + '/' + AuthRouteEnum.SIGNIN;
 		this.validationMessages = validationForgotPasswordMessages;
 
+		this._route.queryParams.subscribe(params => {
+			this.resetToken = params['resetToken'];
+		});
+
 		super.ngOnInit();
 	}
 
 	onSubmit(): void {
-		console.log(this.mainForm);
-
 		this.formError = '';
+		this.formSuccess = '';
 
-		if (this.mainForm.valid) {
-			console.log(this.mainForm.value);
+		if (!this.resetToken) {
+			this.formError = 'No token value was found in the URL. Please provide a valid token.';
 		} else {
-			if (this.mainForm?.hasError('matchPassword')) {
-				this.formError =
-					'Password fields not matching. Please make sure the password and its confirmation are the same.';
+			if (this.mainForm.valid) {
+				this._authService
+					.resetPassword(this.resetToken as string, this.mainForm.value.password as string)
+					.pipe(
+						tap((res: ResponseAuthBase) => {
+							if (res instanceof ResponseAuthError) {
+								this.formError = res.message;
+							} else {
+								this.formSuccess = res.message;
+							}
+						}),
+					)
+					.subscribe();
 			} else {
-				this.formError = 'The form contains errors. Please verify your information.';
+				if (this.mainForm?.hasError('matchPassword')) {
+					this.formError =
+						'Password fields not matching. Please make sure the password and its confirmation are the same.';
+				} else {
+					this.formError = 'The form contains errors. Please verify your information.';
+				}
 			}
 		}
 	}
