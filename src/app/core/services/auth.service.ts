@@ -39,15 +39,15 @@ export class AuthService {
 		);
 	}
 
-	signUpWithEmailAndPassword(userRegisterDatas: AuthUserRegister, newUserprofileDatas: NewUserProfileDatas): void {
-		this._httpClient
-			.post<ResponseAuthSignup>(`${this._BASE_URL}/register`, userRegisterDatas)
-			.pipe(
-				switchMap((registerUserResponse: ResponseAuthSignup) => {
-					return this._profileService.add(registerUserResponse.userId, newUserprofileDatas);
-				}),
-			)
-			.subscribe();
+	signUpWithEmailAndPassword(
+		userRegisterDatas: AuthUserRegister,
+		newUserprofileDatas: NewUserProfileDatas,
+	): Observable<any> {
+		return this._httpClient.post<ResponseAuthSignup>(`${this._BASE_URL}/register`, userRegisterDatas).pipe(
+			switchMap((registerUserResponse: ResponseAuthSignup) => {
+				return this._profileService.add(registerUserResponse.userId, newUserprofileDatas);
+			}),
+		);
 	}
 
 	requestForgotPassword(email: string): Observable<ResponseAuthBase> {
@@ -79,6 +79,21 @@ export class AuthService {
 			.pipe(
 				catchError(err => {
 					const errorMessage = err.error?.message || 'An error occurred while connecting. Please try again.';
+					return of(new ResponseAuthError(true, errorMessage));
+				}),
+			);
+	}
+
+	verificationAccount(verificationToken: string): Observable<ResponseAuthBase> {
+		const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+
+		return this._httpClient
+			.get<ResponseAuthBase>(`${this._BASE_URL}/verification-account?verificationToken=${verificationToken}`, {
+				headers,
+			})
+			.pipe(
+				catchError(err => {
+					const errorMessage = err.error?.message || 'No token was found in the URL or account already verified.';
 					return of(new ResponseAuthError(true, errorMessage));
 				}),
 			);

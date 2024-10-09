@@ -5,7 +5,7 @@ import { SignupPageComponent } from '@root/features/auth/pages/signup-page/signu
 import { ForgotPasswordComponent } from '@root/features/auth/pages/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from '@root/features/auth/pages/reset-password/reset-password.component';
 import { CheckEmailComponent } from '@root/features/auth/pages/check-email/check-email.component';
-import { VerifiedAccountPageComponent } from '@root/features/auth/pages/verified-account-page/verified-account-page.component';
+import { VerificationAccountPageComponent } from '@root/features/auth/pages/verification-account-page/verification-account-page.component';
 
 export const routes: Routes = [
 	{
@@ -29,8 +29,8 @@ export const routes: Routes = [
 		component: CheckEmailComponent,
 	},
 	{
-		path: AuthRouteEnum.VERIFIED_ACCOUNT,
-		component: VerifiedAccountPageComponent,
+		path: AuthRouteEnum.VERIFICATION_ACCOUNT,
+		component: VerificationAccountPageComponent,
 	},
 	{
 		path: AuthRouteEnum.SIGNUP + '/' + PrimaryRouteEnum.PROFILE,
