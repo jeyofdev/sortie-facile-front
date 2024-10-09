@@ -62,9 +62,9 @@ export class SignupPageComponent extends AuthPageAbstract<FormSignup> implements
 		} else {
 			if (this.mainForm.get('passwordForm')?.hasError('matchPassword')) {
 				this.formError =
-					'Les champs de mot de passe ne correspondent pas. Veuillez vous assurer que le mot de passe et sa confirmation sont identiques.';
+					'Password fields not matching. Please make sure the password and its confirmation are the same.';
 			} else {
-				this.formError = 'Le formulaire contient des erreurs. Veuillez vérifier vos informations.';
+				this.formError = 'The form contains errors. Please verify your information.';
 			}
 		}
 	}

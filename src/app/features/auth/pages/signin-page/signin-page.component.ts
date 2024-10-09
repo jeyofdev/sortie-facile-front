@@ -20,6 +20,7 @@ export class SigninPageComponent extends AuthPageAbstract<FormAuthBase> implemen
 	private _signinSubscription: Subscription = new Subscription();
 
 	regexEmail!: RegExp;
+	forgotPasswordLink!: string;
 
 	emailCtrl!: FormControl<string>;
 	passwordCtrl!: FormControl<string>;
@@ -34,6 +35,7 @@ export class SigninPageComponent extends AuthPageAbstract<FormAuthBase> implemen
 
 	override ngOnInit(): void {
 		this.redirectLink = '/' + PrimaryRouteEnum.AUTH + '/' + AuthRouteEnum.SIGNUP;
+		this.forgotPasswordLink = '/' + PrimaryRouteEnum.AUTH + '/' + AuthRouteEnum.FORGOT_PASSWORD;
 		this.validationMessages = validationSigninMessages;
 
 		super.ngOnInit();
