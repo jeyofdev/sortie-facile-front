@@ -1,3 +1,3 @@
-export class ResponseAuthSigninBase {
+export class ResponseAuthBase {
 	constructor(public message: string) {}
 }

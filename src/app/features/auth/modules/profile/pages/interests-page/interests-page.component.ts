@@ -47,7 +47,7 @@ export class InterestsPageComponent extends AuthPageGlobalAbstract<never> implem
 		this.error = '';
 
 		if (this.selectedInterestIds.length > 0) {
-			this._authService.signUpWithEmailAndPassword$(
+			this._authService.signUpWithEmailAndPassword(
 				this._authStepService.getStepData('step1'),
 				new NewUserProfileDatas(
 					this._authStepService.getStepData('step3').regionId,
