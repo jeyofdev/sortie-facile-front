@@ -9,9 +9,17 @@ import { ComponentsModule } from '@features/auth/modules/components.module';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { CheckEmailComponent } from './pages/check-email/check-email.component';
+import { VerifiedAccountPageComponent } from './pages/verified-account-page/verified-account-page.component';
 
 @NgModule({
-	declarations: [SigninPageComponent, SignupPageComponent, ForgotPasswordComponent, ResetPasswordComponent, CheckEmailComponent],
+	declarations: [
+		SigninPageComponent,
+		SignupPageComponent,
+		ForgotPasswordComponent,
+		ResetPasswordComponent,
+		CheckEmailComponent,
+		VerifiedAccountPageComponent,
+	],
 	imports: [CommonModule, AuthRoutingModule, FormsModule, ReactiveFormsModule, SharedModule, ComponentsModule],
 })
 export class AuthModule {}
