@@ -7,6 +7,7 @@ import { AuthProfileEnum } from '@shared/enums/routes.enum';
 import { StepAuthProfilePersonnalInfo } from '@shared/models/auth/steps/step-auth-profile-personal-infos.model';
 import { FormName } from '@shared/types/form/form-name.type';
 import { FormPersonalInfo } from '@shared/types/form/form-personal-info.type';
+import { RegexHelper } from '@utils/regex.helper';
 import { validationAuthProfileMessages } from '@shared/validations/messages/auth-profile-message.error';
 
 @Component({
@@ -15,8 +16,6 @@ import { validationAuthProfileMessages } from '@shared/validations/messages/auth
 	styleUrl: './personal-page.component.scss',
 })
 export class PersonalPageComponent extends AuthProfilePage<FormPersonalInfo> implements OnInit {
-	regexDate!: RegExp;
-
 	nameForm!: FormGroup<FormName>;
 
 	firstnameCtrl!: FormControl<string>;
@@ -56,8 +55,6 @@ export class PersonalPageComponent extends AuthProfilePage<FormPersonalInfo> imp
 	}
 
 	protected override initFormControls(): void {
-		this.regexDate = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(19|20)\d{2}$/;
-
 		this.firstnameCtrl = this._formBuilder.control('', {
 			validators: [Validators.required, Validators.minLength(2), Validators.maxLength(30)],
 			nonNullable: true,
@@ -67,7 +64,7 @@ export class PersonalPageComponent extends AuthProfilePage<FormPersonalInfo> imp
 			nonNullable: true,
 		});
 		this.dateOfBirthCtrl = this._formBuilder.control('', {
-			validators: [Validators.required, Validators.pattern(this.regexDate)],
+			validators: [Validators.required, Validators.pattern(RegexHelper.dateOfBirth)],
 			nonNullable: true,
 		});
 

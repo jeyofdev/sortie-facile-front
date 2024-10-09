@@ -6,6 +6,7 @@ import { AuthRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
 import { ResponseAuthBase } from '@shared/models/auth/response-auth-signin-base.model';
 import { ResponseAuthError } from '@shared/models/auth/response-auth-signin-error.model';
 import { FormForgotPassword } from '@shared/types/form/form-forgot-password.type';
+import { RegexHelper } from '@utils/regex.helper';
 import { validationForgotPasswordMessages } from '@shared/validations/messages/forgot-password-message.error';
 import { tap } from 'rxjs';
 
@@ -15,7 +16,6 @@ import { tap } from 'rxjs';
 	styleUrl: './forgot-password.component.scss',
 })
 export class ForgotPasswordComponent extends AuthPageAbstract<FormForgotPassword> implements OnInit {
-	regexEmail!: RegExp;
 	formSuccess!: string;
 
 	emailCtrl!: FormControl<string>;
@@ -63,10 +63,8 @@ export class ForgotPasswordComponent extends AuthPageAbstract<FormForgotPassword
 	}
 
 	protected override initFormControls(): void {
-		this.regexEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
-
 		this.emailCtrl = this._formBuilder.control<string>('', {
-			validators: [Validators.required, Validators.pattern(this.regexEmail)],
+			validators: [Validators.required, Validators.pattern(RegexHelper.email)],
 			nonNullable: true,
 		});
 	}

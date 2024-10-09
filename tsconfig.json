@@ -26,6 +26,7 @@
 			"@shared/*": ["app/shared/*"],
 			"@enums/*": ["app/shared/enums/*"],
 			"@components/*": ["app/shared/components/*"],
+			"@utils/*": ["app/shared/utils/*"],
 			"@root/*": ["app/*"],
 			"@features/*": ["app/features/*"],
 			"@landing/*": ["app/features/landing/*"],

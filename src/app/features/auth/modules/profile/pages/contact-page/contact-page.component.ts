@@ -7,6 +7,7 @@ import { AuthProfileEnum } from '@shared/enums/routes.enum';
 import { StepAuthProfileContact } from '@shared/models/auth/steps/step-auth-profile-contact.model';
 import { FormContact } from '@shared/types/form/form-contact.type';
 import { FormSocial } from '@shared/types/form/form-social.type';
+import { RegexHelper } from '@utils/regex.helper';
 import { validationAuthProfileMessages } from '@shared/validations/messages/auth-profile-message.error';
 
 @Component({
@@ -60,10 +61,8 @@ export class ContactPageComponent extends AuthProfilePage<FormContact> implement
 	}
 
 	protected override initFormControls(): void {
-		const regexPhone = /^(0[1-9])(-\d{2}){4}$/;
-
 		this.phoneCtrl = this._formBuilder.control('', {
-			validators: [Validators.required, Validators.pattern(regexPhone)],
+			validators: [Validators.required, Validators.pattern(RegexHelper.phone)],
 			nonNullable: true,
 		});
 		this.twitterCtrl = this._formBuilder.control('', {

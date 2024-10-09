@@ -8,6 +8,7 @@ import { AuthUserCredential } from '@shared/models/auth/auth-user-credential.mod
 import { ResponseAuthBase } from '@shared/models/auth/response-auth-signin-base.model';
 import { ResponseAuthError } from '@shared/models/auth/response-auth-signin-error.model';
 import { FormAuthBase } from '@shared/types/form/form-auth-base.type';
+import { RegexHelper } from '@utils/regex.helper';
 import { validationSigninMessages } from '@shared/validations/messages/signin-message.error';
 import { Subscription, tap } from 'rxjs';
 
@@ -19,7 +20,6 @@ import { Subscription, tap } from 'rxjs';
 export class SigninPageComponent extends AuthPageAbstract<FormAuthBase> implements OnInit, OnDestroy {
 	private _signinSubscription: Subscription = new Subscription();
 
-	regexEmail!: RegExp;
 	forgotPasswordLink!: string;
 
 	emailCtrl!: FormControl<string>;
@@ -71,10 +71,8 @@ export class SigninPageComponent extends AuthPageAbstract<FormAuthBase> implemen
 	}
 
 	protected override initFormControls(): void {
-		this.regexEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
-
 		this.emailCtrl = this._formBuilder.control<string>('', {
-			validators: [Validators.required, Validators.pattern(this.regexEmail)],
+			validators: [Validators.required, Validators.pattern(RegexHelper.email)],
 			nonNullable: true,
 		});
 		this.passwordCtrl = this._formBuilder.control('', {
