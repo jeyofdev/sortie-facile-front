@@ -5,12 +5,7 @@
 	</ng-container>
 
 	<ng-container primary>
-		<app-alert-error
-			*ngIf="formError"
-			[content]="formError"
-			severity="error"
-			icon="exclamation-circle"
-		></app-alert-error>
+		<app-alert-form *ngIf="formError" [content]="formError" severity="error" icon="exclamation-circle"></app-alert-form>
 
 		<form #signupForm="ngForm" [formGroup]="mainForm" (ngSubmit)="onSubmit()">
 			<div class="form-control">

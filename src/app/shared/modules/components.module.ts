@@ -11,7 +11,7 @@ import { ErrorFieldComponent } from '@shared/components/form/error-field/error-f
 import { CommonModule } from '@angular/common';
 import { TextFieldComponent } from '@shared/components/form/text-field/text-field.component';
 import { PasswordFieldComponent } from '@shared/components/form/password-field/password-field.component';
-import { AlertErrorComponent } from '@shared/components/form/alert-error/alert-error.component';
+import { AlertErrorComponent } from '@shared/components/form/alert-form/alert-form.component';
 import { MaskFieldComponent } from '@shared/components/form/mask-field/mask-field.component';
 import { NumberFieldComponent } from '@shared/components/form/number-field/number-field.component';
 import { SelectFieldComponent } from '@shared/components/form/select-field/select-field.component';

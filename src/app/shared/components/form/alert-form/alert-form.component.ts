@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-	selector: 'app-alert-error',
-	templateUrl: './alert-error.component.html',
-	styleUrl: './alert-error.component.scss',
+	selector: 'app-alert-form',
+	templateUrl: './alert-form.component.html',
+	styleUrl: './alert-form.component.scss',
 })
 export class AlertErrorComponent implements OnInit {
 	@Input({ required: true }) severity!: 'info' | 'warn' | 'error' | 'success';

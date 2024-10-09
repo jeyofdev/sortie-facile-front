@@ -5,8 +5,8 @@ import { LocalStorageService } from '@services/local-storage.service';
 import { AuthPageAbstract } from '@shared/abstract/auth-page.abstract';
 import { AuthRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
 import { AuthUserCredential } from '@shared/models/auth/auth-user-credential.model';
-import { ResponseAuthSigninBase } from '@shared/models/auth/response-auth-signin-base.model';
-import { ResponseAuthSigninError } from '@shared/models/auth/response-auth-signin-error.model';
+import { ResponseAuthBase } from '@shared/models/auth/response-auth-signin-base.model';
+import { ResponseAuthError } from '@shared/models/auth/response-auth-signin-error.model';
 import { FormAuthBase } from '@shared/types/form/form-auth-base.type';
 import { validationSigninMessages } from '@shared/validations/messages/signin-message.error';
 import { Subscription, tap } from 'rxjs';
@@ -51,8 +51,8 @@ export class SigninPageComponent extends AuthPageAbstract<FormAuthBase> implemen
 					new AuthUserCredential(this.mainForm.value.email as string, this.mainForm.value.password as string),
 				)
 				.pipe(
-					tap((res: ResponseAuthSigninBase) => {
-						if (res instanceof ResponseAuthSigninError) {
+					tap((res: ResponseAuthBase) => {
+						if (res instanceof ResponseAuthError) {
 							this.formError = res.message;
 						}
 					}),

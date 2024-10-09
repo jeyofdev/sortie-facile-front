@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, of, switchMap, tap } from 'rxjs';
 import { AuthUserCredential } from '@shared/models/auth/auth-user-credential.model';
-import { HttpClient } from '@angular/common/http';
-import { ResponseAuthSigninBase } from '@shared/models/auth/response-auth-signin-base.model';
-import { ResponseAuthSigninError } from '@shared/models/auth/response-auth-signin-error.model';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ResponseAuthBase } from '@shared/models/auth/response-auth-signin-base.model';
+import { ResponseAuthError } from '@shared/models/auth/response-auth-signin-error.model';
 import { AuthTokenService } from './auth-token.service';
 import { AuthTokenResponse } from '@shared/models/auth/auth-token-response.model';
 import { AuthUserRegister } from '@shared/models/auth/auth-user-register.model';
@@ -24,30 +24,63 @@ export class AuthService {
 		private _profileService: ProfileService,
 	) {}
 
-	signInWithEmailAndPassword$(userCredential: AuthUserCredential): Observable<ResponseAuthSigninBase> {
+	signInWithEmailAndPassword$(userCredential: AuthUserCredential): Observable<ResponseAuthBase> {
 		this._authTokenService.resetAuthToken();
 
 		return this._httpClient.post<AuthTokenResponse>(`${this._BASE_URL}/login`, userCredential).pipe(
 			map((authToken: AuthTokenResponse) => {
 				this._authTokenService.updateAuthToken(authToken);
-				return new ResponseAuthSigninBase('Authentication successful');
+				return new ResponseAuthBase('Authentication successful');
 			}),
 			catchError(err => {
 				const errorMessage = err.error?.message || 'An error occurred while connecting. Please try again.';
-				return of(new ResponseAuthSigninError(true, errorMessage));
+				return of(new ResponseAuthError(true, errorMessage));
 			}),
 		);
 	}
 
-	signUpWithEmailAndPassword$(userRegisterDatas: AuthUserRegister, newUserprofileDatas: NewUserProfileDatas): void {
+	signUpWithEmailAndPassword(userRegisterDatas: AuthUserRegister, newUserprofileDatas: NewUserProfileDatas): void {
 		this._httpClient
 			.post<ResponseAuthSignup>(`${this._BASE_URL}/register`, userRegisterDatas)
 			.pipe(
-				tap(() => console.log('tap')),
 				switchMap((registerUserResponse: ResponseAuthSignup) => {
 					return this._profileService.add(registerUserResponse.userId, newUserprofileDatas);
 				}),
 			)
 			.subscribe();
+	}
+
+	requestForgotPassword(email: string): Observable<ResponseAuthBase> {
+		const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+
+		const body = new URLSearchParams();
+		body.set('email', email);
+
+		return this._httpClient
+			.post<ResponseAuthBase>(`${this._BASE_URL}/forgot-password`, body.toString(), { headers })
+			.pipe(
+				catchError(err => {
+					const errorMessage = err.error?.message || 'An error occurred while connecting. Please try again.';
+					return of(new ResponseAuthError(true, errorMessage));
+				}),
+			);
+	}
+
+	resetPassword(resetToken: string, newPassword: string): Observable<ResponseAuthBase> {
+		const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+
+		const body = new URLSearchParams();
+		body.set('newPassword', newPassword);
+
+		return this._httpClient
+			.post<ResponseAuthBase>(`${this._BASE_URL}/update-password?resetToken=${resetToken}`, body.toString(), {
+				headers,
+			})
+			.pipe(
+				catchError(err => {
+					const errorMessage = err.error?.message || 'An error occurred while connecting. Please try again.';
+					return of(new ResponseAuthError(true, errorMessage));
+				}),
+			);
 	}
 }
