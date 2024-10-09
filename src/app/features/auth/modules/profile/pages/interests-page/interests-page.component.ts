@@ -11,7 +11,7 @@ import { NewProfileData } from '@shared/models/profile/new-profile-data.model';
 import { NewUserProfileDatas } from '@shared/models/profile/profile-datas.model';
 import { ValidationMessage } from '@shared/types/validation-message.type';
 import { validationAuthProfileMessages } from '@shared/validations/messages/auth-profile-message.error';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 @Component({
 	selector: 'app-interests-page',
@@ -47,29 +47,32 @@ export class InterestsPageComponent extends AuthPageGlobalAbstract<never> implem
 		this.error = '';
 
 		if (this.selectedInterestIds.length > 0) {
-			this._authService.signUpWithEmailAndPassword(
-				this._authStepService.getStepData('step1'),
-				new NewUserProfileDatas(
-					this._authStepService.getStepData('step3').regionId,
-					this._authStepService.getStepData('step3').departmentId,
-					this._authStepService.getStepData('step3').cityId,
-					new NewProfileData(
-						this._authStepService.getStepData('step2').firstName,
-						this._authStepService.getStepData('step2').lastName,
-						new Date(this._authStepService.getStepData('step2').dateOfBirth),
-						this._authStepService.getStepData('step3').streetNumber,
-						this._authStepService.getStepData('step3').street,
-						this._authStepService.getStepData('step3').zipCode,
-						this._authStepService.getStepData('step4').phone.split('-').join(''),
-						this._authStepService.getStepData('step4').twitter,
-						this._authStepService.getStepData('step4').instagram,
-						this._authStepService.getStepData('step4').facebook,
-						this._authStepService.getStepData('step5').description,
-						null,
-						this._authStepService.getStepData('step6').interestsIds,
+			this._authService
+				.signUpWithEmailAndPassword(
+					this._authStepService.getStepData('step1'),
+					new NewUserProfileDatas(
+						this._authStepService.getStepData('step3').regionId,
+						this._authStepService.getStepData('step3').departmentId,
+						this._authStepService.getStepData('step3').cityId,
+						new NewProfileData(
+							this._authStepService.getStepData('step2').firstName,
+							this._authStepService.getStepData('step2').lastName,
+							new Date(this._authStepService.getStepData('step2').dateOfBirth),
+							this._authStepService.getStepData('step3').streetNumber,
+							this._authStepService.getStepData('step3').street,
+							this._authStepService.getStepData('step3').zipCode,
+							this._authStepService.getStepData('step4').phone.split('-').join(''),
+							this._authStepService.getStepData('step4').twitter,
+							this._authStepService.getStepData('step4').instagram,
+							this._authStepService.getStepData('step4').facebook,
+							this._authStepService.getStepData('step5').description,
+							null,
+							this._authStepService.getStepData('step6').interestsIds,
+						),
 					),
-				),
-			);
+				)
+				.pipe(tap(() => this._router.navigateByUrl('/' + PrimaryRouteEnum.AUTH + '/' + AuthRouteEnum.CHECK_EMAIL)))
+				.subscribe();
 		} else {
 			this.error = (this.getValidationMessages('interests') as ValidationMessage)['required'];
 		}

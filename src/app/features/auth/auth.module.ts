@@ -6,10 +6,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '@shared/shared.module';
 import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 import { ComponentsModule } from '@features/auth/modules/components.module';
-import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
-import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
-import { CheckEmailComponent } from './pages/check-email/check-email.component';
-import { VerifiedAccountPageComponent } from './pages/verified-account-page/verified-account-page.component';
+import { ForgotPasswordComponent } from '@features/auth/pages/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from '@features/auth/pages/reset-password/reset-password.component';
+import { CheckEmailComponent } from '@features/auth/pages/check-email/check-email.component';
+import { VerificationAccountPageComponent } from '@features/auth/pages/verification-account-page/verification-account-page.component';
 
 @NgModule({
 	declarations: [
@@ -18,7 +18,7 @@ import { VerifiedAccountPageComponent } from './pages/verified-account-page/veri
 		ForgotPasswordComponent,
 		ResetPasswordComponent,
 		CheckEmailComponent,
-		VerifiedAccountPageComponent,
+		VerificationAccountPageComponent,
 	],
 	imports: [CommonModule, AuthRoutingModule, FormsModule, ReactiveFormsModule, SharedModule, ComponentsModule],
 })
