@@ -15,5 +15,7 @@ export class CheckEmailComponent implements OnInit {
 		this.resendLink = '/' + PrimaryRouteEnum.AUTH + '/' + AuthRouteEnum.CHECK_EMAIL;
 	}
 
-	onSubmit(): void {}
+	onClick(): void {
+		console.log('ok');
+	}
 }

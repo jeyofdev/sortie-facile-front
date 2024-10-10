@@ -11,6 +11,7 @@ import { Region } from '@shared/models/address/region.model';
 import { StepAuthProfileAddress } from '@shared/models/auth/steps/step-auth-profile-address.model';
 import { FormAddress } from '@shared/types/form/form-address.type';
 import { FormStreet } from '@shared/types/form/form-street.type';
+import { RegexHelper } from '@utils/regex.helper';
 import { validationAuthProfileMessages } from '@shared/validations/messages/auth-profile-message.error';
 import { Observable, of } from 'rxjs';
 
@@ -105,10 +106,8 @@ export class AddressPageComponent extends AuthProfilePage<FormAddress> implement
 	}
 
 	protected override initFormControls(): void {
-		const regexStreetNumber = /^\d{1,4}$/;
-
 		this.streetNumberCtrl = this._formBuilder.control('', {
-			validators: [Validators.required, Validators.pattern(regexStreetNumber)],
+			validators: [Validators.required, Validators.pattern(RegexHelper.streetNumber)],
 			nonNullable: true,
 		});
 		this.streetCtrl = this._formBuilder.control('', {

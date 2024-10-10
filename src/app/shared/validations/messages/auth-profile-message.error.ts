@@ -51,6 +51,7 @@ export const validationAuthProfileMessages: ValidationMessages[] = [
 	}),
 	new ValidationMessages('description', {
 		required: 'The description is required for registration.',
+		minlength: 'The description must be at least 20 characters long.',
 	}),
 	new ValidationMessages('interests', {
 		required: 'You must choose at least one area of interest..',

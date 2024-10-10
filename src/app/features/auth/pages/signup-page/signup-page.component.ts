@@ -7,6 +7,7 @@ import { AuthProfileEnum, AuthRouteEnum, PrimaryRouteEnum } from '@shared/enums/
 import { StepAuthRegister } from '@shared/models/auth/steps/step-auth-register.model';
 import { FormPassword } from '@shared/types/form/form-password.type';
 import { FormSignup } from '@shared/types/form/form-signup.type';
+import { RegexHelper } from '@utils/regex.helper';
 import { validationSignupMessages } from '@shared/validations/messages/signup-message.error';
 import { passwordEqualValidator } from '@validators/password-equal.validator';
 
@@ -16,8 +17,6 @@ import { passwordEqualValidator } from '@validators/password-equal.validator';
 	styleUrl: './signup-page.component.scss',
 })
 export class SignupPageComponent extends AuthPageAbstract<FormSignup> implements OnInit {
-	regexEmail!: RegExp;
-
 	passwordForm!: FormGroup<FormPassword>;
 
 	emailCtrl!: FormControl<string>;
@@ -77,10 +76,8 @@ export class SignupPageComponent extends AuthPageAbstract<FormSignup> implements
 	}
 
 	protected override initFormControls(): void {
-		this.regexEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
-
 		this.emailCtrl = this._formBuilder.control('', {
-			validators: [Validators.required, Validators.pattern(this.regexEmail)],
+			validators: [Validators.required, Validators.pattern(RegexHelper.email)],
 			nonNullable: true,
 		});
 		this.passwordCtrl = this._formBuilder.control('', {
