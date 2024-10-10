@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '@services/auth.service';
 import { AuthRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
-import { ResponseAuthBase } from '@shared/models/auth/response-auth-signin-base.model';
-import { ResponseAuthError } from '@shared/models/auth/response-auth-signin-error.model';
+import { ResponseAuthBase } from '@shared/models/auth/response-auth-base.model';
+import { ResponseAuthError } from '@shared/models/auth/response-auth-error.model';
 import { tap } from 'rxjs';
 
 @Component({
