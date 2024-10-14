@@ -3,6 +3,7 @@ export enum PrimaryRouteEnum {
 	AUTH = 'auth',
 	PROFILE = 'profile',
 	NOT_FOUND = '**',
+	ACCOUNT = 'account',
 }
 
 export enum AuthRouteEnum {
@@ -20,4 +21,8 @@ export enum AuthProfileEnum {
 	CONTACT = 'contact',
 	DESCRIPTION = 'description',
 	INTERESTS = 'interests',
+}
+
+export enum AccountEnum {
+	HOME = '',
 }

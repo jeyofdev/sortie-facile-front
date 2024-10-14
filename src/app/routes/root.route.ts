@@ -14,6 +14,10 @@ export const routes: Routes = [
 		loadChildren: () => import('@auth/auth.module').then(m => m.AuthModule),
 	},
 	{
+		path: PrimaryRouteEnum.ACCOUNT,
+		loadChildren: () => import('@features/account/account.module').then(m => m.AccountModule),
+	},
+	{
 		path: PrimaryRouteEnum.NOT_FOUND,
 		pathMatch: 'full',
 		component: NotFoundPageComponent,

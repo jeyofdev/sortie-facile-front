@@ -3,7 +3,7 @@ import { LocalStorageService } from '@services/local-storage.service';
 import { AuthTokenInfoResponse } from '@shared/models/auth/auth-token-infos-response.model';
 import { AuthTokenResponse } from '@shared/models/auth/auth-token-response.model';
 import { jwtDecode } from 'jwt-decode';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
 	providedIn: 'root',
@@ -30,6 +30,14 @@ export class AuthTokenService {
 		} else {
 			return null;
 		}
+	}
+
+	/**
+	 * expose _tokenDetailsSubject$ as an Observable,
+	 * so that every component/service in it .subscribe() is notified if there is a new token.
+	 */
+	getTokenDetailsSubject$(): Observable<any> {
+		return this._tokenDetailsSubject$.asObservable();
 	}
 
 	/**
