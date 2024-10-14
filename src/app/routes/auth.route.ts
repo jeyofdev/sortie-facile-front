@@ -6,31 +6,38 @@ import { ForgotPasswordComponent } from '@root/features/auth/pages/forgot-passwo
 import { ResetPasswordComponent } from '@root/features/auth/pages/reset-password/reset-password.component';
 import { CheckEmailComponent } from '@root/features/auth/pages/check-email/check-email.component';
 import { VerificationAccountPageComponent } from '@root/features/auth/pages/verification-account-page/verification-account-page.component';
+import { authGuard } from '@guards/auth.guard';
 
 export const routes: Routes = [
 	{
 		path: AuthRouteEnum.SIGNIN,
 		component: SigninPageComponent,
+		canActivate: [authGuard],
 	},
 	{
 		path: AuthRouteEnum.SIGNUP,
 		component: SignupPageComponent,
+		canActivate: [authGuard],
 	},
 	{
 		path: AuthRouteEnum.FORGOT_PASSWORD,
 		component: ForgotPasswordComponent,
+		canActivate: [authGuard],
 	},
 	{
 		path: AuthRouteEnum.RESET_PASSWORD,
 		component: ResetPasswordComponent,
+		canActivate: [authGuard],
 	},
 	{
 		path: AuthRouteEnum.CHECK_EMAIL,
 		component: CheckEmailComponent,
+		canActivate: [authGuard],
 	},
 	{
 		path: AuthRouteEnum.VERIFICATION_ACCOUNT,
 		component: VerificationAccountPageComponent,
+		canActivate: [authGuard],
 	},
 	{
 		path: AuthRouteEnum.SIGNUP + '/' + PrimaryRouteEnum.PROFILE,

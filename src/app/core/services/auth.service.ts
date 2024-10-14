@@ -14,6 +14,8 @@ import { RouteAPI } from '@shared/enums/route-api.enum';
 import { ResponseAddProfile } from '@shared/models/profile/response-add-profile.model';
 import { AuthUtils } from '@shared/utils/auth-utils';
 import { LocalStorageService } from './local-storage.service';
+import { Router } from '@angular/router';
+import { AuthRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
 
 @Injectable({
 	providedIn: 'root',
@@ -26,6 +28,7 @@ export class AuthService extends AuthUtils {
 		private _httpClient: HttpClient,
 		private _authTokenService: AuthTokenService,
 		private _profileService: ProfileService,
+		private _router: Router,
 	) {
 		super(localStorageService);
 	}
@@ -59,6 +62,7 @@ export class AuthService extends AuthUtils {
 	logout(): void {
 		this._authTokenService.resetAuthToken();
 		this.notifyLoggedInStatus(false);
+		this._router.navigateByUrl(PrimaryRouteEnum.AUTH + '/' + AuthRouteEnum.SIGNIN);
 	}
 
 	requestForgotPassword(email: string): Observable<ResponseAuthBase> {
