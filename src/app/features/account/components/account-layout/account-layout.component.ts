@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AccountNavigationService } from '@services/account-navigation.service';
 import { MenuItem } from 'primeng/api';
 
 @Component({
@@ -9,40 +11,26 @@ import { MenuItem } from 'primeng/api';
 export class AccountLayoutComponent implements OnInit {
 	items!: MenuItem[];
 
-	activeItem: any = null;
+	activeItem!: MenuItem;
+
+	constructor(
+		private _router: Router,
+		private _accountNavigationService: AccountNavigationService,
+	) {}
 
 	ngOnInit(): void {
-		this.items = [
-			{
-				label: 'Home',
-				icon: 'pi pi-home',
-			},
-			{
-				label: 'Activities',
-				icon: 'pi pi-search',
-			},
-			{
-				label: 'Favorites',
-				icon: 'pi pi-search',
-			},
-			{
-				label: 'Messages',
-				icon: 'pi pi-search',
-			},
-			{
-				label: 'Settings',
-				icon: 'pi pi-search',
-			},
-			{
-				label: 'Logout',
-				icon: 'pi pi-search',
-			},
-		];
-
-		this.activeItem = this.items[0];
+		this.items = this._accountNavigationService.getPrimaryNavigation();
+		this.setActiveItemBasedOnUrl();
 	}
 
 	selectItem(item: any) {
 		this.activeItem = item;
+	}
+
+	setActiveItemBasedOnUrl() {
+		const currentUrl = this._router.url;
+		console.log(currentUrl);
+
+		this.activeItem = this.items.find(item => item.routerLink.includes(currentUrl)) || this.items[0];
 	}
 }

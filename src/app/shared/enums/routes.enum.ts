@@ -24,5 +24,9 @@ export enum AuthProfileEnum {
 }
 
 export enum AccountEnum {
-	HOME = '',
+	HOME = 'home',
+	FAVORITES = 'favorites',
+	ACTIVITIES = 'activities',
+	MESSAGES = 'messages',
+	SETTINGS = 'settings',
 }

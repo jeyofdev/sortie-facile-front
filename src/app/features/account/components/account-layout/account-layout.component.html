@@ -21,8 +21,8 @@
 
 			<p-menu [model]="items">
 				<ng-template let-item pTemplate="item">
-					<div [ngClass]="{ highlight: activeItem === item }" (click)="selectItem(item)">
-						<a href="#">
+					<div [ngClass]="{ highlight: activeItem === item }">
+						<a [routerLink]="item.routerLink" (click)="activeItem = item">
 							<i [class]="item.icon"></i>
 							<span>{{ item.label }}</span>
 						</a>

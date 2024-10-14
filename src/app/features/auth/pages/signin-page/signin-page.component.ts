@@ -57,7 +57,7 @@ export class SigninPageComponent extends AuthPageAbstract<FormAuthBase> implemen
 						if (res instanceof ResponseAuthError) {
 							this.formError = res.message;
 						} else {
-							this._router.navigateByUrl(PrimaryRouteEnum.ACCOUNT);
+							this._router.navigateByUrl('/' + PrimaryRouteEnum.ACCOUNT + '/' + AccountEnum.HOME);
 						}
 					}),
 				)
