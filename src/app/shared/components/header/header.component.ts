@@ -3,6 +3,7 @@ import { DarkModeService } from '@services/dark-mode.service';
 import { HeaderService } from '@services/header.service';
 import { Position } from '@shared/types/position.type';
 import { MenuItem } from 'primeng/api';
+import { Observable } from 'rxjs';
 
 @Component({
 	selector: 'app-header',
@@ -12,7 +13,7 @@ import { MenuItem } from 'primeng/api';
 export class HeaderComponent implements OnInit {
 	visible: boolean = false;
 	position: Position = 'right';
-	items: MenuItem[] | undefined;
+	items$!: Observable<any>;
 
 	constructor(
 		private darkModeService: DarkModeService,
@@ -21,7 +22,7 @@ export class HeaderComponent implements OnInit {
 
 	ngOnInit() {
 		this.darkModeService.initDarkMode();
-		this.items = this.headerService.getMiddleHeaderNavItems();
+		this.items$ = this.headerService.items$;
 	}
 
 	toggleDarkMode() {

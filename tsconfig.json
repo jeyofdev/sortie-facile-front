@@ -23,6 +23,7 @@
 		"paths": {
 			"@routes/*": ["app/routes/*"],
 			"@services/*": ["app/core/services/*"],
+			"@guards/*": ["app/core/guards/*"],
 			"@shared/*": ["app/shared/*"],
 			"@enums/*": ["app/shared/enums/*"],
 			"@components/*": ["app/shared/components/*"],

@@ -19,7 +19,7 @@
 			</div>
 
 			<nav class="nav-container">
-				<p-menu #menuAuth [model]="items" [popup]="true" styleClass="menu-account" />
+				<p-menu #menuAuth [model]="items$ | async" [popup]="true" styleClass="menu-account" />
 
 				<app-button-header-icon
 					icon="user"

@@ -31,4 +31,12 @@ export class LocalStorageService {
 	clearAuthToken(): void {
 		localStorage.removeItem('authToken');
 	}
+
+	checkIfKeyExistInLocalStorage(key: string): boolean {
+		if (localStorage.getItem(key)) {
+			return true;
+		}
+
+		return false;
+	}
 }
