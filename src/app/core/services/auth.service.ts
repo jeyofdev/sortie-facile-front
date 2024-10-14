@@ -12,18 +12,23 @@ import { NewUserProfileDatas } from '@shared/models/profile/profile-datas.model'
 import { ResponseAuthSignup } from '@shared/models/auth/response-auth-signup.model';
 import { RouteAPI } from '@shared/enums/route-api.enum';
 import { ResponseAddProfile } from '@shared/models/profile/response-add-profile.model';
+import { AuthUtils } from '@shared/utils/auth-utils';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
 	providedIn: 'root',
 })
-export class AuthService {
+export class AuthService extends AuthUtils {
 	private readonly _BASE_URL = RouteAPI.AUTH;
 
 	constructor(
+		protected override localStorageService: LocalStorageService,
 		private _httpClient: HttpClient,
 		private _authTokenService: AuthTokenService,
 		private _profileService: ProfileService,
-	) {}
+	) {
+		super(localStorageService);
+	}
 
 	signInWithEmailAndPassword$(userCredential: AuthUserCredential): Observable<ResponseAuthBase> {
 		this._authTokenService.resetAuthToken();
@@ -31,6 +36,8 @@ export class AuthService {
 		return this._httpClient.post<AuthTokenResponse>(`${this._BASE_URL}/login`, userCredential).pipe(
 			map((authToken: AuthTokenResponse) => {
 				this._authTokenService.updateAuthToken(authToken);
+				this.notifyLoggedInStatus(true);
+
 				return new ResponseAuthBase('Authentication successful');
 			}),
 			catchError(err => this.handleError(err)),
@@ -47,6 +54,11 @@ export class AuthService {
 			}),
 			catchError(err => this.handleError(err)),
 		);
+	}
+
+	logout(): void {
+		this._authTokenService.resetAuthToken();
+		this.notifyLoggedInStatus(false);
 	}
 
 	requestForgotPassword(email: string): Observable<ResponseAuthBase> {

@@ -12,9 +12,8 @@ export class AuthTokenService {
 	/**
 	 * save the decoded Token present in Local storage (if there is one).
 	 */
-	private readonly _tokenDetailsSubject$: BehaviorSubject<any> = new BehaviorSubject<any>(
-		this.getTokenFromLocalStorageAndDecode(),
-	);
+	private readonly _tokenDetailsSubject$: BehaviorSubject<AuthTokenInfoResponse | null> =
+		new BehaviorSubject<AuthTokenInfoResponse | null>(this.getTokenFromLocalStorageAndDecode());
 
 	constructor(private _localStorageService: LocalStorageService) {}
 
@@ -22,7 +21,7 @@ export class AuthTokenService {
 	 * get the token stored in localStorage
 	 * and return the decoded value of the token (the body of the token)
 	 */
-	getTokenFromLocalStorageAndDecode(): any {
+	getTokenFromLocalStorageAndDecode(): AuthTokenInfoResponse | null {
 		const authToken = this._localStorageService.getAuthToken();
 
 		if (authToken) {
@@ -53,7 +52,8 @@ export class AuthTokenService {
 	 * clear the decoded Token
 	 */
 	resetAuthToken(): void {
-		this._tokenDetailsSubject$.next({});
+		this._localStorageService.clearAuthToken();
+		this._tokenDetailsSubject$.next(null);
 	}
 
 	/**
