@@ -14,6 +14,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { CheckboxModule } from 'primeng/checkbox';
+import { DividerModule } from 'primeng/divider';
 
 @NgModule({
 	exports: [
@@ -32,6 +33,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 		AutoCompleteModule,
 		InputTextareaModule,
 		CheckboxModule,
+		DividerModule,
 	],
 })
 export class PrimengModule {}

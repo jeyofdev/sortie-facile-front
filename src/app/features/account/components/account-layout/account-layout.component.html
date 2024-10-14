@@ -1,0 +1,38 @@
+<app-account-container>
+	<div class="page-box">
+		<div class="left">
+			<div class="side-top">
+				<div class="user-infos">
+					<div class="user-avatar"></div>
+					<h2 class="user-name">john doe</h2>
+					<a class="user-email">johndoegmail.com</a>
+
+					<p-button
+						type="button"
+						label="Go to my profile page"
+						icon="pi pi-arrow-up-right"
+						iconPos="right"
+						styleClass="btn-cta"
+					/>
+				</div>
+			</div>
+
+			<p-divider type="solid" />
+
+			<p-menu [model]="items">
+				<ng-template let-item pTemplate="item">
+					<div [ngClass]="{ highlight: activeItem === item }">
+						<a [routerLink]="item.routerLink" (click)="activeItem = item">
+							<i [class]="item.icon"></i>
+							<span>{{ item.label }}</span>
+						</a>
+					</div>
+				</ng-template>
+			</p-menu>
+		</div>
+
+		<div class="right">
+			<ng-content></ng-content>
+		</div>
+	</div>
+</app-account-container>

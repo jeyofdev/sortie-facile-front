@@ -1,0 +1,32 @@
+.content-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	width: 100%;
+	max-width: 1920px;
+	min-height: calc(100vh - 220px);
+	padding: 1.5rem 1.25rem;
+	margin-left: auto;
+	margin-right: auto;
+
+	@media screen and (min-width: 768px) {
+		padding: 1.5rem 1.25rem;
+	}
+
+	@media screen and (min-width: 992px) {
+		padding: 1.5rem 1.5rem;
+	}
+
+	@media screen and (min-width: 1380px) {
+		padding: 1.75rem 1.75rem;
+	}
+
+	@media screen and (min-width: 1920px) {
+		padding: 1.75rem 2rem;
+	}
+
+	> * {
+		width: 100%;
+	}
+}

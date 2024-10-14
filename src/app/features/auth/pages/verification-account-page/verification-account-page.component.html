@@ -1,23 +1,26 @@
-<app-auth-layout imgSrc="assets/images/signin.jpg" imgAlt="signin" pageTitle="Verified account" pageIcon="check">
-	<ng-container subtitle>
-		<span
-			>Congratulations! Your account has been successfully verified. You’re all set to start using our platform !</span
-		>
-	</ng-container>
+<app-auth-container
+	><app-auth-layout imgSrc="assets/images/signin.jpg" imgAlt="signin" pageTitle="Verified account" pageIcon="check">
+		<ng-container subtitle>
+			<span
+				>Congratulations! Your account has been successfully verified. You’re all set to start using our platform
+				!</span
+			>
+		</ng-container>
 
-	<ng-container primary>
-		<app-alert-form *ngIf="error" [content]="error" severity="error" icon="exclamation-circle"></app-alert-form>
-		<app-alert-form *ngIf="success" [content]="success" severity="success" icon="check"></app-alert-form>
+		<ng-container primary>
+			<app-alert-form *ngIf="error" [content]="error" severity="error" icon="exclamation-circle"></app-alert-form>
+			<app-alert-form *ngIf="success" [content]="success" severity="success" icon="check"></app-alert-form>
 
-		<div class="content-box">
-			<p-button
-				type="submit"
-				label="Continue"
-				icon="pi pi-arrow-up-right"
-				iconPos="right"
-				styleClass="btn-cta"
-				(click)="onClick()"
-			/>
-		</div>
-	</ng-container>
-</app-auth-layout>
+			<div class="content-box">
+				<p-button
+					type="submit"
+					label="Continue"
+					icon="pi pi-arrow-up-right"
+					iconPos="right"
+					styleClass="btn-cta"
+					(click)="onClick()"
+				/>
+			</div>
+		</ng-container>
+	</app-auth-layout>
+</app-auth-container>
