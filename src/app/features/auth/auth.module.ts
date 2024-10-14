@@ -10,6 +10,7 @@ import { ForgotPasswordComponent } from '@features/auth/pages/forgot-password/fo
 import { ResetPasswordComponent } from '@features/auth/pages/reset-password/reset-password.component';
 import { CheckEmailComponent } from '@features/auth/pages/check-email/check-email.component';
 import { VerificationAccountPageComponent } from '@features/auth/pages/verification-account-page/verification-account-page.component';
+import { AuthContainerComponent } from './component/auth-container/auth-container.component';
 
 @NgModule({
 	declarations: [
@@ -19,6 +20,7 @@ import { VerificationAccountPageComponent } from '@features/auth/pages/verificat
 		ResetPasswordComponent,
 		CheckEmailComponent,
 		VerificationAccountPageComponent,
+  AuthContainerComponent,
 	],
 	imports: [CommonModule, AuthRoutingModule, FormsModule, ReactiveFormsModule, SharedModule, ComponentsModule],
 })

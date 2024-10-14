@@ -1,0 +1,160 @@
+:host ::ng-deep .page-box {
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-start;
+	gap: 1rem;
+	width: 100%;
+
+	.left {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+		flex: 0 18%;
+		padding: 2rem 1rem 1rem;
+
+		.user-infos {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+
+			.user-avatar {
+				width: 80px;
+				height: 80px;
+				background-color: rgb(231, 222, 247);
+				border-radius: 100%;
+				margin-bottom: 1rem;
+			}
+
+			.user-name {
+				text-transform: capitalize;
+				margin-bottom: 0.3rem;
+				color: var(--gray-800);
+			}
+
+			.user-email {
+				color: var(--gray-300);
+			}
+
+			.btn-cta {
+				width: auto;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				padding: 0.6rem 1.5rem;
+				border: none;
+				background: var(--primary-500);
+				color: var(--surface-0);
+				font-weight: 600;
+				text-transform: none;
+				transition: background-color 0.3s ease-in-out;
+				margin-top: 1rem;
+
+				&:hover {
+					background: var(--primary-700);
+				}
+
+				.p-button-label {
+					flex: inherit;
+					font-weight: normal;
+					font-size: 0.9rem;
+					line-height: 1;
+					margin-top: 0.1rem;
+				}
+
+				.p-button-icon {
+					font-size: 0.9rem;
+				}
+			}
+		}
+
+		p-menu {
+			.p-menu {
+				width: 100%;
+				background-color: transparent;
+				border: none;
+				padding: 0;
+
+				.p-submenu-header {
+					display: none;
+				}
+
+				ul {
+					display: flex;
+					flex-direction: column;
+					gap: 0.75rem;
+
+					.p-menuitem {
+						.p-menuitem-content {
+							padding: 0;
+							border-radius: 10px;
+
+							> div {
+								padding: 0.5rem 0.25rem;
+							}
+
+							a {
+								font-size: 1.05rem;
+								margin-left: 1rem;
+								text-decoration: none;
+							}
+						}
+
+						&:not(.p-highlight):not(.p-disabled) > .p-menuitem-content:hover {
+							background-color: var(--primary-50);
+
+							span,
+							i {
+								color: var(--primary-800);
+							}
+
+							.highlight:hover {
+								span,
+								i {
+									color: var(--primary-50);
+								}
+							}
+						}
+
+						a span {
+							gap: 0.5rem;
+							color: var(--gray-800);
+						}
+
+						i {
+							margin-right: 0.4rem;
+							color: var(--gray-800);
+						}
+
+						.highlight {
+							background-color: var(--primary-500);
+							color: var(--primary-50);
+							font-weight: bold;
+							padding: 0.5rem 0.25rem;
+							border-radius: 10px;
+
+							a {
+								margin-left: 1rem;
+							}
+
+							a span {
+								color: var(--primary-50);
+								font-weight: bold;
+							}
+
+							i {
+								color: var(--gray-50);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.right {
+		flex: 0 72%;
+		display: flex;
+		align-items: flex-start;
+	}
+}
