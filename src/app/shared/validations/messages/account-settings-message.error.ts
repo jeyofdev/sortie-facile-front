@@ -30,4 +30,8 @@ export const validationAccountMessages: ValidationMessages[] = [
 		minlength: 'The facebook username must be at least 3 characters long.',
 		maxlength: 'The facebook username must have a maximum 30 characters long.',
 	}),
+	new ValidationMessages('description', {
+		required: 'The description is required for registration.',
+		minlength: 'The description must be at least 20 characters long.',
+	}),
 ];
