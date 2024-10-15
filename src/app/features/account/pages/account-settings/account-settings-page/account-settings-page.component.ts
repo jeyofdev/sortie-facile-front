@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccountNavigationService } from '@services/account-navigation.service';
+import { AccountEnum, PrimaryRouteEnum, SettingsEnum } from '@shared/enums/routes.enum';
 import { MenuItem } from 'primeng/api';
 
 @Component({
-	selector: 'app-account-layout',
-	templateUrl: './account-layout.component.html',
-	styleUrl: './account-layout.component.scss',
+	selector: 'app-account-settings-page',
+	templateUrl: './account-settings-page.component.html',
+	styleUrl: './account-settings-page.component.scss',
 })
-export class AccountLayoutComponent implements OnInit {
+export class AccountSettingsPageComponent implements OnInit {
 	items!: MenuItem[];
 	activeItem!: MenuItem;
 
@@ -17,8 +18,8 @@ export class AccountLayoutComponent implements OnInit {
 		private _accountNavigationService: AccountNavigationService,
 	) {}
 
-	ngOnInit(): void {
-		this.items = this._accountNavigationService.getPrimaryNavigation();
+	ngOnInit() {
+		this.items = this._accountNavigationService.getSettingsNavigation();
 		this.setActiveItemBasedOnUrl();
 	}
 
@@ -28,6 +29,8 @@ export class AccountLayoutComponent implements OnInit {
 
 	setActiveItemBasedOnUrl() {
 		const currentUrl = this._router.url;
+		console.log(currentUrl);
+
 		this.activeItem = this.items.find(item => item.routerLink.includes(currentUrl)) || this.items[0];
 	}
 }

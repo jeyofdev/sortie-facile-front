@@ -30,3 +30,12 @@ export enum AccountEnum {
 	MESSAGES = 'messages',
 	SETTINGS = 'settings',
 }
+
+export enum SettingsEnum {
+	HOME = 'home',
+	PERSONAL = 'personal',
+	ADDRESS = 'address',
+	CONTACT = 'contact',
+	DESCRIPTION = 'description',
+	INTERESTS = 'interests',
+}
