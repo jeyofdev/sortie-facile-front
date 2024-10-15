@@ -1,1 +1,87 @@
-<p>account-settings-contact-page works!</p>
+<app-account-settings-layout pageTitle="Contact & Social media">
+	<ng-container pageSubtitle>
+		<span
+			>Make sure your phone and social media details are current, so you never miss an important notification or
+			update.</span
+		>
+	</ng-container>
+
+	<ng-container primary>
+		<app-alert-form *ngIf="formError" [content]="formError" severity="error" icon="exclamation-circle"></app-alert-form>
+
+		<form #accountContactForm="ngForm" [formGroup]="mainForm" (ngSubmit)="onSubmit()">
+			<div class="form-control">
+				<app-mask-field
+					labelFor="phone"
+					label="Phone :"
+					type="phone"
+					id="phone"
+					name="phone"
+					icon="phone"
+					[form]="accountContactForm"
+					formControlName="phone"
+					[parentForm]="mainForm"
+					controlName="phone"
+					[validationMessage]="getValidationMessages('phone')"
+				></app-mask-field>
+			</div>
+
+			<ng-container formGroupName="socialForm">
+				<div class="form-control">
+					<app-text-field
+						labelFor="twitter"
+						label="Pseudo Twitter :"
+						type="text"
+						id="twitter"
+						name="twitter"
+						icon="twitter"
+						placeholder="john-doe33"
+						[form]="accountContactForm"
+						formControlName="twitter"
+						[parentForm]="socialForm"
+						controlName="twitter"
+						[validationMessage]="getValidationMessages('twitter')"
+					></app-text-field>
+				</div>
+
+				<div class="form-control">
+					<app-text-field
+						labelFor="instagram"
+						label="Pseudo Instagram :"
+						type="text"
+						id="instagram"
+						name="instagram"
+						icon="instagram"
+						placeholder="john-doe33"
+						[form]="accountContactForm"
+						formControlName="instagram"
+						[parentForm]="socialForm"
+						controlName="instagram"
+						[validationMessage]="getValidationMessages('instagram')"
+					></app-text-field>
+				</div>
+
+				<div class="form-control">
+					<app-text-field
+						labelFor="facebook"
+						label="Pseudo Facebook :"
+						type="text"
+						id="facebook"
+						name="facebook"
+						icon="facebook"
+						placeholder="john-doe33"
+						[form]="accountContactForm"
+						formControlName="facebook"
+						[parentForm]="socialForm"
+						controlName="facebook"
+						[validationMessage]="getValidationMessages('facebook')"
+					></app-text-field>
+				</div>
+			</ng-container>
+
+			<div class="btn-cta-box">
+				<p-button type="submit" label="Save changes" icon="pi pi-arrow-up-right" iconPos="right" styleClass="btn-cta" />
+			</div>
+		</form>
+	</ng-container>
+</app-account-settings-layout>

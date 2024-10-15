@@ -1,1 +1,157 @@
-<p>account-settings-personal-infos-page works!</p>
+<app-account-settings-layout pageTitle="Profile">
+	<ng-container pageSubtitle>
+		<span>Update your profile information to keep your details accurate and up-to-date.</span>
+	</ng-container>
+
+	<ng-container primary>
+		<app-alert-form *ngIf="formError" [content]="formError" severity="error" icon="exclamation-circle"></app-alert-form>
+
+		<form #accountPersonalInfosForm="ngForm" [formGroup]="mainForm" (ngSubmit)="onSubmit()">
+			<ng-container formGroupName="nameForm">
+				<div class="form-control">
+					<app-text-field
+						labelFor="firstname"
+						label="Firstname :"
+						type="text"
+						id="firstname"
+						name="firstname"
+						placeholder="John"
+						[form]="accountPersonalInfosForm"
+						formControlName="firstname"
+						[parentForm]="nameForm"
+						controlName="firstname"
+						[validationMessage]="getValidationMessages('firstname')"
+					></app-text-field>
+				</div>
+
+				<div class="form-control">
+					<app-text-field
+						labelFor="lastname"
+						label="Lastname :"
+						type="text"
+						id="lastname"
+						name="lastname"
+						placeholder="Doe"
+						[form]="accountPersonalInfosForm"
+						formControlName="lastname"
+						[parentForm]="nameForm"
+						controlName="lastname"
+						[validationMessage]="getValidationMessages('lastname')"
+					></app-text-field>
+				</div>
+			</ng-container>
+
+			<div class="form-control">
+				<app-mask-field
+					labelFor="dateOfBirth"
+					label="Date of birth :"
+					type="date"
+					id="dateOfBirth"
+					name="dateOfBirth"
+					[form]="accountPersonalInfosForm"
+					formControlName="dateOfBirth"
+					[parentForm]="mainForm"
+					controlName="dateOfBirth"
+					[validationMessage]="getValidationMessages('dateOfBirth')"
+				></app-mask-field>
+			</div>
+
+			<div class="form-control">
+				<app-number-field
+					labelFor="streetNumber"
+					label="Street number :"
+					[useGrouping]="false"
+					mode="decimal"
+					id="streetNumber"
+					name="streetNumber"
+					placeholder="10"
+					[min]="1"
+					[max]="9999999"
+					[form]="accountPersonalInfosForm"
+					formControlName="streetNumber"
+					[parentForm]="mainForm"
+					controlName="streetNumber"
+					[validationMessage]="getValidationMessages('streetNumber')"
+				></app-number-field>
+			</div>
+
+			<div class="form-control">
+				<app-text-field
+					labelFor="street"
+					label="Street :"
+					type="text"
+					id="street"
+					name="street"
+					placeholder="Rue de la république"
+					[form]="accountPersonalInfosForm"
+					formControlName="street"
+					[parentForm]="mainForm"
+					controlName="street"
+					[validationMessage]="getValidationMessages('street')"
+				></app-text-field>
+			</div>
+
+			<div class="form-control">
+				<app-select-field
+					labelFor="region"
+					label="Region :"
+					id="region"
+					name="region"
+					placeholder="select region"
+					[items]="(regionItems$ | async) || []"
+					[form]="accountPersonalInfosForm"
+					formControlName="region"
+					[parentForm]="mainForm"
+					controlName="region"
+					[validationMessage]="getValidationMessages('region')"
+					(selectedValueChange)="onRegionSelected($event)"
+				></app-select-field>
+			</div>
+
+			@if (selectedRegion$) {
+				<div class="form-control">
+					<app-select-field
+						labelFor="department"
+						label="Department :"
+						type="text"
+						id="department"
+						name="department"
+						placeholder="Select department"
+						[items]="(departmentItems$ | async) || []"
+						[form]="accountPersonalInfosForm"
+						formControlName="department"
+						[parentForm]="mainForm"
+						controlName="department"
+						[validationMessage]="getValidationMessages('department')"
+						(selectedValueChange)="onDepartmentSelected($event)"
+					></app-select-field>
+				</div>
+			}
+
+			@if (selectedDepartment$) {
+				<div class="form-control">
+					<app-autocomplete-field
+						labelFor="city"
+						label="City :"
+						type="text"
+						id="city"
+						name="city"
+						[showClear]="true"
+						placeholder="Select city"
+						[items]="(cityItems$ | async) || []"
+						[form]="accountPersonalInfosForm"
+						formControlName="city"
+						[parentForm]="mainForm"
+						controlName="city"
+						[validationMessage]="getValidationMessages('city')"
+						(selectedValueChange)="onCitySelected($event)"
+					></app-autocomplete-field>
+				</div>
+			}
+
+			<div class="btn-cta-box">
+				<p-button type="submit" label="Save changes" icon="pi pi-arrow-up-right" iconPos="right" styleClass="btn-cta" />
+			</div>
+		</form>
+	</ng-container>
+</app-account-settings-layout>

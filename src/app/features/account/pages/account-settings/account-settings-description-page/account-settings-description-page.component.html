@@ -1,1 +1,35 @@
-<p>account-settings-description-page works!</p>
+<app-account-settings-layout pageTitle="Description">
+	<ng-container pageSubtitle>
+		<span
+			>Personalize your profile by updating your description. Share more about yourself, your passions, and what
+			inspires you, allowing others to get to know you better.</span
+		>
+	</ng-container>
+
+	<ng-container primary>
+		<app-alert-form *ngIf="formError" [content]="formError" severity="error" icon="exclamation-circle"></app-alert-form>
+
+		<form #accountDescriptionForm="ngForm" [formGroup]="mainForm" (ngSubmit)="onSubmit()">
+			<div class="form-control">
+				<app-textarea-field
+					labelFor="description"
+					label="Description :"
+					id="description"
+					name="description"
+					[cols]="30"
+					[rows]="10"
+					placeholder="Enter a description"
+					[form]="accountDescriptionForm"
+					formControlName="description"
+					[parentForm]="mainForm"
+					controlName="description"
+					[validationMessage]="getValidationMessages('description')"
+				></app-textarea-field>
+			</div>
+
+			<div class="btn-cta-box">
+				<p-button type="submit" label="Save changes" icon="pi pi-arrow-up-right" iconPos="right" styleClass="btn-cta" />
+			</div>
+		</form>
+	</ng-container>
+</app-account-settings-layout>
