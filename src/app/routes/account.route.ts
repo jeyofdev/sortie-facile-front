@@ -3,9 +3,14 @@ import { userGuard } from '@guards/user.guard';
 import { AccountActivitiesPageComponent } from '@features/account/pages/account-activities-page/account-activities-page.component';
 import { AccountFavoritesPageComponent } from '@features/account/pages/account-favorites-page/account-favorites-page.component';
 import { AccountMessagesPageComponent } from '@features/account/pages/account-messages-page/account-messages-page.component';
-import { AccountSettingsPageComponent } from '@features/account/pages/account-settings-page/account-settings-page.component';
-import { AccountEnum } from '@shared/enums/routes.enum';
+import { AccountSettingsPageComponent } from '@root/features/account/pages/account-settings/account-settings-page/account-settings-page.component';
+import { AccountEnum, SettingsEnum } from '@shared/enums/routes.enum';
 import { AccountHomePageComponent } from '@root/features/account/pages/account-home-page/account-home-page.component';
+import { AccountSettingsPersonalInfosPageComponent } from '@root/features/account/pages/account-settings/account-settings-personal-infos-page/account-settings-personal-infos-page.component';
+import { AccountSettingsDescriptionPageComponent } from '@root/features/account/pages/account-settings/account-settings-description-page/account-settings-description-page.component';
+import { AccountSettingsContactPageComponent } from '@root/features/account/pages/account-settings/account-settings-contact-page/account-settings-contact-page.component';
+import { AccountSettingsAddressPageComponent } from '@root/features/account/pages/account-settings/account-settings-address-page/account-settings-address-page.component';
+import { AccountSettingsInterestsPageComponent } from '@root/features/account/pages/account-settings/account-settings-interests-page/account-settings-interests-page.component';
 
 export const routes: Routes = [
 	{
@@ -32,5 +37,32 @@ export const routes: Routes = [
 		path: AccountEnum.SETTINGS,
 		component: AccountSettingsPageComponent,
 		canActivate: [userGuard],
+		children: [
+			{
+				path: SettingsEnum.PERSONAL,
+				component: AccountSettingsPersonalInfosPageComponent,
+			},
+			{
+				path: SettingsEnum.ADDRESS,
+				component: AccountSettingsAddressPageComponent,
+			},
+			{
+				path: SettingsEnum.CONTACT,
+				component: AccountSettingsContactPageComponent,
+			},
+			{
+				path: SettingsEnum.DESCRIPTION,
+				component: AccountSettingsDescriptionPageComponent,
+			},
+			{
+				path: SettingsEnum.INTERESTS,
+				component: AccountSettingsInterestsPageComponent,
+			},
+			{
+				path: '',
+				redirectTo: SettingsEnum.PERSONAL,
+				pathMatch: 'full',
+			},
+		],
 	},
 ];
