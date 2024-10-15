@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AccountNavigationService } from '@services/account-navigation.service';
 import { AccountEnum, PrimaryRouteEnum, SettingsEnum } from '@shared/enums/routes.enum';
 import { MenuItem } from 'primeng/api';
 
@@ -12,37 +13,13 @@ export class AccountSettingsPageComponent implements OnInit {
 	items!: MenuItem[];
 	activeItem!: MenuItem;
 
-	constructor(private _router: Router) {}
+	constructor(
+		private _router: Router,
+		private _accountNavigationService: AccountNavigationService,
+	) {}
 
 	ngOnInit() {
-		this.items = [
-			{
-				label: 'Home',
-				// icon: 'pi pi-home',
-				routerLink: ['/' + PrimaryRouteEnum.ACCOUNT + '/' + AccountEnum.SETTINGS + '/' + SettingsEnum.PERSONAL],
-			},
-			{
-				label: 'Address',
-				// icon: 'pi pi-star',
-				routerLink: ['/' + PrimaryRouteEnum.ACCOUNT + '/' + AccountEnum.SETTINGS + '/' + SettingsEnum.ADDRESS],
-			},
-			{
-				label: 'Contact',
-				// icon: 'pi pi-search',
-				routerLink: ['/' + PrimaryRouteEnum.ACCOUNT + '/' + AccountEnum.SETTINGS + '/' + SettingsEnum.CONTACT],
-			},
-			{
-				label: 'Description',
-				// icon: 'pi pi-envelope',
-				routerLink: ['/' + PrimaryRouteEnum.ACCOUNT + '/' + AccountEnum.SETTINGS + '/' + SettingsEnum.DESCRIPTION],
-			},
-			{
-				label: 'Interests',
-				// icon: 'pi pi-envelope',
-				routerLink: ['/' + PrimaryRouteEnum.ACCOUNT + '/' + AccountEnum.SETTINGS + '/' + SettingsEnum.INTERESTS],
-			},
-		];
-
+		this.items = this._accountNavigationService.getSettingsNavigation();
 		this.setActiveItemBasedOnUrl();
 	}
 

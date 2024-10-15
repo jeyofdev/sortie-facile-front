@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { AuthService } from './auth.service';
-import { AccountEnum, AuthRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
+import { AccountEnum, AuthRouteEnum, PrimaryRouteEnum, SettingsEnum } from '@shared/enums/routes.enum';
 
 @Injectable({
 	providedIn: 'root',
@@ -40,6 +40,31 @@ export class AccountNavigationService {
 				icon: 'pi pi-sign-out',
 				command: () => this._authService.logout(),
 				routerLink: ['/' + PrimaryRouteEnum.AUTH + '/' + AuthRouteEnum.SIGNIN],
+			},
+		];
+	}
+
+	getSettingsNavigation(): MenuItem[] {
+		return [
+			{
+				label: 'Home',
+				routerLink: ['/' + PrimaryRouteEnum.ACCOUNT + '/' + AccountEnum.SETTINGS + '/' + SettingsEnum.PERSONAL],
+			},
+			{
+				label: 'Address',
+				routerLink: ['/' + PrimaryRouteEnum.ACCOUNT + '/' + AccountEnum.SETTINGS + '/' + SettingsEnum.ADDRESS],
+			},
+			{
+				label: 'Contact',
+				routerLink: ['/' + PrimaryRouteEnum.ACCOUNT + '/' + AccountEnum.SETTINGS + '/' + SettingsEnum.CONTACT],
+			},
+			{
+				label: 'Description',
+				routerLink: ['/' + PrimaryRouteEnum.ACCOUNT + '/' + AccountEnum.SETTINGS + '/' + SettingsEnum.DESCRIPTION],
+			},
+			{
+				label: 'Interests',
+				routerLink: ['/' + PrimaryRouteEnum.ACCOUNT + '/' + AccountEnum.SETTINGS + '/' + SettingsEnum.INTERESTS],
 			},
 		];
 	}

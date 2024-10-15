@@ -5,12 +5,14 @@
 		<p-menubar [model]="items" styleClass="settings-nav">
 			<ng-template let-item pTemplate="item">
 				<a
+					class="p-menuitem-block"
 					[routerLink]="item.routerLink"
-					class="p-menuitem-text"
-					[class.ui-menuitem-active]="item === activeItem"
+					[class.p-menuitem-active]="item === activeItem"
 					(click)="selectItem(item)"
 				>
-					{{ item.label }}
+					<span class="p-menuitem-text">
+						{{ item.label }}
+					</span>
 				</a>
 			</ng-template>
 		</p-menubar>
