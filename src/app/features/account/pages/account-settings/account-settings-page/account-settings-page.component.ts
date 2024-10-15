@@ -29,8 +29,6 @@ export class AccountSettingsPageComponent implements OnInit {
 
 	setActiveItemBasedOnUrl() {
 		const currentUrl = this._router.url;
-		console.log(currentUrl);
-
 		this.activeItem = this.items.find(item => item.routerLink.includes(currentUrl)) || this.items[0];
 	}
 }

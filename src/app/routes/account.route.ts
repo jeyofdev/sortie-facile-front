@@ -11,6 +11,7 @@ import { AccountSettingsDescriptionPageComponent } from '@root/features/account/
 import { AccountSettingsContactPageComponent } from '@root/features/account/pages/account-settings/account-settings-contact-page/account-settings-contact-page.component';
 import { AccountSettingsAddressPageComponent } from '@root/features/account/pages/account-settings/account-settings-address-page/account-settings-address-page.component';
 import { AccountSettingsInterestsPageComponent } from '@root/features/account/pages/account-settings/account-settings-interests-page/account-settings-interests-page.component';
+import { AccountSettingsPasswordPageComponent } from '@root/features/account/pages/account-settings/account-settings-password-page/account-settings-password-page.component';
 
 export const routes: Routes = [
 	{
@@ -41,6 +42,10 @@ export const routes: Routes = [
 			{
 				path: SettingsEnum.PERSONAL,
 				component: AccountSettingsPersonalInfosPageComponent,
+			},
+			{
+				path: SettingsEnum.PASSWORD,
+				component: AccountSettingsPasswordPageComponent,
 			},
 			{
 				path: SettingsEnum.ADDRESS,

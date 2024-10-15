@@ -16,6 +16,7 @@ import { AccountSettingsContactPageComponent } from './pages/account-settings/ac
 import { AccountSettingsDescriptionPageComponent } from './pages/account-settings/account-settings-description-page/account-settings-description-page.component';
 import { AccountSettingsInterestsPageComponent } from './pages/account-settings/account-settings-interests-page/account-settings-interests-page.component';
 import { AccountSettingsAddressPageComponent } from './pages/account-settings/account-settings-address-page/account-settings-address-page.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
 	declarations: [
@@ -28,13 +29,13 @@ import { AccountSettingsAddressPageComponent } from './pages/account-settings/ac
 		AccountFavoritesPageComponent,
 		AccountSettingsPageComponent,
 		AccountActivitiesPageComponent,
-  AccountSettingsPasswordPageComponent,
-  AccountSettingsPersonalInfosPageComponent,
-  AccountSettingsContactPageComponent,
-  AccountSettingsDescriptionPageComponent,
-  AccountSettingsInterestsPageComponent,
-  AccountSettingsAddressPageComponent,
+		AccountSettingsPasswordPageComponent,
+		AccountSettingsPersonalInfosPageComponent,
+		AccountSettingsContactPageComponent,
+		AccountSettingsDescriptionPageComponent,
+		AccountSettingsInterestsPageComponent,
+		AccountSettingsAddressPageComponent,
 	],
-	imports: [CommonModule, AccountRoutingModule, SharedModule],
+	imports: [CommonModule, AccountRoutingModule, SharedModule, FormsModule, ReactiveFormsModule],
 })
 export class AccountModule {}

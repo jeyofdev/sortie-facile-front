@@ -38,4 +38,5 @@ export enum SettingsEnum {
 	CONTACT = 'contact',
 	DESCRIPTION = 'description',
 	INTERESTS = 'interests',
+	PASSWORD = 'password',
 }

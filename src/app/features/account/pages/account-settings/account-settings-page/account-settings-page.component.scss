@@ -1,7 +1,11 @@
+h1 {
+	color: var(--gray-800);
+}
+
 :host ::ng-deep .settings-nav {
 	background-color: transparent;
 	margin-top: 1.5rem;
-	margin-bottom: 2rem;
+	margin-bottom: 3rem;
 	width: fit-content;
 	border: 1.75px solid var(--gray-100);
 	border-radius: 10px;
