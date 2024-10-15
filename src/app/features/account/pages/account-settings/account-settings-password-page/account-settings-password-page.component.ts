@@ -33,7 +33,8 @@ export class AccountSettingsPasswordPageComponent
 	onSubmit(): void {
 		this.formError = '';
 		if (this.mainForm.valid) {
-			console.log('ok');
+			console.log(this.mainForm);
+			// TODO save new password
 		} else {
 			if (this.mainForm.get('passwordForm')?.hasError('matchPassword')) {
 				this.formError =
