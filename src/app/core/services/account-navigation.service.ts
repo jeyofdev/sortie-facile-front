@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { AuthService } from './auth.service';
-import { AccountEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
+import { AccountEnum, AuthRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
 
 @Injectable({
 	providedIn: 'root',
@@ -39,6 +39,7 @@ export class AccountNavigationService {
 				label: 'Logout',
 				icon: 'pi pi-sign-out',
 				command: () => this._authService.logout(),
+				routerLink: ['/' + PrimaryRouteEnum.AUTH + '/' + AuthRouteEnum.SIGNIN],
 			},
 		];
 	}

@@ -2,6 +2,19 @@
 	<div class="box">
 		<h1>Settings</h1>
 
+		<p-menubar [model]="items" styleClass="settings-nav">
+			<ng-template let-item pTemplate="item">
+				<a
+					[routerLink]="item.routerLink"
+					class="p-menuitem-text"
+					[class.ui-menuitem-active]="item === activeItem"
+					(click)="selectItem(item)"
+				>
+					{{ item.label }}
+				</a>
+			</ng-template>
+		</p-menubar>
+
 		<div>
 			<router-outlet></router-outlet>
 		</div>
