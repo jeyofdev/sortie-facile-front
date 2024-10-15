@@ -153,9 +153,10 @@
 	}
 
 	.right {
-		flex: 0 72%;
+		flex: 0 100%;
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-start;
+		padding: 2rem 1rem 1rem;
 	}
 }

@@ -51,6 +51,10 @@ export class AccountNavigationService {
 				routerLink: ['/' + PrimaryRouteEnum.ACCOUNT + '/' + AccountEnum.SETTINGS + '/' + SettingsEnum.PERSONAL],
 			},
 			{
+				label: 'Password',
+				routerLink: ['/' + PrimaryRouteEnum.ACCOUNT + '/' + AccountEnum.SETTINGS + '/' + SettingsEnum.PASSWORD],
+			},
+			{
 				label: 'Address',
 				routerLink: ['/' + PrimaryRouteEnum.ACCOUNT + '/' + AccountEnum.SETTINGS + '/' + SettingsEnum.ADDRESS],
 			},
