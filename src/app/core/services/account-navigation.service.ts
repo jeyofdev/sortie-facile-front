@@ -48,15 +48,11 @@ export class AccountNavigationService {
 		return [
 			{
 				label: 'Home',
-				routerLink: ['/' + PrimaryRouteEnum.ACCOUNT + '/' + AccountEnum.SETTINGS + '/' + SettingsEnum.PERSONAL],
+				routerLink: ['/' + PrimaryRouteEnum.ACCOUNT + '/' + AccountEnum.SETTINGS + '/' + SettingsEnum.PROFILE],
 			},
 			{
 				label: 'Password',
 				routerLink: ['/' + PrimaryRouteEnum.ACCOUNT + '/' + AccountEnum.SETTINGS + '/' + SettingsEnum.PASSWORD],
-			},
-			{
-				label: 'Address',
-				routerLink: ['/' + PrimaryRouteEnum.ACCOUNT + '/' + AccountEnum.SETTINGS + '/' + SettingsEnum.ADDRESS],
 			},
 			{
 				label: 'Contact',

@@ -40,16 +40,12 @@ export const routes: Routes = [
 		canActivate: [userGuard],
 		children: [
 			{
-				path: SettingsEnum.PERSONAL,
+				path: SettingsEnum.PROFILE,
 				component: AccountSettingsPersonalInfosPageComponent,
 			},
 			{
 				path: SettingsEnum.PASSWORD,
 				component: AccountSettingsPasswordPageComponent,
-			},
-			{
-				path: SettingsEnum.ADDRESS,
-				component: AccountSettingsAddressPageComponent,
 			},
 			{
 				path: SettingsEnum.CONTACT,
@@ -62,11 +58,6 @@ export const routes: Routes = [
 			{
 				path: SettingsEnum.INTERESTS,
 				component: AccountSettingsInterestsPageComponent,
-			},
-			{
-				path: '',
-				redirectTo: SettingsEnum.PERSONAL,
-				pathMatch: 'full',
 			},
 		],
 	},

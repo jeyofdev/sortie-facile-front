@@ -32,9 +32,7 @@ export enum AccountEnum {
 }
 
 export enum SettingsEnum {
-	HOME = 'home',
-	PERSONAL = 'personal',
-	ADDRESS = 'address',
+	PROFILE = 'profile',
 	CONTACT = 'contact',
 	DESCRIPTION = 'description',
 	INTERESTS = 'interests',
