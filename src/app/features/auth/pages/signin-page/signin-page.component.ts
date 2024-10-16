@@ -6,7 +6,7 @@ import { AuthPageAbstract } from '@shared/abstract/auth-page.abstract';
 import { AccountEnum, AuthRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
 import { AuthUserCredential } from '@shared/models/auth/auth-user-credential.model';
 import { ResponseAuthBase } from '@shared/models/auth/response-auth-base.model';
-import { ResponseAuthError } from '@shared/models/auth/response-auth-error.model';
+import { ResponseError } from '@shared/models/auth/response-auth-error.model';
 import { FormAuthBase } from '@shared/types/form/form-auth-base.type';
 import { RegexHelper } from '@utils/regex.helper';
 import { validationSigninMessages } from '@shared/validations/messages/signin-message.error';
@@ -54,7 +54,7 @@ export class SigninPageComponent extends AuthPageAbstract<FormAuthBase> implemen
 				)
 				.pipe(
 					tap((res: ResponseAuthBase) => {
-						if (res instanceof ResponseAuthError) {
+						if (res instanceof ResponseError) {
 							this.formError = res.message;
 						} else {
 							this._router.navigateByUrl('/' + PrimaryRouteEnum.ACCOUNT + '/' + AccountEnum.HOME);
