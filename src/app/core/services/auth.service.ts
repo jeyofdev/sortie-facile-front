@@ -8,14 +8,14 @@ import { AuthTokenService } from './auth-token.service';
 import { AuthTokenResponse } from '@shared/models/auth/auth-token-response.model';
 import { AuthUserRegister } from '@shared/models/auth/auth-user-register.model';
 import { ProfileService } from './profile.service';
-import { NewUserProfileDatas } from '@shared/models/profile/profile-datas.model';
 import { ResponseAuthSignup } from '@shared/models/auth/response-auth-signup.model';
 import { RouteAPI } from '@shared/enums/route-api.enum';
-import { ResponseAddProfile } from '@shared/models/profile/response-add-profile.model';
+import { ResponseProfile } from '@shared/models/profile/response/response-profile.model';
 import { AuthUtils } from '@shared/utils/auth-utils';
 import { LocalStorageService } from './local-storage.service';
 import { Router } from '@angular/router';
 import { AuthRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
+import { NewProfileInput } from '@shared/models/profile/input/new-profil-input.model';
 
 @Injectable({
 	providedIn: 'root',
@@ -53,11 +53,11 @@ export class AuthService extends AuthUtils {
 
 	signUpWithEmailAndPassword(
 		userRegisterDatas: AuthUserRegister,
-		newUserprofileDatas: NewUserProfileDatas,
-	): Observable<ResponseAddProfile | ResponseError> {
+		newProfileInput: NewProfileInput,
+	): Observable<ResponseProfile | ResponseError> {
 		return this._httpClient.post<ResponseAuthSignup>(`${this._BASE_URL}/register`, userRegisterDatas).pipe(
 			switchMap((registerUserResponse: ResponseAuthSignup) => {
-				return this._profileService.add(registerUserResponse.userId, newUserprofileDatas);
+				return this._profileService.add(registerUserResponse.userId, newProfileInput);
 			}),
 			catchError(err => this.handleError(err)),
 		);

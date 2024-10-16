@@ -1,10 +1,9 @@
-import { CountAndResult } from '@shared/models/count-and-result.model';
 import { ResponseProfileAddress } from '@shared/models/utils/response-profile-address.model';
 import { ResponseProfileName } from '@shared/models/utils/response-profile-name.model';
 import { ResponseProfileYear } from '@shared/models/utils/response-profile-year.model';
-import { ResponseProfileContact } from '@shared/models/profile/response-profile-contact.model';
+import { ResponseProfileContact } from '@shared/models/profile/response/response-profile-contact.model';
 
-export class ResponseAddProfile {
+export class ResponseProfileDetails {
 	constructor(
 		public id: number,
 		public email: string,
@@ -15,8 +14,5 @@ export class ResponseAddProfile {
 		public contact: ResponseProfileContact,
 		public description: string,
 		public avatar: string | null,
-		public activities: CountAndResult<any>, // TODO,
-		public bookings: CountAndResult<any>, // TODO,
-		public categories: CountAndResult<any>, // TODO,
 	) {}
 }

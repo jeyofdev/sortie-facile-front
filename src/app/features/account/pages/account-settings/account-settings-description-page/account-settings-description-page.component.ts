@@ -3,8 +3,8 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ProfileService } from '@services/profile.service';
 import { AccountSettingsPageAbstract } from '@shared/abstract/account-settings-page.abstract';
-import { NewProfileData } from '@shared/models/profile/new-profile-data.model';
-import { ResponseAddProfile } from '@shared/models/profile/response-add-profile.model';
+import { UpdateProfileInput } from '@shared/models/profile/input/update-profile-input.model';
+import { ResponseProfile } from '@shared/models/profile/response/response-profile.model';
 import { FormDescription } from '@shared/types/form/form-description.type';
 import { validationAccountMessages } from '@shared/validations/messages/account-settings-message.error';
 import { first } from 'rxjs';
@@ -19,7 +19,7 @@ export class AccountSettingsDescriptionPageComponent
 	implements OnInit
 {
 	descriptionCtrl!: FormControl<string>;
-	resolvedProfile!: ResponseAddProfile;
+	resolvedProfile!: ResponseProfile;
 
 	constructor(
 		private _formBuilder: FormBuilder,
@@ -42,7 +42,7 @@ export class AccountSettingsDescriptionPageComponent
 	onSubmit(): void {
 		this.formError = '';
 		if (this.mainForm.valid) {
-			const updatedProfile = new NewProfileData(
+			const updatedProfile = new UpdateProfileInput(
 				this.resolvedProfile.name.firstname,
 				this.resolvedProfile.name.lastname,
 				new Date(this.resolvedProfile.year.dateOfBirth),

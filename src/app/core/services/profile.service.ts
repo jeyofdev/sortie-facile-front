@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { RouteAPI } from '@shared/enums/route-api.enum';
-import { NewUserProfileDatas } from '@shared/models/profile/profile-datas.model';
-import { ResponseAddProfile } from '@shared/models/profile/response-add-profile.model';
 import { Observable, of, tap } from 'rxjs';
 import { AuthTokenService } from './auth-token.service';
-import { NewProfileData } from '@shared/models/profile/new-profile-data.model';
+import { NewProfileInput } from '@shared/models/profile/input/new-profil-input.model';
+import { UpdateProfileInput } from '@shared/models/profile/input/update-profile-input.model';
+import { ResponseProfile } from '@shared/models/profile/response/response-profile.model';
 
 @Injectable({
 	providedIn: 'root',
@@ -18,22 +18,22 @@ export class ProfileService {
 		private _authTokenService: AuthTokenService,
 	) {}
 
-	add(userId: string, profileData: NewUserProfileDatas): Observable<ResponseAddProfile> {
-		return this._httpClient.post<ResponseAddProfile>(
-			`${this._BASE_URL}/add/region/${profileData.regionId}/department/${profileData.departmentId}/city/${profileData.cityId}/user/${userId}`,
-			profileData.newProfileData,
+	add(userId: string, newProfileInput: NewProfileInput): Observable<ResponseProfile> {
+		return this._httpClient.post<ResponseProfile>(
+			`${this._BASE_URL}/add/region/${newProfileInput.regionId}/department/${newProfileInput.departmentId}/city/${newProfileInput.cityId}/user/${userId}`,
+			newProfileInput.ProfileInput,
 		);
 	}
 
-	updateById(profileData: NewProfileData): Observable<ResponseAddProfile> {
+	updateById(updateProfileInput: UpdateProfileInput): Observable<ResponseProfile> {
 		const userId: string = String(this._authTokenService.getTokenFromLocalStorageAndDecode()?.id);
 
-		return this._httpClient.put<ResponseAddProfile>(`${this._BASE_URL}/update/${userId}`, profileData);
+		return this._httpClient.put<ResponseProfile>(`${this._BASE_URL}/update/${userId}`, updateProfileInput);
 	}
 
-	getById(): Observable<ResponseAddProfile> {
+	getById(): Observable<ResponseProfile> {
 		const userId: string = String(this._authTokenService.getTokenFromLocalStorageAndDecode()?.id);
 
-		return this._httpClient.get<ResponseAddProfile>(`${this._BASE_URL}/${userId}`);
+		return this._httpClient.get<ResponseProfile>(`${this._BASE_URL}/${userId}`);
 	}
 }
