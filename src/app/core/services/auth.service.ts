@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, of, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, of, switchMap, tap } from 'rxjs';
 import { AuthUserCredential } from '@shared/models/auth/auth-user-credential.model';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ResponseAuthBase } from '@shared/models/auth/response-auth-base.model';
-import { ResponseAuthError } from '@shared/models/auth/response-auth-error.model';
+import { ResponseError } from '@shared/models/auth/response-auth-error.model';
 import { AuthTokenService } from './auth-token.service';
 import { AuthTokenResponse } from '@shared/models/auth/auth-token-response.model';
 import { AuthUserRegister } from '@shared/models/auth/auth-user-register.model';
@@ -22,6 +22,10 @@ import { AuthRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
 })
 export class AuthService extends AuthUtils {
 	private readonly _BASE_URL = RouteAPI.AUTH;
+
+	private _httpErrorSubject$: BehaviorSubject<HttpErrorResponse> = new BehaviorSubject(new HttpErrorResponse({}));
+
+	private _httpSuccessSubject$: BehaviorSubject<HttpResponse<any>> = new BehaviorSubject(new HttpResponse({}));
 
 	constructor(
 		protected override localStorageService: LocalStorageService,
@@ -50,7 +54,7 @@ export class AuthService extends AuthUtils {
 	signUpWithEmailAndPassword(
 		userRegisterDatas: AuthUserRegister,
 		newUserprofileDatas: NewUserProfileDatas,
-	): Observable<ResponseAddProfile | ResponseAuthError> {
+	): Observable<ResponseAddProfile | ResponseError> {
 		return this._httpClient.post<ResponseAuthSignup>(`${this._BASE_URL}/register`, userRegisterDatas).pipe(
 			switchMap((registerUserResponse: ResponseAuthSignup) => {
 				return this._profileService.add(registerUserResponse.userId, newUserprofileDatas);
@@ -99,8 +103,22 @@ export class AuthService extends AuthUtils {
 			.pipe(catchError(err => this.handleError(err)));
 	}
 
-	private handleError(err: any): Observable<ResponseAuthError> {
+	private handleError(err: any): Observable<ResponseError> {
 		const errorMessage = err.error?.message || 'No token was found in the URL or account already verified.';
-		return of(new ResponseAuthError(true, errorMessage));
+		return of(new ResponseError(true, errorMessage));
+	}
+
+	setHttpSuccessSubject$(success: HttpResponse<any>): void {
+		// On retire l'erreur stockée dans le ErrorSubject
+		this._httpErrorSubject$.next(new HttpErrorResponse({}));
+		// On ajoute l'erreur au SuccessSubject
+		this._httpSuccessSubject$.next(success);
+	}
+
+	setHttpErrorSubject$(error: HttpErrorResponse): void {
+		// On retire l'erreur stockée dans le SuccessSubject
+		this._httpSuccessSubject$.next(new HttpResponse({}));
+		// On ajoute l'erreur au ErrorSubject
+		this._httpErrorSubject$.next(error);
 	}
 }

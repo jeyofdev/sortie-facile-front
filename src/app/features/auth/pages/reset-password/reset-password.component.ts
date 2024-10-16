@@ -5,7 +5,7 @@ import { AuthService } from '@services/auth.service';
 import { AuthPageAbstract } from '@shared/abstract/auth-page.abstract';
 import { AuthRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
 import { ResponseAuthBase } from '@shared/models/auth/response-auth-base.model';
-import { ResponseAuthError } from '@shared/models/auth/response-auth-error.model';
+import { ResponseError } from '@shared/models/auth/response-auth-error.model';
 import { FormPassword } from '@shared/types/form/form-password.type';
 import { validationForgotPasswordMessages } from '@shared/validations/messages/forgot-password-message.error';
 import { passwordEqualValidator } from '@shared/validations/validators/password-equal.validator';
@@ -54,7 +54,7 @@ export class ResetPasswordComponent extends AuthPageAbstract<FormPassword> imple
 					.resetPassword(this.resetToken as string, this.mainForm.value.password as string)
 					.pipe(
 						tap((res: ResponseAuthBase) => {
-							if (res instanceof ResponseAuthError) {
+							if (res instanceof ResponseError) {
 								this.formError = res.message;
 							} else {
 								this.formSuccess = res.message;

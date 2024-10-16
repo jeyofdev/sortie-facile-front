@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { ProfileService } from '@services/profile.service';
 import { AccountSettingsPageAbstract } from '@shared/abstract/account-settings-page.abstract';
+import { NewProfileData } from '@shared/models/profile/new-profile-data.model';
 import { FormDescription } from '@shared/types/form/form-description.type';
 import { validationAccountMessages } from '@shared/validations/messages/account-settings-message.error';
 
@@ -15,7 +17,10 @@ export class AccountSettingsDescriptionPageComponent
 {
 	descriptionCtrl!: FormControl<string>;
 
-	constructor(private _formBuilder: FormBuilder) {
+	constructor(
+		private _formBuilder: FormBuilder,
+		private _profileService: ProfileService,
+	) {
 		super();
 	}
 
@@ -29,6 +34,25 @@ export class AccountSettingsDescriptionPageComponent
 		if (this.mainForm.valid) {
 			console.log(this.mainForm);
 			// TODO save new description
+			this._profileService
+				.updateById(
+					new NewProfileData(
+						'updated',
+						'doe',
+						new Date('1990-12-12'),
+						'12',
+						'Rue du Quai',
+						12345,
+						'1591591591',
+						'jane75',
+						'janedev',
+						'jane75',
+						"it's me",
+						null,
+						[6],
+					),
+				)
+				.subscribe();
 		} else {
 			this.formError = 'The form contains errors. Please verify your information.';
 		}

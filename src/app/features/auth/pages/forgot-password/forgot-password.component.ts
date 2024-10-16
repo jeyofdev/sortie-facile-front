@@ -4,7 +4,7 @@ import { AuthService } from '@services/auth.service';
 import { AuthPageAbstract } from '@shared/abstract/auth-page.abstract';
 import { AuthRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
 import { ResponseAuthBase } from '@shared/models/auth/response-auth-base.model';
-import { ResponseAuthError } from '@shared/models/auth/response-auth-error.model';
+import { ResponseError } from '@shared/models/auth/response-auth-error.model';
 import { FormForgotPassword } from '@shared/types/form/form-forgot-password.type';
 import { RegexHelper } from '@utils/regex.helper';
 import { validationForgotPasswordMessages } from '@shared/validations/messages/forgot-password-message.error';
@@ -43,7 +43,7 @@ export class ForgotPasswordComponent extends AuthPageAbstract<FormForgotPassword
 				.requestForgotPassword(this.mainForm.value.email as string)
 				.pipe(
 					tap((res: ResponseAuthBase) => {
-						if (res instanceof ResponseAuthError) {
+						if (res instanceof ResponseError) {
 							this.formError = res.message;
 						} else {
 							this.formSuccess = res.message;

@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '@services/auth.service';
 import { AuthRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
 import { ResponseAuthBase } from '@shared/models/auth/response-auth-base.model';
-import { ResponseAuthError } from '@shared/models/auth/response-auth-error.model';
+import { ResponseError } from '@shared/models/auth/response-auth-error.model';
 import { tap } from 'rxjs';
 
 @Component({
@@ -34,7 +34,7 @@ export class VerificationAccountPageComponent implements OnInit {
 				.verificationAccount(this.verificationToken)
 				.pipe(
 					tap((res: ResponseAuthBase) => {
-						if (res instanceof ResponseAuthError) {
+						if (res instanceof ResponseError) {
 							this.error = res.message;
 						} else {
 							this.success = res.message;
