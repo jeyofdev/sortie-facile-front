@@ -9,9 +9,9 @@ import { AccountHomePageComponent } from '@root/features/account/pages/account-h
 import { AccountSettingsPersonalInfosPageComponent } from '@root/features/account/pages/account-settings/account-settings-personal-infos-page/account-settings-personal-infos-page.component';
 import { AccountSettingsDescriptionPageComponent } from '@root/features/account/pages/account-settings/account-settings-description-page/account-settings-description-page.component';
 import { AccountSettingsContactPageComponent } from '@root/features/account/pages/account-settings/account-settings-contact-page/account-settings-contact-page.component';
-import { AccountSettingsAddressPageComponent } from '@root/features/account/pages/account-settings/account-settings-address-page/account-settings-address-page.component';
 import { AccountSettingsInterestsPageComponent } from '@root/features/account/pages/account-settings/account-settings-interests-page/account-settings-interests-page.component';
 import { AccountSettingsPasswordPageComponent } from '@root/features/account/pages/account-settings/account-settings-password-page/account-settings-password-page.component';
+import { profileResolver } from '@root/core/resolvers/profile.resolver';
 
 export const routes: Routes = [
 	{
@@ -38,6 +38,9 @@ export const routes: Routes = [
 		path: AccountEnum.SETTINGS,
 		component: AccountSettingsPageComponent,
 		canActivate: [userGuard],
+		resolve: {
+			profile: profileResolver,
+		},
 		children: [
 			{
 				path: SettingsEnum.PROFILE,

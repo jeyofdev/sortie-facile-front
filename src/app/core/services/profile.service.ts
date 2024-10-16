@@ -19,19 +19,21 @@ export class ProfileService {
 	) {}
 
 	add(userId: string, profileData: NewUserProfileDatas): Observable<ResponseAddProfile> {
-		return this._httpClient
-			.post<ResponseAddProfile>(
-				`${this._BASE_URL}/add/region/${profileData.regionId}/department/${profileData.departmentId}/city/${profileData.cityId}/user/${userId}`,
-				profileData.newProfileData,
-			)
-			.pipe(tap(res => console.log(res)));
+		return this._httpClient.post<ResponseAddProfile>(
+			`${this._BASE_URL}/add/region/${profileData.regionId}/department/${profileData.departmentId}/city/${profileData.cityId}/user/${userId}`,
+			profileData.newProfileData,
+		);
 	}
 
 	updateById(profileData: NewProfileData): Observable<ResponseAddProfile> {
 		const userId: string = String(this._authTokenService.getTokenFromLocalStorageAndDecode()?.id);
 
-		return this._httpClient
-			.put<ResponseAddProfile>(`${this._BASE_URL}/update/${userId}`, profileData)
-			.pipe(tap(res => console.log(res)));
+		return this._httpClient.put<ResponseAddProfile>(`${this._BASE_URL}/update/${userId}`, profileData);
+	}
+
+	getById(): Observable<ResponseAddProfile> {
+		const userId: string = String(this._authTokenService.getTokenFromLocalStorageAndDecode()?.id);
+
+		return this._httpClient.get<ResponseAddProfile>(`${this._BASE_URL}/${userId}`);
 	}
 }
