@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccountNavigationService } from '@services/account-navigation.service';
-import { AccountEnum, PrimaryRouteEnum, SettingsEnum } from '@shared/enums/routes.enum';
 import { MenuItem } from 'primeng/api';
 
 @Component({

@@ -7,8 +7,8 @@ import { AuthPageGlobalAbstract } from '@shared/abstract/auth-page-global.abstra
 import { AuthProfileEnum, AuthRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
 import { StepAuthProfileInterests } from '@shared/models/auth/steps/step-auth-profile-interests.model';
 import { Interest } from '@shared/models/interests.interface';
-import { NewProfileData } from '@shared/models/profile/new-profile-data.model';
-import { NewUserProfileDatas } from '@shared/models/profile/profile-datas.model';
+import { NewProfileInput } from '@shared/models/profile/input/new-profil-input.model';
+import { NewProfileDetails } from '@shared/models/profile/input/new-profile-details.model';
 import { ValidationMessage } from '@shared/types/validation-message.type';
 import { validationAuthProfileMessages } from '@shared/validations/messages/auth-profile-message.error';
 import { Observable, tap } from 'rxjs';
@@ -50,11 +50,11 @@ export class InterestsPageComponent extends AuthPageGlobalAbstract<never> implem
 			this._authService
 				.signUpWithEmailAndPassword(
 					this._authStepService.getStepData('step1'),
-					new NewUserProfileDatas(
+					new NewProfileInput(
 						this._authStepService.getStepData('step3').regionId,
 						this._authStepService.getStepData('step3').departmentId,
 						this._authStepService.getStepData('step3').cityId,
-						new NewProfileData(
+						new NewProfileDetails(
 							this._authStepService.getStepData('step2').firstName,
 							this._authStepService.getStepData('step2').lastName,
 							new Date(this._authStepService.getStepData('step2').dateOfBirth),

@@ -1,4 +1,4 @@
-export class NewProfileData {
+export class ProfileDetailsBase {
 	constructor(
 		public firstname: string,
 		public lastname: string,
@@ -12,6 +12,5 @@ export class NewProfileData {
 		public facebook: string,
 		public description: string,
 		public avatar: string | null,
-		public categoryIds: number[],
 	) {}
 }
