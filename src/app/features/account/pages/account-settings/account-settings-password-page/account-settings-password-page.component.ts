@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { AccountSettingsPageAbstract } from '@shared/abstract/account-settings-page.abstract';
 import { FormAccountPassword } from '@shared/types/form/form-account-password.type';
 import { FormPassword } from '@shared/types/form/form-password.type';
@@ -21,8 +22,11 @@ export class AccountSettingsPasswordPageComponent
 	passwordCtrl!: FormControl<string>;
 	confirmPasswordCtrl!: FormControl<string>;
 
-	constructor(private _formBuilder: FormBuilder) {
-		super();
+	constructor(
+		private _formBuilder: FormBuilder,
+		protected override _activatedRoute: ActivatedRoute,
+	) {
+		super(_activatedRoute);
 	}
 
 	override ngOnInit(): void {

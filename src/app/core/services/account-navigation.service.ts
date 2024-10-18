@@ -33,7 +33,7 @@ export class AccountNavigationService {
 			{
 				label: 'Settings',
 				icon: 'pi pi-cog',
-				routerLink: ['/' + PrimaryRouteEnum.ACCOUNT + '/' + AccountEnum.SETTINGS],
+				routerLink: ['/' + PrimaryRouteEnum.ACCOUNT + '/' + AccountEnum.SETTINGS + '/' + SettingsEnum.PROFILE],
 			},
 			{
 				label: 'Logout',
