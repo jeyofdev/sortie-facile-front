@@ -112,7 +112,7 @@ export class AuthService extends AuthUtils {
 	}
 
 	private handleError(err: any): Observable<ResponseError> {
-		const errorMessage = err.error?.message || 'No token was found in the URL or account already verified.';
+		const errorMessage = err.message || 'No token was found in the URL or account already verified.';
 		return of(new ResponseError(true, errorMessage));
 	}
 

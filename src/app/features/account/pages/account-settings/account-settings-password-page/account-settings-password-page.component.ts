@@ -3,10 +3,13 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '@services/auth.service';
 import { AccountSettingsPageAbstract } from '@shared/abstract/account-settings-page.abstract';
+import { ResponseAuthBase } from '@shared/models/auth/response-auth-base.model';
+import { ResponseError } from '@shared/models/auth/response-auth-error.model';
 import { FormAccountPassword } from '@shared/types/form/form-account-password.type';
 import { FormPassword } from '@shared/types/form/form-password.type';
 import { validationAccountMessages } from '@shared/validations/messages/account-settings-message.error';
 import { passwordEqualValidator } from '@shared/validations/validators/password-equal.validator';
+import { tap } from 'rxjs';
 
 @Component({
 	selector: 'app-account-settings-password-page',
@@ -41,6 +44,13 @@ export class AccountSettingsPasswordPageComponent
 		if (this.mainForm.valid) {
 			this._authService
 				.updatePassword(this.mainForm.value.oldPassword as string, this.mainForm.value.passwordForm?.password as string)
+				.pipe(
+					tap((res: ResponseAuthBase) => {
+						if (res instanceof ResponseError) {
+							this.formError = res.message;
+						}
+					}),
+				)
 				.subscribe();
 		} else {
 			if (this.mainForm.get('passwordForm')?.hasError('matchPassword')) {
