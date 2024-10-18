@@ -87,9 +87,17 @@ export class AuthService extends AuthUtils {
 		body.set('newPassword', newPassword);
 
 		return this._httpClient
-			.post<ResponseAuthBase>(`${this._BASE_URL}/update-password?resetToken=${resetToken}`, body.toString(), {
+			.post<ResponseAuthBase>(`${this._BASE_URL}/reset-password?resetToken=${resetToken}`, body.toString(), {
 				headers,
 			})
+			.pipe(catchError(err => this.handleError(err)));
+	}
+
+	updatePassword(oldPassword: string, newPassword: string): Observable<ResponseAuthBase> {
+		const body = { oldPassword, newPassword };
+
+		return this._httpClient
+			.post<ResponseAuthBase>(`${this._BASE_URL}/update-password`, body)
 			.pipe(catchError(err => this.handleError(err)));
 	}
 
