@@ -1,10 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { AuthService } from '@services/auth.service';
 import { AccountSettingsPageAbstract } from '@shared/abstract/account-settings-page.abstract';
+import { ResponseAuthBase } from '@shared/models/auth/response-auth-base.model';
+import { ResponseError } from '@shared/models/auth/response-auth-error.model';
 import { FormAccountPassword } from '@shared/types/form/form-account-password.type';
 import { FormPassword } from '@shared/types/form/form-password.type';
 import { validationAccountMessages } from '@shared/validations/messages/account-settings-message.error';
 import { passwordEqualValidator } from '@shared/validations/validators/password-equal.validator';
+import { tap } from 'rxjs';
 
 @Component({
 	selector: 'app-account-settings-password-page',
@@ -17,12 +22,16 @@ export class AccountSettingsPasswordPageComponent
 {
 	passwordForm!: FormGroup<FormPassword>;
 
-	currentPasswordCtrl!: FormControl<string>;
+	oldPasswordCtrl!: FormControl<string>;
 	passwordCtrl!: FormControl<string>;
 	confirmPasswordCtrl!: FormControl<string>;
 
-	constructor(private _formBuilder: FormBuilder) {
-		super();
+	constructor(
+		private _formBuilder: FormBuilder,
+		protected override _activatedRoute: ActivatedRoute,
+		private _authService: AuthService,
+	) {
+		super(_activatedRoute);
 	}
 
 	override ngOnInit(): void {
@@ -33,8 +42,16 @@ export class AccountSettingsPasswordPageComponent
 	onSubmit(): void {
 		this.formError = '';
 		if (this.mainForm.valid) {
-			console.log(this.mainForm);
-			// TODO save new password
+			this._authService
+				.updatePassword(this.mainForm.value.oldPassword as string, this.mainForm.value.passwordForm?.password as string)
+				.pipe(
+					tap((res: ResponseAuthBase) => {
+						if (res instanceof ResponseError) {
+							this.formError = res.message;
+						}
+					}),
+				)
+				.subscribe();
 		} else {
 			if (this.mainForm.get('passwordForm')?.hasError('matchPassword')) {
 				this.formError =
@@ -47,13 +64,13 @@ export class AccountSettingsPasswordPageComponent
 
 	protected override initMainForm() {
 		this.mainForm = this._formBuilder.group({
-			currentPassword: this.currentPasswordCtrl,
+			oldPassword: this.oldPasswordCtrl,
 			passwordForm: this.passwordForm,
 		});
 	}
 
 	protected override initFormControls(): void {
-		this.currentPasswordCtrl = this._formBuilder.control('', {
+		this.oldPasswordCtrl = this._formBuilder.control('', {
 			validators: [Validators.required, Validators.minLength(8)],
 			nonNullable: true,
 		});

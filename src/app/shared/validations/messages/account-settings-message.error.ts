@@ -32,7 +32,7 @@ export const validationAccountMessages: ValidationMessages[] = [
 	new ValidationMessages('city', {
 		required: 'The city is required for registration.',
 	}),
-	new ValidationMessages('currentPassword', {
+	new ValidationMessages('oldPassword', {
 		required: 'Current password is required.',
 		minlength: 'Current password must be at least 8 characters long.',
 	}),

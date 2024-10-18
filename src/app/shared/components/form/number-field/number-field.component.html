@@ -12,6 +12,7 @@
 			[name]="name"
 			[placeholder]="placeholder"
 			[disabled]="disabled"
+			[(ngModel)]="value"
 			(onInput)="onInputChange($event)"
 			(onFocus)="markAsTouched()"
 			[ngClass]="{
@@ -29,6 +30,7 @@
 		[name]="name"
 		[placeholder]="placeholder"
 		[disabled]="disabled"
+		[(ngModel)]="value"
 		(onInput)="onInputChange($event)"
 		(onFocus)="markAsTouched()"
 		[ngClass]="{

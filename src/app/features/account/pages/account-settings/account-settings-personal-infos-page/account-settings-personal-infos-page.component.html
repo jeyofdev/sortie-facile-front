@@ -64,7 +64,6 @@
 					mode="decimal"
 					id="streetNumber"
 					name="streetNumber"
-					placeholder="10"
 					[min]="1"
 					[max]="9999999"
 					[form]="accountPersonalInfosForm"
@@ -91,7 +90,7 @@
 				></app-text-field>
 			</div>
 
-			<div class="form-control">
+			<!-- <div class="form-control">
 				<app-select-field
 					labelFor="region"
 					label="Region :"
@@ -147,7 +146,7 @@
 						(selectedValueChange)="onCitySelected($event)"
 					></app-autocomplete-field>
 				</div>
-			}
+			} -->
 
 			<div class="btn-cta-box">
 				<p-button type="submit" label="Save changes" icon="pi pi-arrow-up-right" iconPos="right" styleClass="btn-cta" />

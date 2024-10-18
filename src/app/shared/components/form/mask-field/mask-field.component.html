@@ -11,6 +11,7 @@
 			[placeholder]="placeholder"
 			[autoClear]="false"
 			[disabled]="disabled"
+			[(ngModel)]="value"
 			(onInput)="onInputChange($event)"
 			(onFocus)="markAsTouched()"
 			[ngClass]="{
@@ -27,6 +28,7 @@
 		[placeholder]="placeholder"
 		[autoClear]="false"
 		[disabled]="disabled"
+		[(ngModel)]="value"
 		(onInput)="onInputChange($event)"
 		(onFocus)="markAsTouched()"
 		[ngClass]="{

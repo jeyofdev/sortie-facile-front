@@ -17,6 +17,7 @@ import { NumberFieldComponent } from '@shared/components/form/number-field/numbe
 import { SelectFieldComponent } from '@shared/components/form/select-field/select-field.component';
 import { AutocompleteFieldComponent } from '@shared/components/form/autocomplete-field/autocomplete-field.component';
 import { TextareaFieldComponent } from '@shared/components/form/textarea-field/textarea-field.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
 	declarations: [
@@ -37,7 +38,7 @@ import { TextareaFieldComponent } from '@shared/components/form/textarea-field/t
 		AutocompleteFieldComponent,
 		TextareaFieldComponent,
 	],
-	imports: [CommonModule, PrimengModule],
+	imports: [CommonModule, PrimengModule, FormsModule, ReactiveFormsModule],
 	exports: [
 		HeaderComponent,
 		FooterComponent,

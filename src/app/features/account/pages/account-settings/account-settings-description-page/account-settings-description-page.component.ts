@@ -4,10 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { ProfileService } from '@services/profile.service';
 import { AccountSettingsPageAbstract } from '@shared/abstract/account-settings-page.abstract';
 import { UpdateProfileInput } from '@shared/models/profile/input/update-profile-input.model';
-import { ResponseProfile } from '@shared/models/profile/response/response-profile.model';
 import { FormDescription } from '@shared/types/form/form-description.type';
 import { validationAccountMessages } from '@shared/validations/messages/account-settings-message.error';
-import { first } from 'rxjs';
 
 @Component({
 	selector: 'app-account-settings-description-page',
@@ -19,33 +17,29 @@ export class AccountSettingsDescriptionPageComponent
 	implements OnInit
 {
 	descriptionCtrl!: FormControl<string>;
-	resolvedProfile!: ResponseProfile;
 
 	constructor(
+		protected override _activatedRoute: ActivatedRoute,
 		private _formBuilder: FormBuilder,
 		private _profileService: ProfileService,
-		private _activatedRoute: ActivatedRoute,
 	) {
-		super();
+		super(_activatedRoute);
 	}
 
 	override ngOnInit(): void {
 		this.validationMessages = validationAccountMessages;
-
-		this._activatedRoute.parent?.data.pipe(first()).subscribe(data => {
-			this.resolvedProfile = data['profile'];
-		});
-
 		super.ngOnInit();
 	}
 
 	onSubmit(): void {
 		this.formError = '';
 		if (this.mainForm.valid) {
+			const [day, month, year] = this.resolvedProfile.year.dateOfBirth.split('-').map(Number);
+
 			const updatedProfile = new UpdateProfileInput(
 				this.resolvedProfile.name.firstname,
 				this.resolvedProfile.name.lastname,
-				new Date(this.resolvedProfile.year.dateOfBirth),
+				new Date(year, month - 1, day + 1),
 				this.resolvedProfile.address.streetNumber,
 				this.resolvedProfile.address.street,
 				Number(this.resolvedProfile.address.zipCode),
@@ -57,7 +51,7 @@ export class AccountSettingsDescriptionPageComponent
 				this.resolvedProfile.avatar,
 				this.resolvedProfile.activities.results.map((activity: any) => activity.id),
 			);
-			// TODO save new description
+
 			this._profileService.updateById(updatedProfile).subscribe();
 		} else {
 			this.formError = 'The form contains errors. Please verify your information.';
