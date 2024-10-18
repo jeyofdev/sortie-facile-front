@@ -6,14 +6,16 @@ import { AccountSettingsPageAbstract } from '@shared/abstract/account-settings-p
 import { UpdateProfileInput } from '@shared/models/profile/input/update-profile-input.model';
 import { FormContact } from '@shared/types/form/form-contact.type';
 import { FormSocial } from '@shared/types/form/form-social.type';
-import { DateHelper } from '@shared/utils/date-helper';
 import { RegexHelper } from '@shared/utils/regex.helper';
 import { validationAccountMessages } from '@shared/validations/messages/account-settings-message.error';
+import { MessageService } from 'primeng/api';
+import { tap } from 'rxjs';
 
 @Component({
 	selector: 'app-account-settings-contact-page',
 	templateUrl: './account-settings-contact-page.component.html',
 	styleUrl: './account-settings-contact-page.component.scss',
+	providers: [MessageService],
 })
 export class AccountSettingsContactPageComponent extends AccountSettingsPageAbstract<FormContact> implements OnInit {
 	socialForm!: FormGroup<FormSocial>;
@@ -27,6 +29,7 @@ export class AccountSettingsContactPageComponent extends AccountSettingsPageAbst
 		protected override _activatedRoute: ActivatedRoute,
 		private _formBuilder: FormBuilder,
 		private _profileService: ProfileService,
+		private messageService: MessageService,
 	) {
 		super(_activatedRoute);
 	}
@@ -58,10 +61,21 @@ export class AccountSettingsContactPageComponent extends AccountSettingsPageAbst
 				this.resolvedProfile.activities.results.map((activity: any) => activity.id),
 			);
 
-			this._profileService.updateById(updatedProfile).subscribe();
+			this._profileService
+				.updateById(updatedProfile)
+				.pipe(tap(() => this.showToast()))
+				.subscribe();
 		} else {
 			this.formError = 'The form contains errors. Please verify your information.';
 		}
+	}
+
+	showToast() {
+		this.messageService.add({
+			severity: 'success',
+			detail: 'Contact information has been saved successfully.',
+			icon: 'pi pi-check',
+		});
 	}
 
 	protected override initMainForm() {

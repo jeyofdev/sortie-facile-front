@@ -18,6 +18,7 @@ import { SelectFieldComponent } from '@shared/components/form/select-field/selec
 import { AutocompleteFieldComponent } from '@shared/components/form/autocomplete-field/autocomplete-field.component';
 import { TextareaFieldComponent } from '@shared/components/form/textarea-field/textarea-field.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ToastComponent } from '@shared/components/toast/toast.component';
 
 @NgModule({
 	declarations: [
@@ -37,6 +38,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 		SelectFieldComponent,
 		AutocompleteFieldComponent,
 		TextareaFieldComponent,
+		ToastComponent,
 	],
 	imports: [CommonModule, PrimengModule, FormsModule, ReactiveFormsModule],
 	exports: [
@@ -53,6 +55,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 		SelectFieldComponent,
 		AutocompleteFieldComponent,
 		TextareaFieldComponent,
+		ToastComponent,
 	],
 })
 export class ComponentModule {}

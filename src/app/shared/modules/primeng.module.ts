@@ -16,6 +16,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { CheckboxModule } from 'primeng/checkbox';
 import { DividerModule } from 'primeng/divider';
 import { MenubarModule } from 'primeng/menubar';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
 	exports: [
@@ -36,6 +37,7 @@ import { MenubarModule } from 'primeng/menubar';
 		CheckboxModule,
 		DividerModule,
 		MenubarModule,
+		ToastModule,
 	],
 })
 export class PrimengModule {}

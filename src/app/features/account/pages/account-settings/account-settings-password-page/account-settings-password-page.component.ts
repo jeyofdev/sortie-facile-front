@@ -9,12 +9,14 @@ import { FormAccountPassword } from '@shared/types/form/form-account-password.ty
 import { FormPassword } from '@shared/types/form/form-password.type';
 import { validationAccountMessages } from '@shared/validations/messages/account-settings-message.error';
 import { passwordEqualValidator } from '@shared/validations/validators/password-equal.validator';
+import { MessageService } from 'primeng/api';
 import { tap } from 'rxjs';
 
 @Component({
 	selector: 'app-account-settings-password-page',
 	templateUrl: './account-settings-password-page.component.html',
 	styleUrl: './account-settings-password-page.component.scss',
+	providers: [MessageService],
 })
 export class AccountSettingsPasswordPageComponent
 	extends AccountSettingsPageAbstract<FormAccountPassword>
@@ -30,6 +32,7 @@ export class AccountSettingsPasswordPageComponent
 		private _formBuilder: FormBuilder,
 		protected override _activatedRoute: ActivatedRoute,
 		private _authService: AuthService,
+		private messageService: MessageService,
 	) {
 		super(_activatedRoute);
 	}
@@ -51,6 +54,7 @@ export class AccountSettingsPasswordPageComponent
 						}
 					}),
 				)
+				.pipe(tap((response: ResponseAuthBase) => this.showToast(response.message)))
 				.subscribe();
 		} else {
 			if (this.mainForm.get('passwordForm')?.hasError('matchPassword')) {
@@ -60,6 +64,14 @@ export class AccountSettingsPasswordPageComponent
 				this.formError = 'The form contains errors. Please verify your information.';
 			}
 		}
+	}
+
+	showToast(message: string) {
+		this.messageService.add({
+			severity: 'success',
+			detail: message,
+			icon: 'pi pi-check',
+		});
 	}
 
 	protected override initMainForm() {

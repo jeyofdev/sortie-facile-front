@@ -12,12 +12,14 @@ import { FormAccountProfile } from '@shared/types/form/form-account-profile.type
 import { FormName } from '@shared/types/form/form-name.type';
 import { RegexHelper } from '@shared/utils/regex.helper';
 import { validationAccountMessages } from '@shared/validations/messages/account-settings-message.error';
-import { Observable, of } from 'rxjs';
+import { MessageService } from 'primeng/api';
+import { Observable, of, tap } from 'rxjs';
 
 @Component({
 	selector: 'app-account-settings-personal-infos-page',
 	templateUrl: './account-settings-personal-infos-page.component.html',
 	styleUrl: './account-settings-personal-infos-page.component.scss',
+	providers: [MessageService],
 })
 export class AccountSettingsPersonalInfosPageComponent
 	extends AccountSettingsPageAbstract<FormAccountProfile>
@@ -49,6 +51,7 @@ export class AccountSettingsPersonalInfosPageComponent
 		private _formBuilder: FormBuilder,
 		private _addressService: AddressService,
 		private _profileService: ProfileService,
+		private messageService: MessageService,
 	) {
 		super(_activatedRoute);
 	}
@@ -81,10 +84,21 @@ export class AccountSettingsPersonalInfosPageComponent
 				this.resolvedProfile.activities.results.map((activity: any) => activity.id),
 			);
 
-			this._profileService.updateById(updatedProfile).subscribe();
+			this._profileService
+				.updateById(updatedProfile)
+				.pipe(tap(() => this.showToast()))
+				.subscribe();
 		} else {
 			this.formError = 'The form contains errors. Please verify your information.';
 		}
+	}
+
+	showToast() {
+		this.messageService.add({
+			severity: 'success',
+			detail: 'Profil information has been saved successfully.',
+			icon: 'pi pi-check',
+		});
 	}
 
 	onRegionSelected(region: Region): void {
