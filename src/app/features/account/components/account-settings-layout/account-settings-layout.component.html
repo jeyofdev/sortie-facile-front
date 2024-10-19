@@ -21,6 +21,13 @@
 		<ng-content select="[pageSubtitle]"></ng-content>
 	</p>
 
+	@if (showSwitchInput) {
+		<div class="switch-container">
+			<p-inputSwitch [(ngModel)]="isViewDataChecked" (click)="onChangeView()" />
+			<p>I want to change my password</p>
+		</div>
+	}
+
 	<div class="page-content">
 		@if (isViewDatas) {
 			<ng-content select="[primary]"></ng-content>

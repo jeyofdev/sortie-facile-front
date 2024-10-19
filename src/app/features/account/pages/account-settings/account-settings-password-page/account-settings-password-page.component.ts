@@ -22,6 +22,9 @@ export class AccountSettingsPasswordPageComponent
 	extends AccountSettingsPageAbstract<FormAccountPassword>
 	implements OnInit
 {
+	isViewDatas!: boolean;
+	isViewDataChecked!: boolean;
+
 	passwordForm!: FormGroup<FormPassword>;
 
 	oldPasswordCtrl!: FormControl<string>;
@@ -39,6 +42,9 @@ export class AccountSettingsPasswordPageComponent
 
 	override ngOnInit(): void {
 		this.validationMessages = validationAccountMessages;
+		this.isViewDatas = true;
+		this.isViewDataChecked = !this.isViewDatas;
+
 		super.ngOnInit();
 	}
 
@@ -72,6 +78,11 @@ export class AccountSettingsPasswordPageComponent
 			detail: message,
 			icon: 'pi pi-check',
 		});
+	}
+
+	showIsViewDatas(isViewDatas: boolean): void {
+		this.isViewDatas = isViewDatas;
+		this.isViewDataChecked = !this.isViewDatas;
 	}
 
 	protected override initMainForm() {

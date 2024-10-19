@@ -66,3 +66,51 @@
 	font-weight: initial;
 	line-height: 1.2;
 }
+
+:host ::ng-deep .switch-container {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	margin-bottom: 2rem;
+
+	.p-inputswitch {
+		width: 4rem;
+		height: 1.25rem;
+
+		.p-focus {
+			outline: none;
+			box-shadow: none;
+		}
+
+		.p-inputswitch-slider {
+			background-color: var(--primary-50);
+
+			&::before {
+				height: 0.8rem;
+				width: 0.8rem;
+				margin-top: -0.4rem;
+				background-color: var(--primary-500);
+			}
+		}
+
+		&.p-inputswitch-checked {
+			.p-focus {
+				outline: none;
+				box-shadow: none;
+			}
+
+			.p-inputswitch-slider {
+				background-color: var(--primary-500);
+
+				&::before {
+					transform: translateX(2.5rem);
+					background-color: var(--primary-50);
+				}
+			}
+		}
+	}
+
+	p {
+		color: var(--gray-800);
+	}
+}
