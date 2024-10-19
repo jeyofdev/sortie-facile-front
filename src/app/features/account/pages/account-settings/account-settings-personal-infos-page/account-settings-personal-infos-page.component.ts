@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AddressService } from '@services/address.service';
@@ -25,6 +25,8 @@ export class AccountSettingsPersonalInfosPageComponent
 	extends AccountSettingsPageAbstract<FormAccountProfile>
 	implements OnInit
 {
+	isViewDatas!: boolean;
+
 	nameForm!: FormGroup<FormName>;
 
 	firstnameCtrl!: FormControl<string>;
@@ -59,6 +61,7 @@ export class AccountSettingsPersonalInfosPageComponent
 	override ngOnInit(): void {
 		this.regionItems$ = this._addressService.getAllRegions();
 		this.validationMessages = validationAccountMessages;
+		this.isViewDatas = true;
 
 		super.ngOnInit();
 	}
@@ -99,6 +102,10 @@ export class AccountSettingsPersonalInfosPageComponent
 			detail: 'Profil information has been saved successfully.',
 			icon: 'pi pi-check',
 		});
+	}
+
+	showIsViewDatas(isViewDatas: boolean): void {
+		this.isViewDatas = isViewDatas;
 	}
 
 	onRegionSelected(region: Region): void {

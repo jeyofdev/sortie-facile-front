@@ -1,4 +1,10 @@
-<app-account-settings-layout pageTitle="Contact & Social media">
+<app-account-settings-layout
+	pageTitle="Contact & Social media"
+	[showEditCta]="true"
+	severity="error"
+	[isViewDatas]="isViewDatas"
+	(sendIsViewDatas)="showIsViewDatas($event)"
+>
 	<ng-container pageSubtitle>
 		<span
 			>Make sure your phone and social media details are current, so you never miss an important notification or
@@ -7,6 +13,34 @@
 	</ng-container>
 
 	<ng-container primary>
+		<app-account-settings-content-container>
+			<app-account-settings-content-element
+				title="Phone"
+				[content]="mainForm.value.phone"
+				icon="phone"
+			></app-account-settings-content-element>
+
+			<app-account-settings-content-element
+				title="Twitter"
+				[content]="mainForm.value.socialForm?.twitter"
+				icon="twitter"
+			></app-account-settings-content-element>
+
+			<app-account-settings-content-element
+				title="Instagram"
+				[content]="mainForm.value.socialForm?.instagram"
+				icon="instagram"
+			></app-account-settings-content-element>
+
+			<app-account-settings-content-element
+				title="Facebook"
+				[content]="mainForm.value.socialForm?.facebook"
+				icon="facebook"
+			></app-account-settings-content-element>
+		</app-account-settings-content-container>
+	</ng-container>
+
+	<ng-container form>
 		<app-alert-form *ngIf="formError" [content]="formError" severity="error" icon="exclamation-circle"></app-alert-form>
 
 		<form #accountContactForm="ngForm" [formGroup]="mainForm" (ngSubmit)="onSubmit()">

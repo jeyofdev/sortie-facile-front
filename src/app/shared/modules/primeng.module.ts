@@ -17,6 +17,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { DividerModule } from 'primeng/divider';
 import { MenubarModule } from 'primeng/menubar';
 import { ToastModule } from 'primeng/toast';
+import { InputSwitchModule } from 'primeng/inputswitch';
 
 @NgModule({
 	exports: [
@@ -38,6 +39,7 @@ import { ToastModule } from 'primeng/toast';
 		DividerModule,
 		MenubarModule,
 		ToastModule,
+		InputSwitchModule,
 	],
 })
 export class PrimengModule {}

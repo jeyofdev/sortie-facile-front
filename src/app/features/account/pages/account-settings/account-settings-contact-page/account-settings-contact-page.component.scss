@@ -1,3 +1,7 @@
+:host ::ng-deep app-account-settings-content-element {
+	width: calc(50% - (2 * 1.5rem));
+}
+
 :host::ng-deep app-alert-form {
 	.p-messages {
 		margin-bottom: 2rem;

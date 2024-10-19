@@ -1,9 +1,58 @@
-<app-account-settings-layout pageTitle="Profile">
+<app-account-settings-layout
+	pageTitle="Profile"
+	[showEditCta]="true"
+	[isViewDatas]="isViewDatas"
+	(sendIsViewDatas)="showIsViewDatas($event)"
+>
 	<ng-container pageSubtitle>
 		<span>Update your profile information to keep your details accurate and up-to-date.</span>
 	</ng-container>
 
 	<ng-container primary>
+		<app-account-settings-content-container>
+			<app-account-settings-content-element
+				title="Firstname"
+				[content]="mainForm.value.nameForm?.firstname"
+			></app-account-settings-content-element>
+
+			<app-account-settings-content-element
+				title="Lastname"
+				[content]="mainForm.value.nameForm?.lastname"
+			></app-account-settings-content-element>
+
+			<app-account-settings-content-element
+				title="Date of birth"
+				[content]="mainForm.value.dateOfBirth"
+			></app-account-settings-content-element>
+
+			<app-account-settings-content-element
+				title="Street number"
+				[content]="mainForm.value.streetNumber"
+			></app-account-settings-content-element>
+
+			<app-account-settings-content-element
+				title="Street"
+				[content]="mainForm.value.street"
+			></app-account-settings-content-element>
+
+			<app-account-settings-content-element
+				title="Region"
+				[content]="mainForm.value.region"
+			></app-account-settings-content-element>
+
+			<app-account-settings-content-element
+				title="Department"
+				[content]="mainForm.value.department"
+			></app-account-settings-content-element>
+
+			<app-account-settings-content-element
+				title="City"
+				[content]="mainForm.value.city"
+			></app-account-settings-content-element>
+		</app-account-settings-content-container>
+	</ng-container>
+
+	<ng-container form>
 		<app-alert-form *ngIf="formError" [content]="formError" severity="error" icon="exclamation-circle"></app-alert-form>
 
 		<form #accountPersonalInfosForm="ngForm" [formGroup]="mainForm" (ngSubmit)="onSubmit()">

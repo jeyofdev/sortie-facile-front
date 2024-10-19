@@ -1,0 +1,9 @@
+:host ::ng-deep .content-container {
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-start;
+	gap: 2.25rem 1.25rem;
+	flex-wrap: wrap;
+	width: 100%;
+	max-width: 800px;
+}

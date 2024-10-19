@@ -1,9 +1,38 @@
-<h1 class="page-title">{{ pageTitle }}</h1>
+<div class="container">
+	<div class="title-container">
+		<h1 class="page-title">{{ pageTitle }}</h1>
 
-<p class="page-subtitle">
-	<ng-content select="[pageSubtitle]"></ng-content>
-</p>
+		@if (showEditCta) {
+			<p-button
+				type="button"
+				label="Edit"
+				[rounded]="true"
+				[outlined]="true"
+				severity="secondary"
+				icon="pi pi-pencil"
+				iconPos="right"
+				(click)="onChangeView()"
+				styleClass="btn-edit"
+			/>
+		}
+	</div>
 
-<div class="page-content">
-	<ng-content select="[primary]"></ng-content>
+	<p class="page-subtitle">
+		<ng-content select="[pageSubtitle]"></ng-content>
+	</p>
+
+	@if (showSwitchInput) {
+		<div class="switch-container">
+			<p-inputSwitch [(ngModel)]="isViewDataChecked" (click)="onChangeView()" />
+			<p>I want to change my password</p>
+		</div>
+	}
+
+	<div class="page-content">
+		@if (isViewDatas) {
+			<ng-content select="[primary]"></ng-content>
+		} @else {
+			<ng-content select="[form]"></ng-content>
+		}
+	</div>
 </div>

@@ -19,6 +19,8 @@ export class AccountSettingsDescriptionPageComponent
 	extends AccountSettingsPageAbstract<FormDescription>
 	implements OnInit
 {
+	isViewDatas!: boolean;
+
 	descriptionCtrl!: FormControl<string>;
 
 	constructor(
@@ -32,6 +34,8 @@ export class AccountSettingsDescriptionPageComponent
 
 	override ngOnInit(): void {
 		this.validationMessages = validationAccountMessages;
+		this.isViewDatas = true;
+
 		super.ngOnInit();
 	}
 
@@ -63,6 +67,10 @@ export class AccountSettingsDescriptionPageComponent
 		} else {
 			this.formError = 'The form contains errors. Please verify your information.';
 		}
+	}
+
+	showIsViewDatas(isViewDatas: boolean): void {
+		this.isViewDatas = isViewDatas;
 	}
 
 	showToast() {
