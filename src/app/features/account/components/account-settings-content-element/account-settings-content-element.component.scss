@@ -1,0 +1,36 @@
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin: 0;
+}
+
+.card-info {
+	width: 100%;
+
+	h5 {
+		font-size: 1rem;
+		color: var(--gray-500);
+		font-weight: normal;
+		margin-bottom: 0.5rem;
+	}
+
+	i {
+		font-size: 1.05rem;
+	}
+
+	.content-container {
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		gap: 0.5rem;
+
+		p {
+			font-size: 1.1rem;
+			color: var(--black-color);
+		}
+	}
+}

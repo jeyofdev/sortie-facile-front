@@ -1,3 +1,57 @@
+.container {
+	border-radius: 10px;
+	border: 1.5px solid var(--gray-100);
+	background-color: var(--gray-50);
+	padding: 1.5rem 1.75rem;
+}
+
+.title-container {
+	display: flex;
+	justify-content: space-between;
+}
+
+:host ::ng-deep .p-button.btn-edit {
+	padding: 0.5rem;
+
+	@media (min-width: 768px) {
+		padding: 0.5rem 1rem;
+	}
+
+	&.p-button-secondary.p-button-outlined {
+		border-color: var(--gray-300);
+
+		&:hover {
+			border-color: var(--gray-600);
+
+			.p-button-label {
+				color: var(--gray-600);
+			}
+
+			.pi {
+				color: var(--gray-600);
+			}
+		}
+	}
+
+	.p-button-label {
+		display: none;
+		color: var(--gray-300);
+		font-size: 0.9rem;
+		margin-right: 0;
+
+		@media (min-width: 768px) {
+			display: inline-block;
+			margin-right: 1rem;
+		}
+	}
+
+	.pi {
+		color: var(--gray-300);
+		font-size: 0.9rem;
+		margin-left: 0rem;
+	}
+}
+
 .page-title {
 	font-size: 2rem;
 	color: var(--gray-800);

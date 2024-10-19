@@ -1,4 +1,9 @@
-<app-account-settings-layout pageTitle="Description">
+<app-account-settings-layout
+	pageTitle="Description"
+	[showEditCta]="true"
+	[isViewDatas]="isViewDatas"
+	(sendIsViewDatas)="showIsViewDatas($event)"
+>
 	<ng-container pageSubtitle>
 		<span
 			>Personalize your profile by updating your description. Share more about yourself, your passions, and what
@@ -7,6 +12,15 @@
 	</ng-container>
 
 	<ng-container primary>
+		<app-account-settings-content-container>
+			<app-account-settings-content-element
+				title="My description"
+				[content]="mainForm.value.description"
+			></app-account-settings-content-element>
+		</app-account-settings-content-container>
+	</ng-container>
+
+	<ng-container form>
 		<app-alert-form *ngIf="formError" [content]="formError" severity="error" icon="exclamation-circle"></app-alert-form>
 
 		<form #accountDescriptionForm="ngForm" [formGroup]="mainForm" (ngSubmit)="onSubmit()">

@@ -18,6 +18,8 @@ import { tap } from 'rxjs';
 	providers: [MessageService],
 })
 export class AccountSettingsContactPageComponent extends AccountSettingsPageAbstract<FormContact> implements OnInit {
+	isViewDatas!: boolean;
+
 	socialForm!: FormGroup<FormSocial>;
 
 	phoneCtrl!: FormControl<string>;
@@ -36,6 +38,8 @@ export class AccountSettingsContactPageComponent extends AccountSettingsPageAbst
 
 	override ngOnInit(): void {
 		this.validationMessages = validationAccountMessages;
+		this.isViewDatas = true;
+
 		super.ngOnInit();
 	}
 
@@ -76,6 +80,10 @@ export class AccountSettingsContactPageComponent extends AccountSettingsPageAbst
 			detail: 'Contact information has been saved successfully.',
 			icon: 'pi pi-check',
 		});
+	}
+
+	showIsViewDatas(isViewDatas: boolean): void {
+		this.isViewDatas = isViewDatas;
 	}
 
 	protected override initMainForm() {
