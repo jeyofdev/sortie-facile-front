@@ -1,0 +1,33 @@
+@if (isViewDatas) {
+	<app-account-settings-content-container>
+		<app-account-settings-content-element
+			title="My description"
+			[content]="mainForm.value.description"
+		></app-account-settings-content-element>
+	</app-account-settings-content-container>
+} @else {
+	<app-alert-form *ngIf="formError" [content]="formError" severity="error" icon="exclamation-circle"></app-alert-form>
+
+	<form #accountDescriptionForm="ngForm" [formGroup]="mainForm" (ngSubmit)="onSubmit()">
+		<div class="form-control">
+			<app-textarea-field
+				labelFor="description"
+				label="Description :"
+				id="description"
+				name="description"
+				[cols]="30"
+				[rows]="10"
+				placeholder="Enter a description"
+				[form]="accountDescriptionForm"
+				formControlName="description"
+				[parentForm]="mainForm"
+				controlName="description"
+				[validationMessage]="getValidationMessages('description')"
+			></app-textarea-field>
+		</div>
+
+		<div class="btn-cta-box">
+			<p-button type="submit" label="Save changes" icon="pi pi-arrow-up-right" iconPos="right" styleClass="btn-cta" />
+		</div>
+	</form>
+}

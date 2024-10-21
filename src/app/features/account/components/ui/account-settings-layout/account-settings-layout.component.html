@@ -23,16 +23,12 @@
 
 	@if (showSwitchInput) {
 		<div class="switch-container">
-			<p-inputSwitch [(ngModel)]="isViewDataChecked" (click)="onChangeView()" />
+			<p-inputSwitch [(ngModel)]="isViewDatas" (click)="onChangeView()" />
 			<p>I want to change my password</p>
 		</div>
 	}
 
 	<div class="page-content">
-		@if (isViewDatas) {
-			<ng-content select="[primary]"></ng-content>
-		} @else {
-			<ng-content select="[form]"></ng-content>
-		}
+		<ng-content select="[primary]"></ng-content>
 	</div>
 </div>

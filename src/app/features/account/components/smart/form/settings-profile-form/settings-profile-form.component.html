@@ -1,0 +1,75 @@
+@if (isViewDatas) {
+	<app-account-settings-content-container>
+		<app-account-settings-content-element
+			title="Firstname"
+			[content]="mainForm.value.nameForm?.firstname"
+		></app-account-settings-content-element>
+
+		<app-account-settings-content-element
+			title="Lastname"
+			[content]="mainForm.value.nameForm?.lastname"
+		></app-account-settings-content-element>
+
+		<app-account-settings-content-element
+			title="Date of birth"
+			[content]="mainForm.value.dateOfBirth"
+		></app-account-settings-content-element>
+	</app-account-settings-content-container>
+} @else {
+	<app-alert-form *ngIf="formError" [content]="formError" severity="error" icon="exclamation-circle"></app-alert-form>
+
+	<form #accountPersonalInfosForm="ngForm" [formGroup]="mainForm" (ngSubmit)="onSubmit()">
+		<ng-container formGroupName="nameForm">
+			<div class="form-control">
+				<app-text-field
+					labelFor="firstname"
+					label="Firstname :"
+					type="text"
+					id="firstname"
+					name="firstname"
+					placeholder="John"
+					[form]="accountPersonalInfosForm"
+					formControlName="firstname"
+					[parentForm]="nameForm"
+					controlName="firstname"
+					[validationMessage]="getValidationMessages('firstname')"
+				></app-text-field>
+			</div>
+
+			<div class="form-control">
+				<app-text-field
+					labelFor="lastname"
+					label="Lastname :"
+					type="text"
+					id="lastname"
+					name="lastname"
+					placeholder="Doe"
+					[form]="accountPersonalInfosForm"
+					formControlName="lastname"
+					[parentForm]="nameForm"
+					controlName="lastname"
+					[validationMessage]="getValidationMessages('lastname')"
+				></app-text-field>
+			</div>
+		</ng-container>
+
+		<div class="form-control">
+			<app-mask-field
+				labelFor="dateOfBirth"
+				label="Date of birth :"
+				type="date"
+				id="dateOfBirth"
+				name="dateOfBirth"
+				[form]="accountPersonalInfosForm"
+				formControlName="dateOfBirth"
+				[parentForm]="mainForm"
+				controlName="dateOfBirth"
+				[validationMessage]="getValidationMessages('dateOfBirth')"
+			></app-mask-field>
+		</div>
+
+		<div class="btn-cta-box">
+			<p-button type="submit" label="Save changes" icon="pi pi-arrow-up-right" iconPos="right" styleClass="btn-cta" />
+		</div>
+	</form>
+}
