@@ -1,13 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { ProfileService } from '@services/profile.service';
-import { AccountSettingsPageAbstract } from '@shared/abstract/account-settings-page.abstract';
-import { UpdateProfileInput } from '@shared/models/profile/input/update-profile-input.model';
-import { FormDescription } from '@shared/types/form/form-description.type';
-import { validationAccountMessages } from '@shared/validations/messages/account-settings-message.error';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { SettingsService } from '@services/settings.service';
 import { MessageService } from 'primeng/api';
-import { tap } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 @Component({
 	selector: 'app-account-settings-description-page',
@@ -15,82 +9,24 @@ import { tap } from 'rxjs';
 	styleUrl: './account-settings-description-page.component.scss',
 	providers: [MessageService],
 })
-export class AccountSettingsDescriptionPageComponent
-	extends AccountSettingsPageAbstract<FormDescription>
-	implements OnInit
-{
+export class AccountSettingsDescriptionPageComponent implements OnInit, OnDestroy {
 	isViewDatas!: boolean;
 
-	descriptionCtrl!: FormControl<string>;
+	private _descriptionIsViewDatasSubscription: Subscription = new Subscription();
 
-	constructor(
-		protected override _activatedRoute: ActivatedRoute,
-		private _formBuilder: FormBuilder,
-		private _profileService: ProfileService,
-		private messageService: MessageService,
-	) {
-		super(_activatedRoute);
-	}
+	constructor(private _settingsService: SettingsService) {}
 
-	override ngOnInit(): void {
-		this.validationMessages = validationAccountMessages;
-		this.isViewDatas = true;
-
-		super.ngOnInit();
-	}
-
-	onSubmit(): void {
-		this.formError = '';
-		if (this.mainForm.valid) {
-			const [day, month, year] = this.resolvedProfile.year.dateOfBirth.split('-').map(Number);
-
-			const updatedProfile = new UpdateProfileInput(
-				this.resolvedProfile.name.firstname,
-				this.resolvedProfile.name.lastname,
-				new Date(year, month - 1, day + 1),
-				this.resolvedProfile.address.streetNumber,
-				this.resolvedProfile.address.street,
-				Number(this.resolvedProfile.address.zipCode),
-				this.resolvedProfile.contact.phone.split('-').join(''),
-				this.resolvedProfile.contact.socialMedia.twitter,
-				this.resolvedProfile.contact.socialMedia.instagram,
-				this.resolvedProfile.contact.socialMedia.facebook,
-				this.mainForm.value.description as string,
-				this.resolvedProfile.avatar,
-				this.resolvedProfile.activities.results.map((activity: any) => activity.id),
-			);
-
-			this._profileService
-				.updateById(updatedProfile)
-				.pipe(tap(() => this.showToast()))
-				.subscribe();
-		} else {
-			this.formError = 'The form contains errors. Please verify your information.';
-		}
-	}
-
-	showIsViewDatas(isViewDatas: boolean): void {
-		this.isViewDatas = isViewDatas;
-	}
-
-	showToast() {
-		this.messageService.add({
-			severity: 'success',
-			detail: 'The description has been saved successfully.',
-			icon: 'pi pi-check',
+	ngOnInit(): void {
+		this._descriptionIsViewDatasSubscription = this._settingsService.descriptionIsViewDatas$.subscribe(value => {
+			this.isViewDatas = value;
 		});
 	}
 
-	protected override initMainForm() {
-		this.mainForm = this._formBuilder.group({
-			description: this.descriptionCtrl,
-		});
+	onChangeView(): void {
+		this._settingsService.setDescriptionIsViewDatas(!this.isViewDatas);
 	}
 
-	protected override initFormControls(): void {
-		this.descriptionCtrl = this._formBuilder.control(this.resolvedProfile.description, {
-			validators: [Validators.required, Validators.minLength(20)],
-			nonNullable: true,
-		});
+	ngOnDestroy(): void {
+		this._descriptionIsViewDatasSubscription.unsubscribe();
 	}
 }
