@@ -1,5 +1,9 @@
 :host ::ng-deep app-account-settings-content-element {
-	width: calc(50% - (2 * 1.5rem));
+	width: 100%;
+
+	@media screen and (min-width: 600px) {
+		width: calc(50% - (2 * 1.5rem));
+	}
 }
 
 :host::ng-deep app-alert-form {
@@ -11,6 +15,7 @@
 
 :host::ng-deep form {
 	width: 100%;
+	max-width: 750px;
 
 	.form-control {
 		margin-bottom: 1.5rem;
