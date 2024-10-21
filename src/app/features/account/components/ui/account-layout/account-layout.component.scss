@@ -9,14 +9,29 @@
 		display: flex;
 		flex-direction: column;
 		gap: 1.5rem;
-		flex: 0 18%;
-		padding: 2rem 1rem 1rem;
+		flex: 0;
+		padding: 0.5rem 0.25rem 1rem;
+
+		@media screen and (min-width: 1280px) {
+			flex: 0 18%;
+			padding: 2rem 1rem 1rem;
+		}
+
+		p-divider {
+			display: none;
+		}
 
 		.user-infos {
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			align-items: center;
+			display: none;
+
+			@media screen and (min-width: 1280px) {
+				.user-infos {
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+					align-items: center;
+				}
+			}
 
 			.user-avatar {
 				width: 80px;
@@ -95,8 +110,12 @@
 
 							a {
 								font-size: 1.05rem;
-								margin-left: 1rem;
+								margin-left: 0.25rem;
 								text-decoration: none;
+
+								@media screen and (min-width: 1280px) {
+									margin-left: 1rem;
+								}
 							}
 						}
 
@@ -117,13 +136,19 @@
 						}
 
 						a span {
-							gap: 0.5rem;
-							color: var(--gray-800);
+							display: none;
+
+							@media screen and (min-width: 1280px) {
+								display: inline-flex;
+								gap: 0.5rem;
+								color: var(--gray-800);
+							}
 						}
 
 						i {
 							margin-right: 0.4rem;
 							color: var(--gray-800);
+							font-size: 1.25rem;
 						}
 
 						.highlight {
@@ -134,7 +159,11 @@
 							border-radius: 10px;
 
 							a {
-								margin-left: 1rem;
+								margin-left: 0.25rem;
+
+								@media screen and (min-width: 1280px) {
+									margin-left: 1rem;
+								}
 							}
 
 							a span {
