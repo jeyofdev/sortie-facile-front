@@ -1,1 +1,23 @@
-<p>account-settings-interests-page works!</p>
+<app-account-settings-layout pageTitle="Interests" [showEditCta]="true">
+	<ng-container pageSubtitle>
+		<span
+			>Below, you will find a list of your favorite interests, carefully curated to help you stay connected to what
+			inspires you and keep up with the latest updates.</span
+		>
+	</ng-container>
+
+	<ng-container primary>
+		<h6>You have selected {{ userInterests.count }} categories.</h6>
+		<div class="user-interests-container">
+			@for (interest of userInterests.results; track interest.id) {
+				<p-chip [label]="interest.title" [removable]="true" styleClass="user-interest-chip">
+					<ng-template let-chip pTemplate="removeicon">
+						<i class="pi pi-times"></i>
+					</ng-template>
+				</p-chip>
+			}
+		</div>
+	</ng-container>
+</app-account-settings-layout>
+
+<app-toast />
