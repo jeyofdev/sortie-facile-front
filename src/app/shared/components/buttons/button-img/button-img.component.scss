@@ -8,6 +8,10 @@
 	width: 100%;
 	border-radius: 8px;
 
+	&.p-disabled {
+		opacity: 0.25;
+	}
+
 	.p-button {
 		width: 100%;
 		background-size: cover;

@@ -1,0 +1,46 @@
+.interests-container {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.65rem 1rem;
+	margin-bottom: 2rem;
+	max-width: 850px;
+	width: 100%;
+}
+
+h6 {
+	color: var(--gray-800);
+	font-size: 1.05rem;
+	margin-bottom: 1rem;
+	font-weight: normal;
+}
+
+:host ::ng-deep .user-interest-chip {
+	border-radius: 7px;
+	background-color: var(--primary-500);
+	color: var(--gray-50);
+	padding: 0.35rem 1rem 0.25rem 1rem;
+
+	.p-chip-text {
+		font-size: 1.1rem;
+		margin: 0;
+	}
+}
+
+:host ::ng-deep app-button-img {
+	min-width: 140px;
+	width: 100%;
+
+	@media screen and (min-width: 500px) {
+		min-width: auto;
+		width: calc(50% - 0.5rem);
+	}
+
+	@media screen and (min-width: 768px) {
+		width: calc(33.333333% - 1rem);
+	}
+
+	@media screen and (min-width: 992px) {
+		min-width: 150px;
+		width: auto;
+	}
+}

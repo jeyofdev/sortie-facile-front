@@ -19,6 +19,7 @@ import { AutocompleteFieldComponent } from '@shared/components/form/autocomplete
 import { TextareaFieldComponent } from '@shared/components/form/textarea-field/textarea-field.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastComponent } from '@shared/components/toast/toast.component';
+import { ButtonImgComponent } from '@shared/components/buttons/button-img/button-img.component';
 
 @NgModule({
 	declarations: [
@@ -39,6 +40,7 @@ import { ToastComponent } from '@shared/components/toast/toast.component';
 		AutocompleteFieldComponent,
 		TextareaFieldComponent,
 		ToastComponent,
+		ButtonImgComponent,
 	],
 	imports: [CommonModule, PrimengModule, FormsModule, ReactiveFormsModule],
 	exports: [
@@ -56,6 +58,7 @@ import { ToastComponent } from '@shared/components/toast/toast.component';
 		AutocompleteFieldComponent,
 		TextareaFieldComponent,
 		ToastComponent,
+		ButtonImgComponent,
 	],
 })
 export class ComponentModule {}

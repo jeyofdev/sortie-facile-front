@@ -4,6 +4,7 @@ import { ResponseProfileName } from '@shared/models/utils/response-profile-name.
 import { ResponseProfileYear } from '@shared/models/utils/response-profile-year.model';
 import { ResponseProfileContact } from '@shared/models/profile/response/response-profile-contact.model';
 import { ResponseProfileDetails } from './response-profile-details.model';
+import { ResponseInterestBase } from '@shared/models/interests/response/response-interest-base.model';
 
 export class ResponseProfile extends ResponseProfileDetails {
 	constructor(
@@ -18,7 +19,7 @@ export class ResponseProfile extends ResponseProfileDetails {
 		public override avatar: string | null,
 		public activities: CountAndResult<any>, // TODO,
 		public bookings: CountAndResult<any>, // TODO,
-		public categories: CountAndResult<any>, // TODO,
+		public categories: CountAndResult<ResponseInterestBase>,
 	) {
 		super(id, email, nickname, name, year, address, contact, description, avatar);
 	}
