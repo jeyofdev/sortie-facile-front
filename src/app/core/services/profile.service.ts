@@ -36,4 +36,16 @@ export class ProfileService {
 
 		return this._httpClient.get<ResponseProfile>(`${this._BASE_URL}/${userId}`);
 	}
+
+	addOneInterest(categoryId: number): Observable<ResponseProfile> {
+		const userId: string = String(this._authTokenService.getTokenFromLocalStorageAndDecode()?.id);
+
+		return this._httpClient.post<ResponseProfile>(`${this._BASE_URL}/${userId}/category/${String(categoryId)}`, {});
+	}
+
+	removeOneInterest(categoryId: number): Observable<ResponseProfile> {
+		const userId: string = String(this._authTokenService.getTokenFromLocalStorageAndDecode()?.id);
+
+		return this._httpClient.put<ResponseProfile>(`${this._BASE_URL}/${userId}/category/${String(categoryId)}`, {});
+	}
 }

@@ -7,30 +7,39 @@
 	</ng-container>
 
 	<ng-container primary>
-		<h6>You have selected {{ userInterests.count }} interests.</h6>
+		<ng-container *ngIf="userInterests$ | async as userInterests">
+			<h6>You have selected {{ userInterests.count }} interests.</h6>
 
-		<div class="interests-container">
-			@for (interest of userInterests.results; track interest.id) {
-				<p-chip [label]="interest.title" [removable]="true" styleClass="user-interest-chip">
-					<ng-template let-chip pTemplate="removeicon">
-						<i class="pi pi-times"></i>
-					</ng-template>
-				</p-chip>
-			}
-		</div>
+			<div class="interests-container">
+				@for (interest of userInterests.results; track interest.id) {
+					<p-chip
+						styleClass="user-interest-chip"
+						[label]="interest.title"
+						[removable]="true"
+						(onRemove)="removeInterest(interest.id)"
+					>
+						<ng-template let-chip pTemplate="removeicon">
+							<i class="pi pi-times"></i>
+						</ng-template>
+					</p-chip>
+				}
+			</div>
+		</ng-container>
 
-		<h6>Add new interests.</h6>
+		<ng-container *ngIf="choicesInterestList$ | async as choicesInterestList">
+			<h6>Add new interests.</h6>
 
-		<div class="interests-container">
-			@for (interestChoice of choicesInterestList; track interestChoice.id) {
-				<app-button-img
-					[label]="interestChoice.title"
-					[backgroundUrl]="interestChoice.imgUrl"
-					[disabled]="interestChoice.disabled"
-					(onClickBtnImg)="addInterest(interestChoice)"
-				></app-button-img>
-			}
-		</div>
+			<div class="interests-container">
+				@for (interestChoice of choicesInterestList; track interestChoice.id) {
+					<app-button-img
+						[label]="interestChoice.title"
+						[backgroundUrl]="interestChoice.imgUrl"
+						[disabled]="interestChoice.disabled"
+						(onClickBtnImg)="addInterest(interestChoice)"
+					></app-button-img>
+				}
+			</div>
+		</ng-container>
 	</ng-container>
 </app-account-settings-layout>
 
