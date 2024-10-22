@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { RouteAPI } from '@shared/enums/route-api.enum';
-import { Interest } from '@shared/models/interests.interface';
+import { ResponseInterest } from '@shared/models/interests/response/response-interests.interface';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -12,7 +12,7 @@ export class InterestService {
 
 	constructor(private _httpClient: HttpClient) {}
 
-	getAllInterests(): Observable<Interest[]> {
-		return this._httpClient.get<Interest[]>(`${this._BASE_URL}/all`);
+	getAllInterests(): Observable<ResponseInterest[]> {
+		return this._httpClient.get<ResponseInterest[]>(`${this._BASE_URL}/all`);
 	}
 }

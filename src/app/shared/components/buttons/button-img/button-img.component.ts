@@ -8,15 +8,17 @@ import { Component, ElementRef, EventEmitter, Input, Output, Renderer2, ViewChil
 export class ButtonImgComponent {
 	@Input() label!: string;
 	@Input() backgroundUrl?: string;
+	@Input() data!: any;
+	@Input() disabled!: boolean;
 
-	@Output() onClickBtnImg: EventEmitter<void> = new EventEmitter();
+	@Output() onClickBtnImg: EventEmitter<any> = new EventEmitter();
 
 	@ViewChild('pButton', { read: ElementRef }) pButtonElement!: ElementRef;
 
 	constructor(private renderer: Renderer2) {}
 
 	onClick() {
-		this.onClickBtnImg.emit();
+		this.onClickBtnImg.emit(this.data ?? null);
 	}
 
 	ngAfterViewInit(): void {

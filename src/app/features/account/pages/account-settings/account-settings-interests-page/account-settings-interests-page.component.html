@@ -7,14 +7,28 @@
 	</ng-container>
 
 	<ng-container primary>
-		<h6>You have selected {{ userInterests.count }} categories.</h6>
-		<div class="user-interests-container">
+		<h6>You have selected {{ userInterests.count }} interests.</h6>
+
+		<div class="interests-container">
 			@for (interest of userInterests.results; track interest.id) {
 				<p-chip [label]="interest.title" [removable]="true" styleClass="user-interest-chip">
 					<ng-template let-chip pTemplate="removeicon">
 						<i class="pi pi-times"></i>
 					</ng-template>
 				</p-chip>
+			}
+		</div>
+
+		<h6>Add new interests.</h6>
+
+		<div class="interests-container">
+			@for (interestChoice of choicesInterestList; track interestChoice.id) {
+				<app-button-img
+					[label]="interestChoice.title"
+					[backgroundUrl]="interestChoice.imgUrl"
+					[disabled]="interestChoice.disabled"
+					(onClickBtnImg)="addInterest(interestChoice)"
+				></app-button-img>
 			}
 		</div>
 	</ng-container>

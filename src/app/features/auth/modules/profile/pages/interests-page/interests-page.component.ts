@@ -6,7 +6,7 @@ import { InterestService } from '@services/interests.service';
 import { AuthPageGlobalAbstract } from '@shared/abstract/auth-page-global.abstract';
 import { AuthProfileEnum, AuthRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
 import { StepAuthProfileInterests } from '@shared/models/auth/steps/step-auth-profile-interests.model';
-import { Interest } from '@shared/models/interests.interface';
+import { ResponseInterest } from '@shared/models/interests/response/response-interests.interface';
 import { NewProfileInput } from '@shared/models/profile/input/new-profil-input.model';
 import { NewProfileDetails } from '@shared/models/profile/input/new-profile-details.model';
 import { ValidationMessage } from '@shared/types/validation-message.type';
@@ -19,7 +19,7 @@ import { Observable, tap } from 'rxjs';
 	styleUrl: './interests-page.component.scss',
 })
 export class InterestsPageComponent extends AuthPageGlobalAbstract<never> implements OnInit {
-	interestList$!: Observable<Interest[]>;
+	interestList$!: Observable<ResponseInterest[]>;
 	selectedInterestIds: number[] = [];
 	error!: string;
 
