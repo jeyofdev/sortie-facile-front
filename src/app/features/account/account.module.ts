@@ -25,6 +25,7 @@ import { SettingsAddressFormComponent } from './components/smart/form/settings-a
 import { SettingsPasswordFormComponent } from './components/smart/form/settings-password-form/settings-password-form.component';
 import { AccountCreateActivityPageComponent } from '@root/features/account/pages/account-activities/account-create-activity-page/account-create-activity-page.component';
 import { AccountActivityHomePageComponent } from '@root/features/account/pages/account-activities/account-activity-home-page/account-activity-home-page.component';
+import { ActivityCreateFormComponent } from './components/smart/form/activity-create-form/activity-create-form.component';
 
 @NgModule({
 	declarations: [
@@ -50,6 +51,7 @@ import { AccountActivityHomePageComponent } from '@root/features/account/pages/a
 		SettingsPasswordFormComponent,
 		AccountCreateActivityPageComponent,
 		AccountActivityHomePageComponent,
+  ActivityCreateFormComponent,
 	],
 	imports: [CommonModule, AccountRoutingModule, SharedModule, FormsModule, ReactiveFormsModule],
 })
