@@ -22,7 +22,6 @@ export class AutocompleteFieldComponent extends FormInputControlValueAccessor {
 	@Output() selectedValueChange = new EventEmitter<any>();
 
 	filteredItems!: unknown[];
-	selectedCity: unknown | undefined;
 
 	override onInputChange(event: AutoCompleteSelectEvent): void {
 		if (this.disabled) {

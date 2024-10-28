@@ -9,7 +9,7 @@ import { FormSocial } from '@shared/types/form/form-social.type';
 import { RegexHelper } from '@shared/utils/regex.helper';
 import { validationAccountMessages } from '@shared/validations/messages/account-settings-message.error';
 import { MessageService } from 'primeng/api';
-import { tap } from 'rxjs';
+import { switchMap, tap } from 'rxjs';
 
 @Component({
 	selector: 'app-settings-contact-form',
@@ -61,11 +61,18 @@ export class SettingsContactFormComponent extends AccountSettingsPageAbstract<Fo
 				this.resolvedProfile.description,
 				this.resolvedProfile.avatar,
 				this.resolvedProfile.activities.results.map((activity: any) => activity.id),
+				this.resolvedProfile.address.region.id,
+				this.resolvedProfile.address.department.id,
+				this.resolvedProfile.address.city.id,
 			);
 
 			this._profileService
 				.updateById(updatedProfile)
-				.pipe(tap(() => this.showToast()))
+				.pipe(
+					tap(() => this.showToast()),
+					switchMap(() => this._profileService.getById()),
+					tap(updatedProfile => (this.resolvedProfile = updatedProfile)),
+				)
 				.subscribe();
 		} else {
 			this.formError = 'The form contains errors. Please verify your information.';

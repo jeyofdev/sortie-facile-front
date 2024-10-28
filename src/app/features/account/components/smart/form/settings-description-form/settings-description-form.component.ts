@@ -7,7 +7,7 @@ import { UpdateProfileInput } from '@shared/models/profile/input/update-profile-
 import { FormDescription } from '@shared/types/form/form-description.type';
 import { validationAccountMessages } from '@shared/validations/messages/account-settings-message.error';
 import { MessageService } from 'primeng/api';
-import { tap } from 'rxjs';
+import { switchMap, tap } from 'rxjs';
 
 @Component({
 	selector: 'app-settings-description-form',
@@ -53,11 +53,18 @@ export class SettingsDescriptionFormComponent extends AccountSettingsPageAbstrac
 				this.mainForm.value.description as string,
 				this.resolvedProfile.avatar,
 				this.resolvedProfile.activities.results.map((activity: any) => activity.id),
+				this.resolvedProfile.address.region.id,
+				this.resolvedProfile.address.department.id,
+				this.resolvedProfile.address.city.id,
 			);
 
 			this._profileService
 				.updateById(updatedProfile)
-				.pipe(tap(() => this.showToast()))
+				.pipe(
+					tap(() => this.showToast()),
+					switchMap(() => this._profileService.getById()),
+					tap(updatedProfile => (this.resolvedProfile = updatedProfile)),
+				)
 				.subscribe();
 		} else {
 			this.formError = 'The form contains errors. Please verify your information.';

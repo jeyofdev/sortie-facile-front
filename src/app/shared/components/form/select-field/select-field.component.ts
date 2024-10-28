@@ -19,8 +19,6 @@ export class SelectFieldComponent extends FormInputControlValueAccessor {
 	@Input({ required: true }) items!: any[];
 	@Output() selectedValueChange = new EventEmitter<any>();
 
-	selectedCity: any | undefined;
-
 	override onInputChange(event: DropdownChangeEvent): void {
 		if (this.disabled) {
 			return;

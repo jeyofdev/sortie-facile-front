@@ -2,25 +2,25 @@
 	<app-account-settings-content-container>
 		<app-account-settings-content-element
 			title="Phone"
-			[content]="mainForm.value.phone"
+			[content]="resolvedProfile.contact.phone"
 			icon="phone"
 		></app-account-settings-content-element>
 
 		<app-account-settings-content-element
 			title="Twitter"
-			[content]="mainForm.value.socialForm?.twitter"
+			[content]="resolvedProfile.contact.socialMedia.twitter"
 			icon="twitter"
 		></app-account-settings-content-element>
 
 		<app-account-settings-content-element
 			title="Instagram"
-			[content]="mainForm.value.socialForm?.instagram"
+			[content]="resolvedProfile.contact.socialMedia.instagram"
 			icon="instagram"
 		></app-account-settings-content-element>
 
 		<app-account-settings-content-element
 			title="Facebook"
-			[content]="mainForm.value.socialForm?.facebook"
+			[content]="resolvedProfile.contact.socialMedia.facebook"
 			icon="facebook"
 		></app-account-settings-content-element>
 	</app-account-settings-content-container>

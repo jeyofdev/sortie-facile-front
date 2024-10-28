@@ -16,7 +16,7 @@ label {
 
 	.p-dropdown {
 		width: 100%;
-		background-color: transparent;
+		background-color: var(--white-color);
 		border: 1px solid var(--gray-200);
 
 		&:focus {

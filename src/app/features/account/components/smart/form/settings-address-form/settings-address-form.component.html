@@ -2,27 +2,27 @@
 	<app-account-settings-content-container>
 		<app-account-settings-content-element
 			title="Street number"
-			[content]="mainForm.value.streetNumber"
+			[content]="resolvedProfile.address.streetNumber"
 		></app-account-settings-content-element>
 
 		<app-account-settings-content-element
 			title="Street"
-			[content]="mainForm.value.street"
+			[content]="resolvedProfile.address.street"
 		></app-account-settings-content-element>
 
 		<app-account-settings-content-element
 			title="Region"
-			[content]="mainForm.value.region"
+			[content]="resolvedProfile.address.region.name"
 		></app-account-settings-content-element>
 
 		<app-account-settings-content-element
 			title="Department"
-			[content]="mainForm.value.department"
+			[content]="resolvedProfile.address.department.name"
 		></app-account-settings-content-element>
 
 		<app-account-settings-content-element
 			title="City"
-			[content]="mainForm.value.city"
+			[content]="resolvedProfile.address.city.name"
 		></app-account-settings-content-element>
 	</app-account-settings-content-container>
 } @else {
@@ -63,63 +63,63 @@
 			></app-text-field>
 		</div>
 
-		<!-- <div class="form-control">
+		<div class="form-control">
+			<app-select-field
+				labelFor="region"
+				label="Region :"
+				id="region"
+				name="region"
+				placeholder="select region"
+				[items]="(regionItems$ | async) || []"
+				[form]="accountPersonalInfosForm"
+				formControlName="region"
+				[parentForm]="mainForm"
+				controlName="region"
+				[validationMessage]="getValidationMessages('region')"
+				(selectedValueChange)="onRegionSelected($event)"
+			></app-select-field>
+		</div>
+
+		@if (selectedRegion$) {
+			<div class="form-control">
 				<app-select-field
-					labelFor="region"
-					label="Region :"
-					id="region"
-					name="region"
-					placeholder="select region"
-					[items]="(regionItems$ | async) || []"
+					labelFor="department"
+					label="Department :"
+					type="text"
+					id="department"
+					name="department"
+					placeholder="Select department"
+					[items]="(departmentItems$ | async) || []"
 					[form]="accountPersonalInfosForm"
-					formControlName="region"
+					formControlName="department"
 					[parentForm]="mainForm"
-					controlName="region"
-					[validationMessage]="getValidationMessages('region')"
-					(selectedValueChange)="onRegionSelected($event)"
+					controlName="department"
+					[validationMessage]="getValidationMessages('department')"
+					(selectedValueChange)="onDepartmentSelected($event)"
 				></app-select-field>
 			</div>
+		}
 
-			@if (selectedRegion$) {
-				<div class="form-control">
-					<app-select-field
-						labelFor="department"
-						label="Department :"
-						type="text"
-						id="department"
-						name="department"
-						placeholder="Select department"
-						[items]="(departmentItems$ | async) || []"
-						[form]="accountPersonalInfosForm"
-						formControlName="department"
-						[parentForm]="mainForm"
-						controlName="department"
-						[validationMessage]="getValidationMessages('department')"
-						(selectedValueChange)="onDepartmentSelected($event)"
-					></app-select-field>
-				</div>
-			}
-
-			@if (selectedDepartment$) {
-				<div class="form-control">
-					<app-autocomplete-field
-						labelFor="city"
-						label="City :"
-						type="text"
-						id="city"
-						name="city"
-						[showClear]="true"
-						placeholder="Select city"
-						[items]="(cityItems$ | async) || []"
-						[form]="accountPersonalInfosForm"
-						formControlName="city"
-						[parentForm]="mainForm"
-						controlName="city"
-						[validationMessage]="getValidationMessages('city')"
-						(selectedValueChange)="onCitySelected($event)"
-					></app-autocomplete-field>
-				</div>
-			} -->
+		@if (selectedDepartment$) {
+			<div class="form-control">
+				<app-autocomplete-field
+					labelFor="city"
+					label="City :"
+					type="text"
+					id="city"
+					name="city"
+					[showClear]="true"
+					placeholder="Select city"
+					[items]="(cityItems$ | async) || []"
+					[form]="accountPersonalInfosForm"
+					formControlName="city"
+					[parentForm]="mainForm"
+					controlName="city"
+					[validationMessage]="getValidationMessages('city')"
+					(selectedValueChange)="onCitySelected($event)"
+				></app-autocomplete-field>
+			</div>
+		}
 
 		<div class="btn-cta-box">
 			<p-button type="submit" label="Save changes" icon="pi pi-arrow-up-right" iconPos="right" styleClass="btn-cta" />

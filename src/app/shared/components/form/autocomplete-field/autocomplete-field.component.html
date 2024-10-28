@@ -5,7 +5,6 @@
 		<p-inputIcon [styleClass]="iconClass" />
 		<p-autoComplete
 			[dropdown]="true"
-			formControlName="selectedCity"
 			[suggestions]="filteredItems"
 			optionLabel="name"
 			[placeholder]="placeholder"
@@ -22,7 +21,6 @@
 } @else {
 	<p-autoComplete
 		[dropdown]="true"
-		formControlName="selectedCity"
 		[suggestions]="filteredItems"
 		optionLabel="name"
 		[placeholder]="placeholder"
