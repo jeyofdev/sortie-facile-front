@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { AuthStepService } from '@services/auth-step.service';
 import { AuthProfilePage } from '@shared/abstract/auth-profile-page.abstract';
-import { AuthProfileEnum } from '@shared/enums/routes.enum';
+import { AuthProfileRouteEnum } from '@shared/enums/routes.enum';
 import { StepAuthProfilePersonnalInfo } from '@shared/models/auth/steps/step-auth-profile-personal-infos.model';
 import { FormName } from '@shared/types/form/form-name.type';
 import { FormPersonalInfo } from '@shared/types/form/form-personal-info.type';
@@ -43,7 +43,7 @@ export class PersonalPageComponent extends AuthProfilePage<FormPersonalInfo> imp
 				this.mainForm.value?.nameForm?.firstname as string,
 				this.mainForm.value.dateOfBirth as string,
 			),
-			AuthProfileEnum.ADDRESS,
+			AuthProfileRouteEnum.ADDRESS,
 		);
 	}
 

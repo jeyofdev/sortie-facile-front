@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AccountEnum, AuthRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
+import { AccountRouteEnum, AuthRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
 import { MenuItem } from 'primeng/api';
 import { AuthService } from './auth.service';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -41,7 +41,7 @@ export class HeaderService {
 				items: [
 					{
 						label: 'Account',
-						routerLink: PrimaryRouteEnum.ACCOUNT + '/' + AccountEnum.HOME,
+						routerLink: PrimaryRouteEnum.ACCOUNT + '/' + AccountRouteEnum.HOME,
 					},
 					{
 						label: 'Logout',

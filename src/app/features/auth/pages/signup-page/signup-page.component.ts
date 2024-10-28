@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { AuthStepService } from '@services/auth-step.service';
 import { AuthPageAbstract } from '@shared/abstract/auth-page.abstract';
-import { AuthProfileEnum, AuthRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
+import { AuthProfileRouteEnum, AuthRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
 import { StepAuthRegister } from '@shared/models/auth/steps/step-auth-register.model';
 import { FormPassword } from '@shared/types/form/form-password.type';
 import { FormSignup } from '@shared/types/form/form-signup.type';
@@ -56,7 +56,7 @@ export class SignupPageComponent extends AuthPageAbstract<FormSignup> implements
 					'/' +
 					PrimaryRouteEnum.PROFILE +
 					'/' +
-					AuthProfileEnum.PERSONAL,
+					AuthProfileRouteEnum.PERSONAL,
 			);
 		} else {
 			if (this.mainForm.get('passwordForm')?.hasError('matchPassword')) {

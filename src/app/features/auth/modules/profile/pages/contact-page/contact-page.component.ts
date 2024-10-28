@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { AuthStepService } from '@services/auth-step.service';
 import { AuthProfilePage } from '@shared/abstract/auth-profile-page.abstract';
-import { AuthProfileEnum } from '@shared/enums/routes.enum';
+import { AuthProfileRouteEnum } from '@shared/enums/routes.enum';
 import { StepAuthProfileContact } from '@shared/models/auth/steps/step-auth-profile-contact.model';
 import { FormContact } from '@shared/types/form/form-contact.type';
 import { FormSocial } from '@shared/types/form/form-social.type';
@@ -45,12 +45,12 @@ export class ContactPageComponent extends AuthProfilePage<FormContact> implement
 				this.mainForm.value?.socialForm?.instagram as string,
 				this.mainForm.value?.socialForm?.facebook as string,
 			),
-			AuthProfileEnum.DESCRIPTION,
+			AuthProfileRouteEnum.DESCRIPTION,
 		);
 	}
 
 	override backToPreviousStep(): void {
-		super.backToPreviousStep(AuthProfileEnum.ADDRESS);
+		super.backToPreviousStep(AuthProfileRouteEnum.ADDRESS);
 	}
 
 	protected override initMainForm() {

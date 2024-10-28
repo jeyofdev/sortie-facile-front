@@ -4,7 +4,7 @@ import { AuthStepService } from '@services/auth-step.service';
 import { AuthService } from '@services/auth.service';
 import { InterestService } from '@services/interests.service';
 import { AuthPageGlobalAbstract } from '@shared/abstract/auth-page-global.abstract';
-import { AuthProfileEnum, AuthRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
+import { AuthProfileRouteEnum, AuthRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
 import { StepAuthProfileInterests } from '@shared/models/auth/steps/step-auth-profile-interests.model';
 import { ResponseInterest } from '@shared/models/interests/response/response-interests.interface';
 import { NewProfileInput } from '@shared/models/profile/input/new-profil-input.model';
@@ -76,14 +76,14 @@ export class InterestsPageComponent extends AuthPageGlobalAbstract<never> implem
 			this.error = (this.getValidationMessages('interests') as ValidationMessage)['required'];
 		}
 
-		this.navigateByUrl(AuthProfileEnum.INTERESTS);
+		this.navigateByUrl(AuthProfileRouteEnum.INTERESTS);
 	}
 
 	backToPreviousStep(): void {
-		this.navigateByUrl(AuthProfileEnum.DESCRIPTION);
+		this.navigateByUrl(AuthProfileRouteEnum.DESCRIPTION);
 	}
 
-	private navigateByUrl(navitateEndpoint: AuthProfileEnum): void {
+	private navigateByUrl(navitateEndpoint: AuthProfileRouteEnum): void {
 		this._router.navigateByUrl(
 			PrimaryRouteEnum.AUTH + '/' + AuthRouteEnum.SIGNUP + '/' + PrimaryRouteEnum.PROFILE + '/' + navitateEndpoint,
 		);

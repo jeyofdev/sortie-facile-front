@@ -4,27 +4,27 @@ import { AddressPageComponent } from '@features/auth/modules/profile/pages/addre
 import { ContactPageComponent } from '@root/features/auth/modules/profile/pages/contact-page/contact-page.component';
 import { DescriptionPageComponent } from '@root/features/auth/modules/profile/pages/description-page/description-page.component';
 import { InterestsPageComponent } from '@root/features/auth/modules/profile/pages/interests-page/interests-page.component';
-import { AuthProfileEnum } from '@shared/enums/routes.enum';
+import { AuthProfileRouteEnum } from '@shared/enums/routes.enum';
 
 export const routes: Routes = [
 	{
-		path: AuthProfileEnum.PERSONAL,
+		path: AuthProfileRouteEnum.PERSONAL,
 		component: PersonalPageComponent,
 	},
 	{
-		path: AuthProfileEnum.ADDRESS,
+		path: AuthProfileRouteEnum.ADDRESS,
 		component: AddressPageComponent,
 	},
 	{
-		path: AuthProfileEnum.CONTACT,
+		path: AuthProfileRouteEnum.CONTACT,
 		component: ContactPageComponent,
 	},
 	{
-		path: AuthProfileEnum.DESCRIPTION,
+		path: AuthProfileRouteEnum.DESCRIPTION,
 		component: DescriptionPageComponent,
 	},
 	{
-		path: AuthProfileEnum.INTERESTS,
+		path: AuthProfileRouteEnum.INTERESTS,
 		component: InterestsPageComponent,
 	},
 ];

@@ -1,0 +1,169 @@
+<app-alert-form *ngIf="formError" [content]="formError" severity="error" icon="exclamation-circle"></app-alert-form>
+
+<form #accountCreateActivityForm="ngForm" [formGroup]="mainForm" (ngSubmit)="onSubmit()">
+	<div class="form-control">
+		<app-text-field
+			labelFor="title"
+			label="Title :"
+			type="text"
+			id="title"
+			name="title"
+			placeholder="Enter a title"
+			[form]="accountCreateActivityForm"
+			formControlName="title"
+			[parentForm]="mainForm"
+			controlName="title"
+			[validationMessage]="getValidationMessages('title')"
+		></app-text-field>
+	</div>
+
+	<div class="form-control">
+		<app-textarea-field
+			labelFor="description"
+			label="Description :"
+			id="description"
+			name="description"
+			[cols]="30"
+			[rows]="10"
+			placeholder="Enter a description"
+			[form]="accountCreateActivityForm"
+			formControlName="description"
+			[parentForm]="mainForm"
+			controlName="description"
+			[validationMessage]="getValidationMessages('description')"
+		></app-textarea-field>
+	</div>
+
+	<div class="form-control">
+		<app-text-field
+			labelFor="link"
+			label="Link :"
+			type="text"
+			id="link"
+			name="link"
+			placeholder="Enter a link"
+			[form]="accountCreateActivityForm"
+			formControlName="link"
+			[parentForm]="mainForm"
+			controlName="link"
+			[validationMessage]="getValidationMessages('link')"
+		></app-text-field>
+	</div>
+
+	<div class="form-control">
+		<app-mask-field
+			labelFor="date"
+			label="Date :"
+			type="date"
+			id="date"
+			name="date"
+			[form]="accountCreateActivityForm"
+			formControlName="date"
+			[parentForm]="mainForm"
+			controlName="date"
+			[validationMessage]="getValidationMessages('date')"
+		></app-mask-field>
+	</div>
+
+	<ng-container formGroupName="yearOldForm">
+		<div class="form-control">
+			<app-number-field
+				labelFor="minAge"
+				label="Minimum age :"
+				[useGrouping]="false"
+				mode="decimal"
+				id="minAge"
+				name="minAge"
+				[min]="1"
+				[max]="9999999"
+				[form]="accountCreateActivityForm"
+				formControlName="minAge"
+				[parentForm]="yearOldForm"
+				controlName="minAge"
+				[validationMessage]="getValidationMessages('minAge')"
+			></app-number-field>
+		</div>
+
+		<div class="form-control">
+			<app-number-field
+				labelFor="maxAge"
+				label="Maximum age :"
+				[useGrouping]="false"
+				mode="decimal"
+				id="maxAge"
+				name="maxAge"
+				[min]="1"
+				[max]="9999999"
+				[form]="accountCreateActivityForm"
+				formControlName="maxAge"
+				[parentForm]="yearOldForm"
+				controlName="maxAge"
+				[validationMessage]="getValidationMessages('maxAge')"
+			></app-number-field>
+		</div>
+	</ng-container>
+
+	<ng-container formGroupName="addressForm">
+		<div class="form-control">
+			<app-select-field
+				labelFor="region"
+				label="Region :"
+				id="region"
+				name="region"
+				placeholder="select region"
+				[items]="(regionItems$ | async) || []"
+				[form]="accountCreateActivityForm"
+				formControlName="region"
+				[parentForm]="addressForm"
+				controlName="region"
+				[validationMessage]="getValidationMessages('region')"
+				(selectedValueChange)="onRegionSelected($event)"
+			></app-select-field>
+		</div>
+
+		@if (selectedRegion$) {
+			<div class="form-control">
+				<app-select-field
+					labelFor="department"
+					label="Department :"
+					type="text"
+					id="department"
+					name="department"
+					placeholder="Select department"
+					[items]="(departmentItems$ | async) || []"
+					[form]="accountCreateActivityForm"
+					formControlName="department"
+					[parentForm]="addressForm"
+					controlName="department"
+					[validationMessage]="getValidationMessages('department')"
+					(selectedValueChange)="onDepartmentSelected($event)"
+				></app-select-field>
+			</div>
+		}
+
+		@if (selectedDepartment$) {
+			<div class="form-control">
+				<app-autocomplete-field
+					labelFor="city"
+					label="City :"
+					type="text"
+					id="city"
+					name="city"
+					[showClear]="true"
+					placeholder="Select city"
+					[items]="(cityItems$ | async) || []"
+					[form]="accountCreateActivityForm"
+					formControlName="city"
+					[parentForm]="addressForm"
+					controlName="city"
+					[validationMessage]="getValidationMessages('city')"
+					(selectedValueChange)="onCitySelected($event)"
+				></app-autocomplete-field>
+			</div>
+		}
+	</ng-container>
+
+	<div class="btn-cta-box">
+		<p-button type="submit" label="Save changes" icon="pi pi-arrow-up-right" iconPos="right" styleClass="btn-cta" />
+	</div>
+</form>

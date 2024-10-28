@@ -1,7 +1,7 @@
 import { Directive, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthStepService } from '@services/auth-step.service';
-import { AuthProfileEnum, AuthRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
+import { AuthProfileRouteEnum, AuthRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
 import { AuthPageGlobalAbstract } from './auth-page-global.abstract';
 import { AuthStepData } from '@shared/models/auth/auth-step-data.model';
 import { AbstractControl } from '@angular/forms';
@@ -26,7 +26,7 @@ export abstract class AuthProfilePage<T extends { [key: string]: AbstractControl
 	protected onSubmit<K extends keyof AuthStepData>(
 		stepName: K,
 		stepValue: AuthStepData[K],
-		navitateEndpoint: AuthProfileEnum,
+		navitateEndpoint: AuthProfileRouteEnum,
 	): void {
 		console.log('Form Value:', this.mainForm.value);
 		console.log('Form Value:', this.mainForm);
@@ -39,7 +39,7 @@ export abstract class AuthProfilePage<T extends { [key: string]: AbstractControl
 		}
 	}
 
-	protected backToPreviousStep(navitateEndpoint: AuthProfileEnum): void {
+	protected backToPreviousStep(navitateEndpoint: AuthProfileRouteEnum): void {
 		this.navigateByUrl(navitateEndpoint);
 	}
 
@@ -47,7 +47,7 @@ export abstract class AuthProfilePage<T extends { [key: string]: AbstractControl
 
 	protected abstract initFormControls(): void;
 
-	private navigateByUrl(navitateEndpoint: AuthProfileEnum): void {
+	private navigateByUrl(navitateEndpoint: AuthProfileRouteEnum): void {
 		this._router.navigateByUrl(
 			PrimaryRouteEnum.AUTH + '/' + AuthRouteEnum.SIGNUP + '/' + PrimaryRouteEnum.PROFILE + '/' + navitateEndpoint,
 		);

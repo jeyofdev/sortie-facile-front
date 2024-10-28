@@ -15,7 +15,7 @@ export enum AuthRouteEnum {
 	VERIFICATION_ACCOUNT = 'verification-account',
 }
 
-export enum AuthProfileEnum {
+export enum AuthProfileRouteEnum {
 	PERSONAL = 'personal',
 	ADDRESS = 'address',
 	CONTACT = 'contact',
@@ -23,7 +23,7 @@ export enum AuthProfileEnum {
 	INTERESTS = 'interests',
 }
 
-export enum AccountEnum {
+export enum AccountRouteEnum {
 	HOME = 'home',
 	FAVORITES = 'favorites',
 	ACTIVITIES = 'activities',
@@ -31,10 +31,14 @@ export enum AccountEnum {
 	SETTINGS = 'settings',
 }
 
-export enum SettingsEnum {
+export enum SettingsRouteEnum {
 	PROFILE = 'profile',
 	CONTACT = 'contact',
 	DESCRIPTION = 'description',
 	INTERESTS = 'interests',
 	PASSWORD = 'password',
+}
+
+export enum ActivityRouteEnum {
+	CREATE = 'create',
 }
