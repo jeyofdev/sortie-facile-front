@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { AddressService } from '@services/address.service';
 import { AuthStepService } from '@services/auth-step.service';
 import { AuthProfilePage } from '@shared/abstract/auth-profile-page.abstract';
-import { AuthProfileEnum } from '@shared/enums/routes.enum';
+import { AuthProfileRouteEnum } from '@shared/enums/routes.enum';
 import { City } from '@shared/models/address/city.model';
 import { Department } from '@shared/models/address/department.model';
 import { Region } from '@shared/models/address/region.model';
@@ -67,12 +67,12 @@ export class AddressPageComponent extends AuthProfilePage<FormAddress> implement
 				this.zipCode,
 				this.mainForm.value.city as number,
 			),
-			AuthProfileEnum.CONTACT,
+			AuthProfileRouteEnum.CONTACT,
 		);
 	}
 
 	override backToPreviousStep(): void {
-		super.backToPreviousStep(AuthProfileEnum.PERSONAL);
+		super.backToPreviousStep(AuthProfileRouteEnum.PERSONAL);
 	}
 
 	onRegionSelected(region: Region): void {

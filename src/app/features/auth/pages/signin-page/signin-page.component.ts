@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '@services/auth.service';
 import { LocalStorageService } from '@services/local-storage.service';
 import { AuthPageAbstract } from '@shared/abstract/auth-page.abstract';
-import { AccountEnum, AuthRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
+import { AccountRouteEnum, AuthRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
 import { AuthUserCredential } from '@shared/models/auth/auth-user-credential.model';
 import { ResponseAuthBase } from '@shared/models/auth/response-auth-base.model';
 import { ResponseError } from '@shared/models/auth/response-auth-error.model';
@@ -57,7 +57,7 @@ export class SigninPageComponent extends AuthPageAbstract<FormAuthBase> implemen
 						if (res instanceof ResponseError) {
 							this.formError = res.message;
 						} else {
-							this._router.navigateByUrl('/' + PrimaryRouteEnum.ACCOUNT + '/' + AccountEnum.HOME);
+							this._router.navigateByUrl('/' + PrimaryRouteEnum.ACCOUNT + '/' + AccountRouteEnum.HOME);
 						}
 					}),
 				)

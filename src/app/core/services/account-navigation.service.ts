@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { AuthService } from './auth.service';
-import { AccountEnum, AuthRouteEnum, PrimaryRouteEnum, SettingsEnum } from '@shared/enums/routes.enum';
+import { AccountRouteEnum, AuthRouteEnum, PrimaryRouteEnum, SettingsRouteEnum } from '@shared/enums/routes.enum';
 
 @Injectable({
 	providedIn: 'root',
@@ -13,27 +13,29 @@ export class AccountNavigationService {
 			{
 				label: 'Home',
 				icon: 'pi pi-home',
-				routerLink: ['/' + PrimaryRouteEnum.ACCOUNT + '/' + AccountEnum.HOME],
+				routerLink: ['/' + PrimaryRouteEnum.ACCOUNT + '/' + AccountRouteEnum.HOME],
 			},
 			{
 				label: 'Activities',
 				icon: 'pi pi-list-check',
-				routerLink: ['/' + PrimaryRouteEnum.ACCOUNT + '/' + AccountEnum.ACTIVITIES],
+				routerLink: ['/' + PrimaryRouteEnum.ACCOUNT + '/' + AccountRouteEnum.ACTIVITIES],
 			},
 			{
 				label: 'Favorites',
 				icon: 'pi pi-star',
-				routerLink: ['/' + PrimaryRouteEnum.ACCOUNT + '/' + AccountEnum.FAVORITES],
+				routerLink: ['/' + PrimaryRouteEnum.ACCOUNT + '/' + AccountRouteEnum.FAVORITES],
 			},
 			{
 				label: 'Messages',
 				icon: 'pi pi-inbox',
-				routerLink: ['/' + PrimaryRouteEnum.ACCOUNT + '/' + AccountEnum.MESSAGES],
+				routerLink: ['/' + PrimaryRouteEnum.ACCOUNT + '/' + AccountRouteEnum.MESSAGES],
 			},
 			{
 				label: 'Settings',
 				icon: 'pi pi-cog',
-				routerLink: ['/' + PrimaryRouteEnum.ACCOUNT + '/' + AccountEnum.SETTINGS + '/' + SettingsEnum.PROFILE],
+				routerLink: [
+					'/' + PrimaryRouteEnum.ACCOUNT + '/' + AccountRouteEnum.SETTINGS + '/' + SettingsRouteEnum.PROFILE,
+				],
 			},
 			{
 				label: 'Logout',
@@ -48,23 +50,33 @@ export class AccountNavigationService {
 		return [
 			{
 				label: 'Home',
-				routerLink: ['/' + PrimaryRouteEnum.ACCOUNT + '/' + AccountEnum.SETTINGS + '/' + SettingsEnum.PROFILE],
+				routerLink: [
+					'/' + PrimaryRouteEnum.ACCOUNT + '/' + AccountRouteEnum.SETTINGS + '/' + SettingsRouteEnum.PROFILE,
+				],
 			},
 			{
 				label: 'Password',
-				routerLink: ['/' + PrimaryRouteEnum.ACCOUNT + '/' + AccountEnum.SETTINGS + '/' + SettingsEnum.PASSWORD],
+				routerLink: [
+					'/' + PrimaryRouteEnum.ACCOUNT + '/' + AccountRouteEnum.SETTINGS + '/' + SettingsRouteEnum.PASSWORD,
+				],
 			},
 			{
 				label: 'Contact',
-				routerLink: ['/' + PrimaryRouteEnum.ACCOUNT + '/' + AccountEnum.SETTINGS + '/' + SettingsEnum.CONTACT],
+				routerLink: [
+					'/' + PrimaryRouteEnum.ACCOUNT + '/' + AccountRouteEnum.SETTINGS + '/' + SettingsRouteEnum.CONTACT,
+				],
 			},
 			{
 				label: 'Description',
-				routerLink: ['/' + PrimaryRouteEnum.ACCOUNT + '/' + AccountEnum.SETTINGS + '/' + SettingsEnum.DESCRIPTION],
+				routerLink: [
+					'/' + PrimaryRouteEnum.ACCOUNT + '/' + AccountRouteEnum.SETTINGS + '/' + SettingsRouteEnum.DESCRIPTION,
+				],
 			},
 			{
 				label: 'Interests',
-				routerLink: ['/' + PrimaryRouteEnum.ACCOUNT + '/' + AccountEnum.SETTINGS + '/' + SettingsEnum.INTERESTS],
+				routerLink: [
+					'/' + PrimaryRouteEnum.ACCOUNT + '/' + AccountRouteEnum.SETTINGS + '/' + SettingsRouteEnum.INTERESTS,
+				],
 			},
 		];
 	}
