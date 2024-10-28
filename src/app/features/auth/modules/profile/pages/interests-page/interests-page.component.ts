@@ -43,7 +43,6 @@ export class InterestsPageComponent extends AuthPageGlobalAbstract<never> implem
 
 	onSubmit(): void {
 		this._authStepService.setStepData('step6', new StepAuthProfileInterests(this.selectedInterestIds));
-		console.log(this._authStepService.getAllData());
 		this.error = '';
 
 		if (this.selectedInterestIds.length > 0) {

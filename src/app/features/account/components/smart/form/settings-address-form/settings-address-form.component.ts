@@ -12,7 +12,7 @@ import { FormAccountAddress } from '@shared/types/form/form-account-address.type
 import { RegexHelper } from '@shared/utils/regex.helper';
 import { validationAccountMessages } from '@shared/validations/messages/account-settings-message.error';
 import { MessageService } from 'primeng/api';
-import { Observable, of, tap } from 'rxjs';
+import { Observable, of, switchMap, tap } from 'rxjs';
 
 @Component({
 	selector: 'app-settings-address-form',
@@ -73,11 +73,20 @@ export class SettingsAddressFormComponent extends AccountSettingsPageAbstract<Fo
 				this.resolvedProfile.description,
 				this.resolvedProfile.avatar,
 				this.resolvedProfile.activities.results.map((activity: any) => activity.id),
+				this.mainForm.value.region as number,
+				this.mainForm.value.department as number,
+				this.mainForm.value.city as number,
 			);
 
 			this._profileService
 				.updateById(updatedProfile)
-				.pipe(tap(() => this.showToast()))
+				.pipe(
+					tap(() => this.showToast()),
+					switchMap(() => this._profileService.getById()),
+					tap(updatedProfile => {
+						this.resolvedProfile = updatedProfile;
+					}),
+				)
 				.subscribe();
 		} else {
 			this.formError = 'The form contains errors. Please verify your information.';
@@ -132,15 +141,15 @@ export class SettingsAddressFormComponent extends AccountSettingsPageAbstract<Fo
 			validators: [Validators.required, Validators.maxLength(80)],
 			nonNullable: true,
 		});
-		this.regionCtrl = this._formBuilder.control(0, {
+		this.regionCtrl = this._formBuilder.control(this.resolvedProfile.address.region.id, {
 			validators: [Validators.required],
 			nonNullable: true,
 		});
-		this.departmentCtrl = this._formBuilder.control(0, {
+		this.departmentCtrl = this._formBuilder.control(this.resolvedProfile.address.department.id, {
 			validators: [Validators.required],
 			nonNullable: true,
 		});
-		this.cityCtrl = this._formBuilder.control(0, {
+		this.cityCtrl = this._formBuilder.control(this.resolvedProfile.address.city.id, {
 			validators: [Validators.required],
 			nonNullable: true,
 		});

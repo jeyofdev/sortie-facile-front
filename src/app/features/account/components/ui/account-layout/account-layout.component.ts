@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccountNavigationService } from '@services/account-navigation.service';
 import { MenuItem } from 'primeng/api';
@@ -9,6 +9,9 @@ import { MenuItem } from 'primeng/api';
 	styleUrl: './account-layout.component.scss',
 })
 export class AccountLayoutComponent implements OnInit {
+	@Input({ required: true }) pageTitle!: string;
+	@Input() pageSubtitle!: string;
+
 	items!: MenuItem[];
 	activeItem!: MenuItem;
 

@@ -2,17 +2,17 @@
 	<app-account-settings-content-container>
 		<app-account-settings-content-element
 			title="Firstname"
-			[content]="mainForm.value.nameForm?.firstname"
+			[content]="resolvedProfile.name.firstname"
 		></app-account-settings-content-element>
 
 		<app-account-settings-content-element
 			title="Lastname"
-			[content]="mainForm.value.nameForm?.lastname"
+			[content]="resolvedProfile.name.lastname"
 		></app-account-settings-content-element>
 
 		<app-account-settings-content-element
 			title="Date of birth"
-			[content]="mainForm.value.dateOfBirth"
+			[content]="resolvedProfile.year.dateOfBirth"
 		></app-account-settings-content-element>
 	</app-account-settings-content-container>
 } @else {

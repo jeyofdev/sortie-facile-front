@@ -15,6 +15,9 @@ export class UpdateProfileInput extends ProfileDetailsBase {
 		public override description: string,
 		public override avatar: string | null,
 		public categoryIds: number[],
+		public regionId: number,
+		public departmentId: number,
+		public cityId: number,
 	) {
 		super(
 			firstname,
