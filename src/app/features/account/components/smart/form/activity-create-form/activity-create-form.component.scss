@@ -7,14 +7,26 @@
 }
 
 :host::ng-deep form {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1.5rem 1rem;
 	width: 100%;
 	max-width: 750px;
 
 	.form-control {
-		margin-bottom: 1.5rem;
+		width: 100%;
+
+		&.w-50 {
+			width: 100%;
+
+			@media screen and (min-width: 768px) {
+				width: calc(50% - 0.5rem);
+			}
+		}
 	}
 
 	.btn-cta-box {
+		width: 100%;
 		display: flex;
 		justify-content: flex-end;
 	}
@@ -54,7 +66,6 @@
 	display: flex;
 	flex-wrap: wrap;
 	gap: 0.65rem 1rem;
-	margin-bottom: 2rem;
 	margin-top: 0.25rem;
 	max-width: 850px;
 	width: 100%;

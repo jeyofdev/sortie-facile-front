@@ -34,39 +34,8 @@
 		></app-textarea-field>
 	</div>
 
-	<div class="form-control">
-		<app-text-field
-			labelFor="link"
-			label="Link :"
-			type="text"
-			id="link"
-			name="link"
-			placeholder="Enter a link"
-			[form]="accountCreateActivityForm"
-			formControlName="link"
-			[parentForm]="mainForm"
-			controlName="link"
-			[validationMessage]="getValidationMessages('link')"
-		></app-text-field>
-	</div>
-
-	<div class="form-control">
-		<app-mask-field
-			labelFor="date"
-			label="Date :"
-			type="date"
-			id="date"
-			name="date"
-			[form]="accountCreateActivityForm"
-			formControlName="date"
-			[parentForm]="mainForm"
-			controlName="date"
-			[validationMessage]="getValidationMessages('date')"
-		></app-mask-field>
-	</div>
-
 	<ng-container formGroupName="yearOldForm">
-		<div class="form-control">
+		<div class="form-control w-50">
 			<app-number-field
 				labelFor="minAge"
 				label="Minimum age :"
@@ -84,7 +53,7 @@
 			></app-number-field>
 		</div>
 
-		<div class="form-control">
+		<div class="form-control w-50">
 			<app-number-field
 				labelFor="maxAge"
 				label="Maximum age :"
@@ -103,7 +72,22 @@
 		</div>
 	</ng-container>
 
-	<div class="form-control">
+	<div class="form-control w-50">
+		<app-mask-field
+			labelFor="date"
+			label="Date :"
+			type="date"
+			id="date"
+			name="date"
+			[form]="accountCreateActivityForm"
+			formControlName="date"
+			[parentForm]="mainForm"
+			controlName="date"
+			[validationMessage]="getValidationMessages('date')"
+		></app-mask-field>
+	</div>
+
+	<div class="form-control w-50">
 		<app-number-field
 			labelFor="participant"
 			label="Participants :"
@@ -140,7 +124,7 @@
 		</div>
 
 		@if (selectedRegion$) {
-			<div class="form-control">
+			<div class="form-control w-50">
 				<app-select-field
 					labelFor="department"
 					label="Department :"
@@ -160,7 +144,7 @@
 		}
 
 		@if (selectedDepartment$) {
-			<div class="form-control">
+			<div class="form-control w-50">
 				<app-autocomplete-field
 					labelFor="city"
 					label="City :"
@@ -180,21 +164,39 @@
 			</div>
 		}
 
-		<ng-container *ngIf="choicesInterestList$ | async as choicesInterestList">
-			<label for="interests">Interests :</label>
+		<div class="form-control">
+			<ng-container *ngIf="choicesInterestList$ | async as choicesInterestList">
+				<label for="interests">Interests :</label>
 
-			<div class="interests-container">
-				@for (interestChoice of choicesInterestList; track interestChoice.id) {
-					<app-button-img
-						[label]="interestChoice.title"
-						[backgroundUrl]="interestChoice.imgUrl"
-						[disabled]="interestChoice.disabled"
-						(onClickBtnImg)="addInterest(interestChoice)"
-					></app-button-img>
-				}
-			</div>
-		</ng-container>
+				<div class="interests-container">
+					@for (interestChoice of choicesInterestList; track interestChoice.id) {
+						<app-button-img
+							[label]="interestChoice.title"
+							[backgroundUrl]="interestChoice.imgUrl"
+							[disabled]="interestChoice.disabled"
+							(onClickBtnImg)="addInterest(interestChoice)"
+						></app-button-img>
+					}
+				</div>
+			</ng-container>
+		</div>
 	</ng-container>
+
+	<div class="form-control">
+		<app-text-field
+			labelFor="link"
+			label="Link :"
+			type="text"
+			id="link"
+			name="link"
+			placeholder="Enter a link"
+			[form]="accountCreateActivityForm"
+			formControlName="link"
+			[parentForm]="mainForm"
+			controlName="link"
+			[validationMessage]="getValidationMessages('link')"
+		></app-text-field>
+	</div>
 
 	<div class="btn-cta-box">
 		<p-button type="submit" label="Save changes" icon="pi pi-arrow-up-right" iconPos="right" styleClass="btn-cta" />
