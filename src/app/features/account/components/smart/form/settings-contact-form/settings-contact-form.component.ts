@@ -30,7 +30,7 @@ export class SettingsContactFormComponent extends AccountSettingsPageAbstract<Fo
 		protected override _activatedRoute: ActivatedRoute,
 		private _formBuilder: FormBuilder,
 		private _profileService: ProfileService,
-		private messageService: MessageService,
+		private _messageService: MessageService,
 	) {
 		super(_activatedRoute);
 	}
@@ -80,7 +80,7 @@ export class SettingsContactFormComponent extends AccountSettingsPageAbstract<Fo
 	}
 
 	showToast() {
-		this.messageService.add({
+		this._messageService.add({
 			severity: 'success',
 			detail: 'Contact information has been saved successfully.',
 			icon: 'pi pi-check',

@@ -3,18 +3,23 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { ActivityService } from '@services/activity.service';
 import { AddressService } from '@services/address.service';
+import { InterestService } from '@services/interests.service';
+import { NotificationService } from '@services/notification.service';
 import { AccountActivityPageAbstract } from '@shared/abstract/account-activity-page.abstract';
-import { AccountRouteEnum, ActivityRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
+import { AccountRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
 import { NewActivityDetails } from '@shared/models/activity/input/new-activity-details.model';
 import { NewActivityInput } from '@shared/models/activity/input/new-activity-input.model';
 import { City } from '@shared/models/address/city.model';
 import { Department } from '@shared/models/address/department.model';
 import { Region } from '@shared/models/address/region.model';
+import { ResponseInterestWithDisabled } from '@shared/models/interests/response/response-interests-with-disabled.interface';
+import { ResponseInterest } from '@shared/models/interests/response/response-interests.interface';
 import { FormAccountActivityAddress } from '@shared/types/form/form-account-activity-address.type';
 import { FormAccountCreateActivity } from '@shared/types/form/form-account-create-activity.type';
 import { FormYearOld } from '@shared/types/form/form-year-old.type';
 import { validationAccountCreateActivityMessages } from '@shared/validations/messages/account-create-activity-message.error';
-import { Observable, of, tap } from 'rxjs';
+import { MessageService } from 'primeng/api';
+import { BehaviorSubject, map, Observable, of, tap } from 'rxjs';
 
 @Component({
 	selector: 'app-activity-create-form',
@@ -48,11 +53,20 @@ export class ActivityCreateFormComponent
 	selectedDepartment$!: Observable<Department | null>;
 	selectedCity$!: Observable<City | null>;
 
+	private _selectedInterestsSubject = new BehaviorSubject<number[]>([]);
+	selectedInterests$ = this._selectedInterestsSubject.asObservable();
+
+	private _choicesInterestListSubject = new BehaviorSubject<ResponseInterestWithDisabled[]>([]);
+	choicesInterestList$ = this._choicesInterestListSubject.asObservable();
+
 	constructor(
 		private _formBuilder: FormBuilder,
 		private _addressService: AddressService,
 		private _activityService: ActivityService,
 		private _router: Router,
+		private _interestService: InterestService,
+		private _messageService: MessageService,
+		private _notificationService: NotificationService,
 	) {
 		super();
 	}
@@ -61,15 +75,33 @@ export class ActivityCreateFormComponent
 		this.regionItems$ = this._addressService.getAllRegions();
 		this.validationMessages = validationAccountCreateActivityMessages;
 
+		this._interestService
+			.getAllInterests()
+			.pipe(
+				map((interestList: ResponseInterest[]) => {
+					const choices = interestList.map(
+						interest =>
+							new ResponseInterestWithDisabled(
+								interest.id,
+								interest.title,
+								interest.imgUrl,
+								interest.activityIds,
+								false,
+							),
+					);
+
+					this._choicesInterestListSubject.next(choices);
+				}),
+			)
+			.subscribe();
+
 		super.ngOnInit();
 	}
 
 	onSubmit(): void {
 		this.formError = '';
-		console.log(this.mainForm);
 
 		if (this.mainForm.valid) {
-			console.log(this.mainForm.value);
 			this._activityService
 				.addCategory(
 					new NewActivityInput(
@@ -81,26 +113,45 @@ export class ActivityCreateFormComponent
 							new Date(this.mainForm.value.date as string),
 							this.mainForm.value.yearOldForm?.minAge as number,
 							this.mainForm.value.yearOldForm?.maxAge as number,
-							'https://images.unsplash.com/photo-1729867302119-0cd9f7dcc9c8?q=80&w=2672&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+							'',
 							this.mainForm.value.link as string,
 							this.mainForm.value.description as string,
 							this.mainForm.value.participant as number,
 							true,
-							[1, 2],
+							this._selectedInterestsSubject.getValue(),
 						),
 					),
 				)
 				.pipe(
-					tap(() =>
-						this._router.navigateByUrl(
-							'/' + PrimaryRouteEnum.ACCOUNT + '/' + AccountRouteEnum.ACTIVITIES + '/' + ActivityRouteEnum.CREATE,
-						),
-					),
+					tap(() => {
+						this._notificationService.showSuccess('Activity added successfully !');
+						this._router.navigateByUrl('/' + PrimaryRouteEnum.ACCOUNT + '/' + AccountRouteEnum.ACTIVITIES);
+					}),
 				)
 				.subscribe();
 		} else {
 			this.formError = 'The form contains errors. Please verify your information.';
 		}
+	}
+
+	addInterest(interestChoice: ResponseInterestWithDisabled) {
+		const currentInterests = this._selectedInterestsSubject.getValue();
+		const isAlreadyInUserInterests = currentInterests.includes(interestChoice.id);
+
+		const updatedInterests = isAlreadyInUserInterests
+			? currentInterests.filter(id => id !== interestChoice.id)
+			: [...currentInterests, interestChoice.id];
+
+		this._selectedInterestsSubject.next(updatedInterests);
+
+		const updatedChoices = this._choicesInterestListSubject.getValue().map(interest => {
+			if (interest.id === interestChoice.id) {
+				return { ...interest, disabled: !isAlreadyInUserInterests };
+			}
+			return interest;
+		});
+
+		this._choicesInterestListSubject.next(updatedChoices);
 	}
 
 	onRegionSelected(region: Region): void {
@@ -138,11 +189,11 @@ export class ActivityCreateFormComponent
 
 	protected override initFormControls(): void {
 		this.titleCtrl = this._formBuilder.control('', {
-			validators: [Validators.required],
+			validators: [Validators.required, Validators.minLength(5), Validators.maxLength(200)],
 			nonNullable: true,
 		});
 		this.descriptionCtrl = this._formBuilder.control('', {
-			validators: [Validators.required],
+			validators: [Validators.required, Validators.minLength(10)],
 			nonNullable: true,
 		});
 		this.minAgeCtrl = this._formBuilder.control(0, {

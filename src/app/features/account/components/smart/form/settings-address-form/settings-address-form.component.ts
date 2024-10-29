@@ -42,7 +42,7 @@ export class SettingsAddressFormComponent extends AccountSettingsPageAbstract<Fo
 		private _formBuilder: FormBuilder,
 		private _addressService: AddressService,
 		private _profileService: ProfileService,
-		private messageService: MessageService,
+		private _messageService: MessageService,
 	) {
 		super(_activatedRoute);
 	}
@@ -94,7 +94,7 @@ export class SettingsAddressFormComponent extends AccountSettingsPageAbstract<Fo
 	}
 
 	showToast() {
-		this.messageService.add({
+		this._messageService.add({
 			severity: 'success',
 			detail: 'Profil information has been saved successfully.',
 			icon: 'pi pi-check',

@@ -23,7 +23,7 @@ export class SettingsDescriptionFormComponent extends AccountSettingsPageAbstrac
 		protected override _activatedRoute: ActivatedRoute,
 		private _formBuilder: FormBuilder,
 		private _profileService: ProfileService,
-		private messageService: MessageService,
+		private _messageService: MessageService,
 	) {
 		super(_activatedRoute);
 	}
@@ -72,7 +72,7 @@ export class SettingsDescriptionFormComponent extends AccountSettingsPageAbstrac
 	}
 
 	showToast() {
-		this.messageService.add({
+		this._messageService.add({
 			severity: 'success',
 			detail: 'The description has been saved successfully.',
 			icon: 'pi pi-check',

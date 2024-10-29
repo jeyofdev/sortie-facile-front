@@ -31,7 +31,7 @@ export class SettingsPasswordFormComponent extends AccountSettingsPageAbstract<F
 		private _formBuilder: FormBuilder,
 		protected override _activatedRoute: ActivatedRoute,
 		private _authService: AuthService,
-		private messageService: MessageService,
+		private _messageService: MessageService,
 	) {
 		super(_activatedRoute);
 	}
@@ -67,7 +67,7 @@ export class SettingsPasswordFormComponent extends AccountSettingsPageAbstract<F
 	}
 
 	showToast(message: string) {
-		this.messageService.add({
+		this._messageService.add({
 			severity: 'success',
 			detail: message,
 			icon: 'pi pi-check',
