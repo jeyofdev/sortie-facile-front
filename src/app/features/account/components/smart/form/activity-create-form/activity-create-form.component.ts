@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ActivityService } from '@services/activity.service';
 import { AddressService } from '@services/address.service';
 import { InterestService } from '@services/interests.service';
+import { NotificationService } from '@services/notification.service';
 import { AccountActivityPageAbstract } from '@shared/abstract/account-activity-page.abstract';
 import { AccountRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
 import { NewActivityDetails } from '@shared/models/activity/input/new-activity-details.model';
@@ -17,6 +18,7 @@ import { FormAccountActivityAddress } from '@shared/types/form/form-account-acti
 import { FormAccountCreateActivity } from '@shared/types/form/form-account-create-activity.type';
 import { FormYearOld } from '@shared/types/form/form-year-old.type';
 import { validationAccountCreateActivityMessages } from '@shared/validations/messages/account-create-activity-message.error';
+import { MessageService } from 'primeng/api';
 import { BehaviorSubject, map, Observable, of, tap } from 'rxjs';
 
 @Component({
@@ -63,6 +65,8 @@ export class ActivityCreateFormComponent
 		private _activityService: ActivityService,
 		private _router: Router,
 		private _interestService: InterestService,
+		private _messageService: MessageService,
+		private _notificationService: NotificationService,
 	) {
 		super();
 	}
@@ -118,7 +122,12 @@ export class ActivityCreateFormComponent
 						),
 					),
 				)
-				.pipe(tap(() => this._router.navigateByUrl('/' + PrimaryRouteEnum.ACCOUNT + '/' + AccountRouteEnum.ACTIVITIES)))
+				.pipe(
+					tap(() => {
+						this._notificationService.showSuccess('Activity added successfully !');
+						this._router.navigateByUrl('/' + PrimaryRouteEnum.ACCOUNT + '/' + AccountRouteEnum.ACTIVITIES);
+					}),
+				)
 				.subscribe();
 		} else {
 			this.formError = 'The form contains errors. Please verify your information.';

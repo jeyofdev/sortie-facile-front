@@ -7,11 +7,13 @@ import { AppComponent } from '@root/app.component';
 import { SharedModule } from '@shared/shared.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TokenInterceptor } from './core/interceptors/token.interceptor';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
 	declarations: [AppComponent],
 	imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, HttpClientModule, SharedModule],
 	providers: [
+		MessageService,
 		{
 			provide: HTTP_INTERCEPTORS,
 			useClass: TokenInterceptor,
