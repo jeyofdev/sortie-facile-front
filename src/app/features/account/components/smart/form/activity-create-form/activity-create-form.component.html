@@ -103,6 +103,24 @@
 		</div>
 	</ng-container>
 
+	<div class="form-control">
+		<app-number-field
+			labelFor="participant"
+			label="Participants :"
+			[useGrouping]="false"
+			mode="decimal"
+			id="participant"
+			name="participant"
+			[min]="1"
+			[max]="9999999"
+			[form]="accountCreateActivityForm"
+			formControlName="participant"
+			[parentForm]="mainForm"
+			controlName="participant"
+			[validationMessage]="getValidationMessages('participant')"
+		></app-number-field>
+	</div>
+
 	<ng-container formGroupName="addressForm">
 		<div class="form-control">
 			<app-select-field
