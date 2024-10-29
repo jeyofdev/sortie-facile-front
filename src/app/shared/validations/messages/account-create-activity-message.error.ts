@@ -3,9 +3,12 @@ import { ValidationMessages } from '@shared/models/validation-messages.model';
 export const validationAccountCreateActivityMessages: ValidationMessages[] = [
 	new ValidationMessages('title', {
 		required: 'The title is required.',
+		minlength: 'The title must be at least 5 characters long.',
+		maxlength: 'The title must be 200 characters maximum.',
 	}),
 	new ValidationMessages('description', {
 		required: 'The description is required.',
+		minlength: 'The description must contains minimum 10 characters.',
 	}),
 	new ValidationMessages('minAge', {
 		required: 'The minimum age of birth is required.',
