@@ -5,4 +5,5 @@ export enum RouteAPI {
 	DEPARTMENT = 'http://localhost:8080/api/v1/department',
 	CITY = 'http://localhost:8080/api/v1/city',
 	CATEGORY = 'http://localhost:8080/api/v1/category',
+	ACTIVITY = 'http://localhost:8080/api/v1/activity',
 }
