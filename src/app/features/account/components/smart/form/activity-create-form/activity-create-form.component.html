@@ -179,6 +179,21 @@
 				></app-autocomplete-field>
 			</div>
 		}
+
+		<ng-container *ngIf="choicesInterestList$ | async as choicesInterestList">
+			<label for="interests">Interests :</label>
+
+			<div class="interests-container">
+				@for (interestChoice of choicesInterestList; track interestChoice.id) {
+					<app-button-img
+						[label]="interestChoice.title"
+						[backgroundUrl]="interestChoice.imgUrl"
+						[disabled]="interestChoice.disabled"
+						(onClickBtnImg)="addInterest(interestChoice)"
+					></app-button-img>
+				}
+			</div>
+		</ng-container>
 	</ng-container>
 
 	<div class="btn-cta-box">

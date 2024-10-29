@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { ActivityService } from '@services/activity.service';
 import { AddressService } from '@services/address.service';
+import { InterestService } from '@services/interests.service';
 import { AccountActivityPageAbstract } from '@shared/abstract/account-activity-page.abstract';
 import { AccountRouteEnum, ActivityRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
 import { NewActivityDetails } from '@shared/models/activity/input/new-activity-details.model';
@@ -10,11 +11,13 @@ import { NewActivityInput } from '@shared/models/activity/input/new-activity-inp
 import { City } from '@shared/models/address/city.model';
 import { Department } from '@shared/models/address/department.model';
 import { Region } from '@shared/models/address/region.model';
+import { ResponseInterestWithDisabled } from '@shared/models/interests/response/response-interests-with-disabled.interface';
+import { ResponseInterest } from '@shared/models/interests/response/response-interests.interface';
 import { FormAccountActivityAddress } from '@shared/types/form/form-account-activity-address.type';
 import { FormAccountCreateActivity } from '@shared/types/form/form-account-create-activity.type';
 import { FormYearOld } from '@shared/types/form/form-year-old.type';
 import { validationAccountCreateActivityMessages } from '@shared/validations/messages/account-create-activity-message.error';
-import { Observable, of, tap } from 'rxjs';
+import { BehaviorSubject, map, Observable, of, tap } from 'rxjs';
 
 @Component({
 	selector: 'app-activity-create-form',
@@ -48,11 +51,18 @@ export class ActivityCreateFormComponent
 	selectedDepartment$!: Observable<Department | null>;
 	selectedCity$!: Observable<City | null>;
 
+	private _selectedInterestsSubject = new BehaviorSubject<number[]>([]);
+	selectedInterests$ = this._selectedInterestsSubject.asObservable();
+
+	private _choicesInterestListSubject = new BehaviorSubject<ResponseInterestWithDisabled[]>([]);
+	choicesInterestList$ = this._choicesInterestListSubject.asObservable();
+
 	constructor(
 		private _formBuilder: FormBuilder,
 		private _addressService: AddressService,
 		private _activityService: ActivityService,
 		private _router: Router,
+		private _interestService: InterestService,
 	) {
 		super();
 	}
@@ -60,6 +70,26 @@ export class ActivityCreateFormComponent
 	override ngOnInit(): void {
 		this.regionItems$ = this._addressService.getAllRegions();
 		this.validationMessages = validationAccountCreateActivityMessages;
+
+		this._interestService
+			.getAllInterests()
+			.pipe(
+				map((interestList: ResponseInterest[]) => {
+					const choices = interestList.map(
+						interest =>
+							new ResponseInterestWithDisabled(
+								interest.id,
+								interest.title,
+								interest.imgUrl,
+								interest.activityIds,
+								false,
+							),
+					);
+
+					this._choicesInterestListSubject.next(choices);
+				}),
+			)
+			.subscribe();
 
 		super.ngOnInit();
 	}
@@ -86,7 +116,7 @@ export class ActivityCreateFormComponent
 							this.mainForm.value.description as string,
 							this.mainForm.value.participant as number,
 							true,
-							[1, 2],
+							this._selectedInterestsSubject.getValue(),
 						),
 					),
 				)
@@ -101,6 +131,26 @@ export class ActivityCreateFormComponent
 		} else {
 			this.formError = 'The form contains errors. Please verify your information.';
 		}
+	}
+
+	addInterest(interestChoice: ResponseInterestWithDisabled) {
+		const currentInterests = this._selectedInterestsSubject.getValue();
+		const isAlreadyInUserInterests = currentInterests.includes(interestChoice.id);
+
+		const updatedInterests = isAlreadyInUserInterests
+			? currentInterests.filter(id => id !== interestChoice.id)
+			: [...currentInterests, interestChoice.id];
+
+		this._selectedInterestsSubject.next(updatedInterests);
+
+		const updatedChoices = this._choicesInterestListSubject.getValue().map(interest => {
+			if (interest.id === interestChoice.id) {
+				return { ...interest, disabled: !isAlreadyInUserInterests };
+			}
+			return interest;
+		});
+
+		this._choicesInterestListSubject.next(updatedChoices);
 	}
 
 	onRegionSelected(region: Region): void {
