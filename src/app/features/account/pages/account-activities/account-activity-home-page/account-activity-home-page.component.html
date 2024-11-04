@@ -59,10 +59,15 @@
 
 				<ng-template let-product pTemplate="grid" let-products>
 					<ng-container *ngFor="let activity of activities.slice(dv.first || 0, (dv.first || 0) + (dv.rows || 5))">
-						<app-activity-preview-card [activity]="activity"></app-activity-preview-card>
+						<app-activity-preview-card
+							[activity]="activity"
+							(deleteClicked)="deleteActivity($event)"
+						></app-activity-preview-card>
 					</ng-container>
 				</ng-template>
 			</p-dataView>
 		</div>
 	</ng-container>
 </app-account-layout>
+
+<app-delete-modal icon="exclamation-triangle"></app-delete-modal>

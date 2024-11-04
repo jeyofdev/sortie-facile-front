@@ -4,17 +4,19 @@ import { AccountRouteEnum, ActivityRouteEnum, PrimaryRouteEnum } from '@shared/e
 import { ResponseActivity } from '@shared/models/activity/response/response-activity.model';
 import { CountAndResult } from '@shared/models/count-and-result.model';
 import { ResponseInterestBase } from '@shared/models/interests/response/response-interest-base.model';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { combineLatest, first, map, Observable, of } from 'rxjs';
 
 @Component({
 	selector: 'app-account-activity-home-page',
 	templateUrl: './account-activity-home-page.component.html',
 	styleUrl: './account-activity-home-page.component.scss',
+	providers: [ConfirmationService],
 })
 export class AccountActivityHomePageComponent {
 	resolvedActivities$!: Observable<CountAndResult<ResponseActivity>>;
 	filteredActivities$!: Observable<ResponseActivity[]>;
-	layout: 'list' | 'grid' = 'list';
+	layout: 'list' | 'grid' = 'grid';
 
 	categories: ResponseInterestBase[] | undefined;
 	selectedCategory$!: Observable<ResponseInterestBase | null>;
@@ -23,6 +25,8 @@ export class AccountActivityHomePageComponent {
 	constructor(
 		public _router: Router,
 		protected _activatedRoute: ActivatedRoute,
+		private _confirmationService: ConfirmationService,
+		private _messageService: MessageService,
 	) {}
 
 	ngOnInit(): void {
@@ -83,4 +87,27 @@ export class AccountActivityHomePageComponent {
 			PrimaryRouteEnum.ACCOUNT + '/' + AccountRouteEnum.ACTIVITIES + '/' + ActivityRouteEnum.CREATE,
 		);
 	};
+
+	deleteActivity(activityId: number): void {
+		this._confirmationService.confirm({
+			message: 'You are about to delete an activity. Are you sure about your choice? This action is irreversible.',
+			header: 'Delete activity',
+			icon: 'pi pi-info-circle',
+			acceptButtonStyleClass: 'p-button-danger p-button-text',
+			rejectButtonStyleClass: 'p-button-text p-button-text',
+			acceptIcon: 'none',
+			rejectIcon: 'none',
+
+			accept: () => {
+				this._messageService.add({
+					severity: 'success',
+					detail: 'Activity deleted successfully.',
+					icon: 'pi pi-check',
+				});
+			},
+			reject: () => {
+				// this._messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
+			},
+		});
+	}
 }

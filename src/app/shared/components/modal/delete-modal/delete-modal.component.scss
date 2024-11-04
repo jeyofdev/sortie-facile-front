@@ -1,0 +1,51 @@
+:host ::ng-deep p-confirmDialog {
+	.p-dialog {
+		position: absolute;
+		display: flex;
+		background: var(--gray-50);
+		border-radius: 1rem;
+		padding: 2rem 1.5rem;
+
+		.close-btn {
+			position: absolute;
+			top: 0.75rem;
+			right: 0.75rem;
+		}
+
+		.dialog-header {
+			display: flex;
+			justify-content: center;
+
+			i {
+				font-size: 3.5rem;
+				color: var(--red-600);
+				margin-right: 1rem;
+				margin-bottom: 2.5rem;
+			}
+		}
+
+		h3 {
+			font-size: 1.75rem;
+			color: var(--gray-800);
+			text-align: center;
+			margin-bottom: 2rem;
+		}
+
+		p {
+			font-size: 1.1rem;
+			line-height: 1.2;
+			color: var(--gray-800);
+			text-align: center;
+			margin-bottom: 2rem;
+			width: 100%;
+			max-width: 400px;
+		}
+
+		.btns-action {
+			width: 100%;
+			display: flex;
+			justify-content: center;
+			gap: 1rem;
+		}
+	}
+}
