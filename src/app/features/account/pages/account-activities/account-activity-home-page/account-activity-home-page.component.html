@@ -3,7 +3,14 @@
 		<p>My activities ({{ activities.count }})</p>
 
 		<div class="activity-cards-container">
-			<p-dataView #dv [value]="activities.results" [layout]="layout">
+			<p-dataView
+				#dv
+				[value]="activities.results"
+				[layout]="layout"
+				[rows]="6"
+				[totalRecords]="activities.count"
+				[paginator]="true"
+			>
 				<ng-template pTemplate="header">
 					<p-button
 						icon="pi pi-list"
@@ -23,7 +30,9 @@
 				</ng-template>
 
 				<ng-template let-product pTemplate="grid" let-products>
-					<ng-container *ngFor="let activity of activities.results">
+					<ng-container
+						*ngFor="let activity of activities.results.slice(dv.first || 0, (dv.first || 0) + (dv.rows || 5))"
+					>
 						<app-activity-preview-card [activity]="activity"></app-activity-preview-card>
 					</ng-container>
 				</ng-template>
