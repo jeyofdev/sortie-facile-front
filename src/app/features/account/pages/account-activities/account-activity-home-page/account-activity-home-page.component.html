@@ -1,4 +1,36 @@
 <app-account-layout pageTitle="Activities" pageSubtitle="View and manage your added activities.">
+	<ng-container *ngIf="resolvedActivities$ | async as activities">
+		<p>My activities ({{ activities.count }})</p>
+
+		<div class="activity-cards-container">
+			<p-dataView #dv [value]="activities.results" [layout]="layout">
+				<ng-template pTemplate="header">
+					<p-button
+						icon="pi pi-list"
+						(click)="dv.layout = 'list'"
+						[styleClass]="dv.layout === 'list' ? 'btn-header p-button-active' : 'btn-header '"
+					/>
+
+					<p-button
+						icon="pi pi-table"
+						(click)="dv.layout = 'grid'"
+						[styleClass]="dv.layout === 'grid' ? 'btn-header p-button-active' : 'btn-header '"
+					/>
+				</ng-template>
+
+				<ng-template pTemplate="list" let-activities>
+					<app-table-activity-list [activities]="activities"></app-table-activity-list>
+				</ng-template>
+
+				<ng-template let-product pTemplate="grid" let-products>
+					<ng-container *ngFor="let activity of activities.results">
+						<app-activity-preview-card [activity]="activity"></app-activity-preview-card>
+					</ng-container>
+				</ng-template>
+			</p-dataView>
+		</div>
+	</ng-container>
+
 	<p-button
 		type="submit"
 		label="Add new activity"

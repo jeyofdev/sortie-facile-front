@@ -20,6 +20,10 @@ import { ToastModule } from 'primeng/toast';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { TabViewModule } from 'primeng/tabview';
 import { ChipModule } from 'primeng/chip';
+import { CardModule } from 'primeng/card';
+import { DataViewModule } from 'primeng/dataview';
+import { TableModule } from 'primeng/table';
+import { TagModule } from 'primeng/tag';
 
 @NgModule({
 	exports: [
@@ -44,6 +48,10 @@ import { ChipModule } from 'primeng/chip';
 		InputSwitchModule,
 		TabViewModule,
 		ChipModule,
+		CardModule,
+		DataViewModule,
+		TableModule,
+		TagModule,
 	],
 })
 export class PrimengModule {}
