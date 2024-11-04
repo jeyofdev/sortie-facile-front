@@ -5,6 +5,7 @@ import { ResponseProfileYear } from '@shared/models/utils/response-profile-year.
 import { ResponseProfileContact } from '@shared/models/profile/response/response-profile-contact.model';
 import { ResponseProfileDetails } from './response-profile-details.model';
 import { ResponseInterestBase } from '@shared/models/interests/response/response-interest-base.model';
+import { ResponseActivityBase } from '@shared/models/activity/response/response-activity-base.model';
 
 export class ResponseProfile extends ResponseProfileDetails {
 	constructor(
@@ -17,7 +18,7 @@ export class ResponseProfile extends ResponseProfileDetails {
 		public override contact: ResponseProfileContact,
 		public override description: string,
 		public override avatar: string | null,
-		public activities: CountAndResult<any>, // TODO,
+		public activities: CountAndResult<ResponseActivityBase>,
 		public bookings: CountAndResult<any>, // TODO,
 		public categories: CountAndResult<ResponseInterestBase>,
 	) {

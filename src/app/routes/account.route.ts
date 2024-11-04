@@ -29,6 +29,9 @@ export const routes: Routes = [
 		path: AccountRouteEnum.ACTIVITIES,
 		component: AccountActivityHomePageComponent,
 		canActivate: [userGuard],
+		resolve: {
+			profile: profileResolver,
+		},
 	},
 	{
 		path: AccountRouteEnum.ACTIVITIES + '/' + ActivityRouteEnum.CREATE,

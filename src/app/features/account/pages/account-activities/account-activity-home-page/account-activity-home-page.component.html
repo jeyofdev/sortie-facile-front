@@ -1,4 +1,12 @@
 <app-account-layout pageTitle="Activities" pageSubtitle="View and manage your added activities.">
+	<ng-container *ngIf="resolvedActivities$ | async as activities">
+		<p>My activities ({{ activities.count }})</p>
+
+		@for (activity of activities.results; track activity.id) {
+			<pre>{{ activity | json }}</pre>
+		}
+	</ng-container>
+
 	<p-button
 		type="submit"
 		label="Add new activity"
