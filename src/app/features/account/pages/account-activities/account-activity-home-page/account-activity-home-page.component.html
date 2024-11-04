@@ -2,9 +2,31 @@
 	<ng-container *ngIf="resolvedActivities$ | async as activities">
 		<p>My activities ({{ activities.count }})</p>
 
-		@for (activity of activities.results; track activity.id) {
-			<pre>{{ activity | json }}</pre>
-		}
+		<div class="activity-cards-container">
+			<p-dataView #dv [value]="activities.results" [layout]="layout">
+				<ng-template pTemplate="header">
+					<p-button
+						icon="pi pi-list"
+						(click)="dv.layout = 'list'"
+						[styleClass]="dv.layout === 'list' ? 'btn-header p-button-active' : 'btn-header '"
+					/>
+
+					<p-button
+						icon="pi pi-table"
+						(click)="dv.layout = 'grid'"
+						[styleClass]="dv.layout === 'grid' ? 'btn-header p-button-active' : 'btn-header '"
+					/>
+				</ng-template>
+
+				<ng-template pTemplate="list">
+					<p>LIST</p>
+				</ng-template>
+
+				<ng-template pTemplate="grid">
+					<p>CARD</p>
+				</ng-template>
+			</p-dataView>
+		</div>
 	</ng-container>
 
 	<p-button

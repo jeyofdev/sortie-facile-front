@@ -1,0 +1,43 @@
+:host ::ng-deep .activity-cards-container {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1.5rem;
+	margin-top: 1rem;
+
+	p-dataview {
+		width: 100%;
+
+		.p-dataview {
+			.p-dataview-header {
+				display: flex;
+				gap: 0.5rem;
+				background-color: transparent;
+				padding: 0;
+				margin-bottom: 1rem;
+				border: none;
+			}
+
+			.p-dataview-content {
+				background-color: transparent;
+			}
+		}
+	}
+}
+
+:host ::ng-deep .btn-header {
+	background-color: var(--gray-50);
+	border: none;
+
+	.p-button-icon {
+		font-size: 1.25rem;
+		color: var(--primary-900);
+	}
+
+	&.p-button-active {
+		background-color: var(--primary-500);
+
+		.p-button-icon {
+			color: var(--gray-50);
+		}
+	}
+}

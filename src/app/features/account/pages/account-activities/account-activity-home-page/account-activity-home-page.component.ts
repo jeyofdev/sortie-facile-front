@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AccountRouteEnum, ActivityRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
-import { ResponseActivityBase } from '@shared/models/activity/response/response-activity-base.model';
+import { ResponseActivity } from '@shared/models/activity/response/response-activity.model';
 import { CountAndResult } from '@shared/models/count-and-result.model';
 import { first, Observable, of } from 'rxjs';
 
@@ -11,7 +11,8 @@ import { first, Observable, of } from 'rxjs';
 	styleUrl: './account-activity-home-page.component.scss',
 })
 export class AccountActivityHomePageComponent {
-	resolvedActivities$!: Observable<CountAndResult<ResponseActivityBase>>;
+	resolvedActivities$!: Observable<CountAndResult<ResponseActivity>>;
+	layout: 'list' | 'grid' = 'list';
 
 	constructor(
 		public _router: Router,
