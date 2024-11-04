@@ -1,14 +1,42 @@
 <app-account-layout pageTitle="Activities" pageSubtitle="View and manage your added activities.">
-	<ng-container *ngIf="resolvedActivities$ | async as activities">
-		<p>My activities ({{ activities.count }})</p>
+	<ng-container *ngIf="filteredActivities$ | async as activities">
+		<div class="content-header">
+			<div class="filters">
+				<p-dropdown
+					[options]="categories"
+					(onChange)="onCategoryChange($event)"
+					optionLabel="title"
+					placeholder="Select a category"
+				></p-dropdown>
+
+				<input
+					type="text"
+					pInputText
+					placeholder="Search by title"
+					(input)="onSearchTitleChange($event)"
+					style="margin-bottom: 1rem"
+				/>
+			</div>
+
+			<p-button
+				type="submit"
+				label="Add new activity"
+				icon="pi pi-plus"
+				iconPos="right"
+				styleClass="btn-cta"
+				(click)="onClick()"
+			/>
+		</div>
+
+		<p>My activities ({{ activities.length }})</p>
 
 		<div class="activity-cards-container">
 			<p-dataView
 				#dv
-				[value]="activities.results"
+				[value]="activities"
 				[layout]="layout"
 				[rows]="6"
-				[totalRecords]="activities.count"
+				[totalRecords]="activities.length"
 				[paginator]="true"
 			>
 				<ng-template pTemplate="header">
@@ -30,22 +58,11 @@
 				</ng-template>
 
 				<ng-template let-product pTemplate="grid" let-products>
-					<ng-container
-						*ngFor="let activity of activities.results.slice(dv.first || 0, (dv.first || 0) + (dv.rows || 5))"
-					>
+					<ng-container *ngFor="let activity of activities.slice(dv.first || 0, (dv.first || 0) + (dv.rows || 5))">
 						<app-activity-preview-card [activity]="activity"></app-activity-preview-card>
 					</ng-container>
 				</ng-template>
 			</p-dataView>
 		</div>
 	</ng-container>
-
-	<p-button
-		type="submit"
-		label="Add new activity"
-		icon="pi pi-plus"
-		iconPos="right"
-		styleClass="btn-cta"
-		(click)="onClick()"
-	/>
 </app-account-layout>
