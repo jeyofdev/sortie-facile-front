@@ -1,0 +1,112 @@
+:host ::ng-deep p-table {
+	width: 100%;
+
+	.p-datatable.p-datatable-striped {
+		width: 100%;
+
+		.p-datatable-thead {
+			> tr {
+				> th {
+					background-color: transparent;
+					font-size: 1rem;
+					color: var(--gray-800);
+					border-color: var(--primary-100);
+
+					.th-box {
+						display: flex;
+					}
+
+					p-sorticon {
+						.p-sortable-column-icon {
+							color: var(--gray-800);
+						}
+					}
+				}
+			}
+		}
+
+		.p-datatable-tbody > tr {
+			background-color: var(--primary-50);
+
+			&:nth-child(2n) {
+				background-color: transparent;
+			}
+
+			td {
+				font-size: 1rem;
+				color: var(--gray-800);
+				border-color: var(--primary-50);
+
+				.flex {
+					display: flex;
+					gap: 0.5rem;
+
+					p-tag {
+						.p-tag {
+							font-size: 0.9rem;
+							font-weight: normal;
+						}
+					}
+				}
+
+				&.td-image {
+					width: 175px;
+					height: 60px;
+					overflow: hidden;
+
+					img {
+						object-fit: cover;
+						width: 100%;
+						max-width: 200px;
+						height: 95px;
+					}
+				}
+
+				.btn-action-box {
+					display: flex;
+					gap: 0.5rem;
+
+					.p-button.p-button-icon-only {
+						padding: 0;
+						width: 2.1rem;
+						height: 2.1rem;
+
+						&.p-button-success {
+							background: var(--green-100);
+							border: none;
+
+							&:not(:disabled):hover {
+								background: var(--green-500);
+
+								.p-button-icon {
+									color: var(--green-50);
+								}
+							}
+
+							.p-button-icon {
+								color: var(--green-600);
+							}
+						}
+
+						&.p-button-danger {
+							background: var(--red-100);
+							border: none;
+
+							&:not(:disabled):hover {
+								background: var(--red-500);
+
+								.p-button-icon {
+									color: var(--red-50);
+								}
+							}
+
+							.p-button-icon {
+								color: var(--red-600);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

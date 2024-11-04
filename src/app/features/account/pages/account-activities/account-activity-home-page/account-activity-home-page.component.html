@@ -18,8 +18,8 @@
 					/>
 				</ng-template>
 
-				<ng-template pTemplate="list">
-					<p>LIST</p>
+				<ng-template pTemplate="list" let-activities>
+					<app-table-activity-list [activities]="activities"></app-table-activity-list>
 				</ng-template>
 
 				<ng-template let-product pTemplate="grid" let-products>
