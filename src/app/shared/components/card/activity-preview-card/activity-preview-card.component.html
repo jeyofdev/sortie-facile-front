@@ -1,0 +1,33 @@
+<p-card [header]="activity.name">
+	<ng-template pTemplate="header">
+		<img alt="Card" [src]="activity.imgUrl && 'assets/images/signin.jpg'" />
+
+		<div class="btn-action-box">
+			<p-button icon="pi pi-pencil" severity="success" [rounded]="true" />
+			<p-button icon="pi pi-trash" severity="danger" [rounded]="true" />
+		</div>
+	</ng-template>
+
+	<ng-template pTemplate="subtitle">
+		<ng-container *ngIf="activity.categories.results.length">
+			<div class="categories-tags">
+				<ng-container *ngFor="let category of activity.categories.results">
+					<p-tag severity="info" [value]="category.title" />
+				</ng-container>
+			</div>
+		</ng-container>
+	</ng-template>
+
+	<p>{{ activity.description }}</p>
+
+	<ng-template pTemplate="footer">
+		<p-button
+			type="button"
+			[rounded]="true"
+			label="Discover more details"
+			icon="pi pi-eye"
+			iconPos="right"
+			styleClass="btn-view-more"
+		/>
+	</ng-template>
+</p-card>

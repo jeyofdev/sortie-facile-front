@@ -18,7 +18,18 @@
 			}
 
 			.p-dataview-content {
+				width: 100%;
+				display: flex;
+				justify-content: space-between;
+				align-items: stretch;
+				flex-wrap: wrap;
+				gap: 1rem;
 				background-color: transparent;
+
+				app-activity-preview-card {
+					display: flex;
+					width: calc(33.3333333% - 1.5rem);
+				}
 			}
 		}
 	}

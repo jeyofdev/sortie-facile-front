@@ -20,6 +20,7 @@ import { TextareaFieldComponent } from '@shared/components/form/textarea-field/t
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastComponent } from '@shared/components/toast/toast.component';
 import { ButtonImgComponent } from '@shared/components/buttons/button-img/button-img.component';
+import { ActivityPreviewCardComponent } from '@shared/components/card/activity-preview-card/activity-preview-card.component';
 
 @NgModule({
 	declarations: [
@@ -41,6 +42,7 @@ import { ButtonImgComponent } from '@shared/components/buttons/button-img/button
 		TextareaFieldComponent,
 		ToastComponent,
 		ButtonImgComponent,
+		ActivityPreviewCardComponent,
 	],
 	imports: [CommonModule, PrimengModule, FormsModule, ReactiveFormsModule],
 	exports: [
@@ -59,6 +61,7 @@ import { ButtonImgComponent } from '@shared/components/buttons/button-img/button
 		TextareaFieldComponent,
 		ToastComponent,
 		ButtonImgComponent,
+		ActivityPreviewCardComponent,
 	],
 })
 export class ComponentModule {}

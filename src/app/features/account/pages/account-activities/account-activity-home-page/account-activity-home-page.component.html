@@ -22,8 +22,10 @@
 					<p>LIST</p>
 				</ng-template>
 
-				<ng-template pTemplate="grid">
-					<p>CARD</p>
+				<ng-template let-product pTemplate="grid" let-products>
+					<ng-container *ngFor="let activity of activities.results">
+						<app-activity-preview-card [activity]="activity"></app-activity-preview-card>
+					</ng-container>
 				</ng-template>
 			</p-dataView>
 		</div>

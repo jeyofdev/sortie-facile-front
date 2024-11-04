@@ -23,6 +23,7 @@ import { ChipModule } from 'primeng/chip';
 import { CardModule } from 'primeng/card';
 import { DataViewModule } from 'primeng/dataview';
 import { TableModule } from 'primeng/table';
+import { TagModule } from 'primeng/tag';
 
 @NgModule({
 	exports: [
@@ -50,6 +51,7 @@ import { TableModule } from 'primeng/table';
 		CardModule,
 		DataViewModule,
 		TableModule,
+		TagModule,
 	],
 })
 export class PrimengModule {}
