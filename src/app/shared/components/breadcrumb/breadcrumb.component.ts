@@ -8,4 +8,5 @@ import { MenuItem } from 'primeng/api';
 })
 export class BreadcrumbComponent {
 	@Input() items!: MenuItem[];
+	@Input() title!: string;
 }

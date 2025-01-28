@@ -1,0 +1,37 @@
+:host ::ng-deep .content-wrapper {
+	display: flex;
+	justify-content: center;
+	margin-top: 2rem;
+
+	app-container {
+		width: 100%;
+		display: flex;
+		justify-content: center;
+
+		.container {
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+
+			.top-content {
+				width: 100%;
+				max-width: 700px;
+				margin-bottom: 1rem;
+			}
+
+			.top-page-title {
+				font-size: 2.5rem;
+				color: var(--gray-800);
+				margin-bottom: 1rem;
+				letter-spacing: 1.5px;
+			}
+
+			.top-subtitle {
+				font-size: 1rem;
+				color: var(--gray-600);
+				line-height: 1.2;
+			}
+		}
+	}
+}
