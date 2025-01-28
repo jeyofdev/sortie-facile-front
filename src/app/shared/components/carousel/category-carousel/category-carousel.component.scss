@@ -1,0 +1,42 @@
+.element-box {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	border-radius: 1rem;
+	padding: 2rem;
+}
+
+:host ::ng-deep app-button-img {
+	display: block;
+	height: 100%;
+
+	p-button {
+		display: block;
+		height: 100%;
+
+		button {
+			height: 100%;
+		}
+	}
+}
+
+:host ::ng-deep .carousel-wrapper.visible-6 .p-carousel-item {
+	flex: 1 0 calc((100% / 6) - 1rem) !important;
+}
+
+:host ::ng-deep .carousel-wrapper.visible-5 .p-carousel-item {
+	flex: 1 0 calc((100% / 5) - 1rem) !important;
+}
+
+:host ::ng-deep .carousel-wrapper.visible-4 .p-carousel-item {
+	flex: 1 0 calc((100% / 4) - 1rem) !important;
+}
+
+:host ::ng-deep .carousel-wrapper.visible-3 .p-carousel-item {
+	flex: 1 0 calc((100% / 3) - 1rem) !important;
+}
+
+:host ::ng-deep .carousel-wrapper.visible-2 .p-carousel-item {
+	flex: 1 0 calc((100% / 2) - 1rem) !important;
+}

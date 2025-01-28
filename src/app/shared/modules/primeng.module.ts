@@ -26,6 +26,7 @@ import { TableModule } from 'primeng/table';
 import { TagModule } from 'primeng/tag';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
+import { CarouselModule } from 'primeng/carousel';
 
 @NgModule({
 	exports: [
@@ -56,6 +57,7 @@ import { BreadcrumbModule } from 'primeng/breadcrumb';
 		TagModule,
 		ConfirmDialogModule,
 		BreadcrumbModule,
+		CarouselModule,
 	],
 })
 export class PrimengModule {}

@@ -18,20 +18,32 @@
 				width: 100%;
 				max-width: 700px;
 				margin-bottom: 1rem;
-			}
 
-			.top-page-title {
-				font-size: 2.5rem;
-				color: var(--gray-800);
-				margin-bottom: 1rem;
-				letter-spacing: 1.5px;
-			}
+				.top-page-title {
+					font-size: 2.5rem;
+					color: var(--gray-800);
+					margin-bottom: 1rem;
+					letter-spacing: 1.5px;
+				}
 
-			.top-subtitle {
-				font-size: 1rem;
-				color: var(--gray-600);
-				line-height: 1.2;
+				.top-subtitle {
+					font-size: 1rem;
+					color: var(--gray-600);
+					line-height: 1.2;
+				}
 			}
 		}
+	}
+}
+
+:host ::ng-deep app-category-carousel {
+	width: 100%;
+
+	.p-carousel-items-container {
+		gap: 1rem;
+	}
+
+	.p-carousel-item {
+		height: 175px;
 	}
 }

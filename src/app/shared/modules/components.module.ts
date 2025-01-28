@@ -24,6 +24,7 @@ import { ActivityPreviewCardComponent } from '@shared/components/card/activity-p
 import { TableActivityListComponent } from '@shared/components/table/table-activity-list/table-activity-list.component';
 import { DeleteModalComponent } from '@shared/components/modal/delete-modal/delete-modal.component';
 import { BreadcrumbComponent } from '@shared/components/breadcrumb/breadcrumb.component';
+import { CategoryCarouselComponent } from '@shared/components/carousel/category-carousel/category-carousel.component';
 
 @NgModule({
 	declarations: [
@@ -49,6 +50,7 @@ import { BreadcrumbComponent } from '@shared/components/breadcrumb/breadcrumb.co
 		TableActivityListComponent,
 		DeleteModalComponent,
 		BreadcrumbComponent,
+		CategoryCarouselComponent,
 	],
 	imports: [CommonModule, PrimengModule, FormsModule, ReactiveFormsModule],
 	exports: [
@@ -71,6 +73,7 @@ import { BreadcrumbComponent } from '@shared/components/breadcrumb/breadcrumb.co
 		TableActivityListComponent,
 		DeleteModalComponent,
 		BreadcrumbComponent,
+		CategoryCarouselComponent,
 	],
 })
 export class ComponentModule {}
