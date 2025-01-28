@@ -18,6 +18,10 @@ export const routes: Routes = [
 		loadChildren: () => import('@features/account/account.module').then(m => m.AccountModule),
 	},
 	{
+		path: PrimaryRouteEnum.ACTIVITY,
+		loadChildren: () => import('@features/activity/activity.module').then(m => m.ActivityModule),
+	},
+	{
 		path: PrimaryRouteEnum.NOT_FOUND,
 		pathMatch: 'full',
 		component: NotFoundPageComponent,

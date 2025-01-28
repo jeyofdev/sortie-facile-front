@@ -1,0 +1,18 @@
+<div class="carousel-wrapper" [ngClass]="numVisibleClass">
+	<p-carousel
+		[value]="(interests$ | async) || []"
+		[numVisible]="responsiveOptions[0]?.numVisible"
+		[numScroll]="responsiveOptions[0]?.numScroll"
+		[responsiveOptions]="responsiveOptions"
+		[showNavigators]="false"
+	>
+		<ng-template let-interest pTemplate="item">
+			<app-button-img
+				[label]="interest.title"
+				[backgroundUrl]="interest.imgUrl"
+				[disabled]="interest.disabled"
+				routerLink="/"
+			></app-button-img>
+		</ng-template>
+	</p-carousel>
+</div>

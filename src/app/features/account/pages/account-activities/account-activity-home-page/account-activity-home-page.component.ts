@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AccountRouteEnum, ActivityRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
+import { AccountRouteEnum, AccountActivityRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
 import { ResponseActivity } from '@shared/models/activity/response/response-activity.model';
 import { CountAndResult } from '@shared/models/count-and-result.model';
 import { ResponseInterestBase } from '@shared/models/interests/response/response-interest-base.model';
@@ -84,7 +84,7 @@ export class AccountActivityHomePageComponent {
 
 	onClick = () => {
 		this._router.navigateByUrl(
-			PrimaryRouteEnum.ACCOUNT + '/' + AccountRouteEnum.ACTIVITIES + '/' + ActivityRouteEnum.CREATE,
+			PrimaryRouteEnum.ACCOUNT + '/' + AccountRouteEnum.ACTIVITIES + '/' + AccountActivityRouteEnum.CREATE,
 		);
 	};
 

@@ -10,6 +10,7 @@ export class ButtonImgComponent {
 	@Input() backgroundUrl?: string;
 	@Input() data!: any;
 	@Input() disabled!: boolean;
+	@Input() variant: 'base' | 'large' = 'base';
 
 	@Output() onClickBtnImg: EventEmitter<any> = new EventEmitter();
 
