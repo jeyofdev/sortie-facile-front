@@ -17,6 +17,10 @@ export class ActivityService {
 		private _authTokenService: AuthTokenService,
 	) {}
 
+	getAllActivities$(): Observable<ResponseActivity[]> {
+		return this._httpClient.get<ResponseActivity[]>(`${this._BASE_URL}/all`);
+	}
+
 	addCategory(newActivityInput: NewActivityInput): Observable<ResponseActivity> {
 		const userId: string = String(this._authTokenService.getTokenFromLocalStorageAndDecode()?.id);
 
