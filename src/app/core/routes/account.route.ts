@@ -3,7 +3,7 @@ import { userGuard } from '@guards/user.guard';
 import { AccountFavoritesPageComponent } from '@features/account/pages/account-favorites-page/account-favorites-page.component';
 import { AccountMessagesPageComponent } from '@features/account/pages/account-messages-page/account-messages-page.component';
 import { AccountSettingsPageComponent } from '@root/features/account/pages/account-settings/account-settings-page/account-settings-page.component';
-import { AccountRouteEnum, ActivityRouteEnum, SettingsRouteEnum } from '@shared/enums/routes.enum';
+import { AccountRouteEnum, AccountActivityRouteEnum, SettingsRouteEnum } from '@shared/enums/routes.enum';
 import { AccountHomePageComponent } from '@root/features/account/pages/account-home-page/account-home-page.component';
 import { AccountSettingsPersonalInfosPageComponent } from '@root/features/account/pages/account-settings/account-settings-personal-infos-page/account-settings-personal-infos-page.component';
 import { AccountSettingsDescriptionPageComponent } from '@root/features/account/pages/account-settings/account-settings-description-page/account-settings-description-page.component';
@@ -34,7 +34,7 @@ export const routes: Routes = [
 		},
 	},
 	{
-		path: AccountRouteEnum.ACTIVITIES + '/' + ActivityRouteEnum.CREATE,
+		path: AccountRouteEnum.ACTIVITIES + '/' + AccountActivityRouteEnum.CREATE,
 		component: AccountCreateActivityPageComponent,
 		canActivate: [userGuard],
 	},

@@ -1,0 +1,18 @@
+<div class="breadcrumb-wrapper">
+	<app-container>
+		<h2 class="page-title">Category list</h2>
+
+		<p-breadcrumb [model]="items">
+			<ng-template pTemplate="item" let-item>
+				<a class="item" [routerLink]="item.url">
+					<i [class]="item.icon"></i>
+					<span>{{ item.label }}</span>
+				</a>
+			</ng-template>
+
+			<ng-template pTemplate="separator">
+				<i class="pi pi-angle-double-right"></i>
+			</ng-template>
+		</p-breadcrumb>
+	</app-container>
+</div>

@@ -4,6 +4,7 @@ export enum PrimaryRouteEnum {
 	PROFILE = 'profile',
 	NOT_FOUND = '**',
 	ACCOUNT = 'account',
+	ACTIVITY = 'activity',
 }
 
 export enum AuthRouteEnum {
@@ -39,11 +40,15 @@ export enum SettingsRouteEnum {
 	PASSWORD = 'password',
 }
 
-export enum ActivityRouteEnum {
+export enum AccountActivityRouteEnum {
 	CREATE = 'create',
 }
 
 export enum ErrorRouteEnum {
 	NOT_FOUND = 'not-found',
 	SERVER_ERROR = 'server-error',
+}
+
+export enum ActivityRouteEnum {
+	ACTIVITY = 'activity',
 }

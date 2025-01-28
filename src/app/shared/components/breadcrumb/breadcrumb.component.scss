@@ -1,0 +1,39 @@
+.breadcrumb-wrapper {
+	background: var(--gray-50);
+	display: flex;
+	justify-content: center ;
+	padding: 1rem;
+}
+
+:host ::ng-deep app-container {
+	display: flex;
+	justify-content: center ;
+	width: 100%;
+
+	.container {
+		padding: 0;
+	}
+
+	.page-title {
+		font-size: 1.25rem;
+		color: var(--gray-800);
+	}
+
+	.p-breadcrumb {
+		border-radius: 0px;
+		background: transparent;
+
+		li {
+			display: flex;
+			align-items: center;
+		}
+
+		.item {
+			span {
+				font-size: 1rem;
+				color: var(--gray-600);
+				line-height: 1;
+			}
+		}
+	}
+}

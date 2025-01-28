@@ -23,6 +23,7 @@ import { ButtonImgComponent } from '@shared/components/buttons/button-img/button
 import { ActivityPreviewCardComponent } from '@shared/components/card/activity-preview-card/activity-preview-card.component';
 import { TableActivityListComponent } from '@shared/components/table/table-activity-list/table-activity-list.component';
 import { DeleteModalComponent } from '@shared/components/modal/delete-modal/delete-modal.component';
+import { BreadcrumbComponent } from '@shared/components/breadcrumb/breadcrumb.component';
 
 @NgModule({
 	declarations: [
@@ -47,6 +48,7 @@ import { DeleteModalComponent } from '@shared/components/modal/delete-modal/dele
 		ActivityPreviewCardComponent,
 		TableActivityListComponent,
 		DeleteModalComponent,
+		BreadcrumbComponent,
 	],
 	imports: [CommonModule, PrimengModule, FormsModule, ReactiveFormsModule],
 	exports: [
@@ -68,6 +70,7 @@ import { DeleteModalComponent } from '@shared/components/modal/delete-modal/dele
 		ActivityPreviewCardComponent,
 		TableActivityListComponent,
 		DeleteModalComponent,
+		BreadcrumbComponent,
 	],
 })
 export class ComponentModule {}
