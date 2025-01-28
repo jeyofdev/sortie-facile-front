@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ResponseActivity } from '@shared/models/activity/response/response-activity.model';
 
 @Component({
@@ -8,4 +8,9 @@ import { ResponseActivity } from '@shared/models/activity/response/response-acti
 })
 export class TableActivityListComponent {
 	@Input() activities!: ResponseActivity[];
+	@Output() deleteClicked: EventEmitter<number> = new EventEmitter<number>();
+
+	onDeleteClick(activityId: number) {
+		this.deleteClicked.emit(activityId);
+	}
 }

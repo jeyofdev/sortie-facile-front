@@ -24,6 +24,7 @@ import { CardModule } from 'primeng/card';
 import { DataViewModule } from 'primeng/dataview';
 import { TableModule } from 'primeng/table';
 import { TagModule } from 'primeng/tag';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @NgModule({
 	exports: [
@@ -52,6 +53,7 @@ import { TagModule } from 'primeng/tag';
 		DataViewModule,
 		TableModule,
 		TagModule,
+		ConfirmDialogModule,
 	],
 })
 export class PrimengModule {}

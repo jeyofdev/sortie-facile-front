@@ -22,6 +22,7 @@ import { ToastComponent } from '@shared/components/toast/toast.component';
 import { ButtonImgComponent } from '@shared/components/buttons/button-img/button-img.component';
 import { ActivityPreviewCardComponent } from '@shared/components/card/activity-preview-card/activity-preview-card.component';
 import { TableActivityListComponent } from '@shared/components/table/table-activity-list/table-activity-list.component';
+import { DeleteModalComponent } from '@shared/components/modal/delete-modal/delete-modal.component';
 
 @NgModule({
 	declarations: [
@@ -45,6 +46,7 @@ import { TableActivityListComponent } from '@shared/components/table/table-activ
 		ButtonImgComponent,
 		ActivityPreviewCardComponent,
 		TableActivityListComponent,
+		DeleteModalComponent,
 	],
 	imports: [CommonModule, PrimengModule, FormsModule, ReactiveFormsModule],
 	exports: [
@@ -65,6 +67,7 @@ import { TableActivityListComponent } from '@shared/components/table/table-activ
 		ButtonImgComponent,
 		ActivityPreviewCardComponent,
 		TableActivityListComponent,
+		DeleteModalComponent,
 	],
 })
 export class ComponentModule {}

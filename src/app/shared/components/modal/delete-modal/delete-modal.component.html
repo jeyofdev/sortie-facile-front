@@ -1,0 +1,29 @@
+<p-confirmDialog #cd>
+	<ng-template pTemplate="headless" let-message>
+		<p-button
+			icon="pi pi-times"
+			[rounded]="true"
+			[text]="true"
+			severity="danger"
+			styleClass="close-btn"
+			(click)="cd.reject()"
+		/>
+
+		<div class="dialog-header">
+			<i [class]="iconClass"></i>
+		</div>
+
+		<h3>
+			{{ message.header }}
+		</h3>
+
+		<p>
+			{{ message.message }}
+		</p>
+
+		<div class="btns-action">
+			<button pButton label="Cancel" severity="secondary" (click)="cd.reject()"></button>
+			<button pButton label="Delete" severity="danger" (click)="cd.accept()"></button>
+		</div>
+	</ng-template>
+</p-confirmDialog>
