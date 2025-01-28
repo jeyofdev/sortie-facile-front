@@ -42,3 +42,8 @@ export enum SettingsRouteEnum {
 export enum ActivityRouteEnum {
 	CREATE = 'create',
 }
+
+export enum ErrorRouteEnum {
+	NOT_FOUND = 'not-found',
+	SERVER_ERROR = 'server-error',
+}
