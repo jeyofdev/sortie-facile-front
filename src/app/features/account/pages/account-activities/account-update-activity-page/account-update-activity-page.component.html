@@ -1,0 +1,10 @@
+<app-account-layout
+	pageTitle="Update activity"
+	pageSubtitle="Use this form to update your activity details. Make sure to review and edit all necessary fields before submitting your changes."
+>
+	<ng-container primary>
+		<div class="container" *ngIf="activity$ | async as activity">
+			<app-activity-form [activity]="activity"></app-activity-form>
+		</div>
+	</ng-container>
+</app-account-layout>

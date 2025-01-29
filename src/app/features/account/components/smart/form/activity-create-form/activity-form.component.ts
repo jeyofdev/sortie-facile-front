@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ActivityService } from '@services/activity.service';
@@ -9,6 +9,7 @@ import { AccountActivityPageAbstract } from '@shared/abstract/account-activity-p
 import { AccountRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
 import { NewActivityDetails } from '@shared/models/activity/input/new-activity-details.model';
 import { NewActivityInput } from '@shared/models/activity/input/new-activity-input.model';
+import { ResponseActivity } from '@shared/models/activity/response/response-activity.model';
 import { City } from '@shared/models/address/city.model';
 import { Department } from '@shared/models/address/department.model';
 import { Region } from '@shared/models/address/region.model';
@@ -22,14 +23,13 @@ import { MessageService } from 'primeng/api';
 import { BehaviorSubject, map, Observable, of, tap } from 'rxjs';
 
 @Component({
-	selector: 'app-activity-create-form',
-	templateUrl: './activity-create-form.component.html',
-	styleUrl: './activity-create-form.component.scss',
+	selector: 'app-activity-form',
+	templateUrl: './activity-form.component.html',
+	styleUrl: './activity-form.component.scss',
 })
-export class ActivityCreateFormComponent
-	extends AccountActivityPageAbstract<FormAccountCreateActivity>
-	implements OnInit
-{
+export class ActivityFormComponent extends AccountActivityPageAbstract<FormAccountCreateActivity> implements OnInit {
+	@Input() activity!: ResponseActivity;
+
 	yearOldForm!: FormGroup<FormYearOld>;
 	addressForm!: FormGroup<FormAccountActivityAddress>;
 
@@ -79,16 +79,22 @@ export class ActivityCreateFormComponent
 			.getAllInterests()
 			.pipe(
 				map((interestList: ResponseInterest[]) => {
-					const choices = interestList.map(
-						interest =>
-							new ResponseInterestWithDisabled(
-								interest.id,
-								interest.title,
-								interest.imgUrl,
-								interest.activityIds,
-								false,
-							),
-					);
+					const choices = interestList.map(interest => {
+						let disabled = false;
+
+						if (this.activity) {
+							const exist = this.activity.categories.results.find(e => e.id === interest.id);
+							disabled = exist ? true : false;
+						}
+
+						return new ResponseInterestWithDisabled(
+							interest.id,
+							interest.title,
+							interest.imgUrl,
+							interest.activityIds,
+							disabled,
+						);
+					});
 
 					this._choicesInterestListSubject.next(choices);
 				}),
@@ -188,23 +194,23 @@ export class ActivityCreateFormComponent
 	}
 
 	protected override initFormControls(): void {
-		this.titleCtrl = this._formBuilder.control('', {
+		this.titleCtrl = this._formBuilder.control(this.activity ? this.activity.name : '', {
 			validators: [Validators.required, Validators.minLength(5), Validators.maxLength(200)],
 			nonNullable: true,
 		});
-		this.descriptionCtrl = this._formBuilder.control('', {
+		this.descriptionCtrl = this._formBuilder.control(this.activity ? this.activity.description : '', {
 			validators: [Validators.required, Validators.minLength(10)],
 			nonNullable: true,
 		});
-		this.minAgeCtrl = this._formBuilder.control(0, {
+		this.minAgeCtrl = this._formBuilder.control(this.activity ? this.activity.age.min : 0, {
 			validators: [Validators.required],
 			nonNullable: true,
 		});
-		this.maxAgeCtrl = this._formBuilder.control(0, {
+		this.maxAgeCtrl = this._formBuilder.control(this.activity ? this.activity.age.max : 0, {
 			validators: [Validators.required],
 			nonNullable: true,
 		});
-		this.participantCtrl = this._formBuilder.control(0, {
+		this.participantCtrl = this._formBuilder.control(this.activity ? this.activity.nbGuest : 0, {
 			validators: [Validators.required],
 			nonNullable: true,
 		});
@@ -224,7 +230,7 @@ export class ActivityCreateFormComponent
 			validators: [Validators.required],
 			nonNullable: true,
 		});
-		this.linkCtrl = this._formBuilder.control('');
+		this.linkCtrl = this._formBuilder.control(this.activity ? this.activity.link : '');
 
 		this.yearOldForm = this._formBuilder.group({
 			minAge: this.minAgeCtrl,

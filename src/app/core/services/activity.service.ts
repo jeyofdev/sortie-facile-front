@@ -22,6 +22,10 @@ export class ActivityService {
 		return this._httpClient.get<ResponseActivity[]>(`${this._BASE_URL}/all`);
 	}
 
+	getActivityById$(activityId: string): Observable<ResponseActivity> {
+		return this._httpClient.get<ResponseActivity>(`${this._BASE_URL}/${activityId}`);
+	}
+
 	getActivitiesByInterest$ = (interest: string): Observable<ResponseActivity[]> => {
 		return this._httpClient.get<ResponseActivity[]>(`${this._BASE_URL}/all`).pipe(
 			map(activities =>
