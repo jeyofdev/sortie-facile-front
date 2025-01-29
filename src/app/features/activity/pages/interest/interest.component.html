@@ -1,0 +1,61 @@
+<app-breadcrumb title="Activities List" [items]="items"></app-breadcrumb>
+
+<div class="content-wrapper">
+	<app-container>
+		<div class="top-content">
+			<h1 class="top-page-title">Activities List - {{ interest }}</h1>
+			<p class="top-subtitle">
+				Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptas asperiores amet vitae et consequuntur porro a
+				deserunt, veniam obcaecati rerum iure labore ipsum ratione voluptatum quo doloremque quaerat nisi optio cumque
+				at adipisci quasi. Voluptate facere aspernatur dolorum nihil deserunt corporis tempora quae non ducimus delectus
+				porro a neque amet eligendi magni alias necessitatibus, dolore obcaecati aut.
+			</p>
+		</div>
+
+		<app-category-carousel></app-category-carousel>
+
+		<div class="content-box">
+			<div class="filters-box">filters</div>
+			<div class="activities-box">
+				<div class="activity-cards-container">
+					<ng-container *ngIf="activityList$ | async as activityList">
+						<p-dataView
+							#dv
+							[value]="activityList"
+							[layout]="layout"
+							[rows]="4"
+							[totalRecords]="activityList.length"
+							[paginator]="true"
+						>
+							<ng-template pTemplate="header">
+								<p-button
+									icon="pi pi-list"
+									(click)="dv.layout = 'list'"
+									[styleClass]="dv.layout === 'list' ? 'btn-header p-button-active' : 'btn-header '"
+								/>
+
+								<p-button
+									icon="pi pi-table"
+									(click)="dv.layout = 'grid'"
+									[styleClass]="dv.layout === 'grid' ? 'btn-header p-button-active' : 'btn-header '"
+								/>
+							</ng-template>
+
+							<ng-template pTemplate="list" let-activities>
+								<app-table-activity-list [activities]="activities"></app-table-activity-list>
+							</ng-template>
+
+							<ng-template pTemplate="grid" let-products>
+								<ng-container
+									*ngFor="let activity of activityList.slice(dv.first || 0, (dv.first || 0) + (dv.rows || 5))"
+								>
+									<app-activity-preview-card [activity]="activity"></app-activity-preview-card>
+								</ng-container>
+							</ng-template>
+						</p-dataView>
+					</ng-container>
+				</div>
+			</div>
+		</div>
+	</app-container>
+</div>

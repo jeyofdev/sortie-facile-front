@@ -3,8 +3,9 @@ import { Injectable } from '@angular/core';
 import { RouteAPI } from '@shared/enums/route-api.enum';
 import { AuthTokenService } from './auth-token.service';
 import { NewActivityInput } from '@shared/models/activity/input/new-activity-input.model';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { ResponseActivity } from '@shared/models/activity/response/response-activity.model';
+import { ResponseInterestBase } from '@shared/models/interests/response/response-interest-base.model';
 
 @Injectable({
 	providedIn: 'root',
@@ -21,8 +22,28 @@ export class ActivityService {
 		return this._httpClient.get<ResponseActivity[]>(`${this._BASE_URL}/all`);
 	}
 
-	addCategory(newActivityInput: NewActivityInput): Observable<ResponseActivity> {
+	getActivitiesByInterest$ = (interest: string): Observable<ResponseActivity[]> => {
+		return this._httpClient.get<ResponseActivity[]>(`${this._BASE_URL}/all`).pipe(
+			map(activities =>
+				activities.filter(activity =>
+					activity.categories.results.some((result: ResponseInterestBase) => {
+						const formatResultTitle = result.title
+							.replace(/-/g, ' ')
+							.split(' ')
+							.map((e: string) => e.slice(0, 1).toUpperCase() + e.slice(1).toLowerCase())
+							.join(' ');
+
+						return formatResultTitle === interest;
+					}),
+				),
+			),
+		);
+	};
+
+	addActivity(newActivityInput: NewActivityInput): Observable<ResponseActivity> {
 		const userId: string = String(this._authTokenService.getTokenFromLocalStorageAndDecode()?.id);
+
+		console.log('input', newActivityInput);
 
 		return this._httpClient.post<ResponseActivity>(
 			`${this._BASE_URL}/add/region/${newActivityInput.regionId}/department/${newActivityInput.departmentId}/city/${newActivityInput.cityId}/profile/${userId}`,

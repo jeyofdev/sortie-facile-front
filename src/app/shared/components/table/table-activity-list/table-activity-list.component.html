@@ -19,13 +19,13 @@
 	<ng-template pTemplate="body" let-activity>
 		<tr>
 			<td class="td-image">
-				<img alt="Card" [src]="activity.imgUrl && 'assets/images/signin.jpg'" />
+				<img [src]="activity.imgUrl ? activity.imgUrl : 'assets/images/signin.jpg'" />
 			</td>
 			<td>
 				<div class="infos-wrapper">
 					<div class="info-item">
 						<i class="pi pi-map-marker"></i>
-						<span
+						<span *ngIf="activity.location"
 							>{{ activity.location.city.name }}, {{ activity.location.department.name }} ({{
 								activity.location.city.zipCode
 							}})</span

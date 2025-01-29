@@ -1,6 +1,6 @@
 <p-card>
 	<ng-template pTemplate="header">
-		<img alt="Card" [src]="activity.imgUrl && 'assets/images/signin.jpg'" />
+		<img [src]="activity.imgUrl ? activity.imgUrl : 'assets/images/signin.jpg'" />
 
 		<div class="btn-action-box">
 			<p-button icon="pi pi-pencil" severity="success" [rounded]="true" />
@@ -12,7 +12,7 @@
 		<div class="infos-wrapper">
 			<div class="info-item">
 				<i class="pi pi-map-marker"></i>
-				<span
+				<span *ngIf="activity.location"
 					>{{ activity.location.city.name }}, {{ activity.location.department.name }} ({{
 						activity.location.city.zipCode
 					}})</span
