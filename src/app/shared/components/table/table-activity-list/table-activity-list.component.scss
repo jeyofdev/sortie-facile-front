@@ -72,6 +72,11 @@
 					gap: 1rem;
 					margin-bottom: 1rem;
 
+					.info-item {
+						display: flex;
+						gap: 0.15rem;
+					}
+
 					span {
 						font-size: 1rem;
 						color: var(--gray-600);
