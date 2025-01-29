@@ -1,6 +1,6 @@
 <p-card>
 	<ng-template pTemplate="header">
-		<img alt="Card" [src]="activity.imgUrl && 'assets/images/signin.jpg'" />
+		<img [src]="activity.imgUrl ? activity.imgUrl : 'assets/images/signin.jpg'" />
 
 		<div class="btn-action-box">
 			<p-button icon="pi pi-pencil" severity="success" [rounded]="true" />

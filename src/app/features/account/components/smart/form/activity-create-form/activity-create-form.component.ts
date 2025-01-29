@@ -103,7 +103,7 @@ export class ActivityCreateFormComponent
 
 		if (this.mainForm.valid) {
 			this._activityService
-				.addCategory(
+				.addActivity(
 					new NewActivityInput(
 						this.mainForm.value.addressForm?.region as number,
 						this.mainForm.value.addressForm?.department as number,

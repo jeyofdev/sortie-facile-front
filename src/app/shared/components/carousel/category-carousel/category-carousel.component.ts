@@ -1,5 +1,7 @@
 import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 import { InterestService } from '@services/interests.service';
+import { PrimaryRouteEnum } from '@shared/enums/routes.enum';
 import { ResponseInterest } from '@shared/models/interests/response/response-interests.interface';
 import { Observable } from 'rxjs';
 
@@ -16,6 +18,7 @@ export class CategoryCarouselComponent implements OnDestroy {
 	constructor(
 		private interestService: InterestService,
 		private cdr: ChangeDetectorRef,
+		private router: Router,
 	) {}
 
 	ngOnInit() {
@@ -56,6 +59,11 @@ export class CategoryCarouselComponent implements OnDestroy {
 
 		this.updateNumVisibleClass();
 		window.addEventListener('resize', this.updateNumVisibleClass.bind(this));
+	}
+
+	redirectTo(interest: string) {
+		const formatInterest = interest.toLowerCase().replace(' ', '-');
+		this.router.navigateByUrl(`/${PrimaryRouteEnum.ACTIVITY}/${formatInterest}`);
 	}
 
 	private updateNumVisibleClass() {

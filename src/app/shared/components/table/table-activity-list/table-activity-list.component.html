@@ -19,7 +19,7 @@
 	<ng-template pTemplate="body" let-activity>
 		<tr>
 			<td class="td-image">
-				<img alt="Card" [src]="activity.imgUrl && 'assets/images/signin.jpg'" />
+				<img [src]="activity.imgUrl ? activity.imgUrl : 'assets/images/signin.jpg'" />
 			</td>
 			<td>
 				<div class="infos-wrapper">

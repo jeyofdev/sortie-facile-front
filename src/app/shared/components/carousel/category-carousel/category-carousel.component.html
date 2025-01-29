@@ -11,7 +11,7 @@
 				[label]="interest.title"
 				[backgroundUrl]="interest.imgUrl"
 				[disabled]="interest.disabled"
-				routerLink="/"
+				(click)="redirectTo(interest.title)"
 			></app-button-img>
 		</ng-template>
 	</p-carousel>
