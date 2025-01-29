@@ -14,7 +14,7 @@ import { Observable } from 'rxjs';
 export class ActivitiesComponent implements OnInit {
 	items!: MenuItem[];
 	activityList$!: Observable<ResponseActivity[]>;
-	layout: 'list' | 'grid' = 'grid';
+	layout: 'list' | 'grid' = 'list';
 
 	constructor(
 		private activityService: ActivityService,

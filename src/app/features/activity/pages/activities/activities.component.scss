@@ -75,10 +75,11 @@
 			.p-dataview-header {
 				display: flex;
 				gap: 0.5rem;
-				background-color: transparent;
-				padding: 0;
+				background-color: var(--gray-50);
+				padding: 0.8rem;
 				margin-bottom: 1rem;
 				border: none;
+				border-radius: 0.75rem;
 			}
 
 			.p-dataview-content {
@@ -89,6 +90,10 @@
 				flex-wrap: wrap;
 				gap: 1rem;
 				background-color: transparent;
+
+				app-table-activity-list {
+					width: 100%;
+				}
 
 				app-activity-preview-card {
 					display: flex;
@@ -102,6 +107,7 @@
 :host ::ng-deep .btn-header {
 	background-color: var(--gray-50);
 	border: none;
+	border-radius: 0.6rem;
 
 	.p-button-icon {
 		font-size: 1.25rem;
