@@ -8,6 +8,7 @@ import { ResponseActivity } from '@shared/models/activity/response/response-acti
 })
 export class TableActivityListComponent {
 	@Input() activities!: ResponseActivity[];
+	@Input() showHeader: boolean = false;
 	@Output() deleteClicked: EventEmitter<number> = new EventEmitter<number>();
 
 	onDeleteClick(activityId: number) {

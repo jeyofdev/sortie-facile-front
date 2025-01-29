@@ -47,3 +47,129 @@
 		height: 175px;
 	}
 }
+
+.content-box {
+	display: flex;
+	width: 100%;
+	gap: 1rem;
+
+	.filters-box {
+		flex: 0 0 20%;
+	}
+
+	.activities-box {
+		flex: 1;
+	}
+}
+
+:host ::ng-deep .activity-cards-container {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1.5rem;
+	margin-top: 1rem;
+
+	p-dataview {
+		width: 100%;
+
+		.p-dataview {
+			.p-dataview-header {
+				display: flex;
+				gap: 0.5rem;
+				background-color: var(--gray-50);
+				padding: 0.8rem;
+				margin-bottom: 1rem;
+				border: none;
+				border-radius: 0.75rem;
+			}
+
+			.p-dataview-content {
+				width: 100%;
+				display: flex;
+				justify-content: space-between;
+				align-items: stretch;
+				flex-wrap: wrap;
+				gap: 1rem;
+				background-color: transparent;
+
+				app-table-activity-list {
+					width: 100%;
+				}
+
+				app-activity-preview-card {
+					display: flex;
+					width: calc(25% - 1.5rem);
+				}
+			}
+		}
+	}
+}
+
+:host ::ng-deep .btn-header {
+	background-color: var(--gray-50);
+	border: none;
+	border-radius: 0.6rem;
+
+	.p-button-icon {
+		font-size: 1.25rem;
+		color: var(--primary-900);
+	}
+
+	&.p-button-active {
+		background-color: var(--primary-500);
+
+		.p-button-icon {
+			color: var(--gray-50);
+		}
+	}
+}
+
+:host ::ng-deep p-paginator {
+	.p-paginator {
+		background-color: transparent;
+		margin: 1rem;
+
+		.p-paginator-pages .p-paginator-page {
+			background-color: transparent;
+			color: var(--gray-300);
+			font-size: 1rem;
+			font-weight: normal;
+
+			&.p-highlight {
+				background-color: var(--primary-500);
+				color: var(--gray-50);
+				font-size: 1.15rem;
+				font-weight: bold;
+			}
+
+			&:not(.p-highlight):hover {
+				background-color: var(--primary-50);
+				color: var(--primary-900);
+				font-weight: normal;
+			}
+		}
+
+		.p-paginator-first,
+		.p-paginator-prev,
+		.p-paginator-next,
+		.p-paginator-last {
+			background-color: transparent;
+
+			.p-icon {
+				color: var(--gray-300);
+				font-size: 1rem;
+			}
+
+			&:not(.p-disabled):not(.p-highlight):hover {
+				background-color: var(--primary-50);
+
+				.p-icon {
+					color: var(--primary-900);
+				}
+			}
+
+			&.p-disabled {
+				opacity: 0.35;
+			}
+		}
+	}
+}

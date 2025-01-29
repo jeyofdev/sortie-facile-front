@@ -1,4 +1,4 @@
-<p-card [header]="activity.name">
+<p-card>
 	<ng-template pTemplate="header">
 		<img alt="Card" [src]="activity.imgUrl && 'assets/images/signin.jpg'" />
 
@@ -8,26 +8,31 @@
 		</div>
 	</ng-template>
 
-	<ng-template pTemplate="subtitle">
-		<ng-container *ngIf="activity.categories.results.length">
-			<div class="categories-tags">
-				<ng-container *ngFor="let category of activity.categories.results">
-					<p-tag severity="info" [value]="category.title" />
-				</ng-container>
+	<ng-template pTemplate="title">
+		<div class="infos-wrapper">
+			<div class="info-item">
+				<i class="pi pi-map-marker"></i>
+				<span
+					>{{ activity.location.city.name }}, {{ activity.location.department.name }} ({{
+						activity.location.city.zipCode
+					}})</span
+				>
 			</div>
-		</ng-container>
+			<div class="info-item">
+				<i class="pi pi-users"></i>
+				<span>{{ activity.nbGuest }}</span>
+			</div>
+		</div>
+
+		<h3 class="activity-title">{{ activity.name }}</h3>
+		<p class="activity-description">{{ activity.description }}</p>
 	</ng-template>
 
-	<p>{{ activity.description }}</p>
-
-	<ng-template pTemplate="footer">
-		<p-button
-			type="button"
-			[rounded]="true"
-			label="Discover more details"
-			icon="pi pi-eye"
-			iconPos="right"
-			styleClass="btn-view-more"
-		/>
+	<ng-template pTemplate="subtitle">
+		<div class="caterories-wrapper">
+			<ng-container *ngFor="let category of activity.categories.results">
+				<p-tag severity="info" [value]="category.title" />
+			</ng-container>
+		</div>
 	</ng-template>
 </p-card>

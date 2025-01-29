@@ -1,6 +1,6 @@
 <p-table [value]="activities" styleClass="p-datatable-striped" [tableStyle]="{ 'min-width': '50rem' }">
 	<ng-template pTemplate="header">
-		<tr>
+		<tr *ngIf="showHeader">
 			<th pSortableColumn="id">
 				<div class="th-box">Id <p-sortIcon field="code" /></div>
 			</th>
@@ -15,29 +15,44 @@
 			<th></th>
 		</tr>
 	</ng-template>
+
 	<ng-template pTemplate="body" let-activity>
 		<tr>
-			<td>{{ activity.id }}</td>
 			<td class="td-image">
 				<img alt="Card" [src]="activity.imgUrl && 'assets/images/signin.jpg'" />
 			</td>
-			<td>{{ activity.name }}</td>
-			<td>{{ activity.description }}</td>
 			<td>
-				<div class="flex">
+				<div class="infos-wrapper">
+					<div class="info-item">
+						<i class="pi pi-map-marker"></i>
+						<span
+							>{{ activity.location.city.name }}, {{ activity.location.department.name }} ({{
+								activity.location.city.zipCode
+							}})</span
+						>
+					</div>
+					<div class="info-item">
+						<i class="pi pi-users"></i>
+						<span>{{ activity.nbGuest }}</span>
+					</div>
+				</div>
+
+				<h3 class="activity-title">{{ activity.name }}</h3>
+				<p class="activity-description">{{ activity.description }}</p>
+
+				<div class="caterories-wrapper">
 					<ng-container *ngFor="let category of activity.categories.results">
 						<p-tag severity="info" [value]="category.title" />
 					</ng-container>
 				</div>
 			</td>
-			<td>{{ activity.nbGuest }}</td>
-			<td>
+			<!-- <td>
 				<div class="btn-action-box">
 					<p-button icon="pi pi-eye" severity="info" [rounded]="true" />
 					<p-button icon="pi pi-pencil" severity="success" [rounded]="true" />
 					<p-button icon="pi pi-trash" severity="danger" [rounded]="true" (click)="onDeleteClick(activity.id)" />
 				</div>
-			</td>
+			</td> -->
 		</tr>
 	</ng-template>
 </p-table>
