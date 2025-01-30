@@ -17,7 +17,7 @@ import { combineLatest, first, map, Observable, of, tap } from 'rxjs';
 export class AccountActivityHomePageComponent {
 	resolvedActivities$!: Observable<CountAndResult<ResponseActivity>>;
 	filteredActivities$!: Observable<ResponseActivity[]>;
-	layout: 'list' | 'grid' = 'grid';
+	layout: 'list' | 'grid' = 'list';
 
 	categories: ResponseInterestBase[] | undefined;
 	selectedCategory$!: Observable<ResponseInterestBase | null>;
