@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -9,6 +10,7 @@ import { AccountActivityPageAbstract } from '@shared/abstract/account-activity-p
 import { AccountRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
 import { NewActivityDetails } from '@shared/models/activity/input/new-activity-details.model';
 import { NewActivityInput } from '@shared/models/activity/input/new-activity-input.model';
+import { UpdateActivityDetails } from '@shared/models/activity/input/update-activity-details.model';
 import { ResponseActivity } from '@shared/models/activity/response/response-activity.model';
 import { City } from '@shared/models/address/city.model';
 import { Department } from '@shared/models/address/department.model';
@@ -26,6 +28,7 @@ import { BehaviorSubject, map, Observable, of, tap } from 'rxjs';
 	selector: 'app-activity-form',
 	templateUrl: './activity-form.component.html',
 	styleUrl: './activity-form.component.scss',
+	providers: [DatePipe],
 })
 export class ActivityFormComponent extends AccountActivityPageAbstract<FormAccountCreateActivity> implements OnInit {
 	@Input() activity!: ResponseActivity;
@@ -67,6 +70,7 @@ export class ActivityFormComponent extends AccountActivityPageAbstract<FormAccou
 		private _interestService: InterestService,
 		private _messageService: MessageService,
 		private _notificationService: NotificationService,
+		private _datePipe: DatePipe,
 	) {
 		super();
 	}
@@ -80,11 +84,11 @@ export class ActivityFormComponent extends AccountActivityPageAbstract<FormAccou
 			.pipe(
 				map((interestList: ResponseInterest[]) => {
 					const choices = interestList.map(interest => {
-						let disabled = false;
+						let activate = false;
 
 						if (this.activity) {
 							const exist = this.activity.categories.results.find(e => e.id === interest.id);
-							disabled = exist ? true : false;
+							activate = exist ? true : false;
 						}
 
 						return new ResponseInterestWithDisabled(
@@ -92,7 +96,7 @@ export class ActivityFormComponent extends AccountActivityPageAbstract<FormAccou
 							interest.title,
 							interest.imgUrl,
 							interest.activityIds,
-							disabled,
+							activate,
 						);
 					});
 
@@ -108,36 +112,73 @@ export class ActivityFormComponent extends AccountActivityPageAbstract<FormAccou
 		this.formError = '';
 
 		if (this.mainForm.valid) {
-			this._activityService
-				.addActivity(
-					new NewActivityInput(
-						this.mainForm.value.addressForm?.region as number,
-						this.mainForm.value.addressForm?.department as number,
-						this.mainForm.value.addressForm?.city as number,
-						new NewActivityDetails(
-							this.mainForm.value.title as string,
-							new Date(this.mainForm.value.date as string),
-							this.mainForm.value.yearOldForm?.minAge as number,
-							this.mainForm.value.yearOldForm?.maxAge as number,
-							'',
-							this.mainForm.value.link as string,
-							this.mainForm.value.description as string,
-							this.mainForm.value.participant as number,
-							true,
-							this._selectedInterestsSubject.getValue(),
-						),
-					),
-				)
-				.pipe(
-					tap(() => {
-						this._notificationService.showSuccess('Activity added successfully !');
-						this._router.navigateByUrl('/' + PrimaryRouteEnum.ACCOUNT + '/' + AccountRouteEnum.ACTIVITIES);
-					}),
-				)
-				.subscribe();
+			if (this.activity) {
+				this.updateActivity();
+			} else {
+				this.createActivity();
+			}
 		} else {
 			this.formError = 'The form contains errors. Please verify your information.';
 		}
+	}
+
+	createActivity(): void {
+		this._activityService
+			.addActivity(
+				new NewActivityInput(
+					this.mainForm.value.addressForm?.region as number,
+					this.mainForm.value.addressForm?.department as number,
+					this.mainForm.value.addressForm?.city as number,
+					new NewActivityDetails(
+						this.mainForm.value.title as string,
+						new Date(this.mainForm.value.date as string),
+						this.mainForm.value.yearOldForm?.minAge as number,
+						this.mainForm.value.yearOldForm?.maxAge as number,
+						'',
+						this.mainForm.value.link as string,
+						this.mainForm.value.description as string,
+						this.mainForm.value.participant as number,
+						true,
+						this._selectedInterestsSubject.getValue(),
+					),
+				),
+			)
+			.pipe(
+				tap(() => {
+					this._notificationService.showSuccess('Activity added successfully !');
+					this._router.navigateByUrl('/' + PrimaryRouteEnum.ACCOUNT + '/' + AccountRouteEnum.ACTIVITIES);
+				}),
+			)
+			.subscribe();
+	}
+
+	updateActivity(): void {
+		this._activityService
+			.updateActivityById(
+				this.activity.id,
+				new UpdateActivityDetails(
+					this.mainForm.value.title as string,
+					new Date(this._datePipe.transform(this.activity.createdDate, 'dd/MM/yyyy') as string),
+					this.mainForm.value.yearOldForm?.minAge as number,
+					this.mainForm.value.yearOldForm?.maxAge as number,
+					'',
+					this.mainForm.value.link as string,
+					this.mainForm.value.description as string,
+					this.mainForm.value.participant as number,
+					true,
+					this._selectedInterestsSubject.getValue(),
+					this.activity.location?.region.id as number,
+					this.activity.location?.department.id as number,
+					this.activity.location?.city.id as number,
+				),
+			)
+			.pipe(
+				tap(() => {
+					this._notificationService.showSuccess('Activity updated successfully !');
+					this._router.navigateByUrl('/' + PrimaryRouteEnum.ACCOUNT + '/' + AccountRouteEnum.ACTIVITIES);
+				}),
+			)
+			.subscribe();
 	}
 
 	addInterest(interestChoice: ResponseInterestWithDisabled) {
@@ -214,10 +255,13 @@ export class ActivityFormComponent extends AccountActivityPageAbstract<FormAccou
 			validators: [Validators.required],
 			nonNullable: true,
 		});
-		this.dateCtrl = this._formBuilder.control('', {
-			validators: [Validators.required],
-			nonNullable: true,
-		});
+		this.dateCtrl = this._formBuilder.control(
+			this.activity ? (this._datePipe.transform(this.activity.createdDate, 'dd/MM/yyyy') as string) : '',
+			{
+				validators: [Validators.required],
+				nonNullable: true,
+			},
+		);
 		this.regionCtrl = this._formBuilder.control(0, {
 			validators: [Validators.required],
 			nonNullable: true,

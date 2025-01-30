@@ -6,6 +6,7 @@ import { NewActivityInput } from '@shared/models/activity/input/new-activity-inp
 import { map, Observable } from 'rxjs';
 import { ResponseActivity } from '@shared/models/activity/response/response-activity.model';
 import { ResponseInterestBase } from '@shared/models/interests/response/response-interest-base.model';
+import { UpdateActivityDetails } from '@shared/models/activity/input/update-activity-details.model';
 
 @Injectable({
 	providedIn: 'root',
@@ -47,11 +48,22 @@ export class ActivityService {
 	addActivity(newActivityInput: NewActivityInput): Observable<ResponseActivity> {
 		const userId: string = String(this._authTokenService.getTokenFromLocalStorageAndDecode()?.id);
 
-		console.log('input', newActivityInput);
-
 		return this._httpClient.post<ResponseActivity>(
 			`${this._BASE_URL}/add/region/${newActivityInput.regionId}/department/${newActivityInput.departmentId}/city/${newActivityInput.cityId}/profile/${userId}`,
 			newActivityInput.activityInput,
 		);
+	}
+
+	updateActivityById(activityId: number, updateActivityInput: UpdateActivityDetails): Observable<ResponseActivity> {
+		const userId: string = String(this._authTokenService.getTokenFromLocalStorageAndDecode()?.id);
+
+		return this._httpClient.put<ResponseActivity>(
+			`${this._BASE_URL}/update/${activityId.toString()}`,
+			updateActivityInput,
+		);
+	}
+
+	deleteActivityById(activityId: number): Observable<Object> {
+		return this._httpClient.delete(`${this._BASE_URL}/delete/${activityId.toString()}`);
 	}
 }
