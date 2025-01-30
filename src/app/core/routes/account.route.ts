@@ -13,6 +13,7 @@ import { AccountSettingsPasswordPageComponent } from '@root/features/account/pag
 import { profileResolver } from '@root/core/resolvers/profile.resolver';
 import { AccountCreateActivityPageComponent } from '@root/features/account/pages/account-activities/account-create-activity-page/account-create-activity-page.component';
 import { AccountActivityHomePageComponent } from '@root/features/account/pages/account-activities/account-activity-home-page/account-activity-home-page.component';
+import { AccountUpdateActivityPageComponent } from '@root/features/account/pages/account-activities/account-update-activity-page/account-update-activity-page.component';
 
 export const routes: Routes = [
 	{
@@ -36,6 +37,11 @@ export const routes: Routes = [
 	{
 		path: AccountRouteEnum.ACTIVITIES + '/' + AccountActivityRouteEnum.CREATE,
 		component: AccountCreateActivityPageComponent,
+		canActivate: [userGuard],
+	},
+	{
+		path: AccountRouteEnum.ACTIVITIES + '/' + AccountActivityRouteEnum.UPDATE + '/:activityId',
+		component: AccountUpdateActivityPageComponent,
 		canActivate: [userGuard],
 	},
 	{

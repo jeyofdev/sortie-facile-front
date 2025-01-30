@@ -42,6 +42,7 @@ export enum SettingsRouteEnum {
 
 export enum AccountActivityRouteEnum {
 	CREATE = 'create',
+	UPDATE = 'update',
 }
 
 export enum ErrorRouteEnum {

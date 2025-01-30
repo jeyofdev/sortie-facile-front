@@ -3,7 +3,7 @@
 		<img [src]="activity.imgUrl ? activity.imgUrl : 'assets/images/signin.jpg'" />
 
 		<div class="btn-action-box">
-			<p-button icon="pi pi-pencil" severity="success" [rounded]="true" />
+			<p-button icon="pi pi-pencil" severity="success" [rounded]="true" (click)="redirectTo()" />
 			<p-button icon="pi pi-trash" severity="danger" [rounded]="true" (click)="onDeleteClick()" />
 		</div>
 	</ng-template>

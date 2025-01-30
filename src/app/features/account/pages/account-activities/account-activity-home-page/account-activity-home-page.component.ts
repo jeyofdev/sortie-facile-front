@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ActivityService } from '@services/activity.service';
 import { AccountRouteEnum, AccountActivityRouteEnum, PrimaryRouteEnum } from '@shared/enums/routes.enum';
 import { ResponseActivity } from '@shared/models/activity/response/response-activity.model';
 import { CountAndResult } from '@shared/models/count-and-result.model';
 import { ResponseInterestBase } from '@shared/models/interests/response/response-interest-base.model';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { combineLatest, first, map, Observable, of } from 'rxjs';
+import { combineLatest, first, map, Observable, of, tap } from 'rxjs';
 
 @Component({
 	selector: 'app-account-activity-home-page',
@@ -27,6 +28,7 @@ export class AccountActivityHomePageComponent {
 		protected _activatedRoute: ActivatedRoute,
 		private _confirmationService: ConfirmationService,
 		private _messageService: MessageService,
+		private _activityService: ActivityService,
 	) {}
 
 	ngOnInit(): void {
@@ -99,11 +101,18 @@ export class AccountActivityHomePageComponent {
 			rejectIcon: 'none',
 
 			accept: () => {
-				this._messageService.add({
-					severity: 'success',
-					detail: 'Activity deleted successfully.',
-					icon: 'pi pi-check',
-				});
+				this._activityService
+					.deleteActivityById(activityId)
+					.pipe(
+						tap(() => {
+							this._messageService.add({
+								severity: 'success',
+								detail: 'Activity deleted successfully.',
+								icon: 'pi pi-check',
+							});
+						}),
+					)
+					.subscribe();
 			},
 			reject: () => {
 				// this._messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
