@@ -17,42 +17,6 @@
 	</ng-template>
 
 	<ng-template pTemplate="body" let-activity>
-		<tr>
-			<td class="td-image">
-				<img [src]="activity.imgUrl ? activity.imgUrl : 'assets/images/signin.jpg'" />
-			</td>
-			<td>
-				<div class="infos-wrapper">
-					<div class="info-item">
-						<i class="pi pi-map-marker"></i>
-						<span *ngIf="activity.location"
-							>{{ activity.location.city.name }}, {{ activity.location.department.name }} ({{
-								activity.location.city.zipCode
-							}})</span
-						>
-					</div>
-					<div class="info-item">
-						<i class="pi pi-users"></i>
-						<span>{{ activity.nbGuest }}</span>
-					</div>
-				</div>
-
-				<h3 class="activity-title">{{ activity.name }}</h3>
-				<p class="activity-description">{{ activity.description }}</p>
-
-				<div class="caterories-wrapper">
-					<ng-container *ngFor="let category of activity.categories.results">
-						<p-tag severity="info" [value]="category.title" />
-					</ng-container>
-				</div>
-			</td>
-			<!-- <td>
-				<div class="btn-action-box">
-					<p-button icon="pi pi-eye" severity="info" [rounded]="true" />
-					<p-button icon="pi pi-pencil" severity="success" [rounded]="true" />
-					<p-button icon="pi pi-trash" severity="danger" [rounded]="true" (click)="onDeleteClick(activity.id)" />
-				</div>
-			</td> -->
-		</tr>
+		<app-activity-preview-table-card [activity]="activity"></app-activity-preview-table-card>
 	</ng-template>
 </p-table>
