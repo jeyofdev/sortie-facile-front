@@ -28,12 +28,8 @@ export abstract class AuthProfilePage<T extends { [key: string]: AbstractControl
 		stepValue: AuthStepData[K],
 		navitateEndpoint: AuthProfileRouteEnum,
 	): void {
-		console.log('Form Value:', this.mainForm.value);
-		console.log('Form Value:', this.mainForm);
-
 		if (this.mainForm.valid) {
 			this._authStepService.setStepData(stepName, stepValue);
-			console.log(this._authStepService.getAllData());
 
 			this.navigateByUrl(navitateEndpoint);
 		}
