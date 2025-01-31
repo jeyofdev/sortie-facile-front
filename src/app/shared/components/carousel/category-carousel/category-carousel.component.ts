@@ -4,6 +4,7 @@ import { InterestService } from '@services/interests.service';
 import { PrimaryRouteEnum } from '@shared/enums/routes.enum';
 import { ResponseInterest } from '@shared/models/interests/response/response-interests.interface';
 import { Observable } from 'rxjs';
+import { Text } from '@utils/text.utils';
 
 @Component({
 	selector: 'app-category-carousel',
@@ -62,7 +63,7 @@ export class CategoryCarouselComponent implements OnDestroy {
 	}
 
 	redirectTo(interest: string) {
-		const formatInterest = interest.toLowerCase().replace(' ', '-');
+		const formatInterest = Text.normalizeString(interest).toLowerCase().replace(' ', '-');
 		this.router.navigateByUrl(`/${PrimaryRouteEnum.ACTIVITY}/${formatInterest}`);
 	}
 

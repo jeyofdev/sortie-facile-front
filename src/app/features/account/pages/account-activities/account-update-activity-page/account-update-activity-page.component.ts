@@ -20,8 +20,6 @@ export class AccountUpdateActivityPageComponent {
 	ngOnInit(): void {
 		this._activatedRoute.params.subscribe(params => {
 			this.activity$ = this._activityService.getActivityById$(params['activityId']);
-
-			console.log(params);
 		});
 	}
 }
